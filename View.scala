@@ -90,7 +90,7 @@ def createProntoPopLandingPage(): HtmlElement =
       case Some(text) =>
         val rows = text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
           val f = line.split("\t", -1)
-          SongRow(freshId(), f.lift(0).getOrElse(""), f.lift(1).getOrElse(""), f.lift(2).getOrElse(""), f.lift(3).getOrElse(""))
+          SongRow(freshId(), f.lift(0).getOrElse(""), f.lift(1).getOrElse(""), f.lift(2).getOrElse(""), f.lift(3).getOrElse("").replace("…", "..."))
         stopPlaying()
         songsVar.set(rows)
         concertNameVar.set(name)
@@ -106,7 +106,7 @@ def createProntoPopLandingPage(): HtmlElement =
       input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),
       input(cls := "bpm", controlled(value <-- rowSignal.map(_.bpm), onInput.mapToValue --> (v => updateRow(id)(_.copy(bpm = v))))),
       input(cls := "sign", controlled(value <-- rowSignal.map(_.sign), onInput.mapToValue --> (v => updateRow(id)(_.copy(sign = v))))),
-      input(cls := "pattern", controlled(value <-- rowSignal.map(_.pattern), onInput.mapToValue --> (v => updateRow(id)(_.copy(pattern = v))))),
+      input(cls := "pattern", controlled(value <-- rowSignal.map(_.pattern), onInput.mapToValue --> (v => updateRow(id)(_.copy(pattern = v.replace("…", "...")))))),
       button("Remove", onClick --> (_ => removeRow(id))),
     )
 

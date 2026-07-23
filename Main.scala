@@ -3,13 +3,15 @@
 //> using jsVersion 1.22.0
 //> using dep com.raquo::laminar::17.2.1
 
+package prontopop
+
 import com.raquo.laminar.api.L.*
 import org.scalajs.dom
 
 @main def run(): Unit =
-  renderOnDomContentLoaded(dom.document.getElementById("app"), appElement())
+  renderOnDomContentLoaded(dom.document.getElementById("app"), helloWorld())
 
-def appElement(): HtmlElement =
+def helloWorld(): HtmlElement =
   div(
     h1("Hello world!"),
   )

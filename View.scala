@@ -100,6 +100,7 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "songrow",
       button(
         child.text <-- playingVar.signal.map(p => if p.contains(id) then "Stop" else "Play"),
+        cls.toggle("playing") <-- playingVar.signal.map(_.contains(id)),
         onClick --> (_ => songsVar.now().find(_.id == id).foreach(togglePlay)),
       ),
       input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),

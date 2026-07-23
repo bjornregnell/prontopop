@@ -31,7 +31,12 @@ object ModelOps:
         case Silent => Some(Rest(beatDuration))
         case _      => None
 
-      val chars = p.dsl.zipWithIndex.filterNot((c, _) => c.isWhitespace).toVector
+      val chars = p.dsl.zipWithIndex
+        .filterNot((c, _) => c.isWhitespace)
+        .flatMap: (c, i) =>
+          if c == '…' then Vector((Soft, i), (Soft, i), (Soft, i))  // '…' from smart-punctuation keyboards = '...'
+          else Vector((c, i))
+        .toVector
 
       def text(cs: Seq[(Char, Int)]): String = cs.map(_._1).mkString
 

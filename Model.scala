@@ -1,7 +1,7 @@
 package prontopop
 
 object Model:
-  
+
   type Title       = String
   type BPM         = Double
   type Numerator   = Int
@@ -10,31 +10,31 @@ object Model:
   type DSL         = String
   type Pitch       = Int
 
-  case class Frac(numerator: Numerator, denominatior: Denominator)
-  
+  case class Frac(numerator: Numerator, denominator: Denominator)
+
   trait Sound
-  
+
   enum Drum extends Sound:
-    case HiHat, Snare, Base, Bongo 
+    case HiHat, Snare, Base, Bongo
 
   enum Instrument extends Sound:
     case Piano, Guitar
-  
-  
+
+
   trait Event
   case class NoteOn(instrument: Instrument, pitch: Pitch, velocity: Velocity, duration: Frac) extends Event
-  case class DrumHit(drum: Drum, velocity: Velocity) extends Event 
-  case class Rest(duration: Frac)
+  case class DrumHit(drum: Drum, velocity: Velocity) extends Event
+  case class Rest(duration: Frac) extends Event
 
   case class PosInBar(frac: Frac)
 
   case class Signature(frac: Frac)
 
-  case class Bar(events: Seq[(pos: PosInBar, ev: Event)], signature: Frac)
+  case class Bar(events: Seq[(pos: PosInBar, ev: Event)], signature: Signature)
 
   case class Pattern(dsl: DSL)
 
-  case class Song(title: Title, bpm: BPM, pattern: Pattern)
+  case class Song(title: Title, bpm: BPM, signature: Signature, pattern: Pattern)
 
   enum Error:
     case ParseError(msg: String, pos: Int)  // TODO add more errors when needed

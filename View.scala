@@ -33,6 +33,7 @@ def createProntoPopLandingPage(): HtmlElement =
   val selectedVar = Var("")
   val playingVar  = Var(Option.empty[Int])
   val statusVar   = Var("")
+  val volumeVar   = Var("100")
   lazy val player = Sound.initWebSound()
 
   def stopPlaying(): Unit =
@@ -126,6 +127,16 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
       button("Load", onClick --> (_ => load())),
       span(" from Local Store"),
+    ),
+    div(cls := "row",
+      span("Volume: "),
+      input(typ := "range", minAttr := "0", maxAttr := "100",
+        controlled(value <-- volumeVar.signal, onInput.mapToValue --> { (v: String) =>
+          volumeVar.set(v)
+          v.toDoubleOption.foreach(d => player.setVolume(d / 100.0))
+        }),
+      ),
+      span(child.text <-- volumeVar.signal.map(v => s"$v%")),
     ),
     h2("Songs:"),
     div(cls := "songrow header",

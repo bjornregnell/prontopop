@@ -11,6 +11,8 @@ object Sound:
     def play(bpm: BPM, bars: Seq[Bar]): Unit
     def stop(): Unit
     def isPlaying: Boolean
+    /** Master volume 0.0..1.0, effective immediately, also while playing. */
+    def setVolume(volume: Double): Unit
 
   /** WebAudio-backed player. Call play from a user gesture so the browser lets audio start. */
   def initWebSound(): SoundPlayer = WebAudioPlayer()
@@ -20,8 +22,10 @@ object Sound:
     private val tickMs      = 25.0  // scheduler wake-up interval
     private val clickLength = 0.05  // seconds from click attack to silence
 
-    private var ctxOpt = Option.empty[dom.AudioContext]
-    private var timer  = Option.empty[js.timers.SetIntervalHandle]
+    private var ctxOpt    = Option.empty[dom.AudioContext]
+    private var masterOpt = Option.empty[dom.GainNode]  // master volume, all tones route through it
+    private var volume    = 1.0
+    private var timer     = Option.empty[js.timers.SetIntervalHandle]
 
     private var events      = Vector.empty[(offset: Double, ev: Event)]  // offsets in beats from loop start
     private var loopBeats   = 0.0
@@ -33,8 +37,16 @@ object Sound:
     private def ctx: dom.AudioContext =
       ctxOpt.getOrElse:
         val c = new dom.AudioContext()
+        val master = c.createGain()
+        master.gain.value = volume
+        master.connect(c.destination)
         ctxOpt = Some(c)
+        masterOpt = Some(master)
         c
+
+    def setVolume(v: Double): Unit =
+      volume = v.max(0.0).min(1.0)
+      masterOpt.foreach(_.gain.value = volume)
 
     private def beatsOf(f: Frac, beatsPerWhole: Int): Double =
       f.numerator.toDouble * beatsPerWhole / f.denominator
@@ -96,7 +108,7 @@ object Sound:
       gain.gain.setValueAtTime(v, t)
       gain.gain.exponentialRampToValueAtTime(0.001, t + length)
       osc.connect(gain)
-      gain.connect(c.destination)
+      masterOpt.foreach(gain.connect)
       osc.start(t)
       osc.stop(t + length + 0.01)
 

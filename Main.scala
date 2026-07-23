@@ -9,9 +9,4 @@ import com.raquo.laminar.api.L.*
 import org.scalajs.dom
 
 @main def run(): Unit =
-  renderOnDomContentLoaded(dom.document.getElementById("app"), helloWorld())
-
-def helloWorld(): HtmlElement =
-  div(
-    h1("Hello world!"),
-  )
+  renderOnDomContentLoaded(dom.document.getElementById("app"), createProntoPopLandingPage())

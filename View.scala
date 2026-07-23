@@ -111,7 +111,7 @@ def createProntoPopLandingPage(): HtmlElement =
     )
 
   div(cls := "app",
-    h1("Welcome to ProntoPop!"),
+    h1(s"Welcome to ProntoPop! $Version"),
     div(cls := "row",
       span("Concert Name: "),
       input(controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),

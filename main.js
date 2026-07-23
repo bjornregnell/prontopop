@@ -7169,6 +7169,8 @@ function $m_RTLong$() {
 }
 /** @constructor */
 function $c_Lprontopop_Main$package$() {
+  this.Lprontopop_Main$package$__f_Version = null;
+  this.Lprontopop_Main$package$__f_Version = "v0.1.0";
 }
 $c_Lprontopop_Main$package$.prototype = new $h_O();
 $c_Lprontopop_Main$package$.prototype.constructor = $c_Lprontopop_Main$package$;
@@ -8124,7 +8126,7 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
   var $x_2 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h1__Lcom_raquo_laminar_tags_HtmlTag());
   var this$9 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var x0$1 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$9, "Welcome to ProntoPop!", r);
+  var x0$1 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$9, "Welcome to ProntoPop! v0.1.0", r);
   var array$1 = [x0$1];
   var x1$15 = $x_2.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$1));
   var $x_7 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());

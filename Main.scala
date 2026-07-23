@@ -8,5 +8,7 @@ package prontopop
 import com.raquo.laminar.api.L.*
 import org.scalajs.dom
 
+val Version = "v0.1.0"
+
 @main def run(): Unit =
   renderOnDomContentLoaded(dom.document.getElementById("app"), createProntoPopLandingPage())

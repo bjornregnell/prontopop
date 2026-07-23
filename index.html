@@ -8,7 +8,10 @@
     body { font-family: ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
            font-variant-ligatures: none; font-feature-settings: "liga" 0, "calt" 0;
            margin: 1rem auto; max-width: 64rem; padding: 0 1rem; }
-    input, select, button { font-family: inherit; font-size: inherit; }
+    input, select, button { font-family: inherit; font-size: inherit;
+                            font-variant-ligatures: none;
+                            font-feature-settings: "liga" 0, "calt" 0, "dlig" 0; }
+    input.pattern { letter-spacing: 0.2ch; }
     button { padding: 0.3rem 0.8rem; border-radius: 0.5rem; border: 1px solid #999;
              background: #e4e4e4; cursor: pointer; }
     button:hover { background: #d4d4d4; }

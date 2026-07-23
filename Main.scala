@@ -10,16 +10,6 @@ import org.scalajs.dom
   renderOnDomContentLoaded(dom.document.getElementById("app"), appElement())
 
 def appElement(): HtmlElement =
-  val pops = Var(0)
   div(
-    h1("prontopop"),
-    p("A single-page, server-less Scala.js + Laminar app."),
-    button(
-      "Pop!",
-      onClick --> (_ => pops.update(_ + 1)),
-    ),
-    p(
-      "Pops so far: ",
-      child.text <-- pops.signal.map(_.toString),
-    ),
+    h1("Hello world!"),
   )

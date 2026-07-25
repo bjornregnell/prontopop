@@ -151,28 +151,27 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "status", child.text <-- statusVar.signal),
   )
 
-/* Landing Page:
-  legend of below LAYOUT:
-      [   ]  are input field (length is num of chars)
-      {Name}  are buttons with Name
-      /InterfaceElem/  is a UI element of type InterfaceElem for example DropDown
-      All other text is just text
-      Styling should be monospace and repsonsive desktop/mobile
+object LandingPageTemplate:
+  val legend = 
+    s"""|  [   ]  are input field (length is num of chars)
+        |  {Name}  are buttons with Name
+        |  /InterfaceElem/  is a UI element of type InterfaceElem for example DropDown
+        |  All other text is just text
+        |  Styling should be monospace and repsonsive desktop/mobile
+        |""".stripMargin
 
-  LAYOUT:
-----
-Welcome to ProntoPop!
-
-Concert Name: [            ]  {Save} to Local Store
-
-Saved Concerts: /DropDown/    {Load} from Local Store
-
-Songs:
-
-On/Off  Title                                    BPM   Sign.   Pattern
-{Play}  [Rymdresan - vi kommer aldrig tillbaka ] [120] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
-{Play}  [Hopp om en ofri                       ] [108] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
-
-{Add song}
-
-*/
+  val layout =
+        s"""|  ProntoPop!
+            |  
+            |  Concert Name: [            ]  {Save} to Local Store
+            |  
+            |  Saved Concerts: /DropDown/    {Load} from Local Store
+            |  
+            |  Songs:
+            |  
+            |  On/Off  Title                                    BPM   Sign.   Pattern
+            |  {Play}  [Rymdresan - vi kommer aldrig tillbaka ] [120] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
+            |  {Play}  [Hopp om en ofri                       ] [108] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
+            |  
+            |  {Add song}
+            |""".stripMargin

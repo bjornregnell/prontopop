@@ -17,8 +17,10 @@ object Templates:
               |  
               |  Saved Concerts: /--DropDown--/  {Load} from Local Store
               |  
-              |  Songs:  {Silence}
-              |  
+              |  {Silence}  Volume: /--Slider--/  100%
+              |
+              |  Songs:
+              |
               |  On/Off  Title                                    BPM   Sign.   Pattern
               |  {Play}  [Rymdresan - vi kommer aldrig tillbaka ] [120] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
               |  {Play}  [Hopp om en ofri                       ] [108] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}

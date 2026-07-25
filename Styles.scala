@@ -153,15 +153,19 @@ object Styles:
 /* prontopop's own surface, spoken in the semantic tokens above */
 * { box-sizing: border-box; }
 
+/* No max-width and no centering: the song table has a FIXED width in characters, so a narrow
+   window scrolls sideways instead of reflowing. The background still covers the whole canvas
+   because a body background propagates there. */
 body {
   font-family: var(--mono);
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "calt" 0;
   background: var(--bg);
   color: var(--fg);
-  margin: 1rem auto;
-  max-width: 64rem;
-  padding: 0 1rem 3rem;
+  margin: 1rem;
+  padding: 0 0 3rem;
+  width: max-content;
+  min-width: calc(100% - 2rem);
 }
 
 h1 {
@@ -224,25 +228,27 @@ button:hover { border-color: var(--link); }
   border-color: var(--vivid-red-orange);
 }
 
+.silence { font-weight: bold; padding: 0.4rem 1.1rem; margin-right: 2ch; }
+
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }
 .row h2 { margin: 0.5rem 0; }
 
+/* The song table: fixed character widths, so a row NEVER reflows — one song, one line, and the
+   Play buttons line up in a column down the left. Total width is the sum plus the five gaps. */
 .songrow {
   display: grid;
   gap: 0.5ch;
   align-items: center;
   margin: 0.25rem 0;
-  grid-template-columns: 7ch minmax(16ch, 2fr) 5ch 5ch minmax(16ch, 2fr) 8ch;
+  width: var(--table-width);
+  grid-template-columns: 8ch 40ch 6ch 7ch 30ch 11ch;
 }
 
-.songrow input { min-width: 0; }
+:root { --table-width: 104.5ch; }
+
+.songrow input { width: 100%; min-width: 0; }
 .songrow.header { color: var(--muted); }
 
-.status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
 
-@media (max-width: 44rem) {
-  h1 { padding-right: 7rem; }
-  .songrow { grid-template-columns: 1fr 1fr; }
-  .songrow.header { display: none; }
-}
+.status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
 """

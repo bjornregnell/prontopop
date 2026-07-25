@@ -9,6 +9,7 @@ A single-page, server-less metronome app for live performance of songs, in Scala
   * Goal: instant
   * Goal: localOwnData
   * Goal: beautifulStyle
+  * Goal: easyStart
 * Stakeholder: developer has
   * Goal: minimalDependencies
 * Goal: metronomeLivePerformance has
@@ -20,6 +21,9 @@ A single-page, server-less metronome app for live performance of songs, in Scala
 * Goal: beautifulStyle has
   * Gist: the app is pleasant to look at and easy to read, on a dark stage as well as in a lit room
   * Why: a metronome is stared at throughout a gig, so the surface must suit the venue's light
+* Goal: easyStart has
+  * Gist: a first-time visitor meets a working concert and can press play at once, without first learning the pattern notation
+  * Why: the app has to earn the first minute before anyone will trust it on a stage
 * Goal: minimalDependencies has
   * Gist: only Laminar and scalajs-dom besides the Scala and JS standard libraries
   * Comment: handroll a small facade if a needed browser API is missing from scalajs-dom
@@ -41,6 +45,10 @@ A single-page, server-less metronome app for live performance of songs, in Scala
   * Gist: save and load a named concert, with its whole song list, in the browser's local storage
 * Feature: monospaceUi has
   * Gist: one monospace-styled landing page, responsive from desktop to mobile
+* Feature: builtInConcerts has
+  * Gist: example concerts that ship inside the app, offered for loading beside the ones saved in the browser
+  * Spec: the song table opens on an example concert; the saved-concerts dropdown lists the built-in titles too, except where a saved concert already uses that title, in which case the saved one wins
+  * Why: an empty table teaches nothing, and a visitor should hear a click before being asked to write a pattern
 * Feature: themeSelector has
   * Gist: a dropdown at the top right that switches the whole page between light and dark themes
   * Spec: Automatic follows the operating system's light or dark setting; Forgy dark, Smither light, Calm dark and Calm light are explicit picks; the choice persists in local storage
@@ -54,6 +62,9 @@ A single-page, server-less metronome app for live performance of songs, in Scala
 * Feature: concertStore helps Goal: localOwnData
 * Feature: themeSelector helps Goal: beautifulStyle
 * Feature: monospaceUi helps Goal: beautifulStyle
+* Feature: builtInConcerts helps Goal: easyStart
+* Feature: patternDsl hurts Goal: easyStart
+* Feature: builtInConcerts requires Feature: concertStore
 * Feature: playback requires Feature: patternDsl
 * Feature: concertStore requires Feature: songTable
 * Target: staticOnly has

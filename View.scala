@@ -7,8 +7,6 @@ def createProntoPopLandingPage(): HtmlElement =
   import Model.*
   import ModelOps.*
 
-  case class SongRow(id: Int, title: String = "", bpm: String = "120", sign: String = "4/4", pattern: String = "||:!...:||")
-
   val keyPrefix = "prontopop.concert."
 
   var lastId = 0
@@ -16,7 +14,8 @@ def createProntoPopLandingPage(): HtmlElement =
     lastId += 1
     lastId
 
-  def listSaved(): Vector[String] =   // TODO also append for ecach Concerts.all if not already saved under those titles
+  /** Titles of the concerts in local storage. */
+  def listSaved(): Vector[Title] =
     val ls = dom.window.localStorage
     (0 until ls.length).toVector
       .flatMap(i => Option(ls.key(i)))
@@ -24,17 +23,39 @@ def createProntoPopLandingPage(): HtmlElement =
       .map(_.drop(keyPrefix.length))
       .sorted
 
-  val songsVar = Var(Vector(   // TODO: this should use Concerts.all("Example01")
-    SongRow(freshId(), "Rymdresan - vi kommer aldrig tillbaka", "120", "3/4", "||:!..|X..|X..|X..:||"),
-    SongRow(freshId(), "Hopp om en ofri", "108", "3/4", "||:!..|X..|X..|X..:||"),
-  ))
-  val concertNameVar = Var("")
-  val savedVar    = Var(listSaved())
-  val selectedVar = Var("")
-  val playingVar  = Var(Option.empty[Int])
-  val statusVar   = Var("")
-  val volumeVar   = Var("100")
-  lazy val player = Sound.initWebSound()
+  /** What the dropdown offers: saved concerts first, then the built-in ones whose title nobody has
+    * saved over. Paired with a flag so a built-in can say so in its label. */
+  def listOffered(): Vector[(Title, Boolean)] =
+    val saved = listSaved()
+    saved.map(_ -> false) ++ Concerts.titles.filterNot(saved.contains).map(_ -> true)
+
+  def rowsOf(concert: Concert): Vector[SongRow] =
+    concert.toVector.map(song => SongRow.from(freshId(), song))
+
+  def rowsOfSaved(text: String): Vector[SongRow] =
+    text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
+      val f = line.split("\t", -1)
+      SongRow(
+        freshId(),
+        f.lift(0).getOrElse(""),
+        f.lift(1).getOrElse(""),
+        f.lift(2).getOrElse(""),
+        f.lift(3).getOrElse("").replace("…", "..."),
+      )
+
+  /** Local storage wins over a built-in of the same title. */
+  def concertRows(name: Title): Option[Vector[SongRow]] =
+    Option(dom.window.localStorage.getItem(keyPrefix + name)).map(rowsOfSaved)
+      .orElse(Concerts.all.get(name).map(rowsOf))
+
+  val songsVar       = Var(rowsOf(Concerts.startup))
+  val concertNameVar = Var(Concerts.startupTitle)
+  val offeredVar     = Var(listOffered())
+  val selectedVar    = Var("")
+  val playingVar     = Var(Option.empty[Int])
+  val statusVar      = Var("")
+  val volumeVar      = Var("100")
+  lazy val player    = Sound.initWebSound()
 
   def stopPlaying(): Unit =
     player.stop()
@@ -49,27 +70,15 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def addSong(): Unit = songsVar.update(_ :+ SongRow(freshId()))
 
-  def parseSignature(s: String): Either[String, Signature] = s.trim.split("/") match
-    case Array(n, d) if n.trim.toIntOption.exists(_ > 0) && d.trim.toIntOption.exists(_ > 0) =>
-      Right(Signature(Frac(n.trim.toInt, d.trim.toInt)))
-    case _ => Left(s"bad signature '$s', expected like 3/4")
-
   def togglePlay(row: SongRow): Unit =
     if playingVar.now().contains(row.id) then stopPlaying()
     else
-      val parsed =
-        for
-          bpm  <- row.bpm.trim.toDoubleOption.filter(_ > 0).toRight(s"bad bpm '${row.bpm}'")
-          sig  <- parseSignature(row.sign)
-          bars <- Pattern(row.pattern).parse(sig).left.map:
-                    case Error.ParseError(msg, pos) => s"pattern error at $pos: $msg"
-        yield (bpm, bars)
-      parsed match
+      row.toSongAndBars match
         case Left(err) => statusVar.set(err)
-        case Right((bpm, bars)) =>
-          player.play(bpm, bars)
+        case Right((song, bars)) =>
+          player.play(song.bpm, bars)
           playingVar.set(Some(row.id))
-          statusVar.set(s"playing '${row.title}'")
+          statusVar.set(s"playing '${song.title}'")
 
   def save(): Unit =
     val name = concertNameVar.now().trim
@@ -79,18 +88,16 @@ def createProntoPopLandingPage(): HtmlElement =
         .map(r => Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
         .mkString("\n")
       dom.window.localStorage.setItem(keyPrefix + name, text)
-      savedVar.set(listSaved())
+      offeredVar.set(listOffered())
       selectedVar.set(name)
       statusVar.set(s"saved '$name'")
 
   def load(): Unit =
     val name = selectedVar.now()
-    Option(dom.window.localStorage.getItem(keyPrefix + name)) match
-      case None => statusVar.set(if name.isEmpty then "select a saved concert to load" else s"no saved concert '$name'")
-      case Some(text) =>
-        val rows = text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
-          val f = line.split("\t", -1)
-          SongRow(freshId(), f.lift(0).getOrElse(""), f.lift(1).getOrElse(""), f.lift(2).getOrElse(""), f.lift(3).getOrElse("").replace("…", "..."))
+    concertRows(name) match
+      case None =>
+        statusVar.set(if name.isEmpty then "select a concert to load" else s"no concert '$name'")
+      case Some(rows) =>
         stopPlaying()
         songsVar.set(rows)
         concertNameVar.set(name)
@@ -123,8 +130,10 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "row",
       span("Saved Concerts: "),
       select(
-        children <-- savedVar.signal.map(names => ("" +: names).map(n =>
-          option(value := n, if n.isEmpty then "-- select --" else n))),
+        children <-- offeredVar.signal.map: offered =>
+          option(value := "", "-- select --") +: offered.map: (name, builtIn) =>
+            option(value := name, if builtIn then s"$name (built-in)" else name)
+        ,
         value <-- selectedVar.signal,
         onChange.mapToValue --> selectedVar.writer,
       ),
@@ -150,4 +159,3 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "row", button("Add song", onClick --> (_ => addSong()))),
     div(cls := "status", child.text <-- statusVar.signal),
   )
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S scala-cli shebang
 
-//> using scala 3.8.4
+//> using scala 3.9.0-RC4
 
 // Builds the prontopop app: links the app's *.scala files into main.js next to index.html.
 // Run from the project root: ./build.scala

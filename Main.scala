@@ -1,4 +1,4 @@
-//> using scala 3.9.0-RC1
+//> using scala 3.9.0-RC4
 //> using platform scala-js
 //> using jsVersion 1.22.0
 //> using dep com.raquo::laminar::17.2.1

@@ -20,7 +20,7 @@ then open <http://127.0.0.1:8000> — or just open `index.html` directly in a br
 
 ## Stack
 
-- Scala 3.9.0-RC1 (Scala.js 1.22.0) via scala-cli
+- Scala 3.9.0-RC4 (Scala.js 1.22.0) via scala-cli
 - [Laminar](https://laminar.dev) 17.2.1 for the reactive UI
 - No server: the app is static files (`index.html` + compiled `main.js`)
 

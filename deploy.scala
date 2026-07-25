@@ -1,6 +1,6 @@
 #!/usr/bin/env -S scala-cli shebang
 
-//> using scala 3.8.4
+//> using scala 3.9.0-RC4
 
 // Deploys the prontopop app to https://bjornregnell.se/pp/
 //   1. builds main.js via build.scala

@@ -14,12 +14,14 @@
 
 import java.nio.file.{Files, Paths, StandardCopyOption}
 import scala.collection.mutable
+import scala.jdk.CollectionConverters.*
 
 @main def deployPP(args: String*): Unit =
   def die(msg: String): Nothing = { System.err.println(s"deploy: $msg"); sys.exit(2) }
 
   val dryRun      = args.contains("--dry-run")
   val deployFiles = Seq("index.html", "main.js")
+  val deployDirs  = Seq("fonts")  // the app carries its own fonts; see Styles.scala
   val remoteDir   = "webroots/www/pp"
 
   val root = Paths.get("").toAbsolutePath
@@ -42,6 +44,15 @@ import scala.collection.mutable
     val src = root.resolve(f)
     if !Files.isRegularFile(src) then die(s"missing $f after build")
     Files.copy(src, staging.resolve(f), StandardCopyOption.REPLACE_EXISTING)
+  for d <- deployDirs do
+    val src = root.resolve(d)
+    if !Files.isDirectory(src) then die(s"missing directory $d")
+    Files.createDirectories(staging.resolve(d))
+    val entries = Files.list(src)
+    try
+      entries.iterator.asScala.filter(Files.isRegularFile(_)).foreach: p =>
+        Files.copy(p, staging.resolve(d).resolve(p.getFileName.toString), StandardCopyOption.REPLACE_EXISTING)
+    finally entries.close()
 
   // ---- step 3: host + login from ~/.netrc (the password stays there; lftp reads it itself) ----
   val netrc = Paths.get(System.getProperty("user.home"), ".netrc")
@@ -74,7 +85,7 @@ import scala.collection.mutable
         |bye
         |""".stripMargin
 
-  println(s"deploy: ${if dryRun then "DRY-RUN " else ""}upload ${deployFiles.mkString(", ")}  ->  $host:$remoteDir")
+  println(s"deploy: ${if dryRun then "DRY-RUN " else ""}upload ${(deployFiles ++ deployDirs.map(_ + "/")).mkString(", ")}  ->  $host:$remoteDir")
   val pb = new ProcessBuilder("lftp")
   pb.redirectErrorStream(true)
   val proc = pb.start()
@@ -83,8 +94,10 @@ import scala.collection.mutable
   val captured = new String(proc.getInputStream.readAllBytes(), "UTF-8")
   val code = proc.waitFor()
 
-  for f <- deployFiles do Files.deleteIfExists(staging.resolve(f))
-  Files.deleteIfExists(staging)
+  // depth-first, so directories are empty before they are removed
+  val stagedPaths = Files.walk(staging)
+  val doomed = try stagedPaths.iterator.asScala.toVector.sortBy(-_.getNameCount) finally stagedPaths.close()
+  doomed.foreach(Files.deleteIfExists)
 
   if code == 0 then
     println(s"deploy: done${if dryRun then " (dry-run: nothing changed)" else " - live at https://bjornregnell.se/pp/"}")

@@ -11,4 +11,5 @@ import org.scalajs.dom
 val Version = "v0.1.0"
 
 @main def run(): Unit =
+  Theme.showSaved()  // before the first render, so the page never paints the wrong theme
   renderOnDomContentLoaded(dom.document.getElementById("app"), createProntoPopLandingPage())

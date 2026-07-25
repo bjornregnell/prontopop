@@ -7920,6 +7920,90 @@ function $m_Lprontopop_Theme$() {
   }
   return $n_Lprontopop_Theme$;
 }
+/** @constructor */
+function $c_Lprontopop_Timing$() {
+  this.Lprontopop_Timing$__f_Start = null;
+  $n_Lprontopop_Timing$ = this;
+  this.Lprontopop_Timing$__f_Start = new $c_Lprontopop_Timing$Cursor(0, 0);
+}
+$c_Lprontopop_Timing$.prototype = new $h_O();
+$c_Lprontopop_Timing$.prototype.constructor = $c_Lprontopop_Timing$;
+/** @constructor */
+function $h_Lprontopop_Timing$() {
+}
+$h_Lprontopop_Timing$.prototype = $c_Lprontopop_Timing$.prototype;
+$c_Lprontopop_Timing$.prototype.beatsOf__Lprontopop_Model$Frac__I__D = (function(frac, beatsPerWhole) {
+  return (($n(frac).Lprontopop_Model$Frac__f_numerator * beatsPerWhole) / $n(frac).Lprontopop_Model$Frac__f_denominator);
+});
+$c_Lprontopop_Timing$.prototype.secsPerBeat__D__D = (function(bpm) {
+  return (60.0 / bpm);
+});
+$c_Lprontopop_Timing$.prototype.schedule__sci_Seq__Lprontopop_Timing$Schedule = (function(bars) {
+  $m_sci_Vector$();
+  var beats = new $c_sci_VectorBuilder();
+  var barStart = new $c_sr_DoubleRef(0.0);
+  $n(bars).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((bar$3) => {
+    var bar = $as_Lprontopop_Model$Bar(bar$3);
+    var sig = $n($n(bar).Lprontopop_Model$Bar__f_signature).Lprontopop_Model$Signature__f_frac;
+    $n($n(bar).Lprontopop_Model$Bar__f_events).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((e$2) => {
+      var e = $as_T2(e$2);
+      var offset = (barStart.sr_DoubleRef__f_elem + this.beatsOf__Lprontopop_Model$Frac__I__D($n($as_Lprontopop_Model$PosInBar($n(e)._1__O())).Lprontopop_Model$PosInBar__f_frac, $n(sig).Lprontopop_Model$Frac__f_denominator));
+      var ev = $as_Lprontopop_Model$Event($n(e)._2__O());
+      var elem = new $c_Lprontopop_Timing$Beat(offset, ev);
+      return beats.addOne__O__sci_VectorBuilder(elem);
+    })));
+    barStart.sr_DoubleRef__f_elem = (barStart.sr_DoubleRef__f_elem + $n(sig).Lprontopop_Model$Frac__f_numerator);
+  })));
+  var beats$1 = beats.result__sci_Vector();
+  var loopBeats = barStart.sr_DoubleRef__f_elem;
+  return new $c_Lprontopop_Timing$Schedule(beats$1, loopBeats);
+});
+$c_Lprontopop_Timing$.prototype.advance__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__Lprontopop_Timing$Cursor = (function(sched, cursor) {
+  if ((((1 + $n(cursor).Lprontopop_Timing$Cursor__f_index) | 0) >= $n($n(sched).Lprontopop_Timing$Schedule__f_beats).length__I())) {
+    var loop = ((1 + $n(cursor).Lprontopop_Timing$Cursor__f_loop) | 0);
+    return new $c_Lprontopop_Timing$Cursor(0, loop);
+  } else {
+    var index = ((1 + $n(cursor).Lprontopop_Timing$Cursor__f_index) | 0);
+    var loop$1 = $n(cursor).Lprontopop_Timing$Cursor__f_loop;
+    return new $c_Lprontopop_Timing$Cursor(index, loop$1);
+  }
+});
+$c_Lprontopop_Timing$.prototype.timeOf__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__D__D__D = (function(sched, cursor, startTime, secsPerBeat) {
+  return (startTime + ((($n(cursor).Lprontopop_Timing$Cursor__f_loop * $n(sched).Lprontopop_Timing$Schedule__f_loopBeats) + $n($as_Lprontopop_Timing$Beat($n($n(sched).Lprontopop_Timing$Schedule__f_beats).apply__I__O($n(cursor).Lprontopop_Timing$Cursor__f_index))).Lprontopop_Timing$Beat__f_offset) * secsPerBeat));
+});
+$c_Lprontopop_Timing$.prototype.due__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__D__D__D__T2 = (function(sched, cursor, startTime, secsPerBeat, horizon) {
+  if (($n(sched).isEmpty__Z() || (secsPerBeat <= 0.0))) {
+    $m_sci_Vector$();
+    var _1 = $m_sci_Vector0$();
+    return $ct_T2__O__O__(new $c_T2(), _1, cursor);
+  } else {
+    $m_sci_Vector$();
+    var out = new $c_sci_VectorBuilder();
+    var at = cursor;
+    var t = this.timeOf__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__D__D__D(sched, at, startTime, secsPerBeat);
+    while ((t <= horizon)) {
+      var _1$1 = t;
+      var _2 = $n($as_Lprontopop_Timing$Beat($n($n(sched).Lprontopop_Timing$Schedule__f_beats).apply__I__O($n(at).Lprontopop_Timing$Cursor__f_index))).Lprontopop_Timing$Beat__f_ev;
+      var elem = $ct_T2__O__O__(new $c_T2(), _1$1, _2);
+      out.addOne__O__sci_VectorBuilder(elem);
+      at = this.advance__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__Lprontopop_Timing$Cursor(sched, at);
+      t = this.timeOf__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__D__D__D(sched, at, startTime, secsPerBeat);
+    }
+    var _1$2 = out.result__sci_Vector();
+    var _2$1 = at;
+    return $ct_T2__O__O__(new $c_T2(), _1$2, _2$1);
+  }
+});
+var $d_Lprontopop_Timing$ = new $TypeData().initClass($c_Lprontopop_Timing$, "prontopop.Timing$", ({
+  Lprontopop_Timing$: 1
+}));
+var $n_Lprontopop_Timing$;
+function $m_Lprontopop_Timing$() {
+  if ((!$n_Lprontopop_Timing$)) {
+    $n_Lprontopop_Timing$ = new $c_Lprontopop_Timing$();
+  }
+  return $n_Lprontopop_Timing$;
+}
 function $p_Lprontopop_View$package$__freshId$1__sr_IntRef__I($thiz, lastId$1) {
   $n(lastId$1).sr_IntRef__f_elem = ((1 + $n(lastId$1).sr_IntRef__f_elem) | 0);
   return $n(lastId$1).sr_IntRef__f_elem;
@@ -13743,46 +13827,45 @@ function $p_Lprontopop_Sound$WebAudioPlayer__ctx__Lorg_scalajs_dom_AudioContext(
     return this$1.get__O();
   }
 }
-function $p_Lprontopop_Sound$WebAudioPlayer__beatsOf__Lprontopop_Model$Frac__I__D($thiz, f, beatsPerWhole) {
-  return (($n(f).Lprontopop_Model$Frac__f_numerator * beatsPerWhole) / $n(f).Lprontopop_Model$Frac__f_denominator);
-}
-function $p_Lprontopop_Sound$WebAudioPlayer__timeOfNext__D($thiz) {
-  var $x_3 = $thiz.Lprontopop_Sound$WebAudioPlayer__f_startTime;
-  var $x_2 = $thiz.Lprontopop_Sound$WebAudioPlayer__f_loopCount;
-  var $x_1 = $thiz.Lprontopop_Sound$WebAudioPlayer__f_loopBeats;
-  var x$proxy6 = $as_T2($n($thiz.Lprontopop_Sound$WebAudioPlayer__f_events).apply__I__O($thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex));
-  return ($x_3 + ((($x_2 * $x_1) + $uD($n(x$proxy6)._1__O())) * $thiz.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat));
-}
 function $p_Lprontopop_Sound$WebAudioPlayer__tick__V($thiz) {
   var horizon = ($uD($p_Lprontopop_Sound$WebAudioPlayer__ctx__Lorg_scalajs_dom_AudioContext($thiz).currentTime) + $thiz.Lprontopop_Sound$WebAudioPlayer__f_lookahead);
-  var t = $p_Lprontopop_Sound$WebAudioPlayer__timeOfNext__D($thiz);
-  while ((t <= horizon)) {
-    var x$proxy8 = $as_T2($n($thiz.Lprontopop_Sound$WebAudioPlayer__f_events).apply__I__O($thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex));
-    $p_Lprontopop_Sound$WebAudioPlayer__playEvent__Lprontopop_Model$Event__D__V($thiz, $as_Lprontopop_Model$Event($n(x$proxy8)._2__O()), t);
-    $thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex = ((1 + $thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex) | 0);
-    if (($thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex >= $n($thiz.Lprontopop_Sound$WebAudioPlayer__f_events).length__I())) {
-      $thiz.Lprontopop_Sound$WebAudioPlayer__f_nextIndex = 0;
-      $thiz.Lprontopop_Sound$WebAudioPlayer__f_loopCount = ((1 + $thiz.Lprontopop_Sound$WebAudioPlayer__f_loopCount) | 0);
+  matchResult1: {
+    var \u03b42$;
+    var x1 = $m_Lprontopop_Timing$().due__Lprontopop_Timing$Schedule__Lprontopop_Timing$Cursor__D__D__D__T2($thiz.Lprontopop_Sound$WebAudioPlayer__f_sched, $thiz.Lprontopop_Sound$WebAudioPlayer__f_cursor, $thiz.Lprontopop_Sound$WebAudioPlayer__f_startTime, $thiz.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat, horizon);
+    if ((x1 !== null)) {
+      $as_sci_Vector($n(x1)._1__O());
+      $as_Lprontopop_Timing$Cursor($n(x1)._2__O());
+      var \u03b42$ = x1;
+      break matchResult1;
     }
-    t = $p_Lprontopop_Sound$WebAudioPlayer__timeOfNext__D($thiz);
+    throw new $c_s_MatchError(x1);
   }
+  var beats$2 = $as_sci_Vector($n(\u03b42$)._1__O());
+  var next$2 = $as_Lprontopop_Timing$Cursor($n(\u03b42$)._2__O());
+  $n(beats$2).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$3) => {
+    var x$1 = $as_T2(x$1$3);
+    var t = $uD($n(x$1)._1__O());
+    var ev = $as_Lprontopop_Model$Event($n(x$1)._2__O());
+    $p_Lprontopop_Sound$WebAudioPlayer__playEvent__Lprontopop_Model$Event__D__V($thiz, ev, t);
+  })));
+  $thiz.Lprontopop_Sound$WebAudioPlayer__f_cursor = next$2;
 }
 function $p_Lprontopop_Sound$WebAudioPlayer__playEvent__Lprontopop_Model$Event__D__V($thiz, ev, t) {
   if ((ev instanceof $c_Lprontopop_Model$DrumHit)) {
     var x$1 = $as_Lprontopop_Model$DrumHit(ev);
     var this$2 = $n(x$1);
-    var x10 = this$2.Lprontopop_Model$DrumHit__f_drum;
+    var x13 = this$2.Lprontopop_Model$DrumHit__f_drum;
     var this$3 = $n(x$1);
-    var x11 = this$3.Lprontopop_Model$DrumHit__f_velocity;
-    $p_Lprontopop_Sound$WebAudioPlayer__tone__D__I__D__D__V($thiz, $p_Lprontopop_Sound$WebAudioPlayer__drumFreq__Lprontopop_Model$Drum__D($thiz, x10), x11, t, $thiz.Lprontopop_Sound$WebAudioPlayer__f_clickLength);
+    var x14 = this$3.Lprontopop_Model$DrumHit__f_velocity;
+    $p_Lprontopop_Sound$WebAudioPlayer__tone__D__I__D__D__V($thiz, $p_Lprontopop_Sound$WebAudioPlayer__drumFreq__Lprontopop_Model$Drum__D($thiz, x13), x14, t, $thiz.Lprontopop_Sound$WebAudioPlayer__f_clickLength);
   } else if (false) {
     var x$1$1 = $as_Lprontopop_Model$NoteOn(ev);
     $n(x$1$1)._1__Lprontopop_Model$Instrument();
-    var x5 = $n(x$1$1)._2__I();
-    var x6 = $n(x$1$1)._3__I();
-    var x7 = $n(x$1$1)._4__Lprontopop_Model$Frac();
-    var secs = ((4.0 * ($n(x7).Lprontopop_Model$Frac__f_numerator / $n(x7).Lprontopop_Model$Frac__f_denominator)) * $thiz.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat);
-    $p_Lprontopop_Sound$WebAudioPlayer__tone__D__I__D__D__V($thiz, $p_Lprontopop_Sound$WebAudioPlayer__midiFreq__I__D($thiz, x5), x6, t, secs);
+    var x8 = $n(x$1$1)._2__I();
+    var x9 = $n(x$1$1)._3__I();
+    var x10 = $n(x$1$1)._4__Lprontopop_Model$Frac();
+    var secs = ((4.0 * ($n(x10).Lprontopop_Model$Frac__f_numerator / $n(x10).Lprontopop_Model$Frac__f_denominator)) * $thiz.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat);
+    $p_Lprontopop_Sound$WebAudioPlayer__tone__D__I__D__D__V($thiz, $p_Lprontopop_Sound$WebAudioPlayer__midiFreq__I__D($thiz, x8), x9, t, secs);
   }
 }
 function $p_Lprontopop_Sound$WebAudioPlayer__tone__D__I__D__D__V($thiz, baseFreq, velocity, t, length) {
@@ -13859,12 +13942,10 @@ function $c_Lprontopop_Sound$WebAudioPlayer() {
   this.Lprontopop_Sound$WebAudioPlayer__f_masterOpt = null;
   this.Lprontopop_Sound$WebAudioPlayer__f_volume = 0.0;
   this.Lprontopop_Sound$WebAudioPlayer__f_timer = null;
-  this.Lprontopop_Sound$WebAudioPlayer__f_events = null;
-  this.Lprontopop_Sound$WebAudioPlayer__f_loopBeats = 0.0;
+  this.Lprontopop_Sound$WebAudioPlayer__f_sched = null;
+  this.Lprontopop_Sound$WebAudioPlayer__f_cursor = null;
   this.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat = 0.0;
   this.Lprontopop_Sound$WebAudioPlayer__f_startTime = 0.0;
-  this.Lprontopop_Sound$WebAudioPlayer__f_nextIndex = 0;
-  this.Lprontopop_Sound$WebAudioPlayer__f_loopCount = 0;
   this.Lprontopop_Sound$WebAudioPlayer__f_lookahead = 0.1;
   this.Lprontopop_Sound$WebAudioPlayer__f_tickMs = 25.0;
   this.Lprontopop_Sound$WebAudioPlayer__f_clickLength = 0.05;
@@ -13872,12 +13953,12 @@ function $c_Lprontopop_Sound$WebAudioPlayer() {
   this.Lprontopop_Sound$WebAudioPlayer__f_masterOpt = $m_s_None$();
   this.Lprontopop_Sound$WebAudioPlayer__f_volume = 1.0;
   this.Lprontopop_Sound$WebAudioPlayer__f_timer = $m_s_None$();
-  this.Lprontopop_Sound$WebAudioPlayer__f_events = ($m_sci_Vector$(), $m_sci_Vector0$());
-  this.Lprontopop_Sound$WebAudioPlayer__f_loopBeats = 0.0;
+  $m_sci_Vector$();
+  var beats = $m_sci_Vector0$();
+  this.Lprontopop_Sound$WebAudioPlayer__f_sched = new $c_Lprontopop_Timing$Schedule(beats, 0.0);
+  this.Lprontopop_Sound$WebAudioPlayer__f_cursor = $m_Lprontopop_Timing$().Lprontopop_Timing$__f_Start;
   this.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat = 0.5;
   this.Lprontopop_Sound$WebAudioPlayer__f_startTime = 0.0;
-  this.Lprontopop_Sound$WebAudioPlayer__f_nextIndex = 0;
-  this.Lprontopop_Sound$WebAudioPlayer__f_loopCount = 0;
 }
 $c_Lprontopop_Sound$WebAudioPlayer.prototype = new $h_O();
 $c_Lprontopop_Sound$WebAudioPlayer.prototype.constructor = $c_Lprontopop_Sound$WebAudioPlayer;
@@ -13896,33 +13977,16 @@ $c_Lprontopop_Sound$WebAudioPlayer.prototype.setVolume__D__V = (function(v) {
 });
 $c_Lprontopop_Sound$WebAudioPlayer.prototype.play__D__sci_Seq__V = (function(bpm, bars) {
   this.stop__V();
-  var this$1 = $n(bars);
-  if (((!this$1.isEmpty__Z()) && (bpm > 0.0))) {
+  var laid = $m_Lprontopop_Timing$().schedule__sci_Seq__Lprontopop_Timing$Schedule(bars);
+  if (((!$n(laid).isEmpty__Z()) && (bpm > 0.0))) {
     var c = $p_Lprontopop_Sound$WebAudioPlayer__ctx__Lorg_scalajs_dom_AudioContext(this);
     if (($as_T(c.state) === "suspended")) {
       c.resume();
     }
-    $m_sci_Vector$();
-    var scheduled = new $c_sci_VectorBuilder();
-    var barStart = new $c_sr_DoubleRef(0.0);
-    $n(bars).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((bar$3) => {
-      var bar = $as_Lprontopop_Model$Bar(bar$3);
-      var sig = $n($n(bar).Lprontopop_Model$Bar__f_signature).Lprontopop_Model$Signature__f_frac;
-      $n($n(bar).Lprontopop_Model$Bar__f_events).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((e$2) => {
-        var e = $as_T2(e$2);
-        var _1 = (barStart.sr_DoubleRef__f_elem + $p_Lprontopop_Sound$WebAudioPlayer__beatsOf__Lprontopop_Model$Frac__I__D(this, $n($as_Lprontopop_Model$PosInBar($n(e)._1__O())).Lprontopop_Model$PosInBar__f_frac, $n(sig).Lprontopop_Model$Frac__f_denominator));
-        var _2 = $as_Lprontopop_Model$Event($n(e)._2__O());
-        var x$proxy5 = $ct_T2__O__O__(new $c_T2(), _1, _2);
-        return scheduled.addOne__O__sci_VectorBuilder(x$proxy5);
-      })));
-      barStart.sr_DoubleRef__f_elem = (barStart.sr_DoubleRef__f_elem + $n(sig).Lprontopop_Model$Frac__f_numerator);
-    })));
-    this.Lprontopop_Sound$WebAudioPlayer__f_events = scheduled.result__sci_Vector();
-    this.Lprontopop_Sound$WebAudioPlayer__f_loopBeats = barStart.sr_DoubleRef__f_elem;
-    this.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat = (60.0 / bpm);
+    this.Lprontopop_Sound$WebAudioPlayer__f_sched = laid;
+    this.Lprontopop_Sound$WebAudioPlayer__f_secsPerBeat = $m_Lprontopop_Timing$().secsPerBeat__D__D(bpm);
     this.Lprontopop_Sound$WebAudioPlayer__f_startTime = ($uD(c.currentTime) + 0.05);
-    this.Lprontopop_Sound$WebAudioPlayer__f_nextIndex = 0;
-    this.Lprontopop_Sound$WebAudioPlayer__f_loopCount = 0;
+    this.Lprontopop_Sound$WebAudioPlayer__f_cursor = $m_Lprontopop_Timing$().Lprontopop_Timing$__f_Start;
     var value = $m_sjs_js_timers_package$().setInterval__D__F0__sjs_js_timers_SetIntervalHandle(this.Lprontopop_Sound$WebAudioPlayer__f_tickMs, new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => {
       $p_Lprontopop_Sound$WebAudioPlayer__tick__V(this);
     })));
@@ -19881,6 +19945,258 @@ function $asArrayOf_Lprontopop_SongRow(obj, depth) {
 }
 var $d_Lprontopop_SongRow = new $TypeData().initClass($c_Lprontopop_SongRow, "prontopop.SongRow", ({
   Lprontopop_SongRow: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lprontopop_Timing$Beat(offset, ev) {
+  this.Lprontopop_Timing$Beat__f_offset = 0.0;
+  this.Lprontopop_Timing$Beat__f_ev = null;
+  this.Lprontopop_Timing$Beat__f_offset = offset;
+  this.Lprontopop_Timing$Beat__f_ev = ev;
+}
+$c_Lprontopop_Timing$Beat.prototype = new $h_O();
+$c_Lprontopop_Timing$Beat.prototype.constructor = $c_Lprontopop_Timing$Beat;
+/** @constructor */
+function $h_Lprontopop_Timing$Beat() {
+}
+$h_Lprontopop_Timing$Beat.prototype = $c_Lprontopop_Timing$Beat.prototype;
+$c_Lprontopop_Timing$Beat.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lprontopop_Timing$Beat.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 2066390);
+  var hash$1 = acc;
+  var dv = this.Lprontopop_Timing$Beat__f_offset;
+  var data = $m_sr_Statics$().doubleHash__D__I(dv);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x = this.Lprontopop_Timing$Beat__f_ev;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$3, 2);
+});
+$c_Lprontopop_Timing$Beat.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lprontopop_Timing$Beat)) {
+    var x$0$2 = $as_Lprontopop_Timing$Beat(x$0);
+    if ((this.Lprontopop_Timing$Beat__f_offset === $n(x$0$2).Lprontopop_Timing$Beat__f_offset)) {
+      var x = this.Lprontopop_Timing$Beat__f_ev;
+      var x$2 = $n(x$0$2).Lprontopop_Timing$Beat__f_ev;
+      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      $n(x$0$2);
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lprontopop_Timing$Beat.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lprontopop_Timing$Beat.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lprontopop_Timing$Beat.prototype.productPrefix__T = (function() {
+  return "Beat";
+});
+$c_Lprontopop_Timing$Beat.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lprontopop_Timing$Beat__f_offset;
+  }
+  if ((n === 1)) {
+    return this.Lprontopop_Timing$Beat__f_ev;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__I__(new $c_jl_IndexOutOfBoundsException(), n);
+});
+function $as_Lprontopop_Timing$Beat(obj) {
+  return (((obj instanceof $c_Lprontopop_Timing$Beat) || (obj === null)) ? obj : $throwClassCastException(obj, "prontopop.Timing$Beat"));
+}
+function $isArrayOf_Lprontopop_Timing$Beat(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lprontopop_Timing$Beat)));
+}
+function $asArrayOf_Lprontopop_Timing$Beat(obj, depth) {
+  return (($isArrayOf_Lprontopop_Timing$Beat(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lprontopop.Timing$Beat;", depth));
+}
+var $d_Lprontopop_Timing$Beat = new $TypeData().initClass($c_Lprontopop_Timing$Beat, "prontopop.Timing$Beat", ({
+  Lprontopop_Timing$Beat: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lprontopop_Timing$Cursor(index, loop) {
+  this.Lprontopop_Timing$Cursor__f_index = 0;
+  this.Lprontopop_Timing$Cursor__f_loop = 0;
+  this.Lprontopop_Timing$Cursor__f_index = index;
+  this.Lprontopop_Timing$Cursor__f_loop = loop;
+}
+$c_Lprontopop_Timing$Cursor.prototype = new $h_O();
+$c_Lprontopop_Timing$Cursor.prototype.constructor = $c_Lprontopop_Timing$Cursor;
+/** @constructor */
+function $h_Lprontopop_Timing$Cursor() {
+}
+$h_Lprontopop_Timing$Cursor.prototype = $c_Lprontopop_Timing$Cursor.prototype;
+$c_Lprontopop_Timing$Cursor.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lprontopop_Timing$Cursor.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 2029715318);
+  var hash$1 = acc;
+  var data = this.Lprontopop_Timing$Cursor__f_index;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var data$1 = this.Lprontopop_Timing$Cursor__f_loop;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$3, 2);
+});
+$c_Lprontopop_Timing$Cursor.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lprontopop_Timing$Cursor)) {
+    var x$0$2 = $as_Lprontopop_Timing$Cursor(x$0);
+    return (((this.Lprontopop_Timing$Cursor__f_index === $n(x$0$2).Lprontopop_Timing$Cursor__f_index) && (this.Lprontopop_Timing$Cursor__f_loop === $n(x$0$2).Lprontopop_Timing$Cursor__f_loop)) && ($n(x$0$2), true));
+  } else {
+    return false;
+  }
+});
+$c_Lprontopop_Timing$Cursor.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lprontopop_Timing$Cursor.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lprontopop_Timing$Cursor.prototype.productPrefix__T = (function() {
+  return "Cursor";
+});
+$c_Lprontopop_Timing$Cursor.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lprontopop_Timing$Cursor__f_index;
+  }
+  if ((n === 1)) {
+    return this.Lprontopop_Timing$Cursor__f_loop;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__I__(new $c_jl_IndexOutOfBoundsException(), n);
+});
+function $as_Lprontopop_Timing$Cursor(obj) {
+  return (((obj instanceof $c_Lprontopop_Timing$Cursor) || (obj === null)) ? obj : $throwClassCastException(obj, "prontopop.Timing$Cursor"));
+}
+function $isArrayOf_Lprontopop_Timing$Cursor(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lprontopop_Timing$Cursor)));
+}
+function $asArrayOf_Lprontopop_Timing$Cursor(obj, depth) {
+  return (($isArrayOf_Lprontopop_Timing$Cursor(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lprontopop.Timing$Cursor;", depth));
+}
+var $d_Lprontopop_Timing$Cursor = new $TypeData().initClass($c_Lprontopop_Timing$Cursor, "prontopop.Timing$Cursor", ({
+  Lprontopop_Timing$Cursor: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lprontopop_Timing$Schedule(beats, loopBeats) {
+  this.Lprontopop_Timing$Schedule__f_beats = null;
+  this.Lprontopop_Timing$Schedule__f_loopBeats = 0.0;
+  this.Lprontopop_Timing$Schedule__f_beats = beats;
+  this.Lprontopop_Timing$Schedule__f_loopBeats = loopBeats;
+}
+$c_Lprontopop_Timing$Schedule.prototype = new $h_O();
+$c_Lprontopop_Timing$Schedule.prototype.constructor = $c_Lprontopop_Timing$Schedule;
+/** @constructor */
+function $h_Lprontopop_Timing$Schedule() {
+}
+$h_Lprontopop_Timing$Schedule.prototype = $c_Lprontopop_Timing$Schedule.prototype;
+$c_Lprontopop_Timing$Schedule.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lprontopop_Timing$Schedule.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-633276745));
+  var hash$1 = acc;
+  var x = this.Lprontopop_Timing$Schedule__f_beats;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var dv = this.Lprontopop_Timing$Schedule__f_loopBeats;
+  var data$1 = $m_sr_Statics$().doubleHash__D__I(dv);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$3, 2);
+});
+$c_Lprontopop_Timing$Schedule.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lprontopop_Timing$Schedule)) {
+    var x$0$2 = $as_Lprontopop_Timing$Schedule(x$0);
+    if ((this.Lprontopop_Timing$Schedule__f_loopBeats === $n(x$0$2).Lprontopop_Timing$Schedule__f_loopBeats)) {
+      var x = this.Lprontopop_Timing$Schedule__f_beats;
+      var x$2 = $n(x$0$2).Lprontopop_Timing$Schedule__f_beats;
+      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      $n(x$0$2);
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lprontopop_Timing$Schedule.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lprontopop_Timing$Schedule.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lprontopop_Timing$Schedule.prototype.productPrefix__T = (function() {
+  return "Schedule";
+});
+$c_Lprontopop_Timing$Schedule.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lprontopop_Timing$Schedule__f_beats;
+  }
+  if ((n === 1)) {
+    return this.Lprontopop_Timing$Schedule__f_loopBeats;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__I__(new $c_jl_IndexOutOfBoundsException(), n);
+});
+$c_Lprontopop_Timing$Schedule.prototype.isEmpty__Z = (function() {
+  var this$1 = $n(this.Lprontopop_Timing$Schedule__f_beats);
+  if ($f_sc_SeqOps__isEmpty__Z(this$1)) {
+    return true;
+  } else {
+    return (this.Lprontopop_Timing$Schedule__f_loopBeats <= 0.0);
+  }
+});
+function $as_Lprontopop_Timing$Schedule(obj) {
+  return (((obj instanceof $c_Lprontopop_Timing$Schedule) || (obj === null)) ? obj : $throwClassCastException(obj, "prontopop.Timing$Schedule"));
+}
+function $isArrayOf_Lprontopop_Timing$Schedule(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lprontopop_Timing$Schedule)));
+}
+function $asArrayOf_Lprontopop_Timing$Schedule(obj, depth) {
+  return (($isArrayOf_Lprontopop_Timing$Schedule(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lprontopop.Timing$Schedule;", depth));
+}
+var $d_Lprontopop_Timing$Schedule = new $TypeData().initClass($c_Lprontopop_Timing$Schedule, "prontopop.Timing$Schedule", ({
+  Lprontopop_Timing$Schedule: 1,
   s_Equals: 1,
   s_Product: 1,
   Ljava_io_Serializable: 1

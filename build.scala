@@ -17,7 +17,7 @@ import java.nio.file.{Files, Path, Paths}
 import scala.jdk.CollectionConverters.*
 
 /** Sources with no browser dependency, so they compile and test on the JVM. */
-val testable = Seq("Model.scala", "ModelOps.scala", "SongRow.scala", "Concerts.scala")
+val testable = Seq("Model.scala", "ModelOps.scala", "SongRow.scala", "Concerts.scala", "Timing.scala")
 
 def run(cmd: Seq[String]): Int =
   println(s"build: ${cmd.mkString(" ")}")

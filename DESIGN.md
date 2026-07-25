@@ -209,27 +209,24 @@ decide until a second error kind exists.
 
 ## Pinned investigation: how to test the click's timing
 
-DEFERRED, deliberately, 2026-07-25 — but pinned rather than dropped, because timing is the one
-thing a metronome exists to get right. `Goal: metronomeLivePerformance` rests entirely on it, and
-right now nothing checks it: WebAudio is silent in headless Chrome, so the only verification the
-click has ever had is BR listening to it. A drift or a stutter would survive every test we own, and
-would show up on a stage.
+Timing is the one thing a metronome exists to get right, and `Goal: metronomeLivePerformance` rests
+entirely on it. WebAudio is silent in headless Chrome, so for a long while the only verification the
+click had was BR listening to it — a drift or a stutter would have survived every test we owned and
+shown up on a stage.
 
-Three approaches, cheapest and most promising first.
+**Step 1 is DONE (2026-07-25): the arithmetic is extracted and tested.** `Timing.scala` holds the
+whole schedule computation as pure functions of numbers — laying bars end to end, the cursor that
+wraps into the next loop, the time a beat falls, and `due`, which answers what lies inside a
+lookahead window. `WebAudioPlayer` keeps only the audio clock and the graph, and its `tick` is three
+lines. `tests/Timing.test.scala` covers it on the JVM with no browser and no new dependency,
+including the property the whole design rests on: **a beat's time is computed from its index, never
+accumulated**, so rounding cannot pile up. The suite asserts the 10,000th beat at a deliberately
+non-round 137 bpm lands exactly where multiplication says, and that consecutive gaps stay exactly one
+beat across loop boundaries. It also pins two ways the old `tick` could have spun forever — an empty
+schedule and a zero tempo — which the previous code would have hung on.
 
-1. **Extract the schedule arithmetic and unit-test it on the JVM.** Most of what could go wrong is
-   ordinary arithmetic: `timeOfNext` computing `startTime + (loopCount * loopBeats + offset) *
-   secsPerBeat`, the beat offsets accumulated per bar in `play`, and the lookahead loop in `tick`
-   deciding what falls inside the horizon. None of that needs audio — only `ctx.currentTime` and
-   `setInterval` do. Pulling the pure part into a testable function would let munit assert, with no
-   browser and no new dependency, that a 3/4 pattern at 120 bpm places beats exactly 0.5 s apart,
-   that a loop boundary does not double- or skip-fire, and that a bpm change mid-flight lands where
-   it should. This is the lean, handrolled option and fits the dependency stance above.
-
-   Honest caveat: it IS a refactor, not a move. `WebAudioPlayer` currently interleaves the
-   arithmetic with `ctx.currentTime`, mutable cursor state and the timer, so the pure core has to be
-   teased out first — worth doing on its own merits, since that entanglement is also what makes the
-   player hard to reason about.
+What is still NOT verified: that the audio graph turns those numbers into sound at those moments.
+Two approaches remain, should a real timing complaint ever appear.
 
 2. **Render offline and inspect the samples.** `OfflineAudioContext` renders an audio graph to a
    buffer deterministically and faster than real time, with no output device involved. Rendering a
@@ -239,12 +236,11 @@ Three approaches, cheapest and most promising first.
 
 3. **Drive a real page and capture scheduled times.** Substitute a recording stand-in for
    `AudioContext` that logs every `osc.start(t)`, then compare the log against expectations. The
-   most faithful of the three, and the most machinery: it needs in-browser test execution (Scala.js
-   munit on Node with a DOM shim, or the DevTools protocol via Puppeteer) — which means a new
-   dependency, so it should wait until 1 and 2 are exhausted.
+   most faithful, and the most machinery: it needs in-browser test execution (Scala.js munit on Node
+   with a DOM shim, or the DevTools protocol via Puppeteer) — which means a new dependency, so it
+   should wait until there is a real complaint to chase.
 
-Recommendation when this is picked up: do 1, and only reach for 2 if the arithmetic turns out to be
-sound and a real-world timing complaint persists.
+Given step 1, a timing bug now almost certainly means the browser's own scheduling, not ours.
 
 ## Project gotchas worth not rediscovering
 

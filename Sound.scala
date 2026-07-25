@@ -27,12 +27,12 @@ object Sound:
     private var volume    = 1.0
     private var timer     = Option.empty[js.timers.SetIntervalHandle]
 
-    private var events      = Vector.empty[(offset: Double, ev: Event)]  // offsets in beats from loop start
-    private var loopBeats   = 0.0
+    // What to play and how far we have got. The arithmetic lives in Timing, which is pure and
+    // tested on the JVM; this class keeps only the audio clock and the graph.
+    private var sched       = Timing.Schedule(Vector.empty, 0.0)
+    private var cursor      = Timing.Start
     private var secsPerBeat = 0.5
     private var startTime   = 0.0  // ctx time of beat 0 of loop 0
-    private var nextIndex   = 0
-    private var loopCount   = 0
 
     private def ctx: dom.AudioContext =
       ctxOpt.getOrElse:
@@ -48,27 +48,16 @@ object Sound:
       volume = v.max(0.0).min(1.0)
       masterOpt.foreach(_.gain.value = volume)
 
-    private def beatsOf(f: Frac, beatsPerWhole: Int): Double =
-      f.numerator.toDouble * beatsPerWhole / f.denominator
-
     def play(bpm: BPM, bars: Seq[Bar]): Unit =
       stop()
-      if bars.nonEmpty && bpm > 0 then
+      val laid = Timing.schedule(bars)
+      if !laid.isEmpty && bpm > 0 then
         val c = ctx
         if c.state == "suspended" then c.resume()
-        val scheduled = Vector.newBuilder[(offset: Double, ev: Event)]
-        var barStart = 0.0
-        for bar <- bars do
-          val sig = bar.signature.frac
-          for e <- bar.events do
-            scheduled += ((offset = barStart + beatsOf(e.pos.frac, sig.denominator), ev = e.ev))
-          barStart += sig.numerator
-        events = scheduled.result()
-        loopBeats = barStart
-        secsPerBeat = 60.0 / bpm
+        sched = laid
+        secsPerBeat = Timing.secsPerBeat(bpm)
         startTime = c.currentTime + 0.05
-        nextIndex = 0
-        loopCount = 0
+        cursor = Timing.Start
         timer = Some(js.timers.setInterval(tickMs)(tick()))
 
     def stop(): Unit =
@@ -77,19 +66,13 @@ object Sound:
 
     def isPlaying: Boolean = timer.nonEmpty
 
-    private def timeOfNext: Double =
-      startTime + (loopCount * loopBeats + events(nextIndex).offset) * secsPerBeat
-
+    /** Ask Timing what falls inside the lookahead window, hand it to the audio graph, keep the
+      * cursor it gives back. All the arithmetic that could go wrong happens in there. */
     private def tick(): Unit =
       val horizon = ctx.currentTime + lookahead
-      var t = timeOfNext
-      while t <= horizon do
-        playEvent(events(nextIndex).ev, t)
-        nextIndex += 1
-        if nextIndex >= events.length then
-          nextIndex = 0
-          loopCount += 1
-        t = timeOfNext
+      val (beats, next) = Timing.due(sched, cursor, startTime, secsPerBeat, horizon)
+      beats.foreach((t, ev) => playEvent(ev, t))
+      cursor = next
 
     private def playEvent(ev: Event, t: Double): Unit = ev match
       case DrumHit(drum, velocity) => tone(drumFreq(drum), velocity, t, clickLength)

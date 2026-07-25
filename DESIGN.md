@@ -23,6 +23,25 @@ linted clean.
   root-level `*.scala` and `deploy.scala` stages an explicit list, so `tmp/` reaches neither the
   bundle nor the server.
 
+- **Lean and mean on dependencies; handroll when handrolling is reasonable.** What ships is Laminar
+  and scalajs-dom, and nothing else. munit is declared a `test.dep`, so it is absent from `main.js`.
+  A new dependency has to earn its place against the effort of writing the small thing ourselves,
+  and so far writing it ourselves has kept winning:
+
+  - the click is **synthesized** with `AudioContext` oscillators rather than pulling in an audio
+    library or shipping sound files;
+  - the theme dropdown is **~40 lines of Scala** in `Theme.scala` rather than vendoring
+    genscalator's `design.js`, which also keeps it in one language;
+  - the design-language CSS is **emitted from Scala** in `Styles.scala`, so there is no separate
+    stylesheet asset to serve or drift;
+  - the fonts are **copied into `fonts/`**, so the app depends on no sibling deploy;
+  - persistence is **tab-separated lines in local storage**, not a JSON library.
+
+  The rule of thumb: if the handrolled version is small enough to read in one sitting and we
+  understand every line, prefer it. Reach for a dependency when the alternative is re-implementing
+  something genuinely hard — a parser generator, a crypto primitive, a layout engine — not merely
+  tedious. If a browser API is missing from scalajs-dom, handroll the small facade.
+
 ## The bug that shaped `Concerts.scala` (fixed)
 
 VERIFIED at the time, not suspected — running a main that touched `Concerts.all` on the JVM gave:
@@ -187,6 +206,45 @@ decide until a second error kind exists.
   built-in, the `(built-in)` labels, and saving over a built-in have not been clicked through — the
   checks above are JVM-level, and the app itself only ever runs as Scala.js in a browser. There are
   no browser tests at all in this project.
+
+## Pinned investigation: how to test the click's timing
+
+DEFERRED, deliberately, 2026-07-25 — but pinned rather than dropped, because timing is the one
+thing a metronome exists to get right. `Goal: metronomeLivePerformance` rests entirely on it, and
+right now nothing checks it: WebAudio is silent in headless Chrome, so the only verification the
+click has ever had is BR listening to it. A drift or a stutter would survive every test we own, and
+would show up on a stage.
+
+Three approaches, cheapest and most promising first.
+
+1. **Extract the schedule arithmetic and unit-test it on the JVM.** Most of what could go wrong is
+   ordinary arithmetic: `timeOfNext` computing `startTime + (loopCount * loopBeats + offset) *
+   secsPerBeat`, the beat offsets accumulated per bar in `play`, and the lookahead loop in `tick`
+   deciding what falls inside the horizon. None of that needs audio — only `ctx.currentTime` and
+   `setInterval` do. Pulling the pure part into a testable function would let munit assert, with no
+   browser and no new dependency, that a 3/4 pattern at 120 bpm places beats exactly 0.5 s apart,
+   that a loop boundary does not double- or skip-fire, and that a bpm change mid-flight lands where
+   it should. This is the lean, handrolled option and fits the dependency stance above.
+
+   Honest caveat: it IS a refactor, not a move. `WebAudioPlayer` currently interleaves the
+   arithmetic with `ctx.currentTime`, mutable cursor state and the timer, so the pure core has to be
+   teased out first — worth doing on its own merits, since that entanglement is also what makes the
+   player hard to reason about.
+
+2. **Render offline and inspect the samples.** `OfflineAudioContext` renders an audio graph to a
+   buffer deterministically and faster than real time, with no output device involved. Rendering a
+   few seconds of a pattern and locating the click transients in the buffer would verify the actual
+   audio graph, not just our arithmetic. Runs in headless Chrome, needs no new dependency, but does
+   need a way to run assertions inside the page.
+
+3. **Drive a real page and capture scheduled times.** Substitute a recording stand-in for
+   `AudioContext` that logs every `osc.start(t)`, then compare the log against expectations. The
+   most faithful of the three, and the most machinery: it needs in-browser test execution (Scala.js
+   munit on Node with a DOM shim, or the DevTools protocol via Puppeteer) — which means a new
+   dependency, so it should wait until 1 and 2 are exhausted.
+
+Recommendation when this is picked up: do 1, and only reach for 2 if the arithmetic turns out to be
+sound and a real-world timing complaint persists.
 
 ## Project gotchas worth not rediscovering
 

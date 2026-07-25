@@ -241,10 +241,13 @@ button:hover { border-color: var(--link); }
   align-items: center;
   margin: 0.25rem 0;
   width: var(--table-width);
-  grid-template-columns: 8ch 40ch 6ch 7ch 30ch 11ch;
+  grid-template-columns: 8ch 40ch 6ch 7ch 38ch 11ch;
 }
 
-:root { --table-width: 104.5ch; }
+/* Sum of the columns plus the five 0.5ch gaps. The pattern column must fit the longest realistic
+   dsl INCLUDING its letter-spacing and the input's own padding: a 4/4 example is 25 characters,
+   which at 1.2ch each already exceeds 30ch — that clipped the closing ':||' before it was widened. */
+:root { --table-width: 112.5ch; }
 
 .songrow input { width: 100%; min-width: 0; }
 .songrow.header { color: var(--muted); }

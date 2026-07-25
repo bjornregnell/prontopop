@@ -1,22 +1,31 @@
 # ProntoPop design notes
 
-Working notes for the built-in-concerts work. Written 2026-07-25, before a box reboot, so the
-reasoning survives the restart. Not a spec — `PRD.md` is the spec; this is the how and why.
+Working notes for the built-in-concerts work, written 2026-07-25. Not a spec — `PRD.md` is the
+spec; this is the how and why.
 
-## Status when this was written
+## Status
 
-- `PRD.md` has been EDITED but neither parsed nor committed (the `tt parsereqt` runs hung on a
-  wedged bloop). Re-run `tt parsereqt parse PRD.md` and `tt parsereqt lint PRD.md` before trusting
-  it. Added there: `Goal: easyStart`, `Feature: builtInConcerts`, and the relations
-  `builtInConcerts helps easyStart`, `patternDsl hurts easyStart`,
-  `builtInConcerts requires concertStore`.
-- `Concerts.scala` and the TODOs are committed (`08c4742`, `1015f97`) but NOT pushed — the repo was
-  1 ahead of both mirrors.
-- Nothing in the app references `Concerts` yet, so the bug below is still latent.
+Built-in concerts are IMPLEMENTED and deployed (`a34c11a`). The two actionable TODOs are done and
+the initialization bug below is fixed; the reasoning is kept because it explains why the code looks
+the way it does. `PRD.md` carries `Goal: easyStart` and `Feature: builtInConcerts`, parsed and
+linted clean.
 
-## Bug found first: `Concerts.all` throws at initialization
+## Standing decisions
 
-VERIFIED, not suspected — running a main that touches `Concerts.all` on the JVM gives:
+- **Bleeding-edge Scala, deliberately.** The project tracks Scala 3.9.0 release candidates
+  (currently 3.9.0-RC4) everywhere: the app, `build.scala`, `deploy.scala` and the README. scala-cli
+  1.15.0 cannot post-process TASTY from an RC and prints a notice saying so on every script compile.
+  That notice is ACCEPTED, not a defect to chase: it only cleans up source paths inside TASTY files,
+  which cannot affect a JS bundle, and scala-cli will catch up. Do not "fix" it by pinning back to a
+  stable Scala. (BR, 2026-07-25.)
+- **Scratch files live in the repo's gitignored `tmp/`**, never `/tmp`, which a reboot clears —
+  learned the hard way when a verification script vanished mid-task. `build.scala` reads only
+  root-level `*.scala` and `deploy.scala` stages an explicit list, so `tmp/` reaches neither the
+  bundle nor the server.
+
+## The bug that shaped `Concerts.scala` (fixed)
+
+VERIFIED at the time, not suspected — running a main that touched `Concerts.all` on the JVM gave:
 
 ```
 java.lang.NullPointerException: Cannot invoke "scala.Tuple2._1()" because "elem" is null
@@ -165,19 +174,19 @@ throws on a missing key — hence the `Concerts.startup` suggestion above.
 **C (more error kinds): no, and that is fine.** "When needed" is a marker, not a task. Nothing to
 decide until a second error kind exists.
 
-## Caveats: what has NOT been verified
+## What has been verified, and what has not
 
-Recorded honestly, because a reboot makes it easy to mistake "planned" for "checked".
-
-- **The `lazy val` fix was never run.** The scratchpad file exists but the box seized before it
-  executed. The NPE itself IS verified; its fix is not.
-- **`PRD.md` was never parsed or linted** after editing. Both runs hung on the wedged bloop.
-- **Nothing has been compiled since commits `08c4742` and `1015f97`.** `Model.scala` and
-  `Concerts.scala` do compile (the JVM check got as far as a runtime NPE, which proves the compile
-  succeeded), but the full Scala.js build has not run since the new `trait Sound(val isOneOff:
-  Boolean)` and the `Signature(n, d)` overload landed. Build before assuming the app still links.
-- **An unattributed deprecation warning** has been appearing in the Scala.js build since around the
-  Theme/Styles work. Harmless so far; `-deprecation` would name it.
+- **VERIFIED** by re-running `tmp/CheckConcerts.scala` after the fix: `Concerts.all` initializes,
+  `titles` keeps the declared order, `SongRow.from` renders a whole bpm as `120` rather than `120.0`,
+  and the round trip through `toSongAndBars` yields playable bars.
+- **VERIFIED**: the app builds clean on 3.9.0-RC4 after a `scala-cli clean`, `PRD.md` parses and
+  lints clean, and `deploy.scala` runs on RC4 (dry run).
+- **The deprecation warning is fixed**, not merely diagnosed: it was `cls.toggle("playing")` in
+  `View.scala`, deprecated in Laminar 17.0.0-M1 in favour of plain `cls("playing")`.
+- **NOT verified by machine:** everything about how it actually behaves in a browser. Loading a
+  built-in, the `(built-in)` labels, and saving over a built-in have not been clicked through — the
+  checks above are JVM-level, and the app itself only ever runs as Scala.js in a browser. There are
+  no browser tests at all in this project.
 
 ## Project gotchas worth not rediscovering
 

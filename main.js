@@ -26167,6 +26167,9 @@ var $d_ju_regex_PatternSyntaxException = new $TypeData().initClass($c_ju_regex_P
   jl_Throwable: 1,
   Ljava_io_Serializable: 1
 }));
+function $ct_Lprontopop_Model$Drum__($thiz) {
+  return $thiz;
+}
 /** @constructor */
 function $c_Lprontopop_Model$Drum() {
 }
@@ -30139,6 +30142,7 @@ function $f_Lcom_raquo_airstream_common_SingleParentSignal__onStop__V($thiz) {
 function $c_Lprontopop_Model$Drum$$anon$1(\u03b4name$3, _$ordinal$3) {
   this.Lprontopop_Model$Drum$$anon$1__f_$name$1 = null;
   this.Lprontopop_Model$Drum$$anon$1__f_$name$1 = \u03b4name$3;
+  $ct_Lprontopop_Model$Drum__(this);
 }
 $c_Lprontopop_Model$Drum$$anon$1.prototype = new $h_Lprontopop_Model$Drum();
 $c_Lprontopop_Model$Drum$$anon$1.prototype.constructor = $c_Lprontopop_Model$Drum$$anon$1;

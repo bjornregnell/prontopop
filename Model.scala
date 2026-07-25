@@ -9,15 +9,16 @@ object Model:
   type Velocity    = Int
   type DSL         = String
   type Pitch       = Int
+  type Concert     = Seq[Song]
 
   case class Frac(numerator: Numerator, denominator: Denominator)
 
-  trait Sound
+  trait Sound(val isOneOff: Boolean)
 
-  enum Drum extends Sound:
+  enum Drum extends Sound(isOneOff = true):
     case HiHat, Snare, Base, Bongo
 
-  enum Instrument extends Sound:
+  enum Instrument extends Sound(isOneOff = false):
     case Piano, Guitar
 
 
@@ -29,6 +30,8 @@ object Model:
   case class PosInBar(frac: Frac)
 
   case class Signature(frac: Frac)
+  object Signature:
+    def apply(n: Numerator, d: Denominator): Signature = Signature(Frac(n, d))
 
   case class Bar(events: Seq[(pos: PosInBar, ev: Event)], signature: Signature)
 

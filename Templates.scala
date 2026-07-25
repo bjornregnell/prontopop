@@ -22,8 +22,8 @@ object Templates:
               |  Songs:
               |
               |  On/Off  Title                                    BPM   Sign.   Pattern
-              |  {Play}  [Rymdresan - vi kommer aldrig tillbaka ] [120] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
-              |  {Play}  [Hopp om en ofri                       ] [108] [3/4 ] [||:!..|X..|X..|X..:||  ] {Remove}
+              |  {Play}  [Song title example 1 ] [120] [3/4 ] [||:!..|X..|X..|X..:||     ] {Remove}
+              |  {Play}  [Song title example 2 ] [108] [4/4 ] [||:!...|X...|X...|X...:|| ] {Remove}
               |  
               |  {Add song}
               |""".stripMargin

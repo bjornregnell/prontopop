@@ -16,7 +16,7 @@ def createProntoPopLandingPage(): HtmlElement =
     lastId += 1
     lastId
 
-  def listSaved(): Vector[String] =
+  def listSaved(): Vector[String] =   // TODO also append for ecach Concerts.all if not already saved under those titles
     val ls = dom.window.localStorage
     (0 until ls.length).toVector
       .flatMap(i => Option(ls.key(i)))
@@ -24,7 +24,7 @@ def createProntoPopLandingPage(): HtmlElement =
       .map(_.drop(keyPrefix.length))
       .sorted
 
-  val songsVar = Var(Vector(
+  val songsVar = Var(Vector(   // TODO: this should use Concerts.all("Example01")
     SongRow(freshId(), "Rymdresan - vi kommer aldrig tillbaka", "120", "3/4", "||:!..|X..|X..|X..:||"),
     SongRow(freshId(), "Hopp om en ofri", "108", "3/4", "||:!..|X..|X..|X..:||"),
   ))

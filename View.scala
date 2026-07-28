@@ -32,6 +32,19 @@ def createProntoPopLandingPage(): HtmlElement =
   def rowsOf(concert: Concert): Vector[SongRow] =
     concert.toVector.map(song => SongRow.from(freshId(), song))
 
+  /** Widths for the two elastic columns, fitted to the widest entry, so a concert of short titles
+    * or one-bar patterns does not leave half the table empty.
+    *
+    * Deliberately recomputed when a concert is LOADED and not while typing: a column that grew
+    * under the caret would shove every field to its right, mid-keystroke. Clamped at both ends, so
+    * an empty table still has usable fields and one long title cannot run away with the layout. */
+  def fitWidths(rows: Vector[SongRow]): (Int, Int) =
+    def widest(text: SongRow => String): Int = rows.map(r => text(r).length).maxOption.getOrElse(0)
+    val title = (widest(_.title) + 3).max(16).min(60)
+    // a pattern character takes 1.2ch, because the field letter-spaces the beats apart
+    val pattern = ((widest(_.pattern) * 1.2).ceil.toInt + 3).max(14).min(60)
+    (title, pattern)
+
   def rowsOfSaved(text: String): Vector[SongRow] =
     text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
       val f = line.split("\t", -1)
@@ -49,6 +62,7 @@ def createProntoPopLandingPage(): HtmlElement =
       .orElse(Concerts.all.get(name).map(rowsOf))
 
   val songsVar       = Var(rowsOf(Concerts.startup))
+  val colWidthsVar   = Var(fitWidths(songsVar.now()))
   val concertNameVar = Var(Concerts.startupTitle)
   val offeredVar     = Var(listOffered())
   val selectedVar    = Var("")
@@ -156,6 +170,7 @@ def createProntoPopLandingPage(): HtmlElement =
       case Some(rows) =>
         stopPlaying()
         songsVar.set(rows)
+        colWidthsVar.set(fitWidths(rows))
         concertNameVar.set(name)
         statusVar.set(s"loaded '$name' (${rows.length} songs)")
 
@@ -178,6 +193,10 @@ def createProntoPopLandingPage(): HtmlElement =
     )
 
   div(cls := "app",
+    // Custom properties inherit, so setting them here resizes every row's grid at once.
+    styleAttr <-- colWidthsVar.signal.map: (title, pattern) =>
+      s"--col-title: ${title}ch; --col-pattern: ${pattern}ch"
+    ,
     // Listening on the document rather than an element means the keys work without clicking into
     // the page first; preventDefault stops the page scrolling under them.
     documentEvents(_.onKeyDown) --> { (e: dom.KeyboardEvent) =>

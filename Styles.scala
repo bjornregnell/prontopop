@@ -258,19 +258,33 @@ button:hover { border-color: var(--link); }
 
 /* The song table: fixed character widths, so a row NEVER reflows — one song, one line, and the
    Play buttons line up in a column down the left. Total width is the sum plus the five gaps. */
+/* Column widths live in variables so a loaded concert can size Title and Pattern to its own
+   longest entries — see fitWidths in View.scala, which overrides the two elastic ones. The
+   defaults here are what an unmeasured table falls back to. Remember a pattern character occupies
+   1.2ch, since the field letter-spaces the beats apart; forgetting that once clipped a 4/4
+   pattern's closing ':||'. */
+:root {
+  --col-cue: 5ch;
+  --col-play: 8ch;
+  --col-title: 40ch;
+  --col-bpm: 6ch;
+  --col-sign: 7ch;
+  --col-pattern: 38ch;
+  --col-remove: 11ch;
+  --col-gaps: 3ch;  /* the six 0.5ch gaps between seven columns */
+}
+
 .songrow {
   display: grid;
   gap: 0.5ch;
   align-items: center;
   margin: 0.25rem 0;
-  width: var(--table-width);
-  grid-template-columns: 5ch 8ch 40ch 6ch 7ch 38ch 11ch;
+  grid-template-columns:
+    var(--col-cue) var(--col-play) var(--col-title) var(--col-bpm)
+    var(--col-sign) var(--col-pattern) var(--col-remove);
+  width: calc(var(--col-cue) + var(--col-play) + var(--col-title) + var(--col-bpm) +
+              var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));
 }
-
-/* Sum of the columns plus the six 0.5ch gaps. The pattern column must fit the longest realistic
-   dsl INCLUDING its letter-spacing and the input's own padding: a 4/4 example is 25 characters,
-   which at 1.2ch each already exceeds 30ch — that clipped the closing ':||' before it was widened. */
-:root { --table-width: 118ch; }
 
 .songrow input { width: 100%; min-width: 0; }
 .songrow.header { color: var(--muted); }

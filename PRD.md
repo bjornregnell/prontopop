@@ -51,7 +51,7 @@ A single-page, server-less metronome app for live performance of songs, in Scala
   * Why: an empty table teaches nothing, and a visitor should hear a click before being asked to write a pattern
 * Feature: themeSelector has
   * Gist: a dropdown at the top right that switches the whole page between light and dark themes
-  * Spec: Automatic follows the operating system's light or dark setting; Forgy dark, Smither light, Calm dark and Calm light are explicit picks; the choice persists in local storage
+  * Spec: the default entry follows the operating system's light or dark setting; Forgy dark, Smither light, Calm dark and Calm light are explicit picks; the choice persists in local storage
   * Comment: palette, themes and Fira fonts follow genscalator's design language and are reused from the same origin
 
 ## Traceability

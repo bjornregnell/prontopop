@@ -11,7 +11,7 @@ object Templates:
 
   object LandingPage:
     val template =
-          s"""|  ProntoPop!  $Version            /--ThemeDropdown{Automatic}--/
+          s"""|  ProntoPop!  $Version            /--ThemeDropdown{Theme (Default)}--/
               |  
               |  Concert Name: [            ]    {Save} to Local Store
               |  

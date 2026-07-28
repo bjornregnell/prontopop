@@ -14,7 +14,7 @@ object Theme:
   val Auto = "auto"
 
   val all: Vector[(String, String)] = Vector(
-    Auto            -> "Automatic",
+    Auto            -> "Theme (Default)",
     "forgy-dark"    -> "Forgy dark",
     "smither-light" -> "Smither light",
     "calm-dark"     -> "Calm dark",

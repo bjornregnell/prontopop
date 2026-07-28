@@ -141,9 +141,11 @@ object Styles:
   color-scheme: light;
 }
 
-/* the theme dropdown, per the design language: fixed to the top right corner */
+/* The theme dropdown. The design language pins it to the top right corner; here it sits beside the
+   title instead, because on a wide screen a fixed corner puts it far from everything else and out
+   of the eye's path — next to the version it is simply found. */
 #theme-select {
-  position: fixed; top: 1rem; right: 1rem; z-index: 10;
+  margin-left: 3ch;
   font-family: var(--mono); font-size: .8rem; font-weight: bold;
   padding: .3rem .7rem; border-radius: 4px;
   border: 1px solid var(--border); background: var(--code-bg); color: var(--code-fg);
@@ -168,13 +170,19 @@ body {
   min-width: calc(100% - 2rem);
 }
 
+/* The seam sits on the title ROW, not on the h1, so it still spans the full width now that the
+   theme dropdown shares the line. */
+.titlerow {
+  align-items: baseline;
+  margin: 0.2em 0 0.8em;
+  padding-bottom: 0.2em;
+  border-bottom: 4px solid var(--rule);
+}
+
 h1 {
   color: var(--head);
   font-size: 1.6rem;
-  margin: 0.2em 0 0.8em;
-  padding-right: 9rem;
-  padding-bottom: 0.2em;
-  border-bottom: 4px solid var(--rule);
+  margin: 0;
 }
 
 h2 { color: var(--head); font-size: 1.2rem; margin: 0.5rem 0; }
@@ -254,4 +262,7 @@ button:hover { border-color: var(--link); }
 
 
 .status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
+
+/* what is playing, beside the Songs heading */
+.nowplaying { margin-left: 2ch; color: var(--muted); }
 """

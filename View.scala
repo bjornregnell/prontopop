@@ -78,7 +78,7 @@ def createProntoPopLandingPage(): HtmlElement =
         case Right((song, bars)) =>
           player.play(song.bpm, bars)
           playingVar.set(Some(row.id))
-          statusVar.set(s"playing '${song.title}'")
+          statusVar.set("")
 
   def save(): Unit =
     val name = concertNameVar.now().trim
@@ -119,10 +119,14 @@ def createProntoPopLandingPage(): HtmlElement =
 
   div(cls := "app",
     Styles.createPageStyle,
-    Theme.createSelector(),
-    h1(s"ProntoPop! $Version"),
+    div(cls := "row titlerow",
+      h1(s"ProntoPop! $Version"),
+      Theme.createSelector(),
+    ),
     div(cls := "row",
-      span("Concert Name: "),
+      // non-breaking, because HTML collapses ordinary leading spaces: pads "Concert Name:" out to
+      // the width of "Saved Concerts:" so the two colons and their fields line up
+      span("  Concert Name: "),
       input(controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),
       button("Save", onClick --> (_ => save())),
       span(" to Local Store"),
@@ -151,7 +155,17 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
       span(child.text <-- volumeVar.signal.map(v => s"$v%")),
     ),
-    div(cls := "row", h2("Songs:")),
+    // Derived from what is playing rather than set as a message, so it clears itself on Stop and
+    // follows a title edited mid-play.
+    div(cls := "row",
+      h2("Songs:"),
+      span(cls := "nowplaying", child.text <--
+        playingVar.signal.combineWith(songsVar.signal).map: (playing, rows) =>
+          playing.flatMap(id => rows.find(_.id == id))
+            .map(row => s"""playing "${row.title}"""")
+            .getOrElse("")
+      ),
+    ),
     div(cls := "songrow header",
       span("On/Off"), span("Title"), span("BPM"), span("Sign."), span("Pattern"), span(),
     ),

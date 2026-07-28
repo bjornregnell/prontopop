@@ -209,6 +209,11 @@ input:focus, select:focus, button:focus-visible {
 
 input.pattern { letter-spacing: 0.2ch; }
 
+/* The concert name and the saved-concerts dropdown, pinned to the same width so the two rows line
+   up. Without this the select sizes itself to its longest option, so it drifted as concerts were
+   saved with longer names. */
+.concertfield { width: 30ch; }
+
 input[type="range"] { accent-color: var(--hot-iron-orange); }
 
 button {

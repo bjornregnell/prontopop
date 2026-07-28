@@ -90,6 +90,23 @@ def createProntoPopLandingPage(): HtmlElement =
   def togglePlay(row: SongRow): Unit =
     if playingVar.now().contains(row.id) then stopPlaying() else startPlaying(row)
 
+  /** True while the caret is in something typeable, so arrow keys move text rather than the cue.
+    * A read-only field takes no typing, so the cue column itself does not block the keys. */
+  def typingSomewhere: Boolean =
+    Option(dom.document.activeElement).exists: el =>
+      el.tagName match
+        case "INPUT"               => !el.asInstanceOf[dom.html.Input].readOnly
+        case "TEXTAREA" | "SELECT" => true
+        case _                     => false
+
+  /** Step the cue, wrapping like Play next does. */
+  def moveCue(delta: Int): Unit =
+    val rows = songsVar.now()
+    if rows.nonEmpty then
+      val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0).getOrElse(0)
+      val to = ((at + delta) % rows.length + rows.length) % rows.length
+      cueVar.set(Some(rows(to).id))
+
   /** Play the song after the cue — or the first one, when nothing has played yet, so the opening
     * press does not skip the top song. Wraps at the end rather than going dead. */
   def playNext(): Unit =
@@ -140,6 +157,15 @@ def createProntoPopLandingPage(): HtmlElement =
     )
 
   div(cls := "app",
+    // Arrow keys walk the cue. Listening on the document rather than an element means it works
+    // without clicking anything first; preventDefault stops the page scrolling under the keys.
+    documentEvents(_.onKeyDown) --> { (e: dom.KeyboardEvent) =>
+      if !typingSomewhere then
+        e.key match
+          case "ArrowUp"   => e.preventDefault(); moveCue(-1)
+          case "ArrowDown" => e.preventDefault(); moveCue(1)
+          case _           => ()
+    },
     Styles.createPageStyle,
     div(cls := "row titlerow",
       h1(s"ProntoPop! $Version"),
@@ -149,13 +175,15 @@ def createProntoPopLandingPage(): HtmlElement =
       // non-breaking, because HTML collapses ordinary leading spaces: pads "Concert Name:" out to
       // the width of "Saved Concerts:" so the two colons and their fields line up
       span("  Concert Name: "),
-      input(controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),
+      input(cls := "concertfield",
+        controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),
       button("Save", onClick --> (_ => save())),
       span(" to Local Store"),
     ),
     div(cls := "row",
       span("Saved Concerts: "),
       select(
+        cls := "concertfield",
         children <-- offeredVar.signal.map: offered =>
           option(value := "", "-- select --") +: offered.map: (name, builtIn) =>
             option(value := name, if builtIn then s"$name (built-in)" else name)

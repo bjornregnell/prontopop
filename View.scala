@@ -53,6 +53,8 @@ def createProntoPopLandingPage(): HtmlElement =
   val offeredVar     = Var(listOffered())
   val selectedVar    = Var("")
   val playingVar     = Var(Option.empty[Int])
+  /** The song that played last, so the cue stays put when it stops. None until something plays. */
+  val cueVar         = Var(Option.empty[Int])
   val statusVar      = Var("")
   val volumeVar      = Var("100")
   lazy val player    = Sound.initWebSound()
@@ -70,15 +72,31 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def addSong(): Unit = songsVar.update(_ :+ SongRow(freshId()))
 
+  /** Where the cue sits: the last played song while it is still in the list, otherwise the top one,
+    * so a fresh table points at the song a performer would start with. */
+  val cueSignal: Signal[Option[Int]] =
+    cueVar.signal.combineWith(songsVar.signal).map: (cued, rows) =>
+      cued.filter(id => rows.exists(_.id == id)).orElse(rows.headOption.map(_.id))
+
+  def startPlaying(row: SongRow): Unit =
+    row.toSongAndBars match
+      case Left(err) => statusVar.set(err)
+      case Right((song, bars)) =>
+        player.play(song.bpm, bars)
+        playingVar.set(Some(row.id))
+        cueVar.set(Some(row.id))
+        statusVar.set("")
+
   def togglePlay(row: SongRow): Unit =
-    if playingVar.now().contains(row.id) then stopPlaying()
-    else
-      row.toSongAndBars match
-        case Left(err) => statusVar.set(err)
-        case Right((song, bars)) =>
-          player.play(song.bpm, bars)
-          playingVar.set(Some(row.id))
-          statusVar.set("")
+    if playingVar.now().contains(row.id) then stopPlaying() else startPlaying(row)
+
+  /** Play the song after the cue — or the first one, when nothing has played yet, so the opening
+    * press does not skip the top song. Wraps at the end rather than going dead. */
+  def playNext(): Unit =
+    val rows = songsVar.now()
+    if rows.nonEmpty then
+      val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0)
+      startPlaying(rows(at.map(i => (i + 1) % rows.length).getOrElse(0)))
 
   def save(): Unit =
     val name = concertNameVar.now().trim
@@ -107,7 +125,8 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "songrow",
       // placeholder for a ">" cue marking the current or last played song; read-only and out of the
       // tab order, since there is nothing here for a performer to type
-      input(cls := "cue", readOnly := true, tabIndex := -1, value := ""),
+      input(cls := "cue", readOnly := true, tabIndex := -1,
+        value <-- cueSignal.map(cued => if cued.contains(id) then ">" else "")),
       button(
         child.text <-- playingVar.signal.map(p => if p.contains(id) then "Stop" else "Play"),
         cls("playing") <-- playingVar.signal.map(_.contains(id)),
@@ -148,6 +167,7 @@ def createProntoPopLandingPage(): HtmlElement =
       span(" from Local Store"),
     ),
     div(cls := "row",
+      button("Play next", cls := "playnext", onClick --> (_ => playNext())),
       button("Silence", cls := "silence", onClick --> (_ => stopPlaying())),
       span("Volume: "),
       input(typ := "range", minAttr := "0", maxAttr := "100",

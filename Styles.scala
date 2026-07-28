@@ -238,6 +238,16 @@ button:hover { border-color: var(--link); }
 
 .silence { font-weight: bold; padding: 0.4rem 1.1rem; margin-right: 2ch; }
 
+/* starts the song after the cue, in the same signal green a playing song wears */
+.playnext, .playnext:hover {
+  background: var(--vivid-bright-green);
+  color: var(--tempered-iron-purple);
+  border-color: var(--vivid-bright-green);
+  font-weight: bold;
+  padding: 0.4rem 1.1rem;
+  margin-right: 1ch;
+}
+
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }
 .row h2 { margin: 0.5rem 0; }
 

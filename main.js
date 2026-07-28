@@ -7342,12 +7342,63 @@ function $c_Lprontopop_Concerts$() {
   var pattern$1 = new $c_Lprontopop_Model$Pattern("||:!...|X...|X...|X...:||");
   var y = new $c_sci_$colon$colon($x_1, new $c_sci_$colon$colon(new $c_Lprontopop_Model$Song("Song title example 2", 108.0, signature$1, pattern$1), $m_sci_Nil$()));
   this.Lprontopop_Concerts$__f_Example01 = $ct_T2__O__O__(new $c_T2(), "Example01", y);
+  var $x_2 = $m_sci_Seq$();
   var signature$2 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
-  var pattern$2 = new $c_Lprontopop_Model$Pattern("||:!..|X..|X..|X..:||");
-  var $x_2 = new $c_Lprontopop_Model$Song("Rymdresan - vi kommer aldrig tillbaka", 120.0, signature$2, pattern$2);
+  var pattern$2 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x0 = new $c_Lprontopop_Model$Song("Rymdresan", 155.0, signature$2, pattern$2);
   var signature$3 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
-  var pattern$3 = new $c_Lprontopop_Model$Pattern("||:!..|X..|X..|X..:||");
-  var y$1 = new $c_sci_$colon$colon($x_2, new $c_sci_$colon$colon(new $c_Lprontopop_Model$Song("Hopp om en ofri", 108.0, signature$3, pattern$3), $m_sci_Nil$()));
+  var pattern$3 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x1 = new $c_Lprontopop_Model$Song("Hopp om en ofri", 148.0, signature$3, pattern$3);
+  var signature$4 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$4 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x2 = new $c_Lprontopop_Model$Song("Sl\u00e5 en signal", 82.0, signature$4, pattern$4);
+  var signature$5 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$5 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x3 = new $c_Lprontopop_Model$Song("V\u00e4rnhems skugga", 87.0, signature$5, pattern$5);
+  var signature$6 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$6 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x4 = new $c_Lprontopop_Model$Song("Nu b\u00f6rjar flykten", 108.0, signature$6, pattern$6);
+  var signature$7 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$7 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x5 = new $c_Lprontopop_Model$Song("Bara barnen kan", 96.0, signature$7, pattern$7);
+  var signature$8 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$8 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x6 = new $c_Lprontopop_Model$Song("Vi lovar stabilitet", 108.0, signature$8, pattern$8);
+  var signature$9 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$9 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x7 = new $c_Lprontopop_Model$Song("Aldrig mer igen", 100.0, signature$9, pattern$9);
+  var signature$10 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$10 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x8 = new $c_Lprontopop_Model$Song("I min tidsmaskin", 170.0, signature$10, pattern$10);
+  var signature$11 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$11 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x9 = new $c_Lprontopop_Model$Song("Du kan inte hindra mig", 180.0, signature$11, pattern$11);
+  var signature$12 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$12 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x10 = new $c_Lprontopop_Model$Song("Vi borde s\u00e4ga som det \u00e4r", 95.0, signature$12, pattern$12);
+  var signature$13 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$13 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x11 = new $c_Lprontopop_Model$Song("Du kan l\u00e4mna det kvar", 125.0, signature$13, pattern$13);
+  var signature$14 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$14 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x12 = new $c_Lprontopop_Model$Song("Om du verkligen vill", 114.0, signature$14, pattern$14);
+  var signature$15 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$15 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x13 = new $c_Lprontopop_Model$Song("Det kommer en v\u00e5r", 110.0, signature$15, pattern$15);
+  var signature$16 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(3, 4);
+  var pattern$16 = new $c_Lprontopop_Model$Pattern("||:!..:||");
+  var x14 = new $c_Lprontopop_Model$Song("Vintergatans frid", 130.0, signature$16, pattern$16);
+  var signature$17 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$17 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x15 = new $c_Lprontopop_Model$Song("Dj\u00e4vulen har flytt", 117.0, signature$17, pattern$17);
+  var signature$18 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$18 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x16 = new $c_Lprontopop_Model$Song("Har ni h\u00f6rt", 100.0, signature$18, pattern$18);
+  var signature$19 = $m_Lprontopop_Model$Signature$().apply__I__I__Lprontopop_Model$Signature(4, 4);
+  var pattern$19 = new $c_Lprontopop_Model$Pattern("||:!...:||");
+  var x17 = new $c_Lprontopop_Model$Song("Man pova p\u00e5sikti", 100.0, signature$19, pattern$19);
+  var array = [x0, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16, x17];
+  var y$1 = $x_2.apply__sci_Seq__sc_SeqOps(new $c_sjsr_WrappedVarArgs(array));
   this.Lprontopop_Concerts$__f_Soaree01 = $ct_T2__O__O__(new $c_T2(), "Soaree01", y$1);
   this.Lprontopop_Concerts$__f_ordered = new $c_sci_$colon$colon(this.Lprontopop_Concerts$__f_Example01, new $c_sci_$colon$colon(this.Lprontopop_Concerts$__f_Soaree01, $m_sci_Nil$()));
   this.Lprontopop_Concerts$__f_titles = $as_sci_Seq($n(this.Lprontopop_Concerts$__f_ordered).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2) => {
@@ -7355,8 +7406,8 @@ function $c_Lprontopop_Concerts$() {
     var title = $as_T($n(x$1)._1__O());
     return title;
   }))));
-  var this$16 = $n(this.Lprontopop_Concerts$__f_ordered);
-  this.Lprontopop_Concerts$__f_all = $m_sci_Map$().from__sc_IterableOnce__sci_Map(this$16);
+  var this$51 = $n(this.Lprontopop_Concerts$__f_ordered);
+  this.Lprontopop_Concerts$__f_all = $m_sci_Map$().from__sc_IterableOnce__sci_Map(this$51);
   this.Lprontopop_Concerts$__f_startupTitle = $as_T($n(this.Lprontopop_Concerts$__f_Example01)._1__O());
   this.Lprontopop_Concerts$__f_startup = $as_sci_Seq($n(this.Lprontopop_Concerts$__f_Example01)._2__O());
 }
@@ -24219,6 +24270,45 @@ var $d_sci_MapBuilderImpl = new $TypeData().initClass($c_sci_MapBuilderImpl, "sc
   scm_Builder: 1,
   scm_ReusableBuilder: 1
 }));
+/** @constructor */
+function $c_sci_Seq$() {
+  this.sc_SeqFactory$Delegate__f_delegate = null;
+  $ct_sc_SeqFactory$Delegate__sc_SeqFactory__(this, $m_sci_List$());
+}
+$c_sci_Seq$.prototype = new $h_sc_SeqFactory$Delegate();
+$c_sci_Seq$.prototype.constructor = $c_sci_Seq$;
+/** @constructor */
+function $h_sci_Seq$() {
+}
+$h_sci_Seq$.prototype = $c_sci_Seq$.prototype;
+$c_sci_Seq$.prototype.from__sc_IterableOnce__sci_Seq = (function(it) {
+  if ($is_sci_Seq(it)) {
+    var s = $as_sci_Seq(it);
+    return s;
+  } else {
+    return $as_sci_Seq($c_sc_SeqFactory$Delegate.prototype.from__sc_IterableOnce__sc_SeqOps.call(this, it));
+  }
+});
+$c_sci_Seq$.prototype.from__sc_IterableOnce__sc_SeqOps = (function(it) {
+  return this.from__sc_IterableOnce__sci_Seq(it);
+});
+$c_sci_Seq$.prototype.from__sc_IterableOnce__O = (function(source) {
+  return this.from__sc_IterableOnce__sci_Seq(source);
+});
+var $d_sci_Seq$ = new $TypeData().initClass($c_sci_Seq$, "scala.collection.immutable.Seq$", ({
+  sci_Seq$: 1,
+  sc_SeqFactory$Delegate: 1,
+  Ljava_io_Serializable: 1,
+  sc_IterableFactory: 1,
+  sc_SeqFactory: 1
+}));
+var $n_sci_Seq$;
+function $m_sci_Seq$() {
+  if ((!$n_sci_Seq$)) {
+    $n_sci_Seq$ = new $c_sci_Seq$();
+  }
+  return $n_sci_Seq$;
+}
 /** @constructor */
 function $c_sci_SetBuilderImpl() {
   this.sci_SetBuilderImpl__f_elems = null;

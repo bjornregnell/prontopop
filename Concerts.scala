@@ -8,10 +8,28 @@ object Concerts:
     Song(title = "Song title example 2", 108, Signature(4, 4), Pattern("||:!...|X...|X...|X...:||")),
   )
 
+  // BEGIN GENERATED Soaree01 -- written by ./parsesoaree.sc from the songbook; do not edit by hand
   val Soaree01 = "Soaree01" -> Seq(
-    Song(title = "Rymdresan - vi kommer aldrig tillbaka", 120, Signature(3, 4), Pattern("||:!..|X..|X..|X..:||")),
-    Song(title = "Hopp om en ofri", 108, Signature(3, 4), Pattern("||:!..|X..|X..|X..:||")),
+    Song(title = "Rymdresan", 155, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Hopp om en ofri", 148, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Slå en signal", 82, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Värnhems skugga", 87, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Nu börjar flykten", 108, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Bara barnen kan", 96, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Vi lovar stabilitet", 108, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Aldrig mer igen", 100, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "I min tidsmaskin", 170, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Du kan inte hindra mig", 180, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Vi borde säga som det är", 95, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Du kan lämna det kvar", 125, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Om du verkligen vill", 114, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Det kommer en vår", 110, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Vintergatans frid", 130, Signature(3, 4), Pattern("||:!..:||")),
+    Song(title = "Djävulen har flytt", 117, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Har ni hört", 100, Signature(4, 4), Pattern("||:!...:||")),
+    Song(title = "Man pova påsikti", 100, Signature(4, 4), Pattern("||:!...:||")),
   )
+  // END GENERATED Soaree01
 
   /** The concerts in the order they should be offered.
     *

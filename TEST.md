@@ -6,12 +6,12 @@ suites; everything else only exists inside a browser and gets a headless-Chrome 
 ## Layer 1: munit suites over the logic
 
 ```bash
-./build.scala              # tests first, then package — the tests gate the bundle
-./build.scala --test-only  # just the suites
-./build.scala --no-test    # skip them, for quick iteration
+./build.sc              # tests first, then package — the tests gate the bundle
+./build.sc --test-only  # just the suites
+./build.sc --no-test    # skip them, for quick iteration
 ```
 
-Or drive scala-cli directly, which is what `build.scala` does:
+Or drive scala-cli directly, which is what `build.sc` does:
 
 ```bash
 scala-cli test Model.scala ModelOps.scala SongRow.scala Concerts.scala tests/*.test.scala

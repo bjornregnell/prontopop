@@ -2,21 +2,31 @@
 
 //> using scala 3.9.0-RC4
 
-// Extracts a ProntoPop concert from the songbook's metadata file.
+// Keeps a concert in Concerts.scala in step with the songbook's metadata file.
 //
-//   ./parsesoaree.sc                 fetch a fresh copy from GitHub and print Scala source
-//   ./parsesoaree.sc --file F        parse a local file instead (offline, for iterating)
-//   ./parsesoaree.sc --name Soaree   name the emitted concert (default: Soaree)
+//   ./parsesoaree.sc                  fetch fresh, show what WOULD change (default: no writes)
+//   ./parsesoaree.sc --apply          fetch fresh and write the change into Concerts.scala
+//   ./parsesoaree.sc --print          just print the block, change nothing
+//   ./parsesoaree.sc --file F         parse a local .tex instead of downloading (offline)
+//   ./parsesoaree.sc --target Name    which generated block to fill (default Soaree01)
+//   ./parsesoaree.sc --concerts F     path to Concerts.scala (default ./Concerts.scala)
+//
+// Preview by default, write only with --apply: this edits hand-written source, so it follows the
+// same convention as `tt sub` and `deploy.sc --dry-run`. Nothing is written when the download
+// fails, so a network problem can never leave a half-updated file.
+//
+// The block it owns is delimited by BEGIN/END GENERATED markers rather than found by parsing Scala.
+// Balancing parentheses from `Seq(` would be the obvious alternative and is a trap: song titles
+// contain parentheses, so a balancer would have to track string literals to avoid miscounting.
 //
 // The songbook repo is PRIVATE, and `tt forge` has no verb for repo file contents (only release
 // assets), so the fetch goes through `gh api`, which carries the human's own GitHub auth.
 //
-// stdout is Scala source and nothing else, so it can be read or pasted straight into Concerts.scala.
-// Anything questionable in the source file is reported on stderr instead.
-//
-// NB kept as .sc deliberately: build.scala sweeps every root-level *.scala into the app bundle, and
-// a .sc file slips past that filter. The cost is Metals warning about `args$opt0` and friends —
+// NB kept as .sc deliberately: build.sc sweeps every root-level *.scala into the app bundle, and
+// a .sc file slips past that filter. The cost is Metals warning about `args$opt0` and friends --
 // identifiers scala-cli generates around a script, harmless and not ours.
+
+import java.nio.file.{Files, Path, Paths}
 
 val Owner  = "bjornregnell"
 val Repo   = "songbook-bjornregnell"
@@ -26,11 +36,16 @@ def die(msg: String): Nothing =
   System.err.println(s"parsesoaree: $msg")
   sys.exit(2)
 
-def warn(msg: String): Unit = System.err.println(s"parsesoaree: $msg")
+def note(msg: String): Unit = System.err.println(s"parsesoaree: $msg")
 
 def optVal(name: String): Option[String] =
   val i = args.indexOf(name)
   if i >= 0 && i + 1 < args.length then Some(args(i + 1)) else None
+
+val target      = optVal("--target").getOrElse("Soaree01")
+val concertsAt  = Paths.get(optVal("--concerts").getOrElse("Concerts.scala")).toAbsolutePath
+val doApply     = args.contains("--apply")
+val printOnly   = args.contains("--print")
 
 // ---- getting the source ----------------------------------------------------------------
 
@@ -39,7 +54,7 @@ def optVal(name: String): Option[String] =
 def download(): String =
   val cmd = Seq("gh", "api", s"repos/$Owner/$Repo/contents/$InRepo",
     "-H", "Accept: application/vnd.github.raw")
-  warn(s"fetching ${cmd.drop(2).head}")
+  note(s"fetching ${cmd.drop(2).head}")
   val pb = new ProcessBuilder(cmd*)
   pb.redirectError(ProcessBuilder.Redirect.INHERIT)
   val proc = pb.start()
@@ -50,10 +65,10 @@ def download(): String =
 
 val tex = optVal("--file") match
   case Some(path) =>
-    val p = java.nio.file.Paths.get(path)
-    if !java.nio.file.Files.isRegularFile(p) then die(s"no such file: $path")
-    warn(s"reading $path (no download)")
-    java.nio.file.Files.readString(p)
+    val p = Paths.get(path)
+    if !Files.isRegularFile(p) then die(s"no such file: $path")
+    note(s"reading $path (no download)")
+    Files.readString(p)
   case None => download()
 
 // ---- reading LaTeX ---------------------------------------------------------------------
@@ -143,34 +158,72 @@ case class Song(key: String, title: String, bpm: Int, num: Int, den: Int):
 val songs: Vector[Song] = keys.flatMap: key =>
   def field(suffix: String): Option[String] = byName.get(key + suffix).filter(_.nonEmpty)
 
-  val parsed =
-    for
-      title <- field("Titel").orElse { warn(s"$key: no Titel — skipped"); None }
-      rawBpm <- field("Bpm").orElse { warn(s"$key: no Bpm — skipped"); None }
-      bpm <- firstNumber.findFirstIn(rawBpm).map(_.toInt)
-               .orElse { warn(s"$key: Bpm '$rawBpm' holds no number — skipped"); None }
-      rawSig <- field("Sig").orElse { warn(s"$key: no Sig — skipped"); None }
-      sig <- signatures.get(rawSig.trim.stripPrefix("\\"))
-               .orElse { warn(s"$key: unknown signature macro '$rawSig' — skipped"); None }
-    yield
-      val all = firstNumber.findAllIn(rawBpm).toVector
-      if all.size > 1 then warn(s"$key: Bpm '$rawBpm' holds ${all.size} numbers, using ${all.head}")
-      if title.contains("\\") then warn(s"$key: Titel '$title' still contains LaTeX")
-      Song(key, title, bpm, sig._1, sig._2)
-
-  parsed
+  for
+    title <- field("Titel").orElse { note(s"$key: no Titel — skipped"); None }
+    rawBpm <- field("Bpm").orElse { note(s"$key: no Bpm — skipped"); None }
+    bpm <- firstNumber.findFirstIn(rawBpm).map(_.toInt)
+             .orElse { note(s"$key: Bpm '$rawBpm' holds no number — skipped"); None }
+    rawSig <- field("Sig").orElse { note(s"$key: no Sig — skipped"); None }
+    sig <- signatures.get(rawSig.trim.stripPrefix("\\"))
+             .orElse { note(s"$key: unknown signature macro '$rawSig' — skipped"); None }
+  yield
+    // A second number is the stick tempo for a later section; the concert wants the tempo you
+    // COUNT IN, so the first number is the right one and nothing is being lost here.
+    val all = firstNumber.findAllIn(rawBpm).toVector
+    if all.size > 1 then
+      note(s"$key: taking $bpm for verse and chorus; ${all.tail.mkString(", ")} is the later stick tempo")
+    if title.contains("\\") then note(s"$key: Titel '$title' still contains LaTeX")
+    Song(key, title, bpm, sig._1, sig._2)
 
 if songs.isEmpty then die("no complete songs found")
 
-// ---- emit ------------------------------------------------------------------------------
+// ---- the generated block ---------------------------------------------------------------
 
 def quoted(s: String): String = "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
-val name = optVal("--name").getOrElse("Soaree")
+val block: Vector[String] =
+  (s"  val $target = ${quoted(target)} -> Seq(" +:
+    songs.map: s =>
+      s"    Song(title = ${quoted(s.title)}, ${s.bpm}, Signature(${s.num}, ${s.den}), Pattern(${quoted(s.pattern)})),"
+  ) :+ "  )"
 
-println(s"  val $name = ${quoted(name)} -> Seq(")
-songs.foreach: s =>
-  println(s"    Song(title = ${quoted(s.title)}, ${s.bpm}, Signature(${s.num}, ${s.den}), Pattern(${quoted(s.pattern)})),")
-println("  )")
+if printOnly then
+  block.foreach(println)
+  note(s"${songs.size} of ${keys.size} songs; nothing written (--print)")
+  sys.exit(0)
 
-warn(s"${songs.size} of ${keys.size} songs emitted")
+// ---- injection -------------------------------------------------------------------------
+
+if !Files.isRegularFile(concertsAt) then die(s"no such file: $concertsAt")
+
+val Begin = s"// BEGIN GENERATED $target"
+val End   = s"// END GENERATED $target"
+
+val lines = Files.readString(concertsAt).split("\n", -1).toVector
+val beginAt = lines.indexWhere(_.trim.startsWith(Begin))
+val endAt   = lines.indexWhere(_.trim.startsWith(End))
+if beginAt < 0 || endAt < 0 then
+  die(s"markers not found in $concertsAt — expected a line '$Begin' and one '$End'")
+if endAt <= beginAt then die(s"'$End' comes before '$Begin' in $concertsAt")
+
+val current = lines.slice(beginAt + 1, endAt)
+
+if current == block then
+  note(s"no change: $target already matches the songbook (${songs.size} songs)")
+  sys.exit(0)
+
+// Each Song line is distinct, so comparing membership is enough to show what moved.
+val gone = current.filterNot(block.contains)
+val came = block.filterNot(current.contains)
+println(s"$target would change in ${concertsAt.getFileName}:")
+gone.foreach(l => println(s"  - $l"))
+came.foreach(l => println(s"  + $l"))
+note(s"${current.size} lines -> ${block.size} lines (${songs.size} songs)")
+
+if !doApply then
+  note("nothing written — re-run with --apply to write it")
+  sys.exit(0)
+
+val updated = lines.take(beginAt + 1) ++ block ++ lines.drop(endAt)
+Files.writeString(concertsAt, updated.mkString("\n"))
+note(s"wrote $concertsAt — now run ./build.sc, the Concerts tests check every song plays")

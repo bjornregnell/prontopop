@@ -5,9 +5,10 @@ A single-page, server-less web app in Scala.js + Laminar, built with scala-cli.
 ## Build
 
 ```bash
-./build.scala              # run the tests, then link main.js
-./build.scala --no-test    # package only, for quick iteration
-./build.scala --test-only  # just the tests
+./build.sc              # run the tests, then link main.js
+./build.sc --no-test    # package only, for quick iteration
+./build.sc --test-only  # just the tests
+./build.sc --sync       # first refresh the concert from the songbook, then test and link
 ```
 
 See [TEST.md](TEST.md) for what is tested and how.

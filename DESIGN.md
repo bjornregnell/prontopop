@@ -13,15 +13,29 @@ linted clean.
 ## Standing decisions
 
 - **Bleeding-edge Scala, deliberately.** The project tracks Scala 3.9.0 release candidates
-  (currently 3.9.0-RC4) everywhere: the app, `build.scala`, `deploy.scala` and the README. scala-cli
+  (currently 3.9.0-RC4) everywhere: the app, `build.sc`, `deploy.sc` and the README. scala-cli
   1.15.0 cannot post-process TASTY from an RC and prints a notice saying so on every script compile.
   That notice is ACCEPTED, not a defect to chase: it only cleans up source paths inside TASTY files,
   which cannot affect a JS bundle, and scala-cli will catch up. Do not "fix" it by pinning back to a
   stable Scala. (BR, 2026-07-25.)
 - **Scratch files live in the repo's gitignored `tmp/`**, never `/tmp`, which a reboot clears —
-  learned the hard way when a verification script vanished mid-task. `build.scala` reads only
-  root-level `*.scala` and `deploy.scala` stages an explicit list, so `tmp/` reaches neither the
+  learned the hard way when a verification script vanished mid-task. `build.sc` reads only
+  root-level `*.scala` and `deploy.sc` stages an explicit list, so `tmp/` reaches neither the
   bundle nor the server.
+
+- **Syncing the concert from the songbook is opt-in (`./build.sc --sync`), never automatic.**
+  `parsesoaree.sc` pulls `songs/1-namn.tex` from the private songbook repo and rewrites the
+  generated `Soaree01` block in `Concerts.scala`. It is not part of an ordinary build, because
+  `deploy.sc` calls `build.sc`: an automatic sync would let a deploy publish whatever the songbook
+  happened to say at that moment, unreviewed. It would also make every build need the network — a
+  poor trade for an app whose point is working offline on a stage — and let a build rewrite source
+  nobody touched. On its own, `parsesoaree.sc` previews and writes only with `--apply`.
+
+- **The file extension carries the rule: `*.scala` is APP source, `*.sc` is tooling.** `build.sc`
+  sweeps every root-level `*.scala` into the bundle, so the scripts are `.sc` and are excluded
+  structurally rather than by an exclusion list somebody has to remember to extend — forgetting
+  would put JVM-only code into `main.js`. The price is Metals warning about `args$opt0` and
+  friends, identifiers scala-cli generates around a script; accepted, and not ours to fix.
 
 - **Lean and mean on dependencies; handroll when handrolling is reasonable.** What ships is Laminar
   and scalajs-dom, and nothing else. munit is declared a `test.dep`, so it is absent from `main.js`.
@@ -199,7 +213,7 @@ decide until a second error kind exists.
   `titles` keeps the declared order, `SongRow.from` renders a whole bpm as `120` rather than `120.0`,
   and the round trip through `toSongAndBars` yields playable bars.
 - **VERIFIED**: the app builds clean on 3.9.0-RC4 after a `scala-cli clean`, `PRD.md` parses and
-  lints clean, and `deploy.scala` runs on RC4 (dry run).
+  lints clean, and `deploy.sc` runs on RC4 (dry run).
 - **The deprecation warning is fixed**, not merely diagnosed: it was `cls.toggle("playing")` in
   `View.scala`, deprecated in Laminar 17.0.0-M1 in favour of plain `cls("playing")`.
 - **NOT verified by machine:** everything about how it actually behaves in a browser. Loading a

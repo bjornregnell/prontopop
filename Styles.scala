@@ -249,16 +249,26 @@ button:hover { border-color: var(--link); }
   align-items: center;
   margin: 0.25rem 0;
   width: var(--table-width);
-  grid-template-columns: 8ch 40ch 6ch 7ch 38ch 11ch;
+  grid-template-columns: 5ch 8ch 40ch 6ch 7ch 38ch 11ch;
 }
 
-/* Sum of the columns plus the five 0.5ch gaps. The pattern column must fit the longest realistic
+/* Sum of the columns plus the six 0.5ch gaps. The pattern column must fit the longest realistic
    dsl INCLUDING its letter-spacing and the input's own padding: a 4/4 example is 25 characters,
    which at 1.2ch each already exceeds 30ch — that clipped the closing ':||' before it was widened. */
-:root { --table-width: 112.5ch; }
+:root { --table-width: 118ch; }
 
 .songrow input { width: 100%; min-width: 0; }
 .songrow.header { color: var(--muted); }
+
+/* the cue column: shows nothing yet, will carry a ">" at the current or last played song */
+input.cue {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  cursor: default;
+  color: var(--head);
+  font-weight: bold;
+}
 
 
 .status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }

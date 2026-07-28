@@ -105,6 +105,9 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def renderRow(id: Int, initial: SongRow, rowSignal: Signal[SongRow]): HtmlElement =
     div(cls := "songrow",
+      // placeholder for a ">" cue marking the current or last played song; read-only and out of the
+      // tab order, since there is nothing here for a performer to type
+      input(cls := "cue", readOnly := true, tabIndex := -1, value := ""),
       button(
         child.text <-- playingVar.signal.map(p => if p.contains(id) then "Stop" else "Play"),
         cls("playing") <-- playingVar.signal.map(_.contains(id)),
@@ -167,7 +170,7 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
     ),
     div(cls := "songrow header",
-      span("On/Off"), span("Title"), span("BPM"), span("Sign."), span("Pattern"), span(),
+      span("Cue"), span("On/Off"), span("Title"), span("BPM"), span("Sign."), span("Pattern"), span(),
     ),
     children <-- songsVar.signal.split(_.id)(renderRow),
     div(cls := "row", button("Add song", onClick --> (_ => addSong()))),

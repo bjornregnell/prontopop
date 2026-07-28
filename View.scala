@@ -160,7 +160,12 @@ def createProntoPopLandingPage(): HtmlElement =
     // Arrow keys walk the cue. Listening on the document rather than an element means it works
     // without clicking anything first; preventDefault stops the page scrolling under the keys.
     documentEvents(_.onKeyDown) --> { (e: dom.KeyboardEvent) =>
-      if !typingSomewhere then
+      // Escape silences from anywhere, mid-edit included: a panic key that only works when the
+      // hands are off the fields would be no use on a stage.
+      if e.key == "Escape" then
+        e.preventDefault()
+        stopPlaying()
+      else if !typingSomewhere then
         e.key match
           case "ArrowUp"   => e.preventDefault(); moveCue(-1)
           case "ArrowDown" => e.preventDefault(); moveCue(1)

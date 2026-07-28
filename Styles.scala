@@ -288,6 +288,15 @@ input.cue {
 
 .status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
 
+/* the keyboard shortcuts, rendered from the same list the key handler reads */
+.shortcuts { margin-top: 2rem; }
+.shortcuts h2 { margin-bottom: 0.4rem; }
+.shortcuts table { border-collapse: collapse; }
+.shortcuts th, .shortcuts td { border: 1px solid var(--border); padding: 0.25rem 0.9rem; text-align: left; }
+.shortcuts th { background: var(--bg-soft); color: var(--muted); }
+.shortcuts td:first-child { font-weight: bold; color: var(--head); white-space: nowrap; }
+.shortcuts td:last-child { text-align: center; color: var(--muted); }
+
 /* what is playing, beside the Songs heading */
 .nowplaying { margin-left: 2ch; color: var(--muted); }
 """

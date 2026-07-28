@@ -72,6 +72,17 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def addSong(): Unit = songsVar.update(_ :+ SongRow(freshId()))
 
+  /** One keyboard shortcut. Both the key handler and the table below are built from this list, so a
+    * key cannot change in one place and go stale in the other.
+    *
+    * @param key             the browser's KeyboardEvent.key value
+    * @param shown           how the key is written in the table
+    * @param does            what it does, in the table
+    * @param evenWhileTyping fires with the caret in a field too — true only where the keys mean
+    *                        nothing to a text field, or where being stoppable matters more
+    */
+  case class Shortcut(key: String, shown: String, does: String, evenWhileTyping: Boolean, act: () => Unit)
+
   /** Where the cue sits: the last played song while it is still in the list, otherwise the top one,
     * so a fresh table points at the song a performer would start with. */
   val cueSignal: Signal[Option[Int]] =
@@ -115,6 +126,16 @@ def createProntoPopLandingPage(): HtmlElement =
       val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0)
       startPlaying(rows(at.map(i => (i + 1) % rows.length).getOrElse(0)))
 
+  /** The single source of truth for the keyboard. */
+  val shortcuts: Vector[Shortcut] = Vector(
+    Shortcut("Escape", "Esc", "silence — stop the playing song", evenWhileTyping = true,
+      () => stopPlaying()),
+    Shortcut("ArrowUp", "↑ Up", "move the cue to the song above", evenWhileTyping = false,
+      () => moveCue(-1)),
+    Shortcut("ArrowDown", "↓ Down", "move the cue to the song below", evenWhileTyping = false,
+      () => moveCue(1)),
+  )
+
   def save(): Unit =
     val name = concertNameVar.now().trim
     if name.isEmpty then statusVar.set("give the concert a name before saving")
@@ -157,19 +178,14 @@ def createProntoPopLandingPage(): HtmlElement =
     )
 
   div(cls := "app",
-    // Arrow keys walk the cue. Listening on the document rather than an element means it works
-    // without clicking anything first; preventDefault stops the page scrolling under the keys.
+    // Listening on the document rather than an element means the keys work without clicking into
+    // the page first; preventDefault stops the page scrolling under them.
     documentEvents(_.onKeyDown) --> { (e: dom.KeyboardEvent) =>
-      // Escape silences from anywhere, mid-edit included: a panic key that only works when the
-      // hands are off the fields would be no use on a stage.
-      if e.key == "Escape" then
-        e.preventDefault()
-        stopPlaying()
-      else if !typingSomewhere then
-        e.key match
-          case "ArrowUp"   => e.preventDefault(); moveCue(-1)
-          case "ArrowDown" => e.preventDefault(); moveCue(1)
-          case _           => ()
+      shortcuts
+        .find(s => s.key == e.key && (s.evenWhileTyping || !typingSomewhere))
+        .foreach: s =>
+          e.preventDefault()
+          s.act()
     },
     Styles.createPageStyle,
     div(cls := "row titlerow",
@@ -228,4 +244,18 @@ def createProntoPopLandingPage(): HtmlElement =
     children <-- songsVar.signal.split(_.id)(renderRow),
     div(cls := "row", button("Add song", onClick --> (_ => addSong()))),
     div(cls := "status", child.text <-- statusVar.signal),
+    div(cls := "shortcuts",
+      h2("Keyboard shortcuts"),
+      table(
+        thead(tr(th("Key"), th("Does"), th("While typing"))),
+        tbody(
+          shortcuts.map: s =>
+            tr(
+              td(s.shown),
+              td(s.does),
+              td(if s.evenWhileTyping then "yes" else "no"),
+            )
+        ),
+      ),
+    ),
   )

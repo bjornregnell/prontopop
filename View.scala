@@ -199,7 +199,9 @@ def createProntoPopLandingPage(): HtmlElement =
       input(cls := "concertfield",
         controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),
       button("Save", onClick --> (_ => save())),
-      span(" to Local Store"),
+      // non-breaking, since HTML collapses ordinary leading spaces: pads "to" out to the width of
+      // "from" below, so both "Local Store" land in the same column
+      span("  to Local Store"),
     ),
     div(cls := "row",
       span("Saved Concerts: "),

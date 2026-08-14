@@ -27,7 +27,6 @@ object Concerts:
     Song(title = "Vintergatans frid", 130, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "Djävulen har flytt", 117, Signature(4, 4), Pattern("||:!...:||")),
     Song(title = "Har ni hört", 100, Signature(4, 4), Pattern("||:!...:||")),
-    Song(title = "Man pova påsikti", 100, Signature(4, 4), Pattern("||:!...:||")),
   )
   // END GENERATED Soaree01
 
@@ -43,5 +42,5 @@ object Concerts:
   val all: Map[Title, Concert] = ordered.toMap
 
   /** What the app opens on, so no caller has to name a key that might move. */
-  val startupTitle: Title = Example01._1
-  val startup: Concert    = Example01._2
+  val startupTitle: Title = Soaree01._1
+  val startup: Concert    = Soaree01._2

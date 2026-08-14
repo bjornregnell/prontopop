@@ -179,6 +179,11 @@ def createProntoPopLandingPage(): HtmlElement =
         concertNameVar.set(name)
         statusVar.set(s"loaded '$name' (${rows.length} songs)")
 
+  /** Parsed rather than compared as text, so " 4 / 4 " counts and a half-typed signature does not.
+    * Anything unparseable is simply not 4/4, and wears the other colour. */
+  def isFourFour(sign: String): Boolean =
+    SongRow.parseSignature(sign).exists(s => s.frac.numerator == 4 && s.frac.denominator == 4)
+
   def renderRow(id: Int, initial: SongRow, rowSignal: Signal[SongRow]): HtmlElement =
     div(cls := "songrow",
       // placeholder for a ">" cue marking the current or last played song; read-only and out of the
@@ -192,7 +197,9 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
       input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),
       input(cls := "bpm", controlled(value <-- rowSignal.map(_.bpm), onInput.mapToValue --> (v => updateRow(id)(_.copy(bpm = v))))),
-      input(cls := "sign", controlled(value <-- rowSignal.map(_.sign), onInput.mapToValue --> (v => updateRow(id)(_.copy(sign = v))))),
+      input(cls := "sign",
+        cls("common") <-- rowSignal.map(r => isFourFour(r.sign)),
+        controlled(value <-- rowSignal.map(_.sign), onInput.mapToValue --> (v => updateRow(id)(_.copy(sign = v))))),
       input(cls := "pattern", controlled(value <-- rowSignal.map(_.pattern), onInput.mapToValue --> (v => updateRow(id)(_.copy(pattern = v.replace("…", "...")))))),
       button("Remove", onClick --> (_ => removeRow(id))),
     )

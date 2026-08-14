@@ -153,6 +153,12 @@ object Styles:
 }
 
 /* prontopop's own surface, spoken in the semantic tokens above */
+
+/* NOT from the design language, so do not expect to find it upstream: the forge palette stops at
+   hot-iron orange, around working heat, and yellow is the next step up the same temperature scale
+   — welding heat. Added here for the signature chips. */
+:root { --welding-yellow: #f5c518; }
+
 * { box-sizing: border-box; }
 
 /* No max-width and no centering: the song table has a FIXED width in characters, so a narrow
@@ -208,6 +214,23 @@ input:focus, select:focus, button:focus-visible {
 }
 
 input.pattern { letter-spacing: 0.2ch; }
+
+/* The signature at a glance: 4/4 in welding yellow, every other signature in light blue. Coloured
+   as CHIPS, the way the design language marks state, rather than as text: light blue as text fails
+   contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing
+   into all five themes. */
+.songrow input.sign {
+  background: var(--chio-light-blue);
+  color: var(--tempered-iron-purple);
+  border-color: var(--chio-light-blue);
+  font-weight: bold;
+  text-align: center;
+}
+
+.songrow input.sign.common {
+  background: var(--welding-yellow);
+  border-color: var(--welding-yellow);
+}
 
 /* The concert name and the saved-concerts dropdown, pinned to the same width so the two rows line
    up. Without this the select sizes itself to its longest option, so it drifted as concerts were

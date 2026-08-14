@@ -96,6 +96,11 @@ def createProntoPopLandingPage(): HtmlElement =
     if dom.document.fullscreenElement == null then dom.document.documentElement.requestFullscreen()
     else dom.document.exitFullscreen()
 
+  /** Leaving fullscreen is also the browser's own answer to Escape, so this mostly agrees with what
+    * already happened; asking to exit when not fullscreen would be rejected, hence the guard. */
+  def exitFullScreenIfAny(): Unit =
+    if dom.document.fullscreenElement != null then dom.document.exitFullscreen()
+
   /** One keyboard shortcut. Both the key handler and the table below are built from this list, so a
     * key cannot change in one place and go stale in the other.
     *
@@ -152,10 +157,26 @@ def createProntoPopLandingPage(): HtmlElement =
       val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0)
       startPlaying(rows(at.map(i => (i + 1) % rows.length).getOrElse(0)))
 
+  /** Play the cued song — the one the ">" marks, or the top one before anything has played. */
+  def playCued(): Unit =
+    val rows = songsVar.now()
+    cueVar.now().flatMap(id => rows.find(_.id == id)).orElse(rows.headOption).foreach(startPlaying)
+
+  /** Stop if something is running, otherwise start the cued song again. Return moves on; this
+    * stays put, so the pair reads as "again" and "next". */
+  def togglePlayCued(): Unit =
+    if playingVar.now().isDefined then stopPlaying() else playCued()
+
   /** The single source of truth for the keyboard. */
   val shortcuts: Vector[Shortcut] = Vector(
-    Shortcut("Escape", "Esc", "silence — stop the playing song", evenWhileTyping = true,
+    Shortcut(" ", "Space", "play the cued song, or stop what is playing", evenWhileTyping = false,
+      () => togglePlayCued()),
+    Shortcut("Enter", "Return", "play the song after the cue", evenWhileTyping = false,
+      () => playNext()),
+    Shortcut("Backspace", "Backspace", "silence — stop the playing song", evenWhileTyping = false,
       () => stopPlaying()),
+    Shortcut("Escape", "Esc", "leave full screen", evenWhileTyping = true,
+      () => exitFullScreenIfAny()),
     Shortcut("ArrowUp", "↑ Up", "move the cue to the song above", evenWhileTyping = false,
       () => moveCue(-1)),
     Shortcut("ArrowDown", "↓ Down", "move the cue to the song below", evenWhileTyping = false,

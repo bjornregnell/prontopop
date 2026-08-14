@@ -71,6 +71,9 @@ def createProntoPopLandingPage(): HtmlElement =
   val cueVar         = Var(Option.empty[Int])
   val statusVar      = Var("")
   val volumeVar      = Var("100")
+  /** How many bars a song plays before stopping itself; "forever" means until Silence. */
+  val barsVar        = Var("4")
+  val barChoices     = Vector("1", "2", "4", "8", "16", "32", "forever")
   lazy val player    = Sound.initWebSound()
 
   def stopPlaying(): Unit =
@@ -107,7 +110,9 @@ def createProntoPopLandingPage(): HtmlElement =
     row.toSongAndBars match
       case Left(err) => statusVar.set(err)
       case Right((song, bars)) =>
-        player.play(song.bpm, bars)
+        // the cue is deliberately left alone when a bar limit runs out: it marks the last song
+        // played, which is exactly what just finished
+        player.play(song.bpm, bars, barsVar.now().toIntOption, () => playingVar.set(None))
         playingVar.set(Some(row.id))
         cueVar.set(Some(row.id))
         statusVar.set("")
@@ -238,6 +243,13 @@ def createProntoPopLandingPage(): HtmlElement =
     ),
     div(cls := "row",
       button("Play next", cls := "playnext", onClick --> (_ => playNext())),
+      select(
+        cls := "bars",
+        title := "bars to play before stopping",
+        barChoices.map(b => option(value := b, b)),
+        value <-- barsVar.signal,
+        onChange.mapToValue --> barsVar.writer,
+      ),
       button("Silence", cls := "silence", onClick --> (_ => stopPlaying())),
       span("Volume: "),
       input(typ := "range", minAttr := "0", maxAttr := "100",

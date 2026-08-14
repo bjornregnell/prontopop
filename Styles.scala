@@ -243,6 +243,9 @@ button:hover { border-color: var(--link); }
 
 .silence { font-weight: bold; padding: 0.4rem 1.1rem; margin-right: 2ch; }
 
+/* how many bars Play next and the row buttons run for */
+select.bars { margin-right: 2ch; }
+
 /* starts the song after the cue, in the same signal green a playing song wears */
 .playnext, .playnext:hover {
   background: var(--vivid-bright-green);

@@ -110,6 +110,40 @@ class TimingSuite extends munit.FunSuite:
     val (beats, _) = Timing.due(sched, Cursor(10, 0), 0.0, 0.5, horizon = 6.5)
     assertEquals(beats.map(_._1).toVector, Vector(5.0, 5.5, 6.0, 6.5))
 
+  // ---- stopping after a number of bars ----
+
+  test("a bar limit counts bars, cycling the pattern as often as needed"):
+    assertEqualsDouble(Timing.beatsForBars(bars34, 1), 3.0, 1e-12)
+    assertEqualsDouble(Timing.beatsForBars(bars34, 4), 12.0, 1e-12, "one full pass of four 3/4 bars")
+    assertEqualsDouble(Timing.beatsForBars(bars34, 6), 18.0, 1e-12, "one and a half passes")
+
+  test("bars of different signatures each count their own length"):
+    val mixed = Pattern("!..").parse(sig34).toOption.get ++ Pattern("!...").parse(sig44).toOption.get
+    assertEqualsDouble(Timing.beatsForBars(mixed, 1), 3.0, 1e-12, "the 3/4 bar")
+    assertEqualsDouble(Timing.beatsForBars(mixed, 2), 7.0, 1e-12, "plus the 4/4 bar")
+    assertEqualsDouble(Timing.beatsForBars(mixed, 3), 10.0, 1e-12, "then round to the 3/4 bar again")
+
+  test("no bars at all means no beats"):
+    assertEqualsDouble(Timing.beatsForBars(bars34, 0), 0.0, 1e-12)
+    assertEqualsDouble(Timing.beatsForBars(Nil, 4), 0.0, 1e-12)
+
+  test("nothing is due beyond the bar limit, however far the horizon reaches"):
+    val limit = Timing.beatsForBars(bars34, 2)  // six beats
+    val (beats, _) = Timing.due(sched, Timing.Start, 0.0, 0.5, horizon = 1e6, untilBeats = limit)
+    assertEquals(beats.length, 6, "six beats and not one more")
+    assertEquals(beats.map(_._1).toVector, Vector(0.0, 0.5, 1.0, 1.5, 2.0, 2.5))
+
+  test("the limit does not cut a beat that falls exactly on it short"):
+    // twelve beats of limit must yield all twelve, beat 12 belonging to the next pass
+    val (beats, at) = Timing.due(sched, Timing.Start, 0.0, 0.5, 1e6, untilBeats = 12.0)
+    assertEquals(beats.length, 12)
+    assert(Timing.finished(sched, at, 12.0), "and playing is over")
+
+  test("a limit reports finished only once the cursor reaches it"):
+    val (_, part) = Timing.due(sched, Timing.Start, 0.0, 0.5, horizon = 1.0, untilBeats = 12.0)
+    assert(!Timing.finished(sched, part, 12.0), "still mid-pattern")
+    assert(!Timing.finished(sched, Timing.Start, Double.PositiveInfinity), "forever never finishes")
+
   test("an empty schedule yields nothing instead of spinning forever"):
     val empty = Timing.schedule(Nil)
     val (beats, next) = Timing.due(empty, Timing.Start, 0.0, 0.5, horizon = 1e6)

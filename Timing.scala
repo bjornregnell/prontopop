@@ -44,6 +44,22 @@ object Timing:
       barStart += sig.numerator
     Schedule(beats.result(), barStart)
 
+  /** How many beats pass before `barCount` bars have gone by, cycling the pattern as often as
+    * needed. Counts the bars themselves rather than multiplying, since a pattern may mix
+    * signatures and its bars then differ in length. */
+  def beatsForBars(bars: Seq[Bar], barCount: Int): Double =
+    if barCount <= 0 || bars.isEmpty then 0.0
+    else Iterator.continually(bars).flatten.take(barCount)
+      .map(_.signature.frac.numerator.toDouble).sum
+
+  /** Where the cursor stands, in beats from the very start of playing. */
+  def beatsAt(sched: Schedule, cursor: Cursor): Double =
+    cursor.loop * sched.loopBeats + sched.beats(cursor.index).offset
+
+  /** True once the cursor has reached a bar limit, so nothing further should sound. */
+  def finished(sched: Schedule, cursor: Cursor, untilBeats: Double): Boolean =
+    !sched.isEmpty && beatsAt(sched, cursor) >= untilBeats
+
   /** The next beat, wrapping to the top of the pattern and counting the loop. */
   def advance(sched: Schedule, cursor: Cursor): Cursor =
     if cursor.index + 1 >= sched.beats.length then Cursor(0, cursor.loop + 1)
@@ -65,13 +81,16 @@ object Timing:
     startTime: Double,
     secsPerBeat: Double,
     horizon: Double,
+    untilBeats: Double = Double.PositiveInfinity,
   ): (Vector[(Double, Event)], Cursor) =
     if sched.isEmpty || secsPerBeat <= 0 then (Vector.empty, cursor)
     else
       val out = Vector.newBuilder[(Double, Event)]
       var at = cursor
       var t = timeOf(sched, at, startTime, secsPerBeat)
-      while t <= horizon do
+      // the limit is checked here, not by stopping the timer later: the lookahead would otherwise
+      // have already scheduled a click or two past the end, and they would sound
+      while t <= horizon && beatsAt(sched, at) < untilBeats do
         out += ((t, sched.beats(at.index).ev))
         at = advance(sched, at)
         t = timeOf(sched, at, startTime, secsPerBeat)

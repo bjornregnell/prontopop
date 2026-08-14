@@ -234,8 +234,13 @@ def createProntoPopLandingPage(): HtmlElement =
 
   div(cls := "app",
     onMountCallback: _ =>
-      dom.document.addEventListener("fullscreenchange",
-        (_: dom.Event) => fullScreenVar.set(dom.document.fullscreenElement != null))
+      // Driven by the state change rather than the button, so entering fullscreen by any route
+      // holds the screen awake — and leaving it by any route, Escape included, lets go again.
+      dom.document.addEventListener("fullscreenchange", (_: dom.Event) =>
+        val on = dom.document.fullscreenElement != null
+        fullScreenVar.set(on)
+        if on then WakeLock.keepAwake() else WakeLock.allowSleep()
+      )
     ,
     // Custom properties inherit, so setting them here resizes every row's grid at once.
     styleAttr <-- colWidthsVar.signal.map: (title, pattern) =>

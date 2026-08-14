@@ -3093,7 +3093,7 @@ function $p_Lcom_raquo_laminar_inputs_InputController__checkControllerCompatibil
           var $x_1 = true;
         } else {
           if ((maybeAllowedConfigs === (void 0))) {
-            throw new $c_ju_NoSuchElementException("undefined.get");
+            throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "undefined.get");
           }
           var $x_2 = maybeAllowedConfigs.length;
           var $x_1 = ($uI($x_2) === 0);
@@ -3139,7 +3139,7 @@ function $p_Lcom_raquo_laminar_inputs_InputController__checkControllerCompatibil
           if ((maybeMatchingPropConfig === (void 0))) {
             if ((maybeAllowedConfigs === (void 0))) {
               var $x_6;
-              throw new $c_ju_NoSuchElementException("undefined.get");
+              throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "undefined.get");
             } else {
               var $x_6 = maybeAllowedConfigs;
             }
@@ -4356,6 +4356,9 @@ function $m_jl_Math$() {
   }
   return $n_jl_Math$;
 }
+var $d_jl_Runnable = new $TypeData().initClass(1, "java.lang.Runnable", ({
+  jl_Runnable: 1
+}));
 function $p_jl_StackTrace$__normalizedLinesToStackTrace__O__Ajl_StackTraceElement($thiz, lines) {
   var NormalizedFrameLine = $m_jl_StackTrace$StringRE$().re$extension0__T__O("^([^@]*)@(.*?):([0-9]+)(?::([0-9]+))?$");
   var trace = [];
@@ -4760,6 +4763,53 @@ function $m_jl_System$SystemProperties$() {
   }
   return $n_jl_System$SystemProperties$;
 }
+/** @constructor */
+function $c_jl_Thread$() {
+  this.jl_Thread$__f_SingleThread = null;
+  $n_jl_Thread$ = this;
+  this.jl_Thread$__f_SingleThread = new $c_jl_Thread((void 0));
+}
+$c_jl_Thread$.prototype = new $h_O();
+$c_jl_Thread$.prototype.constructor = $c_jl_Thread$;
+/** @constructor */
+function $h_jl_Thread$() {
+}
+$h_jl_Thread$.prototype = $c_jl_Thread$.prototype;
+var $d_jl_Thread$ = new $TypeData().initClass($c_jl_Thread$, "java.lang.Thread$", ({
+  jl_Thread$: 1
+}));
+var $n_jl_Thread$;
+function $m_jl_Thread$() {
+  if ((!$n_jl_Thread$)) {
+    $n_jl_Thread$ = new $c_jl_Thread$();
+  }
+  return $n_jl_Thread$;
+}
+/** @constructor */
+function $c_jl_ThreadLocal() {
+  this.jl_ThreadLocal__f_hasValue = false;
+  this.jl_ThreadLocal__f_v = null;
+  this.jl_ThreadLocal__f_hasValue = false;
+}
+$c_jl_ThreadLocal.prototype = new $h_O();
+$c_jl_ThreadLocal.prototype.constructor = $c_jl_ThreadLocal;
+/** @constructor */
+function $h_jl_ThreadLocal() {
+}
+$h_jl_ThreadLocal.prototype = $c_jl_ThreadLocal.prototype;
+$c_jl_ThreadLocal.prototype.get__O = (function() {
+  if ((!this.jl_ThreadLocal__f_hasValue)) {
+    this.set__O__V(null);
+  }
+  return this.jl_ThreadLocal__f_v;
+});
+$c_jl_ThreadLocal.prototype.set__O__V = (function(o) {
+  this.jl_ThreadLocal__f_v = o;
+  this.jl_ThreadLocal__f_hasValue = true;
+});
+var $d_jl_ThreadLocal = new $TypeData().initClass($c_jl_ThreadLocal, "java.lang.ThreadLocal", ({
+  jl_ThreadLocal: 1
+}));
 /** @constructor */
 function $c_jl_UnicodeData$() {
   this.jl_UnicodeData$__f_java$lang$UnicodeData$$dataDirect = null;
@@ -9156,9 +9206,10 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
   var fn = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$31$3) => {
     $as_Lcom_raquo_laminar_lifecycle_MountContext(_$31$3);
     document.addEventListener("fullscreenchange", ((_$32$2) => {
+      var on = (document.fullscreenElement !== null);
       var this$37 = $n(fullScreenVar);
-      var value$1 = (document.fullscreenElement !== null);
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$37, value$1);
+      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$37, on);
+      return (on ? ($m_Lprontopop_WakeLock$().keepAwake__V(), (void 0)) : ($m_Lprontopop_WakeLock$().allowSleep__V(), (void 0)));
     }));
   }));
   var $x_131 = $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier(this$38, fn);
@@ -9293,9 +9344,9 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
       var $x_102 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter(name);
       if (builtIn) {
         var this$90 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-        var value$2 = (name + " (built-in)");
+        var value$1 = (name + " (built-in)");
         var r$6 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-        var $x_101 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$90, value$2, r$6);
+        var $x_101 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$90, value$1, r$6);
       } else {
         var this$91 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
         var r$7 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
@@ -9453,8 +9504,8 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     $m_sc_StringOps$();
     var this$160 = $m_sc_StringParsers$();
     if (this$160.checkFloatFormat__T__Z(v)) {
-      var value$3 = $m_jl_Double$().parseDouble__T__D(v);
-      var this$162 = new $c_s_Some(value$3);
+      var value$2 = $m_jl_Double$().parseDouble__T__D(v);
+      var this$162 = new $c_s_Some(value$2);
     } else {
       var this$162 = $m_s_None$();
     }
@@ -9522,8 +9573,8 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     if (this$186.isEmpty__Z()) {
       var this$188 = $m_s_None$();
     } else {
-      var value$4 = f$4.apply__O__O(this$186.get__O());
-      var this$188 = new $c_s_Some(value$4);
+      var value$3 = f$4.apply__O__O(this$186.get__O());
+      var this$188 = new $c_s_Some(value$3);
     }
     var default$1 = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => ""));
     return $as_T((this$188.isEmpty__Z() ? default$1.apply__O() : this$188.get__O()));
@@ -9684,17 +9735,17 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     var $x_12 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
     var this$273 = $m_sjsr_package$();
     var this$272 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-    var value$5 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_shown;
+    var value$4 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_shown;
     var r$26 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$45 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$272, value$5, r$26)]);
+    var xs$45 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$272, value$4, r$26)]);
     var array$45 = this$273.refArrayToJSArray__AO__sjs_js_Array(xs$45);
     var $x_11 = $x_12.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$45));
     var $x_10 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
     var this$277 = $m_sjsr_package$();
     var this$276 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-    var value$6 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_does;
+    var value$5 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_does;
     var r$27 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$46 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$276, value$6, r$27)]);
+    var xs$46 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$276, value$5, r$27)]);
     var array$46 = this$277.refArrayToJSArray__AO__sjs_js_Array(xs$46);
     var $x_9 = $x_10.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$46));
     var $x_8 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag();
@@ -9734,6 +9785,131 @@ function $m_Lprontopop_View$package$() {
     $n_Lprontopop_View$package$ = new $c_Lprontopop_View$package$();
   }
   return $n_Lprontopop_View$package$;
+}
+function $p_Lprontopop_WakeLock$__api__s_Option($thiz) {
+  var wl = window.navigator.wakeLock;
+  return (((wl === (void 0)) || (wl === null)) ? $m_s_None$() : new $c_s_Some(wl));
+}
+function $p_Lprontopop_WakeLock$__acquire__V($thiz) {
+  if (($thiz.Lprontopop_WakeLock$__f_wanted && $n($thiz.Lprontopop_WakeLock$__f_held).isEmpty__Z())) {
+    var this$1 = $n($p_Lprontopop_WakeLock$__api__s_Option($thiz));
+    if ((!this$1.isEmpty__Z())) {
+      var x0 = this$1.get__O();
+      try {
+        var p = x0.request("screen");
+        var r1 = $m_sjs_js_Thenable$ThenableOps$().toFuture$extension__sjs_js_Thenable__s_concurrent_Future(p);
+        var $x_1 = new $c_s_util_Success(r1);
+      } catch (e) {
+        var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+        matchResult1: {
+          var $x_1;
+          var x2 = $m_s_util_control_NonFatal$().unapply__jl_Throwable__s_Option(e$2);
+          if ((!$n(x2).isEmpty__Z())) {
+            var x3 = $as_jl_Throwable($n(x2).get__O());
+            var $x_1 = new $c_s_util_Failure(x3);
+            break matchResult1;
+          }
+          throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+        }
+      }
+      $x_1.foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((pending$3) => {
+        var pending = $as_s_concurrent_Future(pending$3);
+        $n(pending).onComplete__F1__s_concurrent_ExecutionContext__V(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2) => {
+          var x$1 = $as_s_util_Try(x$1$2);
+          if ((x$1 instanceof $c_s_util_Success)) {
+            var sentinel = $n($as_s_util_Success(x$1)).s_util_Success__f_value;
+            if ($thiz.Lprontopop_WakeLock$__f_wanted) {
+              $thiz.Lprontopop_WakeLock$__f_held = new $c_s_Some(sentinel);
+              return (void 0);
+            } else {
+              try {
+                var r1$1 = sentinel.release();
+                return new $c_s_util_Success(r1$1);
+              } catch (e$1) {
+                var e$2$1 = ((e$1 instanceof $c_jl_Throwable) ? e$1 : new $c_sjs_js_JavaScriptException(e$1));
+                var x2$1 = $m_s_util_control_NonFatal$().unapply__jl_Throwable__s_Option(e$2$1);
+                if ((!$n(x2$1).isEmpty__Z())) {
+                  var x3$1 = $as_jl_Throwable($n(x2$1).get__O());
+                  return new $c_s_util_Failure(x3$1);
+                }
+                throw ((e$2$1 instanceof $c_sjs_js_JavaScriptException) ? e$2$1.sjs_js_JavaScriptException__f_exception : e$2$1);
+              }
+            }
+          }
+          if ((x$1 instanceof $c_s_util_Failure)) {
+            return (void 0);
+          }
+          throw new $c_s_MatchError(x$1);
+        })), $m_sjs_concurrent_JSExecutionContext$Implicits$().sjs_concurrent_JSExecutionContext$Implicits$__f_queue);
+      })));
+    }
+  }
+}
+function $p_Lprontopop_WakeLock$__listenForVisibility__V($thiz) {
+  if ((!$thiz.Lprontopop_WakeLock$__f_listening)) {
+    $thiz.Lprontopop_WakeLock$__f_listening = true;
+    document.addEventListener("visibilitychange", ((_$1$2) => {
+      if (($thiz.Lprontopop_WakeLock$__f_wanted && (!$uZ(document.hidden)))) {
+        $thiz.Lprontopop_WakeLock$__f_held = $m_s_None$();
+        $p_Lprontopop_WakeLock$__acquire__V($thiz);
+        return (void 0);
+      } else {
+        return (void 0);
+      }
+    }));
+  }
+}
+/** @constructor */
+function $c_Lprontopop_WakeLock$() {
+  this.Lprontopop_WakeLock$__f_held = null;
+  this.Lprontopop_WakeLock$__f_wanted = false;
+  this.Lprontopop_WakeLock$__f_listening = false;
+  $n_Lprontopop_WakeLock$ = this;
+  this.Lprontopop_WakeLock$__f_held = $m_s_None$();
+  this.Lprontopop_WakeLock$__f_wanted = false;
+  this.Lprontopop_WakeLock$__f_listening = false;
+}
+$c_Lprontopop_WakeLock$.prototype = new $h_O();
+$c_Lprontopop_WakeLock$.prototype.constructor = $c_Lprontopop_WakeLock$;
+/** @constructor */
+function $h_Lprontopop_WakeLock$() {
+}
+$h_Lprontopop_WakeLock$.prototype = $c_Lprontopop_WakeLock$.prototype;
+$c_Lprontopop_WakeLock$.prototype.keepAwake__V = (function() {
+  this.Lprontopop_WakeLock$__f_wanted = true;
+  $p_Lprontopop_WakeLock$__listenForVisibility__V(this);
+  $p_Lprontopop_WakeLock$__acquire__V(this);
+});
+$c_Lprontopop_WakeLock$.prototype.allowSleep__V = (function() {
+  this.Lprontopop_WakeLock$__f_wanted = false;
+  var this$1 = $n(this.Lprontopop_WakeLock$__f_held);
+  if ((!this$1.isEmpty__Z())) {
+    var x0 = this$1.get__O();
+    try {
+      x0.release();
+    } catch (e) {
+      var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+      matchResult1: {
+        var x2 = $m_s_util_control_NonFatal$().unapply__jl_Throwable__s_Option(e$2);
+        if ((!$n(x2).isEmpty__Z())) {
+          var x3 = $as_jl_Throwable($n(x2).get__O());
+          break matchResult1;
+        }
+        throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+      }
+    }
+  }
+  this.Lprontopop_WakeLock$__f_held = $m_s_None$();
+});
+var $d_Lprontopop_WakeLock$ = new $TypeData().initClass($c_Lprontopop_WakeLock$, "prontopop.WakeLock$", ({
+  Lprontopop_WakeLock$: 1
+}));
+var $n_Lprontopop_WakeLock$;
+function $m_Lprontopop_WakeLock$() {
+  if ((!$n_Lprontopop_WakeLock$)) {
+    $n_Lprontopop_WakeLock$ = new $c_Lprontopop_WakeLock$();
+  }
+  return $n_Lprontopop_WakeLock$;
 }
 function $s_Lprontopop_run__main__AT__V(args) {
   try {
@@ -12061,6 +12237,278 @@ function $m_scm_MutationTracker$() {
   }
   return $n_scm_MutationTracker$;
 }
+function $ct_s_concurrent_BatchingExecutor$AbstractBatch__jl_Runnable__Ajl_Runnable__I__($thiz, first, other, size) {
+  $thiz.s_concurrent_BatchingExecutor$AbstractBatch__f_first = first;
+  $thiz.s_concurrent_BatchingExecutor$AbstractBatch__f_other = other;
+  $thiz.s_concurrent_BatchingExecutor$AbstractBatch__f_size = size;
+  return $thiz;
+}
+function $p_s_concurrent_BatchingExecutor$AbstractBatch__ensureCapacity__I__Ajl_Runnable($thiz, curSize) {
+  var curOther = $thiz.s_concurrent_BatchingExecutor$AbstractBatch__f_other;
+  var curLen = $n(curOther).u.length;
+  if ((curSize <= curLen)) {
+    return curOther;
+  } else {
+    var newLen = ((curLen === 0) ? 4 : (curLen << 1));
+    if ((newLen <= curLen)) {
+      throw new $c_jl_StackOverflowError(("Space limit of asynchronous stack reached: " + curLen));
+    }
+    var newOther = new ($d_jl_Runnable.getArrayOf().constr)(newLen);
+    $systemArraycopyRefs($n(curOther), 0, newOther, 0, curLen);
+    $thiz.s_concurrent_BatchingExecutor$AbstractBatch__f_other = newOther;
+    return newOther;
+  }
+}
+/** @constructor */
+function $c_s_concurrent_BatchingExecutor$AbstractBatch() {
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_first = null;
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_other = null;
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_size = 0;
+}
+$c_s_concurrent_BatchingExecutor$AbstractBatch.prototype = new $h_O();
+$c_s_concurrent_BatchingExecutor$AbstractBatch.prototype.constructor = $c_s_concurrent_BatchingExecutor$AbstractBatch;
+/** @constructor */
+function $h_s_concurrent_BatchingExecutor$AbstractBatch() {
+}
+$h_s_concurrent_BatchingExecutor$AbstractBatch.prototype = $c_s_concurrent_BatchingExecutor$AbstractBatch.prototype;
+$c_s_concurrent_BatchingExecutor$AbstractBatch.prototype.push__jl_Runnable__V = (function(r) {
+  var sz = this.s_concurrent_BatchingExecutor$AbstractBatch__f_size;
+  if ((sz === 0)) {
+    this.s_concurrent_BatchingExecutor$AbstractBatch__f_first = r;
+  } else {
+    $n($p_s_concurrent_BatchingExecutor$AbstractBatch__ensureCapacity__I__Ajl_Runnable(this, sz)).set(((sz - 1) | 0), r);
+  }
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_size = ((1 + sz) | 0);
+});
+$c_s_concurrent_BatchingExecutor$AbstractBatch.prototype.runN__I__V = (function(n) {
+  var n$tailLocal1 = n;
+  while (true) {
+    if ((n$tailLocal1 > 0)) {
+      var x1 = this.s_concurrent_BatchingExecutor$AbstractBatch__f_size;
+      if ((x1 === 0)) {
+        return (void 0);
+      }
+      if ((x1 === 1)) {
+        var x$proxy1 = this.s_concurrent_BatchingExecutor$AbstractBatch__f_first;
+        if ((x$proxy1 === null)) {
+          $m_sr_Scala3RunTime$().nnFail__E();
+        }
+        this.s_concurrent_BatchingExecutor$AbstractBatch__f_first = null;
+        this.s_concurrent_BatchingExecutor$AbstractBatch__f_size = 0;
+        $n(x$proxy1).run__V();
+        n$tailLocal1 = ((n$tailLocal1 - 1) | 0);
+        continue;
+      }
+      var o = this.s_concurrent_BatchingExecutor$AbstractBatch__f_other;
+      var x$proxy2 = $n(o).get(((x1 - 2) | 0));
+      if ((x$proxy2 === null)) {
+        $m_sr_Scala3RunTime$().nnFail__E();
+      }
+      $n(o).set(((x1 - 2) | 0), null);
+      this.s_concurrent_BatchingExecutor$AbstractBatch__f_size = ((x1 - 1) | 0);
+      $n(x$proxy2).run__V();
+      n$tailLocal1 = ((n$tailLocal1 - 1) | 0);
+    } else {
+      return (void 0);
+    }
+  }
+});
+/** @constructor */
+function $c_s_concurrent_BatchingExecutorStatics$() {
+  this.s_concurrent_BatchingExecutorStatics$__f_emptyBatchArray = null;
+  $n_s_concurrent_BatchingExecutorStatics$ = this;
+  this.s_concurrent_BatchingExecutorStatics$__f_emptyBatchArray = new ($d_jl_Runnable.getArrayOf().constr)(0);
+}
+$c_s_concurrent_BatchingExecutorStatics$.prototype = new $h_O();
+$c_s_concurrent_BatchingExecutorStatics$.prototype.constructor = $c_s_concurrent_BatchingExecutorStatics$;
+/** @constructor */
+function $h_s_concurrent_BatchingExecutorStatics$() {
+}
+$h_s_concurrent_BatchingExecutorStatics$.prototype = $c_s_concurrent_BatchingExecutorStatics$.prototype;
+var $d_s_concurrent_BatchingExecutorStatics$ = new $TypeData().initClass($c_s_concurrent_BatchingExecutorStatics$, "scala.concurrent.BatchingExecutorStatics$", ({
+  s_concurrent_BatchingExecutorStatics$: 1
+}));
+var $n_s_concurrent_BatchingExecutorStatics$;
+function $m_s_concurrent_BatchingExecutorStatics$() {
+  if ((!$n_s_concurrent_BatchingExecutorStatics$)) {
+    $n_s_concurrent_BatchingExecutorStatics$ = new $c_s_concurrent_BatchingExecutorStatics$();
+  }
+  return $n_s_concurrent_BatchingExecutorStatics$;
+}
+/** @constructor */
+function $c_s_concurrent_ExecutionContext$() {
+  this.s_concurrent_ExecutionContext$__f_defaultReporter = null;
+  $n_s_concurrent_ExecutionContext$ = this;
+  this.s_concurrent_ExecutionContext$__f_defaultReporter = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$1$3) => {
+    var _$1 = $as_jl_Throwable(_$1$3);
+    var this$2 = $n(_$1);
+    this$2.printStackTrace__Ljava_io_PrintStream__V($m_jl_System$Streams$().jl_System$Streams$__f_err);
+  }));
+}
+$c_s_concurrent_ExecutionContext$.prototype = new $h_O();
+$c_s_concurrent_ExecutionContext$.prototype.constructor = $c_s_concurrent_ExecutionContext$;
+/** @constructor */
+function $h_s_concurrent_ExecutionContext$() {
+}
+$h_s_concurrent_ExecutionContext$.prototype = $c_s_concurrent_ExecutionContext$.prototype;
+var $d_s_concurrent_ExecutionContext$ = new $TypeData().initClass($c_s_concurrent_ExecutionContext$, "scala.concurrent.ExecutionContext$", ({
+  s_concurrent_ExecutionContext$: 1
+}));
+var $n_s_concurrent_ExecutionContext$;
+function $m_s_concurrent_ExecutionContext$() {
+  if ((!$n_s_concurrent_ExecutionContext$)) {
+    $n_s_concurrent_ExecutionContext$ = new $c_s_concurrent_ExecutionContext$();
+  }
+  return $n_s_concurrent_ExecutionContext$;
+}
+/** @constructor */
+function $c_s_concurrent_Future$() {
+  this.s_concurrent_Future$__f_collectFailed = null;
+  this.s_concurrent_Future$__f_filterFailure = null;
+  this.s_concurrent_Future$__f_failedFailure = null;
+  this.s_concurrent_Future$__f_recoverWithFailedMarker = null;
+  this.s_concurrent_Future$__f_recoverWithFailed = null;
+  $n_s_concurrent_Future$ = this;
+  var this$31 = $m_sci_Map$();
+  var x0 = $ct_T2__O__O__(new $c_T2(), $d_Z.getClassOf(), $d_jl_Boolean.getClassOf());
+  var x1 = $ct_T2__O__O__(new $c_T2(), $d_B.getClassOf(), $d_jl_Byte.getClassOf());
+  var x2 = $ct_T2__O__O__(new $c_T2(), $d_C.getClassOf(), $d_jl_Character.getClassOf());
+  var x3 = $ct_T2__O__O__(new $c_T2(), $d_S.getClassOf(), $d_jl_Short.getClassOf());
+  var x4 = $ct_T2__O__O__(new $c_T2(), $d_I.getClassOf(), $d_jl_Integer.getClassOf());
+  var x5 = $ct_T2__O__O__(new $c_T2(), $d_J.getClassOf(), $d_jl_Long.getClassOf());
+  var x6 = $ct_T2__O__O__(new $c_T2(), $d_F.getClassOf(), $d_jl_Float.getClassOf());
+  var x7 = $ct_T2__O__O__(new $c_T2(), $d_D.getClassOf(), $d_jl_Double.getClassOf());
+  var x8 = $ct_T2__O__O__(new $c_T2(), $d_V.getClassOf(), $d_jl_Void.getClassOf());
+  var array = [x0, x1, x2, x3, x4, x5, x6, x7, x8];
+  var elems = new $c_sjsr_WrappedVarArgs(array);
+  this$31.from__sc_IterableOnce__sci_Map(elems);
+  this.s_concurrent_Future$__f_collectFailed = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((t$2) => {
+    throw new $c_s_concurrent_Future$$anon$1(t$2);
+  }));
+  var exception = new $c_s_concurrent_Future$$anon$2();
+  this.s_concurrent_Future$__f_filterFailure = new $c_s_util_Failure(exception);
+  var exception$1 = new $c_s_concurrent_Future$$anon$3();
+  this.s_concurrent_Future$__f_failedFailure = new $c_s_util_Failure(exception$1);
+  $m_s_concurrent_Future$().fromTry__s_util_Try__s_concurrent_Future(this.s_concurrent_Future$__f_failedFailure);
+  this.s_concurrent_Future$__f_recoverWithFailedMarker = $m_s_concurrent_Future$().failed__jl_Throwable__s_concurrent_Future(new $c_s_concurrent_Future$$anon$4());
+  this.s_concurrent_Future$__f_recoverWithFailed = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((t$2$1) => {
+    $as_jl_Throwable(t$2$1);
+    return this.s_concurrent_Future$__f_recoverWithFailedMarker;
+  }));
+  this.fromTry__s_util_Try__s_concurrent_Future(new $c_s_util_Success((void 0)));
+}
+$c_s_concurrent_Future$.prototype = new $h_O();
+$c_s_concurrent_Future$.prototype.constructor = $c_s_concurrent_Future$;
+/** @constructor */
+function $h_s_concurrent_Future$() {
+}
+$h_s_concurrent_Future$.prototype = $c_s_concurrent_Future$.prototype;
+$c_s_concurrent_Future$.prototype.failed__jl_Throwable__s_concurrent_Future = (function(exception) {
+  return $n($m_s_concurrent_Promise$().failed__jl_Throwable__s_concurrent_Promise(exception));
+});
+$c_s_concurrent_Future$.prototype.fromTry__s_util_Try__s_concurrent_Future = (function(result) {
+  return $ct_s_concurrent_impl_Promise$DefaultPromise__s_util_Try__(new $c_s_concurrent_impl_Promise$DefaultPromise(), result);
+});
+var $d_s_concurrent_Future$ = new $TypeData().initClass($c_s_concurrent_Future$, "scala.concurrent.Future$", ({
+  s_concurrent_Future$: 1
+}));
+var $n_s_concurrent_Future$;
+function $m_s_concurrent_Future$() {
+  if ((!$n_s_concurrent_Future$)) {
+    $n_s_concurrent_Future$ = new $c_s_concurrent_Future$();
+  }
+  return $n_s_concurrent_Future$;
+}
+function $f_s_concurrent_Promise__complete__s_util_Try__s_concurrent_Promise($thiz, result) {
+  if ($thiz.tryComplete__s_util_Try__Z(result)) {
+    return $thiz;
+  } else {
+    throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), "Promise already completed.");
+  }
+}
+function $f_s_concurrent_Promise__success__O__s_concurrent_Promise($thiz, value) {
+  var result = new $c_s_util_Success(value);
+  return $f_s_concurrent_Promise__complete__s_util_Try__s_concurrent_Promise($thiz, result);
+}
+function $f_s_concurrent_Promise__failure__jl_Throwable__s_concurrent_Promise($thiz, cause) {
+  var result = new $c_s_util_Failure(cause);
+  return $f_s_concurrent_Promise__complete__s_util_Try__s_concurrent_Promise($thiz, result);
+}
+/** @constructor */
+function $c_s_concurrent_Promise$() {
+}
+$c_s_concurrent_Promise$.prototype = new $h_O();
+$c_s_concurrent_Promise$.prototype.constructor = $c_s_concurrent_Promise$;
+/** @constructor */
+function $h_s_concurrent_Promise$() {
+}
+$h_s_concurrent_Promise$.prototype = $c_s_concurrent_Promise$.prototype;
+$c_s_concurrent_Promise$.prototype.failed__jl_Throwable__s_concurrent_Promise = (function(exception) {
+  var result = new $c_s_util_Failure(exception);
+  return $ct_s_concurrent_impl_Promise$DefaultPromise__s_util_Try__(new $c_s_concurrent_impl_Promise$DefaultPromise(), result);
+});
+var $d_s_concurrent_Promise$ = new $TypeData().initClass($c_s_concurrent_Promise$, "scala.concurrent.Promise$", ({
+  s_concurrent_Promise$: 1
+}));
+var $n_s_concurrent_Promise$;
+function $m_s_concurrent_Promise$() {
+  if ((!$n_s_concurrent_Promise$)) {
+    $n_s_concurrent_Promise$ = new $c_s_concurrent_Promise$();
+  }
+  return $n_s_concurrent_Promise$;
+}
+/** @constructor */
+function $c_s_concurrent_impl_Promise$() {
+  this.s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop = null;
+  $n_s_concurrent_impl_Promise$ = this;
+  this.s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop = $ct_s_concurrent_impl_Promise$Transformation__I__F1__s_concurrent_ExecutionContext__(new $c_s_concurrent_impl_Promise$Transformation(), 0, null, $m_s_concurrent_ExecutionContext$parasitic$());
+}
+$c_s_concurrent_impl_Promise$.prototype = new $h_O();
+$c_s_concurrent_impl_Promise$.prototype.constructor = $c_s_concurrent_impl_Promise$;
+/** @constructor */
+function $h_s_concurrent_impl_Promise$() {
+}
+$h_s_concurrent_impl_Promise$.prototype = $c_s_concurrent_impl_Promise$.prototype;
+$c_s_concurrent_impl_Promise$.prototype.scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try = (function(value) {
+  if (($n(value) instanceof $c_s_util_Success)) {
+    return value;
+  } else {
+    var t = $n($as_s_util_Failure(value)).s_util_Failure__f_exception;
+    if (((false || false) || (t instanceof $c_jl_Error))) {
+      if (false) {
+        var value$1 = $n($as_sr_NonLocalReturnControl(t)).value__O();
+        return new $c_s_util_Success(value$1);
+      } else {
+        var exception = new $c_ju_concurrent_ExecutionException("Boxed Exception", t);
+        return new $c_s_util_Failure(exception);
+      }
+    } else {
+      return value;
+    }
+  }
+});
+var $d_s_concurrent_impl_Promise$ = new $TypeData().initClass($c_s_concurrent_impl_Promise$, "scala.concurrent.impl.Promise$", ({
+  s_concurrent_impl_Promise$: 1
+}));
+var $n_s_concurrent_impl_Promise$;
+function $m_s_concurrent_impl_Promise$() {
+  if ((!$n_s_concurrent_impl_Promise$)) {
+    $n_s_concurrent_impl_Promise$ = new $c_s_concurrent_impl_Promise$();
+  }
+  return $n_s_concurrent_impl_Promise$;
+}
+function $is_s_concurrent_impl_Promise$Callbacks(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.s_concurrent_impl_Promise$Callbacks)));
+}
+function $as_s_concurrent_impl_Promise$Callbacks(obj) {
+  return (($is_s_concurrent_impl_Promise$Callbacks(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.impl.Promise$Callbacks"));
+}
+function $isArrayOf_s_concurrent_impl_Promise$Callbacks(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_impl_Promise$Callbacks)));
+}
+function $asArrayOf_s_concurrent_impl_Promise$Callbacks(obj, depth) {
+  return (($isArrayOf_s_concurrent_impl_Promise$Callbacks(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.impl.Promise$Callbacks;", depth));
+}
 /** @constructor */
 function $c_s_reflect_ClassTag$() {
   this.s_reflect_ClassTag$__f_Byte = null;
@@ -12534,6 +12982,72 @@ function $m_sr_Statics$PFMarker$() {
   return $n_sr_Statics$PFMarker$;
 }
 /** @constructor */
+function $c_sjs_concurrent_JSExecutionContext$() {
+  this.sjs_concurrent_JSExecutionContext$__f_queue = null;
+  $n_sjs_concurrent_JSExecutionContext$ = this;
+  this.sjs_concurrent_JSExecutionContext$__f_queue = $m_sjs_concurrent_QueueExecutionContext$().apply__s_concurrent_ExecutionContextExecutor();
+}
+$c_sjs_concurrent_JSExecutionContext$.prototype = new $h_O();
+$c_sjs_concurrent_JSExecutionContext$.prototype.constructor = $c_sjs_concurrent_JSExecutionContext$;
+/** @constructor */
+function $h_sjs_concurrent_JSExecutionContext$() {
+}
+$h_sjs_concurrent_JSExecutionContext$.prototype = $c_sjs_concurrent_JSExecutionContext$.prototype;
+var $d_sjs_concurrent_JSExecutionContext$ = new $TypeData().initClass($c_sjs_concurrent_JSExecutionContext$, "scala.scalajs.concurrent.JSExecutionContext$", ({
+  sjs_concurrent_JSExecutionContext$: 1
+}));
+var $n_sjs_concurrent_JSExecutionContext$;
+function $m_sjs_concurrent_JSExecutionContext$() {
+  if ((!$n_sjs_concurrent_JSExecutionContext$)) {
+    $n_sjs_concurrent_JSExecutionContext$ = new $c_sjs_concurrent_JSExecutionContext$();
+  }
+  return $n_sjs_concurrent_JSExecutionContext$;
+}
+/** @constructor */
+function $c_sjs_concurrent_JSExecutionContext$Implicits$() {
+  this.sjs_concurrent_JSExecutionContext$Implicits$__f_queue = null;
+  $n_sjs_concurrent_JSExecutionContext$Implicits$ = this;
+  this.sjs_concurrent_JSExecutionContext$Implicits$__f_queue = $m_sjs_concurrent_JSExecutionContext$().sjs_concurrent_JSExecutionContext$__f_queue;
+}
+$c_sjs_concurrent_JSExecutionContext$Implicits$.prototype = new $h_O();
+$c_sjs_concurrent_JSExecutionContext$Implicits$.prototype.constructor = $c_sjs_concurrent_JSExecutionContext$Implicits$;
+/** @constructor */
+function $h_sjs_concurrent_JSExecutionContext$Implicits$() {
+}
+$h_sjs_concurrent_JSExecutionContext$Implicits$.prototype = $c_sjs_concurrent_JSExecutionContext$Implicits$.prototype;
+var $d_sjs_concurrent_JSExecutionContext$Implicits$ = new $TypeData().initClass($c_sjs_concurrent_JSExecutionContext$Implicits$, "scala.scalajs.concurrent.JSExecutionContext$Implicits$", ({
+  sjs_concurrent_JSExecutionContext$Implicits$: 1
+}));
+var $n_sjs_concurrent_JSExecutionContext$Implicits$;
+function $m_sjs_concurrent_JSExecutionContext$Implicits$() {
+  if ((!$n_sjs_concurrent_JSExecutionContext$Implicits$)) {
+    $n_sjs_concurrent_JSExecutionContext$Implicits$ = new $c_sjs_concurrent_JSExecutionContext$Implicits$();
+  }
+  return $n_sjs_concurrent_JSExecutionContext$Implicits$;
+}
+/** @constructor */
+function $c_sjs_concurrent_QueueExecutionContext$() {
+}
+$c_sjs_concurrent_QueueExecutionContext$.prototype = new $h_O();
+$c_sjs_concurrent_QueueExecutionContext$.prototype.constructor = $c_sjs_concurrent_QueueExecutionContext$;
+/** @constructor */
+function $h_sjs_concurrent_QueueExecutionContext$() {
+}
+$h_sjs_concurrent_QueueExecutionContext$.prototype = $c_sjs_concurrent_QueueExecutionContext$.prototype;
+$c_sjs_concurrent_QueueExecutionContext$.prototype.apply__s_concurrent_ExecutionContextExecutor = (function() {
+  return (($as_T((typeof Promise)) === "undefined") ? new $c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext() : new $c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext());
+});
+var $d_sjs_concurrent_QueueExecutionContext$ = new $TypeData().initClass($c_sjs_concurrent_QueueExecutionContext$, "scala.scalajs.concurrent.QueueExecutionContext$", ({
+  sjs_concurrent_QueueExecutionContext$: 1
+}));
+var $n_sjs_concurrent_QueueExecutionContext$;
+function $m_sjs_concurrent_QueueExecutionContext$() {
+  if ((!$n_sjs_concurrent_QueueExecutionContext$)) {
+    $n_sjs_concurrent_QueueExecutionContext$ = new $c_sjs_concurrent_QueueExecutionContext$();
+  }
+  return $n_sjs_concurrent_QueueExecutionContext$;
+}
+/** @constructor */
 function $c_sjs_js_ArrayOps$() {
 }
 $c_sjs_js_ArrayOps$.prototype = new $h_O();
@@ -12566,6 +13080,35 @@ function $m_sjs_js_ArrayOps$() {
     $n_sjs_js_ArrayOps$ = new $c_sjs_js_ArrayOps$();
   }
   return $n_sjs_js_ArrayOps$;
+}
+/** @constructor */
+function $c_sjs_js_Thenable$ThenableOps$() {
+}
+$c_sjs_js_Thenable$ThenableOps$.prototype = new $h_O();
+$c_sjs_js_Thenable$ThenableOps$.prototype.constructor = $c_sjs_js_Thenable$ThenableOps$;
+/** @constructor */
+function $h_sjs_js_Thenable$ThenableOps$() {
+}
+$h_sjs_js_Thenable$ThenableOps$.prototype = $c_sjs_js_Thenable$ThenableOps$.prototype;
+$c_sjs_js_Thenable$ThenableOps$.prototype.toFuture$extension__sjs_js_Thenable__s_concurrent_Future = (function(this$) {
+  var p2 = $ct_s_concurrent_impl_Promise$DefaultPromise__(new $c_s_concurrent_impl_Promise$DefaultPromise());
+  this$.then(((arg1$2) => {
+    $f_s_concurrent_Promise__success__O__s_concurrent_Promise(p2, arg1$2);
+  }), $m_sjs_js_defined$().apply__O__sjs_js_$bar(((arg1$2$1) => {
+    var cause = ((arg1$2$1 instanceof $c_jl_Throwable) ? arg1$2$1 : new $c_sjs_js_JavaScriptException(arg1$2$1));
+    $f_s_concurrent_Promise__failure__jl_Throwable__s_concurrent_Promise(p2, cause);
+  })));
+  return p2;
+});
+var $d_sjs_js_Thenable$ThenableOps$ = new $TypeData().initClass($c_sjs_js_Thenable$ThenableOps$, "scala.scalajs.js.Thenable$ThenableOps$", ({
+  sjs_js_Thenable$ThenableOps$: 1
+}));
+var $n_sjs_js_Thenable$ThenableOps$;
+function $m_sjs_js_Thenable$ThenableOps$() {
+  if ((!$n_sjs_js_Thenable$ThenableOps$)) {
+    $n_sjs_js_Thenable$ThenableOps$ = new $c_sjs_js_Thenable$ThenableOps$();
+  }
+  return $n_sjs_js_Thenable$ThenableOps$;
 }
 /** @constructor */
 function $c_sjs_js_defined$() {
@@ -13094,6 +13637,30 @@ function $m_s_util_Sorting$() {
     $n_s_util_Sorting$ = new $c_s_util_Sorting$();
   }
   return $n_s_util_Sorting$;
+}
+function $f_s_util_control_NoStackTrace__fillInStackTrace__jl_Throwable($thiz) {
+  return ($m_s_util_control_NoStackTrace$().s_util_control_NoStackTrace$__f__noSuppression ? $c_jl_Throwable.prototype.fillInStackTrace__jl_Throwable.call($thiz) : $as_jl_Throwable($thiz));
+}
+/** @constructor */
+function $c_s_util_control_NoStackTrace$() {
+  this.s_util_control_NoStackTrace$__f__noSuppression = false;
+  this.s_util_control_NoStackTrace$__f__noSuppression = false;
+}
+$c_s_util_control_NoStackTrace$.prototype = new $h_O();
+$c_s_util_control_NoStackTrace$.prototype.constructor = $c_s_util_control_NoStackTrace$;
+/** @constructor */
+function $h_s_util_control_NoStackTrace$() {
+}
+$h_s_util_control_NoStackTrace$.prototype = $c_s_util_control_NoStackTrace$.prototype;
+var $d_s_util_control_NoStackTrace$ = new $TypeData().initClass($c_s_util_control_NoStackTrace$, "scala.util.control.NoStackTrace$", ({
+  s_util_control_NoStackTrace$: 1
+}));
+var $n_s_util_control_NoStackTrace$;
+function $m_s_util_control_NoStackTrace$() {
+  if ((!$n_s_util_control_NoStackTrace$)) {
+    $n_s_util_control_NoStackTrace$ = new $c_s_util_control_NoStackTrace$();
+  }
+  return $n_s_util_control_NoStackTrace$;
 }
 /** @constructor */
 function $c_s_util_control_NonFatal$() {
@@ -14616,8 +15183,24 @@ function $m_jl_String$() {
   }
   return $n_jl_String$;
 }
+/** @constructor */
+function $c_jl_Thread(dummy) {
+}
+$c_jl_Thread.prototype = new $h_O();
+$c_jl_Thread.prototype.constructor = $c_jl_Thread;
+/** @constructor */
+function $h_jl_Thread() {
+}
+$h_jl_Thread.prototype = $c_jl_Thread.prototype;
+$c_jl_Thread.prototype.run__V = (function() {
+});
+var $d_jl_Thread = new $TypeData().initClass($c_jl_Thread, "java.lang.Thread", ({
+  jl_Thread: 1,
+  jl_Runnable: 1
+}));
 function $ct_jl_Throwable__T__jl_Throwable__Z__Z__($thiz, s, e, enableSuppression, writableStackTrace) {
   $thiz.jl_Throwable__f_s = s;
+  $thiz.jl_Throwable__f_e = e;
   $thiz.jl_Throwable__f_writableStackTrace = writableStackTrace;
   if (writableStackTrace) {
     $thiz.fillInStackTrace__jl_Throwable();
@@ -14628,11 +15211,13 @@ class $c_jl_Throwable extends Error {
   constructor() {
     super();
     this.jl_Throwable__f_s = null;
+    this.jl_Throwable__f_e = null;
     this.jl_Throwable__f_writableStackTrace = false;
     this.jl_Throwable__f_jsErrorForStackTrace = null;
     this.jl_Throwable__f_stackTrace = null;
   }
   initCause__jl_Throwable__jl_Throwable(cause) {
+    this.jl_Throwable__f_e = cause;
     return this;
   }
   getMessage__T() {
@@ -14653,6 +15238,77 @@ class $c_jl_Throwable extends Error {
       }
     }
     return this.jl_Throwable__f_stackTrace;
+  }
+  printStackTrace__Ljava_io_PrintStream__V(s) {
+    this.getStackTrace__Ajl_StackTraceElement();
+    var t = this.toString__T();
+    $n(s).println__T__V(t);
+    if (($n(this.jl_Throwable__f_stackTrace).u.length !== 0)) {
+      var i = 0;
+      while ((i < $n(this.jl_Throwable__f_stackTrace).u.length)) {
+        var t$1 = ("  at " + $n(this.jl_Throwable__f_stackTrace).get(i));
+        $n(s).println__T__V(t$1);
+        i = ((1 + i) | 0);
+      }
+    } else {
+      $n(s).println__T__V("  <no stack trace available>");
+    }
+    var wCause = this;
+    while (true) {
+      var $x_3 = wCause;
+      var this$1 = $n(wCause);
+      if (($x_3 !== this$1.jl_Throwable__f_e)) {
+        var this$2 = $n(wCause);
+        var $x_2 = (this$2.jl_Throwable__f_e !== null);
+      } else {
+        var $x_2 = false;
+      }
+      if ($x_2) {
+        var parentTrace = $n(wCause).getStackTrace__Ajl_StackTraceElement();
+        var this$3 = $n(wCause);
+        wCause = this$3.jl_Throwable__f_e;
+        var thisTrace = $n(wCause).getStackTrace__Ajl_StackTraceElement();
+        var thisLength = $n(thisTrace).u.length;
+        var parentLength = $n(parentTrace).u.length;
+        var t$2 = ("Caused by: " + wCause);
+        $n(s).println__T__V(t$2);
+        if ((thisLength !== 0)) {
+          var sameFrameCount = 0;
+          while (true) {
+            if (((sameFrameCount < thisLength) && (sameFrameCount < parentLength))) {
+              var x = $n(thisTrace).get(((((thisLength - sameFrameCount) | 0) - 1) | 0));
+              var x$2 = $n(parentTrace).get(((((parentLength - sameFrameCount) | 0) - 1) | 0));
+              var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+            } else {
+              var $x_1 = false;
+            }
+            if ($x_1) {
+              sameFrameCount = ((1 + sameFrameCount) | 0);
+            } else {
+              break;
+            }
+          }
+          if ((sameFrameCount > 0)) {
+            sameFrameCount = ((sameFrameCount - 1) | 0);
+          }
+          var lengthToPrint = ((thisLength - sameFrameCount) | 0);
+          var i$2 = 0;
+          while ((i$2 < lengthToPrint)) {
+            var t$3 = ("  at " + $n(thisTrace).get(i$2));
+            $n(s).println__T__V(t$3);
+            i$2 = ((1 + i$2) | 0);
+          }
+          if ((sameFrameCount > 0)) {
+            var t$4 = (("  ... " + sameFrameCount) + " more");
+            $n(s).println__T__V(t$4);
+          }
+        } else {
+          $n(s).println__T__V("  <no stack trace available>");
+        }
+      } else {
+        break;
+      }
+    }
   }
   toString__T() {
     var className = $objectClassName(this);
@@ -14728,6 +15384,32 @@ function $m_ju_Formatter$RootLocaleInfo$() {
   }
   return $n_ju_Formatter$RootLocaleInfo$;
 }
+function $ct_ju_concurrent_atomic_AtomicReference__O__($thiz, value) {
+  $thiz.ju_concurrent_atomic_AtomicReference__f_value = value;
+  return $thiz;
+}
+/** @constructor */
+function $c_ju_concurrent_atomic_AtomicReference() {
+  this.ju_concurrent_atomic_AtomicReference__f_value = null;
+}
+$c_ju_concurrent_atomic_AtomicReference.prototype = new $h_O();
+$c_ju_concurrent_atomic_AtomicReference.prototype.constructor = $c_ju_concurrent_atomic_AtomicReference;
+/** @constructor */
+function $h_ju_concurrent_atomic_AtomicReference() {
+}
+$h_ju_concurrent_atomic_AtomicReference.prototype = $c_ju_concurrent_atomic_AtomicReference.prototype;
+$c_ju_concurrent_atomic_AtomicReference.prototype.compareAndSet__O__O__Z = (function(expect, update) {
+  if (Object.is(expect, this.ju_concurrent_atomic_AtomicReference__f_value)) {
+    this.ju_concurrent_atomic_AtomicReference__f_value = update;
+    return true;
+  } else {
+    return false;
+  }
+});
+$c_ju_concurrent_atomic_AtomicReference.prototype.toString__T = (function() {
+  var obj = this.ju_concurrent_atomic_AtomicReference__f_value;
+  return ("" + obj);
+});
 /** @constructor */
 function $c_ju_internal_GenericArrayOps$ReusableAnyRefArrayOps$() {
 }
@@ -15277,7 +15959,7 @@ $c_sci_Range$.prototype.scala$collection$immutable$Range$$fail__I__I__I__Z__E = 
   throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), ($p_sci_Range$__description__I__I__I__Z__T(this, start, end, step, isInclusive) + ": seqs cannot contain more than Int.MaxValue elements."));
 });
 $c_sci_Range$.prototype.scala$collection$immutable$Range$$emptyRangeError__T__jl_Throwable = (function(what) {
-  return new $c_ju_NoSuchElementException((what + " on empty Range"));
+  return $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), (what + " on empty Range"));
 });
 var $d_sci_Range$ = new $TypeData().initClass($c_sci_Range$, "scala.collection.immutable.Range$", ({
   sci_Range$: 1,
@@ -15319,6 +16001,91 @@ function $f_scm_Growable__addAll__sc_IterableOnce__scm_Growable($thiz, elems) {
   }
   return $thiz;
 }
+function $f_s_concurrent_BatchingExecutor__submitSyncBatched__jl_Runnable__V($thiz, runnable) {
+  $n(runnable);
+  var tl = $thiz.s_concurrent_ExecutionContext$parasitic$__f_scala$concurrent$BatchingExecutor$$_tasksLocal;
+  var b = $n(tl).get__O();
+  if ((b instanceof $c_s_concurrent_BatchingExecutor$SyncBatch)) {
+    $n($as_s_concurrent_BatchingExecutor$SyncBatch(b)).push__jl_Runnable__V(runnable);
+  } else {
+    if ((b !== null)) {
+      var this$1 = $n($as_jl_Integer(b));
+      var i = this$1;
+    } else {
+      var i = 0;
+    }
+    if ((i < 16)) {
+      var $x_1 = $n(tl);
+      var i$1 = ((1 + i) | 0);
+      $x_1.set__O__V(i$1);
+      try {
+        $n(runnable).run__V();
+      } catch (e) {
+        var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+        if (false) {
+          var ie = $as_jl_InterruptedException(e$2);
+          $n($m_s_concurrent_ExecutionContext$().s_concurrent_ExecutionContext$__f_defaultReporter).apply__O__O(ie);
+        } else {
+          matchResult3: {
+            if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+              $n($m_s_concurrent_ExecutionContext$().s_concurrent_ExecutionContext$__f_defaultReporter).apply__O__O(e$2);
+              break matchResult3;
+            }
+            throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+          }
+        }
+      } finally {
+        $n(tl).set__O__V(b);
+      }
+    } else {
+      var batch = new $c_s_concurrent_BatchingExecutor$SyncBatch($thiz, runnable);
+      $n(tl).set__O__V(batch);
+      batch.run__V();
+      $n(tl).set__O__V(b);
+    }
+  }
+}
+function $is_s_concurrent_Future(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.s_concurrent_Future)));
+}
+function $as_s_concurrent_Future(obj) {
+  return (($is_s_concurrent_Future(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.Future"));
+}
+function $isArrayOf_s_concurrent_Future(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_Future)));
+}
+function $asArrayOf_s_concurrent_Future(obj, depth) {
+  return (($isArrayOf_s_concurrent_Future(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.Future;", depth));
+}
+/** @constructor */
+function $c_s_concurrent_impl_Promise$ManyCallbacks(first, rest) {
+  this.s_concurrent_impl_Promise$ManyCallbacks__f_first = null;
+  this.s_concurrent_impl_Promise$ManyCallbacks__f_rest = null;
+  this.s_concurrent_impl_Promise$ManyCallbacks__f_first = first;
+  this.s_concurrent_impl_Promise$ManyCallbacks__f_rest = rest;
+}
+$c_s_concurrent_impl_Promise$ManyCallbacks.prototype = new $h_O();
+$c_s_concurrent_impl_Promise$ManyCallbacks.prototype.constructor = $c_s_concurrent_impl_Promise$ManyCallbacks;
+/** @constructor */
+function $h_s_concurrent_impl_Promise$ManyCallbacks() {
+}
+$h_s_concurrent_impl_Promise$ManyCallbacks.prototype = $c_s_concurrent_impl_Promise$ManyCallbacks.prototype;
+$c_s_concurrent_impl_Promise$ManyCallbacks.prototype.toString__T = (function() {
+  return "ManyCallbacks";
+});
+function $as_s_concurrent_impl_Promise$ManyCallbacks(obj) {
+  return (((obj instanceof $c_s_concurrent_impl_Promise$ManyCallbacks) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.impl.Promise$ManyCallbacks"));
+}
+function $isArrayOf_s_concurrent_impl_Promise$ManyCallbacks(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_impl_Promise$ManyCallbacks)));
+}
+function $asArrayOf_s_concurrent_impl_Promise$ManyCallbacks(obj, depth) {
+  return (($isArrayOf_s_concurrent_impl_Promise$ManyCallbacks(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.impl.Promise$ManyCallbacks;", depth));
+}
+var $d_s_concurrent_impl_Promise$ManyCallbacks = new $TypeData().initClass($c_s_concurrent_impl_Promise$ManyCallbacks, "scala.concurrent.impl.Promise$ManyCallbacks", ({
+  s_concurrent_impl_Promise$ManyCallbacks: 1,
+  s_concurrent_impl_Promise$Callbacks: 1
+}));
 /** @constructor */
 function $c_s_math_Ordering$() {
 }
@@ -16213,6 +16980,15 @@ var $d_jl_Class = new $TypeData().initClass($c_jl_Class, "java.lang.Class", ({
 }));
 class $c_jl_Error extends $c_jl_Throwable {
 }
+function $as_jl_Error(obj) {
+  return (((obj instanceof $c_jl_Error) || (obj === null)) ? obj : $throwClassCastException(obj, "java.lang.Error"));
+}
+function $isArrayOf_jl_Error(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.jl_Error)));
+}
+function $asArrayOf_jl_Error(obj, depth) {
+  return (($isArrayOf_jl_Error(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Ljava.lang.Error;", depth));
+}
 function $ct_jl_Exception__T__($thiz, s) {
   $ct_jl_Throwable__T__jl_Throwable__Z__Z__($thiz, s, null, true, true);
   return $thiz;
@@ -16819,12 +17595,12 @@ $c_sci_BitmapIndexedMapNode.prototype.apply__O__I__I__I__O = (function(key, orig
     if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, y)) {
       return this.getValue__I__O(index);
     } else {
-      throw new $c_ju_NoSuchElementException(("key not found: " + key));
+      throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
     }
   } else if (((this.sci_BitmapIndexedMapNode__f_nodeMap & bitpos) !== 0)) {
     return $n(this.getNode__I__sci_MapNode($m_sci_Node$().indexFrom__I__I__I__I(this.sci_BitmapIndexedMapNode__f_nodeMap, mask, bitpos))).apply__O__I__I__I__O(key, originalHash, keyHash, ((5 + shift) | 0));
   } else {
-    throw new $c_ju_NoSuchElementException(("key not found: " + key));
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
   }
 });
 $c_sci_BitmapIndexedMapNode.prototype.get__O__I__I__I__s_Option = (function(key, originalHash, keyHash, shift) {
@@ -18703,6 +19479,110 @@ function $m_scm_LinkedHashSet$() {
   }
   return $n_scm_LinkedHashSet$;
 }
+/** @constructor */
+function $c_s_concurrent_BatchingExecutor$SyncBatch(outer, runnable) {
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_first = null;
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_other = null;
+  this.s_concurrent_BatchingExecutor$AbstractBatch__f_size = 0;
+  this.s_concurrent_BatchingExecutor$SyncBatch__f_$outer = null;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.s_concurrent_BatchingExecutor$SyncBatch__f_$outer = outer;
+  $ct_s_concurrent_BatchingExecutor$AbstractBatch__jl_Runnable__Ajl_Runnable__I__(this, runnable, $m_s_concurrent_BatchingExecutorStatics$().s_concurrent_BatchingExecutorStatics$__f_emptyBatchArray, 1);
+}
+$c_s_concurrent_BatchingExecutor$SyncBatch.prototype = new $h_s_concurrent_BatchingExecutor$AbstractBatch();
+$c_s_concurrent_BatchingExecutor$SyncBatch.prototype.constructor = $c_s_concurrent_BatchingExecutor$SyncBatch;
+/** @constructor */
+function $h_s_concurrent_BatchingExecutor$SyncBatch() {
+}
+$h_s_concurrent_BatchingExecutor$SyncBatch.prototype = $c_s_concurrent_BatchingExecutor$SyncBatch.prototype;
+$c_s_concurrent_BatchingExecutor$SyncBatch.prototype.run__V = (function() {
+  while (true) {
+    try {
+      this.runN__I__V(1024);
+    } catch (e) {
+      var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+      if (false) {
+        var ie = $as_jl_InterruptedException(e$2);
+        $n(this.s_concurrent_BatchingExecutor$SyncBatch__f_$outer);
+        $n($m_s_concurrent_ExecutionContext$().s_concurrent_ExecutionContext$__f_defaultReporter).apply__O__O(ie);
+      } else {
+        matchResult2: {
+          if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+            $n(this.s_concurrent_BatchingExecutor$SyncBatch__f_$outer);
+            $n($m_s_concurrent_ExecutionContext$().s_concurrent_ExecutionContext$__f_defaultReporter).apply__O__O(e$2);
+            break matchResult2;
+          }
+          throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+        }
+      }
+    }
+    if ((this.s_concurrent_BatchingExecutor$AbstractBatch__f_size > 0)) {
+    } else {
+      return (void 0);
+    }
+  }
+});
+function $as_s_concurrent_BatchingExecutor$SyncBatch(obj) {
+  return (((obj instanceof $c_s_concurrent_BatchingExecutor$SyncBatch) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.BatchingExecutor$SyncBatch"));
+}
+function $isArrayOf_s_concurrent_BatchingExecutor$SyncBatch(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_BatchingExecutor$SyncBatch)));
+}
+function $asArrayOf_s_concurrent_BatchingExecutor$SyncBatch(obj, depth) {
+  return (($isArrayOf_s_concurrent_BatchingExecutor$SyncBatch(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.BatchingExecutor$SyncBatch;", depth));
+}
+var $d_s_concurrent_BatchingExecutor$SyncBatch = new $TypeData().initClass($c_s_concurrent_BatchingExecutor$SyncBatch, "scala.concurrent.BatchingExecutor$SyncBatch", ({
+  s_concurrent_BatchingExecutor$SyncBatch: 1,
+  s_concurrent_BatchingExecutor$AbstractBatch: 1,
+  jl_Runnable: 1
+}));
+/** @constructor */
+function $c_s_concurrent_impl_Promise$Link(to) {
+  this.ju_concurrent_atomic_AtomicReference__f_value = null;
+  $ct_ju_concurrent_atomic_AtomicReference__O__(this, to);
+}
+$c_s_concurrent_impl_Promise$Link.prototype = new $h_ju_concurrent_atomic_AtomicReference();
+$c_s_concurrent_impl_Promise$Link.prototype.constructor = $c_s_concurrent_impl_Promise$Link;
+/** @constructor */
+function $h_s_concurrent_impl_Promise$Link() {
+}
+$h_s_concurrent_impl_Promise$Link.prototype = $c_s_concurrent_impl_Promise$Link.prototype;
+$c_s_concurrent_impl_Promise$Link.prototype.promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise = (function(owner) {
+  var c = $as_s_concurrent_impl_Promise$DefaultPromise(this.ju_concurrent_atomic_AtomicReference__f_value);
+  var target$tailLocal1 = c;
+  var current$tailLocal1 = c;
+  while (true) {
+    var value = $n(target$tailLocal1).ju_concurrent_atomic_AtomicReference__f_value;
+    if ($is_s_concurrent_impl_Promise$Callbacks(value)) {
+      if (this.compareAndSet__O__O__Z(current$tailLocal1, target$tailLocal1)) {
+        return target$tailLocal1;
+      } else {
+        current$tailLocal1 = $as_s_concurrent_impl_Promise$DefaultPromise(this.ju_concurrent_atomic_AtomicReference__f_value);
+      }
+    } else if ((value instanceof $c_s_concurrent_impl_Promise$Link)) {
+      target$tailLocal1 = $as_s_concurrent_impl_Promise$DefaultPromise($n($as_s_concurrent_impl_Promise$Link(value)).ju_concurrent_atomic_AtomicReference__f_value);
+    } else {
+      $n(owner).unlink__s_util_Try__V($as_s_util_Try(value));
+      return owner;
+    }
+  }
+});
+function $as_s_concurrent_impl_Promise$Link(obj) {
+  return (((obj instanceof $c_s_concurrent_impl_Promise$Link) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.impl.Promise$Link"));
+}
+function $isArrayOf_s_concurrent_impl_Promise$Link(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_impl_Promise$Link)));
+}
+function $asArrayOf_s_concurrent_impl_Promise$Link(obj, depth) {
+  return (($isArrayOf_s_concurrent_impl_Promise$Link(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.impl.Promise$Link;", depth));
+}
+var $d_s_concurrent_impl_Promise$Link = new $TypeData().initClass($c_s_concurrent_impl_Promise$Link, "scala.concurrent.impl.Promise$Link", ({
+  s_concurrent_impl_Promise$Link: 1,
+  ju_concurrent_atomic_AtomicReference: 1,
+  Ljava_io_Serializable: 1
+}));
 function $as_s_math_ScalaNumber(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.math.ScalaNumber"));
 }
@@ -18817,6 +19697,9 @@ $c_sjs_js_Any$.prototype.constructor = $c_sjs_js_Any$;
 function $h_sjs_js_Any$() {
 }
 $h_sjs_js_Any$.prototype = $c_sjs_js_Any$.prototype;
+$c_sjs_js_Any$.prototype.fromFunction0__F0__sjs_js_Function0 = (function(f) {
+  return (() => $n(f).apply__O());
+});
 $c_sjs_js_Any$.prototype.fromFunction1__F1__sjs_js_Function1 = (function(f) {
   return ((arg1$2) => $n(f).apply__O__O(arg1$2));
 });
@@ -20347,6 +21230,18 @@ var $d_ju_Formatter = new $TypeData().initClass($c_ju_Formatter, "java.util.Form
   Ljava_io_Closeable: 1,
   jl_AutoCloseable: 1,
   Ljava_io_Flushable: 1
+}));
+class $c_ju_concurrent_ExecutionException extends $c_jl_Exception {
+  constructor(message, cause) {
+    super();
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, message, cause, true, true);
+  }
+}
+var $d_ju_concurrent_ExecutionException = new $TypeData().initClass($c_ju_concurrent_ExecutionException, "java.util.concurrent.ExecutionException", ({
+  ju_concurrent_ExecutionException: 1,
+  jl_Exception: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1
 }));
 /** @constructor */
 function $c_ju_internal_GenericArrayOps$ByteArrayOps$() {
@@ -22230,9 +23125,94 @@ function $m_scm_Map$() {
   }
   return $n_scm_Map$;
 }
+class $c_s_concurrent_Future$$anon$4 extends $c_jl_Throwable {
+  constructor() {
+    super();
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, null, null, true, true);
+  }
+  fillInStackTrace__jl_Throwable() {
+    return $f_s_util_control_NoStackTrace__fillInStackTrace__jl_Throwable(this);
+  }
+}
+var $d_s_concurrent_Future$$anon$4 = new $TypeData().initClass($c_s_concurrent_Future$$anon$4, "scala.concurrent.Future$$anon$4", ({
+  s_concurrent_Future$$anon$4: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1,
+  s_util_control_NoStackTrace: 1
+}));
 function $f_sr_EnumValue__productElement__I__O($thiz, n) {
   throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
 }
+function $as_sr_NonLocalReturnControl(obj) {
+  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.runtime.NonLocalReturnControl"));
+}
+function $isArrayOf_sr_NonLocalReturnControl(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sr_NonLocalReturnControl)));
+}
+function $asArrayOf_sr_NonLocalReturnControl(obj, depth) {
+  return (($isArrayOf_sr_NonLocalReturnControl(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.runtime.NonLocalReturnControl;", depth));
+}
+/** @constructor */
+function $c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext() {
+  this.sjs_concurrent_QueueExecutionContext$PromisesExecutionContext__f_resolvedUnitPromise = null;
+  this.sjs_concurrent_QueueExecutionContext$PromisesExecutionContext__f_resolvedUnitPromise = Promise.resolve((void 0));
+}
+$c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype = new $h_O();
+$c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype.constructor = $c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext;
+/** @constructor */
+function $h_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext() {
+}
+$h_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype = $c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype;
+$c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype.execute__jl_Runnable__V = (function(runnable) {
+  this.sjs_concurrent_QueueExecutionContext$PromisesExecutionContext__f_resolvedUnitPromise.then(((arg1$2) => {
+    $as_jl_Void(arg1$2);
+    try {
+      $n(runnable).run__V();
+    } catch (e) {
+      var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+      e$2.printStackTrace__Ljava_io_PrintStream__V($m_jl_System$Streams$().jl_System$Streams$__f_err);
+    }
+  }));
+});
+$c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext.prototype.reportFailure__jl_Throwable__V = (function(t) {
+  var this$1 = $n(t);
+  this$1.printStackTrace__Ljava_io_PrintStream__V($m_jl_System$Streams$().jl_System$Streams$__f_err);
+});
+var $d_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext = new $TypeData().initClass($c_sjs_concurrent_QueueExecutionContext$PromisesExecutionContext, "scala.scalajs.concurrent.QueueExecutionContext$PromisesExecutionContext", ({
+  sjs_concurrent_QueueExecutionContext$PromisesExecutionContext: 1,
+  s_concurrent_ExecutionContextExecutor: 1,
+  s_concurrent_ExecutionContext: 1,
+  ju_concurrent_Executor: 1
+}));
+/** @constructor */
+function $c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext() {
+}
+$c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype = new $h_O();
+$c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype.constructor = $c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext;
+/** @constructor */
+function $h_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext() {
+}
+$h_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype = $c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype;
+$c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype.execute__jl_Runnable__V = (function(runnable) {
+  setTimeout($m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => {
+    try {
+      $n(runnable).run__V();
+    } catch (e) {
+      var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+      e$2.printStackTrace__Ljava_io_PrintStream__V($m_jl_System$Streams$().jl_System$Streams$__f_err);
+    }
+  }))), 0);
+});
+$c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext.prototype.reportFailure__jl_Throwable__V = (function(t) {
+  var this$1 = $n(t);
+  this$1.printStackTrace__Ljava_io_PrintStream__V($m_jl_System$Streams$().jl_System$Streams$__f_err);
+});
+var $d_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext = new $TypeData().initClass($c_sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext, "scala.scalajs.concurrent.QueueExecutionContext$TimeoutsExecutionContext", ({
+  sjs_concurrent_QueueExecutionContext$TimeoutsExecutionContext: 1,
+  s_concurrent_ExecutionContextExecutor: 1,
+  s_concurrent_ExecutionContext: 1,
+  ju_concurrent_Executor: 1
+}));
 /** @constructor */
 function $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d(f) {
   this.sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d__f_f = null;
@@ -22766,7 +23746,7 @@ function $f_Lcom_raquo_laminar_nodes_ReactiveElement__addEventListener__Lcom_raq
     var x$1 = $thiz.Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_com$raquo$laminar$nodes$ReactiveElement$$maybeEventListeners;
     if ((x$1 === (void 0))) {
       var $x_1;
-      throw new $c_ju_NoSuchElementException("undefined.get");
+      throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "undefined.get");
     } else {
       var $x_1 = x$1;
     }
@@ -22775,7 +23755,7 @@ function $f_Lcom_raquo_laminar_nodes_ReactiveElement__addEventListener__Lcom_raq
     var x$2 = $thiz.Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_com$raquo$laminar$nodes$ReactiveElement$$maybeEventListeners;
     if ((x$2 === (void 0))) {
       var $x_2;
-      throw new $c_ju_NoSuchElementException("undefined.get");
+      throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "undefined.get");
     } else {
       var $x_2 = x$2;
     }
@@ -23482,6 +24462,19 @@ var $d_jl_Short = new $TypeData().initClass(0, "java.lang.Short", ({
   jl_Comparable: 1,
   jl_constant_Constable: 1
 }), ((x) => $isShort(x)));
+class $c_jl_StackOverflowError extends $c_jl_VirtualMachineError {
+  constructor(s) {
+    super();
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, s, null, true, true);
+  }
+}
+var $d_jl_StackOverflowError = new $TypeData().initClass($c_jl_StackOverflowError, "java.lang.StackOverflowError", ({
+  jl_StackOverflowError: 1,
+  jl_VirtualMachineError: 1,
+  jl_Error: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1
+}));
 class $c_jl_UnsupportedOperationException extends $c_jl_RuntimeException {
   constructor(s) {
     super();
@@ -23508,11 +24501,11 @@ var $d_ju_ConcurrentModificationException = new $TypeData().initClass($c_ju_Conc
   jl_Throwable: 1,
   Ljava_io_Serializable: 1
 }));
+function $ct_ju_NoSuchElementException__T__($thiz, s) {
+  $ct_jl_Throwable__T__jl_Throwable__Z__Z__($thiz, s, null, true, true);
+  return $thiz;
+}
 class $c_ju_NoSuchElementException extends $c_jl_RuntimeException {
-  constructor(s) {
-    super();
-    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, s, null, true, true);
-  }
 }
 var $d_ju_NoSuchElementException = new $TypeData().initClass($c_ju_NoSuchElementException, "java.util.NoSuchElementException", ({
   ju_NoSuchElementException: 1,
@@ -24061,7 +25054,7 @@ function $f_sc_IndexedSeqOps__head__O($thiz) {
     } else {
       var $x_1 = $thiz.toString__T();
     }
-    throw new $c_ju_NoSuchElementException(("head of empty " + $x_1));
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("head of empty " + $x_1));
   }
 }
 function $f_sc_IndexedSeqOps__headOption__s_Option($thiz) {
@@ -24193,7 +25186,7 @@ $c_sc_Iterator$$anon$19.prototype.hasNext__Z = (function() {
   return false;
 });
 $c_sc_Iterator$$anon$19.prototype.next__E = (function() {
-  throw new $c_ju_NoSuchElementException("next on empty iterator");
+  throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "next on empty iterator");
 });
 $c_sc_Iterator$$anon$19.prototype.knownSize__I = (function() {
   return 0;
@@ -27534,6 +28527,38 @@ function $m_scm_Queue$() {
   }
   return $n_scm_Queue$;
 }
+/** @constructor */
+function $c_s_concurrent_ExecutionContext$parasitic$() {
+  this.s_concurrent_ExecutionContext$parasitic$__f_scala$concurrent$BatchingExecutor$$_tasksLocal = null;
+  $n_s_concurrent_ExecutionContext$parasitic$ = this;
+  this.s_concurrent_ExecutionContext$parasitic$__f_scala$concurrent$BatchingExecutor$$_tasksLocal = new $c_jl_ThreadLocal();
+}
+$c_s_concurrent_ExecutionContext$parasitic$.prototype = new $h_O();
+$c_s_concurrent_ExecutionContext$parasitic$.prototype.constructor = $c_s_concurrent_ExecutionContext$parasitic$;
+/** @constructor */
+function $h_s_concurrent_ExecutionContext$parasitic$() {
+}
+$h_s_concurrent_ExecutionContext$parasitic$.prototype = $c_s_concurrent_ExecutionContext$parasitic$.prototype;
+$c_s_concurrent_ExecutionContext$parasitic$.prototype.execute__jl_Runnable__V = (function(runnable) {
+  $f_s_concurrent_BatchingExecutor__submitSyncBatched__jl_Runnable__V(this, runnable);
+});
+$c_s_concurrent_ExecutionContext$parasitic$.prototype.reportFailure__jl_Throwable__V = (function(t) {
+  $n($m_s_concurrent_ExecutionContext$().s_concurrent_ExecutionContext$__f_defaultReporter).apply__O__O(t);
+});
+var $d_s_concurrent_ExecutionContext$parasitic$ = new $TypeData().initClass($c_s_concurrent_ExecutionContext$parasitic$, "scala.concurrent.ExecutionContext$parasitic$", ({
+  s_concurrent_ExecutionContext$parasitic$: 1,
+  s_concurrent_ExecutionContext: 1,
+  ju_concurrent_Executor: 1,
+  s_concurrent_ExecutionContextExecutor: 1,
+  s_concurrent_BatchingExecutor: 1
+}));
+var $n_s_concurrent_ExecutionContext$parasitic$;
+function $m_s_concurrent_ExecutionContext$parasitic$() {
+  if ((!$n_s_concurrent_ExecutionContext$parasitic$)) {
+    $n_s_concurrent_ExecutionContext$parasitic$ = new $c_s_concurrent_ExecutionContext$parasitic$();
+  }
+  return $n_s_concurrent_ExecutionContext$parasitic$;
+}
 function $f_s_math_Ordering__gteq__O__O__Z($thiz, x, y) {
   return ($thiz.compare__O__O__I(x, y) >= 0);
 }
@@ -29303,7 +30328,7 @@ $c_s_None$.prototype.productElement__I__O = (function(n) {
   throw $ct_jl_IndexOutOfBoundsException__I__(new $c_jl_IndexOutOfBoundsException(), n);
 });
 $c_s_None$.prototype.get__E = (function() {
-  throw new $c_ju_NoSuchElementException("None.get");
+  throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "None.get");
 });
 $c_s_None$.prototype.get__O = (function() {
   this.get__E();
@@ -29744,7 +30769,7 @@ function $f_sc_MapOps__foreachEntry__F2__V($thiz, f) {
   }
 }
 function $f_sc_MapOps__default__O__O($thiz, key) {
-  throw new $c_ju_NoSuchElementException(("key not found: " + key));
+  throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
 }
 function $f_sc_MapOps__addString__scm_StringBuilder__T__T__T__scm_StringBuilder($thiz, sb, start, sep, end) {
   var this$2 = $n($thiz.iterator__sc_Iterator());
@@ -31149,6 +32174,10 @@ $c_Ljava_io_PrintStream.prototype.constructor = $c_Ljava_io_PrintStream;
 function $h_Ljava_io_PrintStream() {
 }
 $h_Ljava_io_PrintStream.prototype = $c_Ljava_io_PrintStream.prototype;
+$c_Ljava_io_PrintStream.prototype.println__T__V = (function(s) {
+  this.print__T__V(s);
+  this.java$lang$JSConsoleBasedPrintStream$$printString__T__V("\n");
+});
 $c_Ljava_io_PrintStream.prototype.append__jl_CharSequence__Ljava_io_PrintStream = (function(csq) {
   this.print__T__V(((csq === null) ? "null" : $dp_toString__T($n(csq))));
   return this;
@@ -31682,6 +32711,282 @@ var $d_scm_CheckedIndexedSeqView$CheckedIterator = new $TypeData().initClass($c_
   sc_IterableOnceOps: 1,
   sc_Iterator: 1,
   Ljava_io_Serializable: 1
+}));
+class $c_s_concurrent_Future$$anon$1 extends $c_ju_NoSuchElementException {
+  constructor(t$2) {
+    super();
+    var s = ("Future.collect partial function is not defined at: " + t$2);
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, s, null, true, true);
+  }
+  fillInStackTrace__jl_Throwable() {
+    return $f_s_util_control_NoStackTrace__fillInStackTrace__jl_Throwable(this);
+  }
+}
+var $d_s_concurrent_Future$$anon$1 = new $TypeData().initClass($c_s_concurrent_Future$$anon$1, "scala.concurrent.Future$$anon$1", ({
+  s_concurrent_Future$$anon$1: 1,
+  ju_NoSuchElementException: 1,
+  jl_RuntimeException: 1,
+  jl_Exception: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1,
+  s_util_control_NoStackTrace: 1
+}));
+class $c_s_concurrent_Future$$anon$2 extends $c_ju_NoSuchElementException {
+  constructor() {
+    super();
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, "Future.filter predicate is not satisfied", null, true, true);
+  }
+  fillInStackTrace__jl_Throwable() {
+    return $f_s_util_control_NoStackTrace__fillInStackTrace__jl_Throwable(this);
+  }
+}
+var $d_s_concurrent_Future$$anon$2 = new $TypeData().initClass($c_s_concurrent_Future$$anon$2, "scala.concurrent.Future$$anon$2", ({
+  s_concurrent_Future$$anon$2: 1,
+  ju_NoSuchElementException: 1,
+  jl_RuntimeException: 1,
+  jl_Exception: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1,
+  s_util_control_NoStackTrace: 1
+}));
+class $c_s_concurrent_Future$$anon$3 extends $c_ju_NoSuchElementException {
+  constructor() {
+    super();
+    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, "Future.failed not completed with a throwable.", null, true, true);
+  }
+  fillInStackTrace__jl_Throwable() {
+    return $f_s_util_control_NoStackTrace__fillInStackTrace__jl_Throwable(this);
+  }
+}
+var $d_s_concurrent_Future$$anon$3 = new $TypeData().initClass($c_s_concurrent_Future$$anon$3, "scala.concurrent.Future$$anon$3", ({
+  s_concurrent_Future$$anon$3: 1,
+  ju_NoSuchElementException: 1,
+  jl_RuntimeException: 1,
+  jl_Exception: 1,
+  jl_Throwable: 1,
+  Ljava_io_Serializable: 1,
+  s_util_control_NoStackTrace: 1
+}));
+function $ct_s_concurrent_impl_Promise$DefaultPromise__O__($thiz, initial) {
+  $ct_ju_concurrent_atomic_AtomicReference__O__($thiz, initial);
+  return $thiz;
+}
+function $ct_s_concurrent_impl_Promise$DefaultPromise__s_util_Try__($thiz, result) {
+  $ct_s_concurrent_impl_Promise$DefaultPromise__O__($thiz, $m_s_concurrent_impl_Promise$().scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try(result));
+  return $thiz;
+}
+function $ct_s_concurrent_impl_Promise$DefaultPromise__($thiz) {
+  $ct_s_concurrent_impl_Promise$DefaultPromise__O__($thiz, $m_s_concurrent_impl_Promise$().s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop);
+  return $thiz;
+}
+function $p_s_concurrent_impl_Promise$DefaultPromise__value0__s_util_Try($thiz) {
+  var \u03b4this$tailLocal2 = $thiz;
+  while (true) {
+    var state = $n(\u03b4this$tailLocal2).ju_concurrent_atomic_AtomicReference__f_value;
+    if ((state instanceof $c_s_util_Try)) {
+      return $as_s_util_Try(state);
+    } else if ((state instanceof $c_s_concurrent_impl_Promise$Link)) {
+      \u03b4this$tailLocal2 = $n($as_s_concurrent_impl_Promise$Link(state)).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal2);
+    } else {
+      return null;
+    }
+  }
+}
+function $p_s_concurrent_impl_Promise$DefaultPromise__dispatchOrAddCallbacks__O__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks($thiz, state, callbacks) {
+  var \u03b4this$tailLocal4 = $thiz;
+  var state$tailLocal2 = state;
+  while (true) {
+    if ((state$tailLocal2 instanceof $c_s_util_Try)) {
+      $p_s_concurrent_impl_Promise$DefaultPromise__submitWithValue__s_concurrent_impl_Promise$Callbacks__s_util_Try__V($n(\u03b4this$tailLocal4), callbacks, $as_s_util_Try(state$tailLocal2));
+      return callbacks;
+    } else if ($is_s_concurrent_impl_Promise$Callbacks(state$tailLocal2)) {
+      if ($n(\u03b4this$tailLocal4).compareAndSet__O__O__Z(state$tailLocal2, ((state$tailLocal2 !== $m_s_concurrent_impl_Promise$().s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop) ? $p_s_concurrent_impl_Promise$DefaultPromise__concatCallbacks__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks($n(\u03b4this$tailLocal4), callbacks, $as_s_concurrent_impl_Promise$Callbacks(state$tailLocal2)) : callbacks))) {
+        return callbacks;
+      } else {
+        state$tailLocal2 = $n(\u03b4this$tailLocal4).ju_concurrent_atomic_AtomicReference__f_value;
+      }
+    } else {
+      var p = $n($as_s_concurrent_impl_Promise$Link(state$tailLocal2)).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal4);
+      var state$tailLocal2$tmp1 = $n(p).ju_concurrent_atomic_AtomicReference__f_value;
+      \u03b4this$tailLocal4 = p;
+      state$tailLocal2 = state$tailLocal2$tmp1;
+    }
+  }
+}
+function $p_s_concurrent_impl_Promise$DefaultPromise__concatCallbacks__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks($thiz, left, right) {
+  var right$tailLocal1 = right;
+  var left$tailLocal1 = left;
+  while (true) {
+    if ((left$tailLocal1 instanceof $c_s_concurrent_impl_Promise$Transformation)) {
+      return new $c_s_concurrent_impl_Promise$ManyCallbacks($as_s_concurrent_impl_Promise$Transformation(left$tailLocal1), right$tailLocal1);
+    } else {
+      var m = $as_s_concurrent_impl_Promise$ManyCallbacks(left$tailLocal1);
+      var left$tailLocal1$tmp1 = $n(m).s_concurrent_impl_Promise$ManyCallbacks__f_rest;
+      var right$tailLocal1$tmp1 = new $c_s_concurrent_impl_Promise$ManyCallbacks($n(m).s_concurrent_impl_Promise$ManyCallbacks__f_first, right$tailLocal1);
+      left$tailLocal1 = left$tailLocal1$tmp1;
+      right$tailLocal1 = right$tailLocal1$tmp1;
+    }
+  }
+}
+function $p_s_concurrent_impl_Promise$DefaultPromise__submitWithValue__s_concurrent_impl_Promise$Callbacks__s_util_Try__V($thiz, callbacks, resolved) {
+  var callbacks$tailLocal1 = callbacks;
+  while (true) {
+    if ((callbacks$tailLocal1 instanceof $c_s_concurrent_impl_Promise$ManyCallbacks)) {
+      var m = $as_s_concurrent_impl_Promise$ManyCallbacks(callbacks$tailLocal1);
+      $n($n(m).s_concurrent_impl_Promise$ManyCallbacks__f_first).submitWithValue__s_util_Try__s_concurrent_impl_Promise$Transformation(resolved);
+      callbacks$tailLocal1 = $n(m).s_concurrent_impl_Promise$ManyCallbacks__f_rest;
+    } else {
+      $n($as_s_concurrent_impl_Promise$Transformation(callbacks$tailLocal1)).submitWithValue__s_util_Try__s_concurrent_impl_Promise$Transformation(resolved);
+      return (void 0);
+    }
+  }
+}
+/** @constructor */
+function $c_s_concurrent_impl_Promise$DefaultPromise() {
+  this.ju_concurrent_atomic_AtomicReference__f_value = null;
+}
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype = new $h_ju_concurrent_atomic_AtomicReference();
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.constructor = $c_s_concurrent_impl_Promise$DefaultPromise;
+/** @constructor */
+function $h_s_concurrent_impl_Promise$DefaultPromise() {
+}
+$h_s_concurrent_impl_Promise$DefaultPromise.prototype = $c_s_concurrent_impl_Promise$DefaultPromise.prototype;
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.onComplete__F1__s_concurrent_ExecutionContext__V = (function(func, executor) {
+  $p_s_concurrent_impl_Promise$DefaultPromise__dispatchOrAddCallbacks__O__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks(this, this.ju_concurrent_atomic_AtomicReference__f_value, $ct_s_concurrent_impl_Promise$Transformation__I__F1__s_concurrent_ExecutionContext__(new $c_s_concurrent_impl_Promise$Transformation(), 6, func, executor));
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.toString__T = (function() {
+  var \u03b4this$tailLocal1 = this;
+  while (true) {
+    var state = $n(\u03b4this$tailLocal1).ju_concurrent_atomic_AtomicReference__f_value;
+    if ((state instanceof $c_s_util_Try)) {
+      return (("Future(" + state) + ")");
+    } else if ((state instanceof $c_s_concurrent_impl_Promise$Link)) {
+      \u03b4this$tailLocal1 = $n($as_s_concurrent_impl_Promise$Link(state)).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal1);
+    } else {
+      return "Future(<not completed>)";
+    }
+  }
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.tryComplete__s_util_Try__Z = (function(value) {
+  var state = this.ju_concurrent_atomic_AtomicReference__f_value;
+  return ((!(state instanceof $c_s_util_Try)) && this.tryComplete0__O__s_util_Try__Z(state, $m_s_concurrent_impl_Promise$().scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try(value)));
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.tryComplete0__O__s_util_Try__Z = (function(state, resolved) {
+  var \u03b4this$tailLocal3 = this;
+  var state$tailLocal1 = state;
+  while (true) {
+    if ($is_s_concurrent_impl_Promise$Callbacks(state$tailLocal1)) {
+      if ((!$n(\u03b4this$tailLocal3).compareAndSet__O__O__Z(state$tailLocal1, resolved))) {
+        state$tailLocal1 = $n(\u03b4this$tailLocal3).ju_concurrent_atomic_AtomicReference__f_value;
+        continue;
+      }
+      if ((state$tailLocal1 !== $m_s_concurrent_impl_Promise$().s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop)) {
+        $p_s_concurrent_impl_Promise$DefaultPromise__submitWithValue__s_concurrent_impl_Promise$Callbacks__s_util_Try__V($n(\u03b4this$tailLocal3), $as_s_concurrent_impl_Promise$Callbacks(state$tailLocal1), resolved);
+      }
+      return true;
+    } else if ((state$tailLocal1 instanceof $c_s_concurrent_impl_Promise$Link)) {
+      var p = $n($as_s_concurrent_impl_Promise$Link(state$tailLocal1)).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal3);
+      if ((p !== \u03b4this$tailLocal3)) {
+        var state$tailLocal1$tmp1 = $n(p).ju_concurrent_atomic_AtomicReference__f_value;
+        \u03b4this$tailLocal3 = p;
+        state$tailLocal1 = state$tailLocal1$tmp1;
+        continue;
+      }
+      return false;
+    } else {
+      return false;
+    }
+  }
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.completeWith__s_concurrent_Future__s_concurrent_impl_Promise$DefaultPromise = (function(other) {
+  if ((other !== this)) {
+    var state = this.ju_concurrent_atomic_AtomicReference__f_value;
+    if ((!(state instanceof $c_s_util_Try))) {
+      if ((other instanceof $c_s_concurrent_impl_Promise$DefaultPromise)) {
+        var resolved = $p_s_concurrent_impl_Promise$DefaultPromise__value0__s_util_Try($n($as_s_concurrent_impl_Promise$DefaultPromise(other)));
+      } else {
+        var this$1 = $n(other);
+        var this$2 = $n($m_s_Option$().apply__O__s_Option($p_s_concurrent_impl_Promise$DefaultPromise__value0__s_util_Try(this$1)));
+        var resolved = $as_s_util_Try((this$2.isEmpty__Z() ? null : this$2.get__O()));
+      }
+      if ((resolved !== null)) {
+        this.tryComplete0__O__s_util_Try__Z(state, resolved);
+      } else {
+        $n(other).onComplete__F1__s_concurrent_ExecutionContext__V(this, $m_s_concurrent_ExecutionContext$parasitic$());
+      }
+    }
+  }
+  return this;
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.linkRootOf__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$Link__V = (function(target, link) {
+  var \u03b4this$tailLocal5 = this;
+  var link$tailLocal1 = link;
+  var target$tailLocal2 = target;
+  while (true) {
+    if ((\u03b4this$tailLocal5 !== target$tailLocal2)) {
+      var state = $n(\u03b4this$tailLocal5).ju_concurrent_atomic_AtomicReference__f_value;
+      if ((state instanceof $c_s_util_Try)) {
+        if ((!$n(target$tailLocal2).tryComplete0__O__s_util_Try__Z($n(target$tailLocal2).ju_concurrent_atomic_AtomicReference__f_value, $as_s_util_Try(state)))) {
+          throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), "Cannot link completed promises together");
+        } else {
+          return (void 0);
+        }
+      } else if ($is_s_concurrent_impl_Promise$Callbacks(state)) {
+        var l = ((link$tailLocal1 !== null) ? link$tailLocal1 : new $c_s_concurrent_impl_Promise$Link(target$tailLocal2));
+        var p = $n(l).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal5);
+        if (((\u03b4this$tailLocal5 !== p) && $n(\u03b4this$tailLocal5).compareAndSet__O__O__Z(state, l))) {
+          if ((state !== $m_s_concurrent_impl_Promise$().s_concurrent_impl_Promise$__f_scala$concurrent$impl$Promise$$$Noop)) {
+            $p_s_concurrent_impl_Promise$DefaultPromise__dispatchOrAddCallbacks__O__s_concurrent_impl_Promise$Callbacks__s_concurrent_impl_Promise$Callbacks($n(p), $n(p).ju_concurrent_atomic_AtomicReference__f_value, $as_s_concurrent_impl_Promise$Callbacks(state));
+            return (void 0);
+          } else {
+            return (void 0);
+          }
+        } else {
+          target$tailLocal2 = p;
+          link$tailLocal1 = l;
+        }
+      } else {
+        \u03b4this$tailLocal5 = $n($as_s_concurrent_impl_Promise$Link(state)).promise__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$DefaultPromise(\u03b4this$tailLocal5);
+      }
+    } else {
+      return (void 0);
+    }
+  }
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.unlink__s_util_Try__V = (function(resolved) {
+  var \u03b4this$tailLocal6 = this;
+  while (true) {
+    var state = $n(\u03b4this$tailLocal6).ju_concurrent_atomic_AtomicReference__f_value;
+    if ((state instanceof $c_s_concurrent_impl_Promise$Link)) {
+      var next = ($n(\u03b4this$tailLocal6).compareAndSet__O__O__Z(state, resolved) ? $as_s_concurrent_impl_Promise$DefaultPromise($n($as_s_concurrent_impl_Promise$Link(state)).ju_concurrent_atomic_AtomicReference__f_value) : \u03b4this$tailLocal6);
+      \u03b4this$tailLocal6 = next;
+    } else {
+      $n(\u03b4this$tailLocal6).tryComplete0__O__s_util_Try__Z(state, resolved);
+      return (void 0);
+    }
+  }
+});
+$c_s_concurrent_impl_Promise$DefaultPromise.prototype.apply__O__O = (function(v1) {
+  var resolved = $as_s_util_Try(v1);
+  this.tryComplete0__O__s_util_Try__Z(this.ju_concurrent_atomic_AtomicReference__f_value, resolved);
+});
+function $as_s_concurrent_impl_Promise$DefaultPromise(obj) {
+  return (((obj instanceof $c_s_concurrent_impl_Promise$DefaultPromise) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.impl.Promise$DefaultPromise"));
+}
+function $isArrayOf_s_concurrent_impl_Promise$DefaultPromise(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_impl_Promise$DefaultPromise)));
+}
+function $asArrayOf_s_concurrent_impl_Promise$DefaultPromise(obj, depth) {
+  return (($isArrayOf_s_concurrent_impl_Promise$DefaultPromise(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.impl.Promise$DefaultPromise;", depth));
+}
+var $d_s_concurrent_impl_Promise$DefaultPromise = new $TypeData().initClass($c_s_concurrent_impl_Promise$DefaultPromise, "scala.concurrent.impl.Promise$DefaultPromise", ({
+  s_concurrent_impl_Promise$DefaultPromise: 1,
+  ju_concurrent_atomic_AtomicReference: 1,
+  Ljava_io_Serializable: 1,
+  s_concurrent_Promise: 1,
+  s_concurrent_Awaitable: 1,
+  s_concurrent_Future: 1,
+  F1: 1
 }));
 /** @constructor */
 function $c_s_math_Ordering$Boolean$() {
@@ -33793,6 +35098,199 @@ function $isArrayOf_sc_Map(obj, depth) {
 function $asArrayOf_sc_Map(obj, depth) {
   return (($isArrayOf_sc_Map(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.Map;", depth));
 }
+function $ct_s_concurrent_impl_Promise$Transformation__F1__s_concurrent_ExecutionContext__s_util_Try__I__($thiz, _fun, _ec, _arg, _xform) {
+  $thiz.s_concurrent_impl_Promise$Transformation__f__fun = _fun;
+  $thiz.s_concurrent_impl_Promise$Transformation__f__ec = _ec;
+  $thiz.s_concurrent_impl_Promise$Transformation__f__arg = _arg;
+  $thiz.s_concurrent_impl_Promise$Transformation__f__xform = _xform;
+  $ct_s_concurrent_impl_Promise$DefaultPromise__($thiz);
+  return $thiz;
+}
+function $ct_s_concurrent_impl_Promise$Transformation__I__F1__s_concurrent_ExecutionContext__($thiz, xform, f, ec) {
+  $ct_s_concurrent_impl_Promise$Transformation__F1__s_concurrent_ExecutionContext__s_util_Try__I__($thiz, f, $n(ec), null, xform);
+  return $thiz;
+}
+function $p_s_concurrent_impl_Promise$Transformation__handleFailure__jl_Throwable__s_concurrent_ExecutionContext__V($thiz, t, e) {
+  var wasInterrupted = false;
+  if ((wasInterrupted || $m_s_util_control_NonFatal$().apply__jl_Throwable__Z(t))) {
+    var completed = $thiz.tryComplete0__O__s_util_Try__Z($thiz.ju_concurrent_atomic_AtomicReference__f_value, $m_s_concurrent_impl_Promise$().scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try(new $c_s_util_Failure(t)));
+    if ((completed && wasInterrupted)) {
+      $n($m_jl_Thread$().jl_Thread$__f_SingleThread);
+    }
+    if (((($thiz.s_concurrent_impl_Promise$Transformation__f__xform === 5) || ($thiz.s_concurrent_impl_Promise$Transformation__f__xform === 6)) || (!completed))) {
+      $n(e).reportFailure__jl_Throwable__V(t);
+    }
+  } else {
+    var $x_1 = $n(t);
+    throw (($x_1 instanceof $c_sjs_js_JavaScriptException) ? $x_1.sjs_js_JavaScriptException__f_exception : $x_1);
+  }
+}
+/** @constructor */
+function $c_s_concurrent_impl_Promise$Transformation() {
+  this.ju_concurrent_atomic_AtomicReference__f_value = null;
+  this.s_concurrent_impl_Promise$Transformation__f__fun = null;
+  this.s_concurrent_impl_Promise$Transformation__f__ec = null;
+  this.s_concurrent_impl_Promise$Transformation__f__arg = null;
+  this.s_concurrent_impl_Promise$Transformation__f__xform = 0;
+}
+$c_s_concurrent_impl_Promise$Transformation.prototype = new $h_s_concurrent_impl_Promise$DefaultPromise();
+$c_s_concurrent_impl_Promise$Transformation.prototype.constructor = $c_s_concurrent_impl_Promise$Transformation;
+/** @constructor */
+function $h_s_concurrent_impl_Promise$Transformation() {
+}
+$h_s_concurrent_impl_Promise$Transformation.prototype = $c_s_concurrent_impl_Promise$Transformation.prototype;
+$c_s_concurrent_impl_Promise$Transformation.prototype.submitWithValue__s_util_Try__s_concurrent_impl_Promise$Transformation = (function(resolved) {
+  this.s_concurrent_impl_Promise$Transformation__f__arg = resolved;
+  var e = this.s_concurrent_impl_Promise$Transformation__f__ec;
+  try {
+    if ((e === null)) {
+      $m_sr_Scala3RunTime$().nnFail__E();
+    }
+    $n(e).execute__jl_Runnable__V(this);
+  } catch (e$2) {
+    var e$3 = ((e$2 instanceof $c_jl_Throwable) ? e$2 : new $c_sjs_js_JavaScriptException(e$2));
+    this.s_concurrent_impl_Promise$Transformation__f__fun = null;
+    this.s_concurrent_impl_Promise$Transformation__f__arg = null;
+    this.s_concurrent_impl_Promise$Transformation__f__ec = null;
+    if ((e === null)) {
+      $m_sr_Scala3RunTime$().nnFail__E();
+    }
+    $p_s_concurrent_impl_Promise$Transformation__handleFailure__jl_Throwable__s_concurrent_ExecutionContext__V(this, e$3, e);
+  }
+  return this;
+});
+$c_s_concurrent_impl_Promise$Transformation.prototype.run__V = (function() {
+  var x$proxy4 = this.s_concurrent_impl_Promise$Transformation__f__arg;
+  if ((x$proxy4 === null)) {
+    $m_sr_Scala3RunTime$().nnFail__E();
+  }
+  var x$proxy5 = this.s_concurrent_impl_Promise$Transformation__f__fun;
+  if ((x$proxy5 === null)) {
+    $m_sr_Scala3RunTime$().nnFail__E();
+  }
+  var x$proxy6 = this.s_concurrent_impl_Promise$Transformation__f__ec;
+  if ((x$proxy6 === null)) {
+    $m_sr_Scala3RunTime$().nnFail__E();
+  }
+  this.s_concurrent_impl_Promise$Transformation__f__fun = null;
+  this.s_concurrent_impl_Promise$Transformation__f__arg = null;
+  this.s_concurrent_impl_Promise$Transformation__f__ec = null;
+  try {
+    var resolvedResult;
+    var x7 = this.s_concurrent_impl_Promise$Transformation__f__xform;
+    switch (x7) {
+      case 0: {
+        var resolvedResult = null;
+        break;
+      }
+      case 1: {
+        if ((x$proxy4 instanceof $c_s_util_Success)) {
+          var value = $n(x$proxy5).apply__O__O($n(x$proxy4).get__O());
+          var resolvedResult = new $c_s_util_Success(value);
+        } else {
+          var resolvedResult = x$proxy4;
+        }
+        break;
+      }
+      case 2: {
+        if ((x$proxy4 instanceof $c_s_util_Success)) {
+          var f = $n(x$proxy5).apply__O__O($n(x$proxy4).get__O());
+          if ((f instanceof $c_s_concurrent_impl_Promise$DefaultPromise)) {
+            $n($as_s_concurrent_impl_Promise$DefaultPromise(f)).linkRootOf__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$Link__V(this, null);
+          } else {
+            this.completeWith__s_concurrent_Future__s_concurrent_impl_Promise$DefaultPromise($as_s_concurrent_Future(f));
+          }
+          var resolvedResult = null;
+        } else {
+          var resolvedResult = x$proxy4;
+        }
+        break;
+      }
+      case 3: {
+        var resolvedResult = $m_s_concurrent_impl_Promise$().scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try($as_s_util_Try($n(x$proxy5).apply__O__O(x$proxy4)));
+        break;
+      }
+      case 4: {
+        var f$2 = $n(x$proxy5).apply__O__O(x$proxy4);
+        if ((f$2 instanceof $c_s_concurrent_impl_Promise$DefaultPromise)) {
+          $n($as_s_concurrent_impl_Promise$DefaultPromise(f$2)).linkRootOf__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$Link__V(this, null);
+        } else {
+          this.completeWith__s_concurrent_Future__s_concurrent_impl_Promise$DefaultPromise($as_s_concurrent_Future(f$2));
+        }
+        var resolvedResult = null;
+        break;
+      }
+      case 5: {
+        $n(x$proxy4).foreach__F1__V(x$proxy5);
+        var resolvedResult = null;
+        break;
+      }
+      case 6: {
+        $n(x$proxy5).apply__O__O(x$proxy4);
+        var resolvedResult = null;
+        break;
+      }
+      case 7: {
+        var resolvedResult = ((x$proxy4 instanceof $c_s_util_Failure) ? $m_s_concurrent_impl_Promise$().scala$concurrent$impl$Promise$$$resolve__s_util_Try__s_util_Try($n(x$proxy4).recover__s_PartialFunction__s_util_Try($as_s_PartialFunction(x$proxy5))) : x$proxy4);
+        break;
+      }
+      case 8: {
+        if ((x$proxy4 instanceof $c_s_util_Failure)) {
+          var f$3 = $as_s_concurrent_Future($n($as_s_PartialFunction(x$proxy5)).applyOrElse__O__F1__O($n($as_s_util_Failure(x$proxy4)).s_util_Failure__f_exception, $m_s_concurrent_Future$().s_concurrent_Future$__f_recoverWithFailed));
+          var resolvedResult = ((f$3 !== $m_s_concurrent_Future$().s_concurrent_Future$__f_recoverWithFailedMarker) ? (((f$3 instanceof $c_s_concurrent_impl_Promise$DefaultPromise) ? $n($as_s_concurrent_impl_Promise$DefaultPromise(f$3)).linkRootOf__s_concurrent_impl_Promise$DefaultPromise__s_concurrent_impl_Promise$Link__V(this, null) : this.completeWith__s_concurrent_Future__s_concurrent_impl_Promise$DefaultPromise(f$3)), null) : x$proxy4);
+        } else {
+          var resolvedResult = x$proxy4;
+        }
+        break;
+      }
+      case 9: {
+        var resolvedResult = (((x$proxy4 instanceof $c_s_util_Failure) || $uZ($n(x$proxy5).apply__O__O($n(x$proxy4).get__O()))) ? x$proxy4 : $m_s_concurrent_Future$().s_concurrent_Future$__f_filterFailure);
+        break;
+      }
+      case 10: {
+        if ((x$proxy4 instanceof $c_s_util_Success)) {
+          var value$1 = $n($as_s_PartialFunction(x$proxy5)).applyOrElse__O__F1__O($n(x$proxy4).get__O(), $m_s_concurrent_Future$().s_concurrent_Future$__f_collectFailed);
+          var resolvedResult = new $c_s_util_Success(value$1);
+        } else {
+          var resolvedResult = x$proxy4;
+        }
+        break;
+      }
+      default: {
+        var exception = $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("BUG: encountered transformation promise with illegal type: " + this.s_concurrent_impl_Promise$Transformation__f__xform));
+        var resolvedResult = new $c_s_util_Failure(exception);
+      }
+    }
+    if ((resolvedResult !== null)) {
+      this.tryComplete0__O__s_util_Try__Z(this.ju_concurrent_atomic_AtomicReference__f_value, resolvedResult);
+    }
+  } catch (e) {
+    var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
+    $p_s_concurrent_impl_Promise$Transformation__handleFailure__jl_Throwable__s_concurrent_ExecutionContext__V(this, e$2, x$proxy6);
+  }
+});
+function $as_s_concurrent_impl_Promise$Transformation(obj) {
+  return (((obj instanceof $c_s_concurrent_impl_Promise$Transformation) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.impl.Promise$Transformation"));
+}
+function $isArrayOf_s_concurrent_impl_Promise$Transformation(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_concurrent_impl_Promise$Transformation)));
+}
+function $asArrayOf_s_concurrent_impl_Promise$Transformation(obj, depth) {
+  return (($isArrayOf_s_concurrent_impl_Promise$Transformation(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.concurrent.impl.Promise$Transformation;", depth));
+}
+var $d_s_concurrent_impl_Promise$Transformation = new $TypeData().initClass($c_s_concurrent_impl_Promise$Transformation, "scala.concurrent.impl.Promise$Transformation", ({
+  s_concurrent_impl_Promise$Transformation: 1,
+  s_concurrent_impl_Promise$DefaultPromise: 1,
+  ju_concurrent_atomic_AtomicReference: 1,
+  Ljava_io_Serializable: 1,
+  s_concurrent_Promise: 1,
+  s_concurrent_Awaitable: 1,
+  s_concurrent_Future: 1,
+  F1: 1,
+  s_concurrent_impl_Promise$Callbacks: 1,
+  jl_Runnable: 1,
+  s_concurrent_Batchable: 1
+}));
 /** @constructor */
 function $c_Lcom_raquo_airstream_combine_CombineSignalN(parents, combinator) {
   this.Lcom_raquo_airstream_combine_CombineSignalN__f_maybeDisplayName = null;
@@ -38262,7 +39760,7 @@ $c_sci_Map$EmptyMap$.prototype.isEmpty__Z = (function() {
   return true;
 });
 $c_sci_Map$EmptyMap$.prototype.apply__O__E = (function(key) {
-  throw new $c_ju_NoSuchElementException(("key not found: " + key));
+  throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
 });
 $c_sci_Map$EmptyMap$.prototype.contains__O__Z = (function(key) {
   return false;
@@ -38364,7 +39862,7 @@ $c_sci_Map$Map1.prototype.apply__O__O = (function(key) {
   if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, y)) {
     return this.sci_Map$Map1__f_value1;
   } else {
-    throw new $c_ju_NoSuchElementException(("key not found: " + key));
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
   }
 });
 $c_sci_Map$Map1.prototype.contains__O__Z = (function(key) {
@@ -38517,7 +40015,7 @@ $c_sci_Map$Map2.prototype.apply__O__O = (function(key) {
     if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, y$1)) {
       return this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2;
     } else {
-      throw new $c_ju_NoSuchElementException(("key not found: " + key));
+      throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
     }
   }
 });
@@ -38740,7 +40238,7 @@ $c_sci_Map$Map3.prototype.apply__O__O = (function(key) {
       if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, y$2)) {
         return this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3;
       } else {
-        throw new $c_ju_NoSuchElementException(("key not found: " + key));
+        throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
       }
     }
   }
@@ -39032,7 +40530,7 @@ $c_sci_Map$Map4.prototype.apply__O__O = (function(key) {
         if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, y$3)) {
           return this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value4;
         } else {
-          throw new $c_ju_NoSuchElementException(("key not found: " + key));
+          throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("key not found: " + key));
         }
       }
     }
@@ -39681,7 +41179,7 @@ $c_sci_LazyList.prototype.knownSize__I = (function() {
 });
 $c_sci_LazyList.prototype.head__O = (function() {
   if (($p_sci_LazyList__evaluated__sci_LazyList(this) === $m_sci_LazyList$().sci_LazyList$__f_scala$collection$immutable$LazyList$$$Empty)) {
-    throw new $c_ju_NoSuchElementException("head of empty lazy list");
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "head of empty lazy list");
   } else {
     return this.sci_LazyList__f__head;
   }
@@ -41751,7 +43249,7 @@ $c_sci_Vector.prototype.ioob__I__jl_IndexOutOfBoundsException = (function(index)
 });
 $c_sci_Vector.prototype.head__O = (function() {
   if (($n(this.sci_Vector__f_prefix1).u.length === 0)) {
-    throw new $c_ju_NoSuchElementException("empty.head");
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "empty.head");
   } else {
     return $n(this.sci_Vector__f_prefix1).get(0);
   }
@@ -41760,7 +43258,7 @@ $c_sci_Vector.prototype.last__O = (function() {
   if ((this instanceof $c_sci_BigVector)) {
     var suffix = $n($as_sci_BigVector(this)).sci_BigVector__f_suffix1;
     if (($n(suffix).u.length === 0)) {
-      throw new $c_ju_NoSuchElementException("empty.tail");
+      throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "empty.tail");
     } else {
       return $n(suffix).get((($n(suffix).u.length - 1) | 0));
     }
@@ -45252,7 +46750,7 @@ $c_sci_Nil$.prototype.productElement__I__O = (function(n) {
   throw $ct_jl_IndexOutOfBoundsException__I__(new $c_jl_IndexOutOfBoundsException(), n);
 });
 $c_sci_Nil$.prototype.head__E = (function() {
-  throw new $c_ju_NoSuchElementException("head of empty list");
+  throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "head of empty list");
 });
 $c_sci_Nil$.prototype.tail__E = (function() {
   throw new $c_jl_UnsupportedOperationException("tail of empty list");
@@ -49033,7 +50531,7 @@ $c_scm_ArrayDeque.prototype.addAll__sc_IterableOnce__scm_ArrayDeque = (function(
 });
 $c_scm_ArrayDeque.prototype.removeHead__Z__O = (function(resizeInternalRepr) {
   if (this.isEmpty__Z()) {
-    throw new $c_ju_NoSuchElementException("empty collection");
+    throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), "empty collection");
   } else {
     var elem = $n(this.scm_ArrayDeque__f_array).get(this.scm_ArrayDeque__f_start);
     $n(this.scm_ArrayDeque__f_array).set(this.scm_ArrayDeque__f_start, null);

@@ -267,7 +267,7 @@ select.bars { margin-right: 2ch; }
    1.2ch, since the field letter-spaces the beats apart; forgetting that once clipped a 4/4
    pattern's closing ':||'. */
 :root {
-  --col-cue: 5ch;
+  --col-cue: 3ch;  /* one character: the "@" heading and the ">" marker */
   --col-play: 8ch;
   --col-title: 40ch;
   --col-bpm: 6ch;
@@ -291,6 +291,8 @@ select.bars { margin-right: 2ch; }
 
 .songrow input { width: 100%; min-width: 0; }
 .songrow.header { color: var(--muted); }
+/* the "@" sits over the marker below it */
+.songrow.header span:first-child { text-align: center; }
 
 /* the cue column: shows nothing yet, will carry a ">" at the current or last played song */
 input.cue {

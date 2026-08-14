@@ -269,6 +269,8 @@ button:hover { border-color: var(--link); }
 /* how many bars Play next and the row buttons run for */
 select.bars { margin-right: 2ch; }
 
+.fullscreen { margin-right: 2ch; }
+
 /* starts the song after the cue, in the same signal green a playing song wears */
 .playnext, .playnext:hover {
   background: var(--vivid-bright-green);

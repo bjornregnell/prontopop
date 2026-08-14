@@ -73,6 +73,9 @@ def createProntoPopLandingPage(): HtmlElement =
   val volumeVar      = Var("100")
   /** How many bars a song plays before stopping itself; "forever" means until Silence. */
   val barsVar        = Var("4")
+  /** Driven by the browser's own fullscreenchange, so the label stays right however it was left —
+    * by the button, or by the Escape key, which the browser handles itself. */
+  val fullScreenVar  = Var(false)
   val barChoices     = Vector("1", "2", "4", "8", "16", "32", "forever")
   lazy val player    = Sound.initWebSound()
 
@@ -88,6 +91,10 @@ def createProntoPopLandingPage(): HtmlElement =
     songsVar.update(_.filterNot(_.id == id))
 
   def addSong(): Unit = songsVar.update(_ :+ SongRow(freshId()))
+
+  def toggleFullScreen(): Unit =
+    if dom.document.fullscreenElement == null then dom.document.documentElement.requestFullscreen()
+    else dom.document.exitFullscreen()
 
   /** One keyboard shortcut. Both the key handler and the table below are built from this list, so a
     * key cannot change in one place and go stale in the other.
@@ -205,6 +212,10 @@ def createProntoPopLandingPage(): HtmlElement =
     )
 
   div(cls := "app",
+    onMountCallback: _ =>
+      dom.document.addEventListener("fullscreenchange",
+        (_: dom.Event) => fullScreenVar.set(dom.document.fullscreenElement != null))
+    ,
     // Custom properties inherit, so setting them here resizes every row's grid at once.
     styleAttr <-- colWidthsVar.signal.map: (title, pattern) =>
       s"--col-title: ${title}ch; --col-pattern: ${pattern}ch"
@@ -258,6 +269,10 @@ def createProntoPopLandingPage(): HtmlElement =
         onChange.mapToValue --> barsVar.writer,
       ),
       button("Silence", cls := "silence", onClick --> (_ => stopPlaying())),
+      button(cls := "fullscreen",
+        child.text <-- fullScreenVar.signal.map(on => if on then "Exit full screen" else "Full screen"),
+        onClick --> (_ => toggleFullScreen()),
+      ),
       span("Volume: "),
       input(typ := "range", minAttr := "0", maxAttr := "100",
         controlled(value <-- volumeVar.signal, onInput.mapToValue --> { (v: String) =>

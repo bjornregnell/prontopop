@@ -156,6 +156,10 @@ def createProntoPopLandingPage(): HtmlElement =
     songsVar.update(_ :+ SongRow(freshId()))
     dirtyVar.set(true)
 
+  def addPause(): Unit =
+    songsVar.update(_ :+ pauseRow())
+    dirtyVar.set(true)
+
   def toggleFullScreen(): Unit =
     if dom.document.fullscreenElement == null then dom.document.documentElement.requestFullscreen()
     else dom.document.exitFullscreen()
@@ -458,6 +462,10 @@ def createProntoPopLandingPage(): HtmlElement =
       // pay for it — adding a song is not something anyone does mid-gig.
       button("Add song", cls := "addsong", title := "add an empty song to the bottom of the table",
         onClick --> (_ => addSong())),
+      // Lands at the bottom like its neighbour. A break belongs between two songs, and there is no
+      // way to move a row yet, so a pause is placed by building the concert down to it.
+      button("Add pause", cls := "addpause", title := "add a pause to the bottom of the table",
+        onClick --> (_ => addPause())),
       // Only ever the saved copy, and only after asking. Disabled on a built-in: those ship with
       // the app, and a dropdown entry nobody can restore is not something a button should offer.
       button("Remove concert", cls := "removeconcert",

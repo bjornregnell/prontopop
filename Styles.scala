@@ -367,12 +367,14 @@ select.bars { margin-right: 2ch; }
 /* what is playing, riding along at the end of the controls */
 .nowplaying { margin-left: 2ch; color: var(--muted); }
 
-/* Save says whether there is anything to save: red while the table holds something the Local Store
-   does not, the ordinary button otherwise. White text keeps the red AA at button size. */
+/* Save says whether there is anything to save: warm orange while the table holds something the
+   Local Store does not, the ordinary button otherwise. Orange rather than the alert red-orange
+   deliberately — red is kept for the two things that matter on a stage, a song sounding and work
+   about to be lost, and a third red would dilute both. */
 .save.dirty, .save.dirty:hover {
-  background: var(--vivid-red-orange);
-  color: #ffffff;
-  border-color: var(--vivid-red-orange);
+  background: var(--hot-iron-orange);
+  color: var(--tempered-iron-purple);
+  border-color: var(--hot-iron-orange);
   font-weight: bold;
 }
 

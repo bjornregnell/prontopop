@@ -180,14 +180,17 @@ body {
    theme dropdown shares the line. */
 .titlerow {
   align-items: baseline;
-  margin: 0.2em 0 0.8em;
+  margin: 0 0 0.4em;
   padding-bottom: 0.2em;
   border-bottom: 4px solid var(--rule);
 }
 
+/* The title reads at the size of everything else: it is a name, not something to be read from the
+   back of a room, and the height it was taking belonged to the songs. Bold and in the heading
+   colour still tell it apart. */
 h1 {
   color: var(--head);
-  font-size: 1.6rem;
+  font-size: 1rem;
   margin: 0;
 }
 

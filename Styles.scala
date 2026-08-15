@@ -293,7 +293,7 @@ select.bars { margin-right: 2ch; }
    pattern's closing ':||'. */
 :root {
   --col-cue: 3ch;  /* one character: the "@" heading and the ">" marker */
-  --col-play: 8ch;
+  --col-play: 6ch;  /* "Play" and "Stop" are four characters; the buttons drop their side padding */
   --col-title: 40ch;
   --col-bpm: 6ch;
   --col-sign: 7ch;
@@ -315,15 +315,18 @@ select.bars { margin-right: 2ch; }
 }
 
 .songrow input { width: 100%; min-width: 0; }
+
+/* the row buttons keep only their vertical padding: each fills its grid column anyway, so the side
+   padding bought nothing but width, and the table has to fit a phone held sideways */
+.songrow button { padding: 0.3rem 0; }
 .songrow.header { color: var(--muted); }
 /* the "@" sits over the marker below it */
 .songrow.header span:first-child { text-align: center; }
 
 /* the cue column: a ">" at the current or last played song, and on every row a button that moves
    the cue there. It wears the ordinary button look, so the column reads as pressable at a glance
-   rather than having to be discovered; only the side padding goes, to fit one character. */
+   rather than having to be discovered. */
 .songrow button.cue {
-  padding: 0.3rem 0;
   text-align: center;
   color: var(--head);
   font-weight: bold;

@@ -25,7 +25,16 @@ case class SongRow(
 
   def toSong: Either[String, Song] = toSongAndBars.map((song, _) => song)
 
+  /** A break in the concert rather than a song: nothing to play, and nothing to type. Marked by a
+    * negative id, so a pause is told from a song by the one field every row already has. */
+  def isPause: Boolean = id < 0
+
 object SongRow:
+
+  /** The shape of a pause row. Its id is replaced with a fresh NEGATIVE one as it is made — every
+    * row needs its own, or two pauses in a concert would be the same row to the table, and
+    * removing one would remove both. */
+  val Empty = SongRow(id = -1, title = "Pause")
 
   /** A whole bpm must read "120", never "120.0". */
   def showBpm(bpm: BPM): String =

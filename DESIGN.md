@@ -56,6 +56,24 @@ linted clean.
   something genuinely hard — a parser generator, a crypto primitive, a layout engine — not merely
   tedious. If a browser API is missing from scalajs-dom, handroll the small facade.
 
+- **A pause is a row with a negative id.** `Concert` is a `Seq[ConcertElem]`, either a `Song` or the
+  `Pause` object, and a pause arrives in the table as `SongRow.Empty` with a **fresh negative id**
+  — not the literal `-1`. Every row needs its own key: the table is rendered with
+  `split(_.id)`, so two pauses sharing an id would be one row to Laminar, and removing one would
+  remove both. `SongRow.isPause` is `id < 0`, so the distinction rides on a field every row already
+  has and nothing else had to change shape.
+
+  It renders as a dashed rule across the columns between the cue and `Remove` — a break in the list
+  rather than a row with empty fields — and keeps its `Remove` so a break can be taken out. The cue
+  steps **over** pauses (`moveCue` walks `filterNot(_.isPause)`), so a step never lands on one and
+  never has to be pressed twice to get past it. In the Local Store a pause is one line holding a
+  marker character, which no song can produce: concerts saved before pauses existed have no such
+  line and load exactly as they did.
+
+  ⚠ A `Pause` written inside the `BEGIN/END GENERATED Soaree01` markers in `Concerts.scala` is
+  **lost on `./build.sc --sync`**, which rewrites that whole block from the songbook, and
+  `parsesoaree.sc` emits only songs. (BR, 2026-08-15.)
+
 - **The cue is what plays.** One rule for the whole transport: `Play` starts the cued song and turns
   into a red `Stop` while it runs, `Next` and `Prev` only walk the cue, and the arrow keys and the
   cue buttons in the table do the same walking. This replaced a `Play next` button that meant "the

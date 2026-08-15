@@ -9,7 +9,7 @@ object Concerts:
   )
 
   // BEGIN GENERATED Soaree01 -- written by ./parsesoaree.sc from the songbook; do not edit by hand
-  val Soaree01 = "Soaree01" -> Seq(
+  val Soaree01: (String, Concert) = "Soaree01" -> Seq(
     Song(title = "Rymdresan", 155, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "Hopp om en ofri", 148, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "Slå en signal", 82, Signature(4, 4), Pattern("||:!...:||")),
@@ -20,6 +20,7 @@ object Concerts:
     Song(title = "Aldrig mer igen", 100, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "I min tidsmaskin", 170, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "Du kan inte hindra mig", 180, Signature(3, 4), Pattern("||:!..:||")),
+    Pause,
     Song(title = "Vi borde säga som det är", 95, Signature(4, 4), Pattern("||:!...:||")),
     Song(title = "Du kan lämna det kvar", 125, Signature(3, 4), Pattern("||:!..:||")),
     Song(title = "Om du verkligen vill", 114, Signature(4, 4), Pattern("||:!...:||")),

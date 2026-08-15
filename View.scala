@@ -9,6 +9,11 @@ def createProntoPopLandingPage(): HtmlElement =
 
   val keyPrefix = "prontopop.concert."
 
+  /** How a pause is written to the Local Store: a line that no song can produce, since a song
+    * always writes its four tab-separated fields. Concerts saved before pauses existed contain no
+    * such line and load exactly as they did. */
+  val pauseLine: String = 2.toChar.toString
+
   var lastId = 0
   def freshId(): Int =
     lastId += 1
@@ -45,8 +50,15 @@ def createProntoPopLandingPage(): HtmlElement =
   def labelOf(key: String): String =
     if key.startsWith(builtInMark) then s"${titleOf(key)} (built-in)" else key
 
+  /** A pause takes a fresh id like any other row, negated: negative means pause, and no two rows
+    * share a key. Sharing one would make Laminar treat every pause as the same row, and removing
+    * one would remove them all. */
+  def pauseRow(): SongRow = SongRow.Empty.copy(id = -freshId())
+
   def rowsOf(concert: Concert): Vector[SongRow] =
-    concert.toVector.map(song => SongRow.from(freshId(), song))
+    concert.toVector.map:
+      case Pause      => pauseRow()
+      case song: Song => SongRow.from(freshId(), song)
 
   /** Widths for the two elastic columns, fitted to the widest entry, so a concert of short titles
     * or one-bar patterns does not leave half the table empty.
@@ -55,7 +67,9 @@ def createProntoPopLandingPage(): HtmlElement =
     * under the caret would shove every field to its right, mid-keystroke. Clamped at both ends, so
     * an empty table still has usable fields and one long title cannot run away with the layout. */
   def fitWidths(rows: Vector[SongRow]): (Int, Int) =
-    def widest(text: SongRow => String): Int = rows.map(r => text(r).length).maxOption.getOrElse(0)
+    // a pause has no title or pattern on screen, so its placeholder text must not set a width
+    val songs = rows.filterNot(_.isPause)
+    def widest(text: SongRow => String): Int = songs.map(r => text(r).length).maxOption.getOrElse(0)
     // 2ch of slack covers the field's own border and its remaining side padding, with room for the
     // caret past the last character. It was 3ch while the fields still had wide side padding.
     val title = (widest(_.title) + 2).max(14).min(60)
@@ -65,14 +79,16 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def rowsOfSaved(text: String): Vector[SongRow] =
     text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
-      val f = line.split("\t", -1)
-      SongRow(
-        freshId(),
-        f.lift(0).getOrElse(""),
-        f.lift(1).getOrElse(""),
-        f.lift(2).getOrElse(""),
-        f.lift(3).getOrElse("").replace("…", "..."),
-      )
+      if line == pauseLine then pauseRow()
+      else
+        val f = line.split("\t", -1)
+        SongRow(
+          freshId(),
+          f.lift(0).getOrElse(""),
+          f.lift(1).getOrElse(""),
+          f.lift(2).getOrElse(""),
+          f.lift(3).getOrElse("").replace("…", "..."),
+        )
 
   /** The songs behind a dropdown key. The key says which of the two a shared title means, so
     * neither hides the other: local storage is asked for a saved key, the app itself for a
@@ -163,7 +179,8 @@ def createProntoPopLandingPage(): HtmlElement =
     * so a fresh table points at the song a performer would start with. */
   val cueSignal: Signal[Option[Int]] =
     cueVar.signal.combineWith(songsVar.signal).map: (cued, rows) =>
-      cued.filter(id => rows.exists(_.id == id)).orElse(rows.headOption.map(_.id))
+      cued.filter(id => rows.exists(_.id == id))
+        .orElse(rows.find(!_.isPause).map(_.id))  // never a pause: there is nothing there to play
 
   def startPlaying(row: SongRow): Unit =
     row.toSongAndBars match
@@ -188,18 +205,20 @@ def createProntoPopLandingPage(): HtmlElement =
         case "TEXTAREA" | "SELECT" => true
         case _                     => false
 
-  /** Step the cue, wrapping at either end rather than going dead. */
+  /** Step the cue, wrapping at either end rather than going dead. Pauses are left out of the walk
+    * entirely, so a step never lands on one and never has to step twice to get past it. */
   def moveCue(delta: Int): Unit =
-    val rows = songsVar.now()
-    if rows.nonEmpty then
-      val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0).getOrElse(0)
-      val to = ((at + delta) % rows.length + rows.length) % rows.length
-      cueVar.set(Some(rows(to).id))
+    val songs = songsVar.now().filterNot(_.isPause)
+    if songs.nonEmpty then
+      val at = cueVar.now().map(id => songs.indexWhere(_.id == id)).filter(_ >= 0).getOrElse(0)
+      val to = ((at + delta) % songs.length + songs.length) % songs.length
+      cueVar.set(Some(songs(to).id))
 
   /** Play the cued song — the one the ">" marks, or the top one before anything has played. */
   def playCued(): Unit =
     val rows = songsVar.now()
-    cueVar.now().flatMap(id => rows.find(_.id == id)).orElse(rows.headOption).foreach(startPlaying)
+    cueVar.now().flatMap(id => rows.find(_.id == id)).orElse(rows.find(!_.isPause))
+      .filterNot(_.isPause).foreach(startPlaying)
 
   /** Stop if something is running, otherwise start the cued song. What the big button does, and
     * what the space bar does. */
@@ -226,7 +245,7 @@ def createProntoPopLandingPage(): HtmlElement =
     if name.isEmpty then statusVar.set("give the concert a name before saving")
     else
       val text = songsVar.now()
-        .map(r => Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
+        .map(r => if r.isPause then pauseLine else Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
         .mkString("\n")
       dom.window.localStorage.setItem(keyPrefix + name, text)
       offeredVar.set(listOffered())
@@ -303,7 +322,22 @@ def createProntoPopLandingPage(): HtmlElement =
   def isFourFour(sign: String): Boolean =
     SongRow.parseSignature(sign).exists(s => s.frac.numerator == 4 && s.frac.denominator == 4)
 
+  /** A pause: a rule drawn across the table where the songs stop for a while. It carries no fields
+    * and no Play button — there is nothing to type and nothing to sound — but it keeps its Remove,
+    * so a break can be taken out like anything else. */
+  def renderPause(id: Int): HtmlElement =
+    div(cls := "songrow pause",
+      span(),
+      div(cls := "pauseline", title := "a pause in the concert"),
+      button("Remove", onClick --> (_ => removeRow(id))),
+    )
+
+  /** Which of the two a row is can be decided once, from the initial value: the sign of an id
+    * never changes, so a song never becomes a pause under the same key. */
   def renderRow(id: Int, initial: SongRow, rowSignal: Signal[SongRow]): HtmlElement =
+    if initial.isPause then renderPause(id) else renderSong(id, rowSignal)
+
+  def renderSong(id: Int, rowSignal: Signal[SongRow]): HtmlElement =
     div(cls := "songrow",
       // the ">" cue marking the current or last played song. A real button, so the column looks
       // pressable and says what it does: pressing one moves the cue to that row. It was a read-only

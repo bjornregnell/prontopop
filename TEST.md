@@ -114,8 +114,9 @@ them a claim about behaviour that a screenshot cannot make. Examples live in `tm
 Honestly, so nobody assumes otherwise:
 
 - **Interaction is exercised only where a probe was written.** The probes cover the cue column, the
-  Play/Stop transport with Next and Prev, and choosing a concert while there are unsaved edits.
-  Saving, removing, theme switching and the volume slider are still only ever loaded, never pressed.
+  Play/Stop transport with its two cue steps, choosing a concert while there are unsaved edits,
+  removing a saved concert, and pauses — that the cue steps over one and that one survives a save
+  and a load. Theme switching and the volume slider are still only ever loaded, never pressed.
 - **A probe proves the wiring, not the feel.** It can show that pressing Play sets the button to
   Stop and names the song; it cannot show that the button is reachable with a thumb, or that the
   colour reads across a stage. Those still want the screenshot and a human.

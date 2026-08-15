@@ -9,7 +9,7 @@ object Model:
   type Velocity    = Int
   type DSL         = String
   type Pitch       = Int
-  type Concert     = Seq[Song]
+  type Concert     = Seq[ConcertElem]
 
   case class Frac(numerator: Numerator, denominator: Denominator)
 
@@ -36,8 +36,10 @@ object Model:
   case class Bar(events: Seq[(pos: PosInBar, ev: Event)], signature: Signature)
 
   case class Pattern(dsl: DSL)
-
-  case class Song(title: Title, bpm: BPM, signature: Signature, pattern: Pattern)
+  
+  trait ConcertElem
+  case class Song(title: Title, bpm: BPM, signature: Signature, pattern: Pattern) extends ConcertElem
+  case object Pause extends ConcertElem 
 
   enum Error:
     case ParseError(msg: String, pos: Int)  // TODO add more errors when needed

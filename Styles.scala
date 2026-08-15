@@ -361,6 +361,15 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
 /* the cued row, outlined so the marked one is clear across a lit stage */
 .songrow button.cue.cued { border-color: var(--head); }
 
+/* A pause: a rule drawn where the songs stop. It spans everything between the cue column and
+   Remove, so the break reads as a break in the list rather than as a row with empty fields. */
+.songrow.pause { margin: 0.35rem 0; }
+.songrow.pause .pauseline {
+  grid-column: 2 / 7;
+  height: 0;
+  border-top: 2px dashed var(--rule);
+}
+
 
 /* No reserved height: it stood empty most of the time, holding a line and a half of screen against
    a message that may never come. The page shifts by one line when a message does arrive, which is

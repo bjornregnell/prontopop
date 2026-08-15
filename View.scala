@@ -328,7 +328,7 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
     ),
     div(cls := "songrow header",
-      span("@"), span("Play"), span("Title"), span("BPM"), span("Sign."), span("Pattern"), span(),
+      span("@"), span("Play"), span("Title"), span("BPM"), span("Sig."), span("Pattern"), span(),
     ),
     children <-- songsVar.signal.split(_.id)(renderRow),
     div(cls := "row", button("Add song", onClick --> (_ => addSong()))),

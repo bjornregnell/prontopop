@@ -219,6 +219,11 @@ input.pattern { letter-spacing: 0.2ch; }
    as CHIPS, the way the design language marks state, rather than as text: light blue as text fails
    contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing
    into all five themes. */
+/* the two short fields keep their vertical padding but hand back most of the sides, which is what
+   made their columns wide; both hold three characters and centre them */
+.songrow input.bpm, .songrow input.sign { padding-left: 0.2rem; padding-right: 0.2rem; }
+.songrow input.bpm { text-align: center; }
+
 .songrow input.sign {
   background: var(--chio-light-blue);
   color: var(--tempered-iron-purple);
@@ -295,8 +300,8 @@ select.bars { margin-right: 2ch; }
   --col-cue: 3ch;  /* one character: the "@" heading and the ">" marker */
   --col-play: 6ch;  /* "Play" and "Stop" are four characters; the buttons drop their side padding */
   --col-title: 40ch;
-  --col-bpm: 6ch;
-  --col-sign: 7ch;
+  --col-bpm: 5ch;   /* three or four digits, in fields that give up most of their side padding */
+  --col-sign: 5ch;  /* "3/4", under a heading shortened to "Sig." to fit */
   --col-pattern: 38ch;
   --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
   --col-gaps: 3ch;  /* the six 0.5ch gaps between seven columns */

@@ -319,15 +319,22 @@ select.bars { margin-right: 2ch; }
 /* the "@" sits over the marker below it */
 .songrow.header span:first-child { text-align: center; }
 
-/* the cue column: shows nothing yet, will carry a ">" at the current or last played song */
-input.cue {
+/* the cue column: a ">" at the current or last played song, and a click target on every row that
+   moves the cue there. Borrows the fields' box so the row keeps its alignment and height, but is a
+   div, not an input — it takes clicks, never a caret. */
+.songrow div.cue {
   text-align: center;
-  padding-left: 0;
-  padding-right: 0;
-  cursor: default;
+  padding: 0.25rem 0;
+  border: 1px solid transparent;
+  border-radius: 0.3rem;
+  cursor: pointer;
   color: var(--head);
   font-weight: bold;
+  user-select: none;
 }
+
+/* only on hover does it announce itself as clickable, so the resting table stays quiet */
+.songrow div.cue:hover { border-color: var(--border); }
 
 
 .status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }

@@ -214,10 +214,13 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def renderRow(id: Int, initial: SongRow, rowSignal: Signal[SongRow]): HtmlElement =
     div(cls := "songrow",
-      // placeholder for a ">" cue marking the current or last played song; read-only and out of the
-      // tab order, since there is nothing here for a performer to type
-      input(cls := "cue", readOnly := true, tabIndex := -1,
-        value <-- cueSignal.map(cued => if cued.contains(id) then ">" else "")),
+      // the ">" cue marking the current or last played song. Not a field but a click target: a
+      // read-only input still took a caret when tapped, which offered a performer an edit that was
+      // never going to happen. Clicking any row's cell moves the cue there instead.
+      // A no-break space when unmarked, so the empty cell keeps the height of a marked one.
+      div(cls := "cue", title := "move the cue here",
+        onClick --> (_ => cueVar.set(Some(id))),
+        child.text <-- cueSignal.map(cued => if cued.contains(id) then ">" else " ")),
       button(
         child.text <-- playingVar.signal.map(p => if p.contains(id) then "Stop" else "Play"),
         cls("playing") <-- playingVar.signal.map(_.contains(id)),

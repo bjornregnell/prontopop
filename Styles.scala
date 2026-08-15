@@ -301,12 +301,13 @@ select.bars { margin-right: 2ch; }
   --col-sign: 5ch;  /* "3/4", under a heading shortened to "Sig." to fit */
   --col-pattern: 38ch;
   --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
-  --col-gaps: 3ch;  /* the six 0.5ch gaps between seven columns */
+  --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */
+  --col-gaps: calc(var(--col-gap) * 6);  /* the six gaps between seven columns */
 }
 
 .songrow {
   display: grid;
-  gap: 0.5ch;
+  gap: var(--col-gap);
   align-items: center;
   margin: 0.25rem 0;
   grid-template-columns:

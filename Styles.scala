@@ -243,6 +243,11 @@ input.pattern { letter-spacing: 0.2ch; }
    "Soaree01 (built-in)" and the select's own arrow. */
 .concertfield { width: 23ch; }
 
+/* The name being typed needs far less room than the dropdown, which has to hold the longest title
+   anyone has saved plus "(built-in)" and the select's arrow. Ten characters holds a name like
+   "Soaree01"; a longer one scrolls inside the field while it is typed. */
+input.concertfield { width: 10ch; }
+
 input[type="range"] { accent-color: var(--hot-iron-orange); }
 
 button {

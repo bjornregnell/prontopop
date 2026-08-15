@@ -56,6 +56,27 @@ linted clean.
   something genuinely hard — a parser generator, a crypto primitive, a layout engine — not merely
   tedious. If a browser API is missing from scalajs-dom, handroll the small facade.
 
+- **The cue is what plays.** One rule for the whole transport: `Play` starts the cued song and turns
+  into a red `Stop` while it runs, `Next` and `Prev` only walk the cue, and the arrow keys and the
+  cue buttons in the table do the same walking. This replaced a `Play next` button that meant "the
+  song after the cue" except before anything had played, when it meant "the first song" — a rule
+  nobody should have to remember while counting in a band. When adding a control, ask what it does
+  to the cue; if the answer is "it plays something else", it is probably the wrong control.
+  (BR, 2026-08-15.)
+
+- **Loading never silently discards edits.** Choosing from the dropdown loads at once — there is no
+  `Load` button, since it only asked the same question twice — but any edit since the last load or
+  save raises a flag, shown as `unsaved changes` beside `Save` so the warning is never the first
+  news of it. Loading while that flag is up puts the question on screen instead: `Cancel` (focused,
+  so the reflex answers keep the table) or `Discard and load`. The dropdown is `controlled`, which
+  matters more than it looks: without it a refused choice would leave the dropdown naming one
+  concert while the table held another. The flag is for the whole table, not per song, because what
+  a load overwrites is all of it.
+
+  This settles half of the old TODO-A gap below — what happens when someone edits a loaded built-in.
+  Editing is now visibly unsaved work; saving under the same title still shadows the built-in, which
+  remains a deliberate choice. (BR, 2026-08-15.)
+
 ## The bug that shaped `Concerts.scala` (fixed)
 
 VERIFIED at the time, not suspected — running a main that touched `Concerts.all` on the JVM gave:

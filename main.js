@@ -2928,7 +2928,7 @@ function $f_Lcom_raquo_laminar_api_MountHooks__$init$__V($thiz) {
     var _$1$1 = $as_Lcom_raquo_laminar_lifecycle_MountContext(_$1);
     $n($as_Lcom_raquo_laminar_nodes_ReactiveHtmlElement($n(_$1$1).Lcom_raquo_laminar_lifecycle_MountContext__f_thisNode)).Lcom_raquo_laminar_nodes_ReactiveHtmlElement__f_ref.focus();
   }));
-  $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier($thiz, fn);
+  $thiz.Lcom_raquo_laminar_api_package$$anon$1__f_onMountFocus = $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier($thiz, fn);
 }
 function $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier($thiz, fn) {
   var this$6 = $m_Lcom_raquo_laminar_modifiers_Modifier$();
@@ -3469,6 +3469,78 @@ var $d_Lcom_raquo_laminar_inputs_InputController$InputControllerConfig = new $Ty
   Lcom_raquo_laminar_inputs_InputController$InputControllerConfig: 1
 }));
 /** @constructor */
+function $c_Lcom_raquo_laminar_inserters_ChildInserter$() {
+}
+$c_Lcom_raquo_laminar_inserters_ChildInserter$.prototype = new $h_O();
+$c_Lcom_raquo_laminar_inserters_ChildInserter$.prototype.constructor = $c_Lcom_raquo_laminar_inserters_ChildInserter$;
+/** @constructor */
+function $h_Lcom_raquo_laminar_inserters_ChildInserter$() {
+}
+$h_Lcom_raquo_laminar_inserters_ChildInserter$.prototype = $c_Lcom_raquo_laminar_inserters_ChildInserter$.prototype;
+$c_Lcom_raquo_laminar_inserters_ChildInserter$.prototype.apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter = (function(childSource, renderable, initialHooks) {
+  return new $c_Lcom_raquo_laminar_inserters_DynamicInserter($m_s_None$(), true, new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((ctx, owner, hooks) => {
+    var ctx$1 = $as_Lcom_raquo_laminar_inserters_InsertContext(ctx);
+    var owner$1 = $as_Lcom_raquo_airstream_ownership_Owner(owner);
+    if ((!$n(ctx$1).Lcom_raquo_laminar_inserters_InsertContext__f_strictMode)) {
+      $n(ctx$1).forceSetStrictMode__V();
+    }
+    var maybeLastSeenChild = new $c_sr_ObjectRef((void 0));
+    return $f_Lcom_raquo_airstream_core_BaseObservable__foreach__F1__Lcom_raquo_airstream_ownership_Owner__Lcom_raquo_airstream_ownership_Subscription($n(childSource), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((newComponent) => {
+      $n(renderable);
+      var value = $as_Lcom_raquo_laminar_nodes_ChildNode(newComponent);
+      this.switchToChild__O__Lcom_raquo_laminar_nodes_ChildNode__Lcom_raquo_laminar_inserters_InsertContext__O__V(maybeLastSeenChild.sr_ObjectRef__f_elem, value, ctx$1, hooks);
+      var ev$3 = value;
+      maybeLastSeenChild.sr_ObjectRef__f_elem = ev$3;
+      ev$3 = null;
+    })), owner$1);
+  })), initialHooks);
+});
+$c_Lcom_raquo_laminar_inserters_ChildInserter$.prototype.switchToChild__O__Lcom_raquo_laminar_nodes_ChildNode__Lcom_raquo_laminar_inserters_InsertContext__O__V = (function(maybeLastSeenChild, newChildNode, ctx, hooks) {
+  if ((!$n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_strictMode)) {
+    $n(ctx).forceSetStrictMode__V();
+  }
+  var elem = $n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_extraNodeCount;
+  var elem$1 = 0;
+  elem$1 = elem;
+  if ((maybeLastSeenChild === (void 0))) {
+    var $x_1 = true;
+  } else {
+    var _$1 = $as_Lcom_raquo_laminar_nodes_ChildNode(maybeLastSeenChild);
+    var x = $n(_$1).ref__Lorg_scalajs_dom_Node();
+    var y = $n($n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_sentinelNode).ref__Lorg_scalajs_dom_Node().nextSibling;
+    var $x_1 = $m_sr_BoxesRunTime$().equals__O__O__Z(x, y);
+  }
+  if ($x_1) {
+    var x$1 = maybeLastSeenChild;
+  } else {
+    var x$1 = (void 0);
+  }
+  if ((x$1 === (void 0))) {
+    $m_Lcom_raquo_laminar_nodes_ParentNode$().insertChildAfter__Lcom_raquo_laminar_nodes_ParentNode__Lcom_raquo_laminar_nodes_ChildNode__Lcom_raquo_laminar_nodes_ChildNode__O__Z($n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_parentNode, newChildNode, $n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_sentinelNode, hooks);
+  } else {
+    var lastSeenChild = $as_Lcom_raquo_laminar_nodes_ChildNode(x$1);
+    var replaced = $m_Lcom_raquo_laminar_nodes_ParentNode$().replaceChild__Lcom_raquo_laminar_nodes_ParentNode__Lcom_raquo_laminar_nodes_ChildNode__Lcom_raquo_laminar_nodes_ChildNode__O__Z($n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_parentNode, lastSeenChild, newChildNode, hooks);
+    if ((replaced || (lastSeenChild === newChildNode))) {
+      var ev$4 = ((elem$1 - 1) | 0);
+      elem$1 = ev$4;
+    }
+  }
+  $n(ctx).removeOldChildNodesFromDOM__Lcom_raquo_laminar_nodes_ChildNode__V(newChildNode);
+  $n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_extraNodesMap.clear();
+  $n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_extraNodesMap.set($n(newChildNode).ref__Lorg_scalajs_dom_Node(), newChildNode);
+  $n(ctx).Lcom_raquo_laminar_inserters_InsertContext__f_extraNodeCount = 1;
+});
+var $d_Lcom_raquo_laminar_inserters_ChildInserter$ = new $TypeData().initClass($c_Lcom_raquo_laminar_inserters_ChildInserter$, "com.raquo.laminar.inserters.ChildInserter$", ({
+  Lcom_raquo_laminar_inserters_ChildInserter$: 1
+}));
+var $n_Lcom_raquo_laminar_inserters_ChildInserter$;
+function $m_Lcom_raquo_laminar_inserters_ChildInserter$() {
+  if ((!$n_Lcom_raquo_laminar_inserters_ChildInserter$)) {
+    $n_Lcom_raquo_laminar_inserters_ChildInserter$ = new $c_Lcom_raquo_laminar_inserters_ChildInserter$();
+  }
+  return $n_Lcom_raquo_laminar_inserters_ChildInserter$;
+}
+/** @constructor */
 function $c_Lcom_raquo_laminar_inserters_ChildTextInserter$() {
 }
 $c_Lcom_raquo_laminar_inserters_ChildTextInserter$.prototype = new $h_O();
@@ -3825,6 +3897,19 @@ $c_Lcom_raquo_laminar_keys_EventProcessor.prototype.constructor = $c_Lcom_raquo_
 function $h_Lcom_raquo_laminar_keys_EventProcessor() {
 }
 $h_Lcom_raquo_laminar_keys_EventProcessor.prototype = $c_Lcom_raquo_laminar_keys_EventProcessor.prototype;
+$c_Lcom_raquo_laminar_keys_EventProcessor.prototype.stopPropagation__Lcom_raquo_laminar_keys_EventProcessor = (function() {
+  var newProcessor = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ev) => {
+    var this$2 = $n($as_s_Option($n(this.Lcom_raquo_laminar_keys_EventProcessor__f_processor).apply__O__O(ev)));
+    if (this$2.isEmpty__Z()) {
+      return $m_s_None$();
+    } else {
+      var x0 = this$2.get__O();
+      ev.stopPropagation();
+      return new $c_s_Some(x0);
+    }
+  }));
+  return new $c_Lcom_raquo_laminar_keys_EventProcessor(this.Lcom_raquo_laminar_keys_EventProcessor__f_eventProp, this.Lcom_raquo_laminar_keys_EventProcessor__f_shouldUseCapture, this.Lcom_raquo_laminar_keys_EventProcessor__f_shouldBePassive, newProcessor);
+});
 $c_Lcom_raquo_laminar_keys_EventProcessor.prototype.mapToValue__Lcom_raquo_laminar_keys_EventProcessor = (function() {
   var newProcessor = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ev) => {
     var this$2 = $n($as_s_Option($n(this.Lcom_raquo_laminar_keys_EventProcessor__f_processor).apply__O__O(ev)));
@@ -4196,10 +4281,52 @@ function $m_Lcom_raquo_laminar_nodes_ReactiveElement$() {
   }
   return $n_Lcom_raquo_laminar_nodes_ReactiveElement$;
 }
+function $p_Lcom_raquo_laminar_receivers_ChildOptionReceiver$__emptyNode$lzyINIT1$1__sr_LazyRef__Lcom_raquo_laminar_nodes_CommentNode($thiz, emptyNode$lzy1$1) {
+  if ((emptyNode$lzy1$1 === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  return $as_Lcom_raquo_laminar_nodes_CommentNode(($n(emptyNode$lzy1$1).sr_LazyRef__f__initialized ? $n(emptyNode$lzy1$1).sr_LazyRef__f__value : $n(emptyNode$lzy1$1).initialize__O__O(new $c_Lcom_raquo_laminar_nodes_CommentNode(""))));
+}
+function $p_Lcom_raquo_laminar_receivers_ChildOptionReceiver$__emptyNode$1__sr_LazyRef__Lcom_raquo_laminar_nodes_CommentNode($thiz, emptyNode$lzy1$2) {
+  return $as_Lcom_raquo_laminar_nodes_CommentNode(($n(emptyNode$lzy1$2).sr_LazyRef__f__initialized ? $n(emptyNode$lzy1$2).sr_LazyRef__f__value : $p_Lcom_raquo_laminar_receivers_ChildOptionReceiver$__emptyNode$lzyINIT1$1__sr_LazyRef__Lcom_raquo_laminar_nodes_CommentNode($thiz, emptyNode$lzy1$2)));
+}
+/** @constructor */
+function $c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$() {
+}
+$c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$.prototype = new $h_O();
+$c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$.prototype.constructor = $c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$;
+/** @constructor */
+function $h_Lcom_raquo_laminar_receivers_ChildOptionReceiver$() {
+}
+$h_Lcom_raquo_laminar_receivers_ChildOptionReceiver$.prototype = $c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$.prototype;
+$c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$.prototype.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_inserters_DynamicInserter = (function(maybeChildSource) {
+  var emptyNode$lzy1 = new $c_sr_LazyRef();
+  $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
+  var $x_1 = $n($n(maybeChildSource).toObservable__Lcom_raquo_airstream_core_Observable());
+  var emptyNode$lzy1$2$1 = emptyNode$lzy1;
+  var childSource = $x_1.map__F1__Lcom_raquo_airstream_core_Observable(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((emptyNode$lzy1$2) => ((_$1) => {
+    var _$1$1 = $as_s_Option(_$1);
+    var this$2 = $n(_$1$1);
+    return $as_Lcom_raquo_laminar_nodes_ChildNode((this$2.isEmpty__Z() ? $p_Lcom_raquo_laminar_receivers_ChildOptionReceiver$__emptyNode$1__sr_LazyRef__Lcom_raquo_laminar_nodes_CommentNode(this, emptyNode$lzy1$2) : this$2.get__O()));
+  }))(emptyNode$lzy1$2$1)));
+  return $m_Lcom_raquo_laminar_inserters_ChildInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter($n(childSource).toObservable__Lcom_raquo_airstream_core_Observable(), $m_Lcom_raquo_laminar_modifiers_RenderableNode$().Lcom_raquo_laminar_modifiers_RenderableNode$__f_nodeRenderable, (void 0));
+});
+var $d_Lcom_raquo_laminar_receivers_ChildOptionReceiver$ = new $TypeData().initClass($c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$, "com.raquo.laminar.receivers.ChildOptionReceiver$", ({
+  Lcom_raquo_laminar_receivers_ChildOptionReceiver$: 1
+}));
+var $n_Lcom_raquo_laminar_receivers_ChildOptionReceiver$;
+function $m_Lcom_raquo_laminar_receivers_ChildOptionReceiver$() {
+  if ((!$n_Lcom_raquo_laminar_receivers_ChildOptionReceiver$)) {
+    $n_Lcom_raquo_laminar_receivers_ChildOptionReceiver$ = new $c_Lcom_raquo_laminar_receivers_ChildOptionReceiver$();
+  }
+  return $n_Lcom_raquo_laminar_receivers_ChildOptionReceiver$;
+}
 /** @constructor */
 function $c_Lcom_raquo_laminar_receivers_ChildReceiver$() {
+  this.Lcom_raquo_laminar_receivers_ChildReceiver$__f_maybe = null;
   this.Lcom_raquo_laminar_receivers_ChildReceiver$__f_text = null;
   $n_Lcom_raquo_laminar_receivers_ChildReceiver$ = this;
+  this.Lcom_raquo_laminar_receivers_ChildReceiver$__f_maybe = $m_Lcom_raquo_laminar_receivers_ChildOptionReceiver$();
   this.Lcom_raquo_laminar_receivers_ChildReceiver$__f_text = $m_Lcom_raquo_laminar_receivers_ChildTextReceiver$();
 }
 $c_Lcom_raquo_laminar_receivers_ChildReceiver$.prototype = new $h_O();
@@ -8107,7 +8234,7 @@ function $asArrayOf_Lprontopop_Sound$SoundPlayer(obj, depth) {
 /** @constructor */
 function $c_Lprontopop_Styles$() {
   this.Lprontopop_Styles$__f_css = null;
-  this.Lprontopop_Styles$__f_css = "\n@font-face { font-family: \"Fira Code\"; src: url(\"fonts/FiraCode-Regular.woff2\") format(\"woff2\");\n  font-weight: 400; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-Regular.woff2\") format(\"woff2\");\n  font-weight: 400; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-Medium.woff2\") format(\"woff2\");\n  font-weight: 500; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-SemiBold.woff2\") format(\"woff2\");\n  font-weight: 600; font-style: normal; font-display: swap; }\n\n/* the forge palette: fixed tokens, never theme-dependent */\n:root {\n  --hot-iron-orange: #ee582b;\n  --vivid-red-orange: #E22200;\n  --chio-light-blue: #11a7d4;\n  --cvro-bright-blue: #05b9e9;\n  --temper-blue: #095c75;\n  --tempered-iron-purple: #17193f;\n  --ctip-bone-white: #e8e6c0;\n  --anvil-coal-graphite: #322b25;\n  --cacg-cold-gray: #cdd4da;\n  --coal-ash: #7d6e5f;\n  --neon-pink-purple: #c724b1;\n  --vivid-bright-green: #38db4e;\n  --dark-night-graphite: #14161a;\n  --day-light-white: #fafafa;\n  --mono: \"Fira Code\", \"Fira Mono\", ui-monospace, monospace;\n}\n\n/* Automatic (no data-theme): Calm light */\n:root {\n  --bg: var(--day-light-white);\n  --fg: var(--dark-night-graphite);\n  --head: var(--dark-night-graphite);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--coal-ash);\n  color-scheme: light;\n}\n\n/* Automatic + OS dark: Calm dark */\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme]) {\n    --bg: var(--dark-night-graphite);\n    --fg: var(--day-light-white);\n    --head: var(--day-light-white);\n    --link: var(--chio-light-blue);\n    --link-hover: var(--cvro-bright-blue);\n    --muted: var(--cacg-cold-gray);\n    --bg-soft: var(--tempered-iron-purple);\n    --code-bg: var(--tempered-iron-purple);\n    --code-fg: var(--ctip-bone-white);\n    --border: var(--coal-ash);\n    --rule: var(--coal-ash);\n    color-scheme: dark;\n  }\n}\n\n/* Smither light: tempered purple on bone white, headings over a hot-iron rule */\n:root[data-theme=\"smither-light\"] {\n  --bg: var(--ctip-bone-white);\n  --fg: var(--tempered-iron-purple);\n  --head: var(--tempered-iron-purple);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--anvil-coal-graphite);\n  --rule: var(--hot-iron-orange);\n  color-scheme: light;\n}\n\n/* Forgy dark: heading and its line must differ, so a hot-iron heading sits over a quiet temper-blue seam */\n:root[data-theme=\"forgy-dark\"] {\n  --bg: var(--tempered-iron-purple);\n  --fg: var(--ctip-bone-white);\n  --head: var(--hot-iron-orange);\n  --link: var(--cvro-bright-blue);\n  --link-hover: var(--chio-light-blue);\n  --muted: var(--cacg-cold-gray);\n  --bg-soft: var(--anvil-coal-graphite);\n  --code-bg: var(--anvil-coal-graphite);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--temper-blue);\n  color-scheme: dark;\n}\n\n:root[data-theme=\"calm-dark\"] {\n  --bg: var(--dark-night-graphite);\n  --fg: var(--day-light-white);\n  --head: var(--day-light-white);\n  --link: var(--chio-light-blue);\n  --link-hover: var(--cvro-bright-blue);\n  --muted: var(--cacg-cold-gray);\n  --bg-soft: var(--tempered-iron-purple);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--coal-ash);\n  --rule: var(--coal-ash);\n  color-scheme: dark;\n}\n\n:root[data-theme=\"calm-light\"] {\n  --bg: var(--day-light-white);\n  --fg: var(--dark-night-graphite);\n  --head: var(--dark-night-graphite);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--coal-ash);\n  color-scheme: light;\n}\n\n/* The theme dropdown. The design language pins it to the top right corner; here it sits beside the\n   title instead, because on a wide screen a fixed corner puts it far from everything else and out\n   of the eye's path \u2014 next to the version it is simply found. */\n#theme-select {\n  margin-left: 3ch;\n  font-family: var(--mono); font-size: .8rem; font-weight: bold;\n  padding: .3rem .7rem; border-radius: 4px;\n  border: 1px solid var(--border); background: var(--code-bg); color: var(--code-fg);\n  cursor: pointer;\n}\n\n/* prontopop's own surface, spoken in the semantic tokens above */\n\n/* NOT from the design language, so do not expect to find it upstream: the forge palette stops at\n   hot-iron orange, around working heat, and yellow is the next step up the same temperature scale\n   \u2014 welding heat. Added here for the signature chips. */\n:root { --welding-yellow: #f5c518; }\n\n* { box-sizing: border-box; }\n\n/* No max-width and no centering: the song table has a FIXED width in characters, so a narrow\n   window scrolls sideways instead of reflowing. The background still covers the whole canvas\n   because a body background propagates there. */\nbody {\n  font-family: var(--mono);\n  font-variant-ligatures: none;\n  font-feature-settings: \"liga\" 0, \"calt\" 0;\n  background: var(--bg);\n  color: var(--fg);\n  margin: 1rem;\n  padding: 0 0 3rem;\n  width: max-content;\n  min-width: calc(100% - 2rem);\n}\n\n/* The seam sits on the title ROW, not on the h1, so it still spans the full width now that the\n   theme dropdown shares the line. */\n.titlerow {\n  align-items: baseline;\n  margin: 0.2em 0 0.8em;\n  padding-bottom: 0.2em;\n  border-bottom: 4px solid var(--rule);\n}\n\nh1 {\n  color: var(--head);\n  font-size: 1.6rem;\n  margin: 0;\n}\n\nh2 { color: var(--head); font-size: 1.2rem; margin: 0.5rem 0; }\n\ninput, select, button {\n  font-family: inherit;\n  font-size: inherit;\n  font-variant-ligatures: none;\n  font-feature-settings: \"liga\" 0, \"calt\" 0, \"dlig\" 0;\n}\n\ninput:not([type=\"range\"]), select {\n  background: var(--bg);\n  color: var(--fg);\n  border: 1px solid var(--border);\n  border-radius: 0.3rem;\n  padding: 0.25rem 0.4rem;\n}\n\ninput:focus, select:focus, button:focus-visible {\n  outline: 2px solid var(--link);\n  outline-offset: 1px;\n}\n\ninput.pattern { letter-spacing: 0.2ch; }\n\n/* The signature at a glance: 4/4 in welding yellow, every other signature in light blue. Coloured\n   as CHIPS, the way the design language marks state, rather than as text: light blue as text fails\n   contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing\n   into all five themes. */\n.songrow input.bpm { text-align: center; }\n\n.songrow input.sign {\n  background: var(--chio-light-blue);\n  color: var(--tempered-iron-purple);\n  border-color: var(--chio-light-blue);\n  font-weight: bold;\n  text-align: center;\n}\n\n.songrow input.sign.common {\n  background: var(--welding-yellow);\n  border-color: var(--welding-yellow);\n}\n\n/* The concert name and the saved-concerts dropdown, pinned to the same width so the two rows line\n   up. Without this the select sizes itself to its longest option, so it drifted as concerts were\n   saved with longer names. */\n.concertfield { width: 30ch; }\n\ninput[type=\"range\"] { accent-color: var(--hot-iron-orange); }\n\nbutton {\n  padding: 0.3rem 0.8rem;\n  border-radius: 0.5rem;\n  border: 1px solid var(--border);\n  background: var(--bg-soft);\n  color: var(--fg);\n  cursor: pointer;\n}\n\nbutton:hover { border-color: var(--link); }\n\n/* The playing song's own button, in the same alert red-orange the transport wears while it offers\n   to stop: both say \"Stop\" and both do, so one word must not come in two colours. */\n.playing, .playing:hover {\n  background: var(--vivid-red-orange);\n  color: #ffffff;\n  border-color: var(--vivid-red-orange);\n}\n\n/* The one transport button: the signal green the design language gives a healthy state while it\n   offers to play, the alert red-orange while it offers to stop. It is the same button either way,\n   so the colour is what says which, and it has to be readable across a room. */\n.transport, .transport:hover {\n  background: var(--vivid-bright-green);\n  color: var(--tempered-iron-purple);\n  border-color: var(--vivid-bright-green);\n}\n\n/* white text keeps the red AA at button size */\n.transport.stopping, .transport.stopping:hover {\n  background: var(--vivid-red-orange);\n  color: #ffffff;\n  border-color: var(--vivid-red-orange);\n}\n\n.transport { font-weight: bold; padding: 0.4rem 1.1rem; }\n\n/* Next and Prev only walk the cue, so they stay in the ordinary button colours: nothing sounds\n   when they are pressed, and green would promise that it did */\n.step { padding: 0.4rem 0.8rem; }\n.step + .step { margin-right: 2ch; }\n\n/* how many bars a song runs for */\nselect.bars { margin-right: 2ch; }\n\n.fullscreen { margin-right: 2ch; }\n\n.row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }\n.row h2 { margin: 0.5rem 0; }\n\n/* The song table: fixed character widths, so a row NEVER reflows \u2014 one song, one line, and the\n   Play buttons line up in a column down the left. Total width is the sum plus the five gaps. */\n/* Column widths live in variables so a loaded concert can size Title and Pattern to its own\n   longest entries \u2014 see fitWidths in View.scala, which overrides the two elastic ones. The\n   defaults here are what an unmeasured table falls back to. Remember a pattern character occupies\n   1.2ch, since the field letter-spaces the beats apart; forgetting that once clipped a 4/4\n   pattern's closing ':||'. */\n:root {\n  --col-cue: 3ch;  /* one character: the \"@\" heading and the \">\" marker */\n  --col-play: 6ch;  /* \"Play\" and \"Stop\" are four characters; the buttons drop their side padding */\n  --col-title: 40ch;\n  --col-bpm: 5ch;   /* three or four digits, in fields that give up most of their side padding */\n  --col-sign: 5ch;  /* \"3/4\", under a heading shortened to \"Sig.\" to fit */\n  --col-pattern: 38ch;\n  --col-remove: 7ch;  /* \"Remove\" is six characters, and the button has no side padding left */\n  --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */\n  --col-gaps: calc(var(--col-gap) * 6);  /* the six gaps between seven columns */\n}\n\n.songrow {\n  display: grid;\n  gap: var(--col-gap);\n  align-items: center;\n  /* the fields are boxes with their own borders, so a hair between rows is enough to keep two of\n     them apart; a taller gap only pushed songs off the bottom of a phone */\n  margin: 0.1rem 0;\n  grid-template-columns:\n    var(--col-cue) var(--col-play) var(--col-title) var(--col-bpm)\n    var(--col-sign) var(--col-pattern) var(--col-remove);\n  width: calc(var(--col-cue) + var(--col-play) + var(--col-title) + var(--col-bpm) +\n              var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));\n}\n\n/* The row's fields keep their vertical padding but hand back most of the sides: it was the padding\n   that set how narrow each column could be drawn, and the table has to fit a phone held sideways.\n   fitWidths in View.scala allows for what is left. */\n.songrow input { width: 100%; min-width: 0; padding-left: 0.2rem; padding-right: 0.2rem; }\n\n/* the row buttons keep only their vertical padding: each fills its grid column anyway, so the side\n   padding bought nothing but width, and the table has to fit a phone held sideways */\n.songrow button { padding: 0.3rem 0; }\n.songrow.header { color: var(--muted); }\n/* the \"@\" sits over the marker below it */\n.songrow.header span:first-child { text-align: center; }\n\n/* the cue column: a \">\" at the current or last played song, and on every row a button that moves\n   the cue there. It wears the ordinary button look, so the column reads as pressable at a glance\n   rather than having to be discovered. */\n.songrow button.cue {\n  text-align: center;\n  color: var(--head);\n  font-weight: bold;\n}\n\n/* the cued row, outlined so the marked one is clear across a lit stage */\n.songrow button.cue.cued { border-color: var(--head); }\n\n\n.status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }\n\n/* the keyboard shortcuts, rendered from the same list the key handler reads */\n.shortcuts { margin-top: 2rem; }\n.shortcuts h2 { margin-bottom: 0.4rem; }\n.shortcuts table { border-collapse: collapse; }\n.shortcuts th, .shortcuts td { border: 1px solid var(--border); padding: 0.25rem 0.9rem; text-align: left; }\n.shortcuts th { background: var(--bg-soft); color: var(--muted); }\n.shortcuts td:first-child { font-weight: bold; color: var(--head); white-space: nowrap; }\n.shortcuts td:last-child { text-align: center; color: var(--muted); }\n\n/* what is playing, beside the Songs heading */\n.nowplaying { margin-left: 2ch; color: var(--muted); }\n";
+  this.Lprontopop_Styles$__f_css = "\n@font-face { font-family: \"Fira Code\"; src: url(\"fonts/FiraCode-Regular.woff2\") format(\"woff2\");\n  font-weight: 400; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-Regular.woff2\") format(\"woff2\");\n  font-weight: 400; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-Medium.woff2\") format(\"woff2\");\n  font-weight: 500; font-style: normal; font-display: swap; }\n@font-face { font-family: \"Fira Sans\"; src: url(\"fonts/FiraSans-SemiBold.woff2\") format(\"woff2\");\n  font-weight: 600; font-style: normal; font-display: swap; }\n\n/* the forge palette: fixed tokens, never theme-dependent */\n:root {\n  --hot-iron-orange: #ee582b;\n  --vivid-red-orange: #E22200;\n  --chio-light-blue: #11a7d4;\n  --cvro-bright-blue: #05b9e9;\n  --temper-blue: #095c75;\n  --tempered-iron-purple: #17193f;\n  --ctip-bone-white: #e8e6c0;\n  --anvil-coal-graphite: #322b25;\n  --cacg-cold-gray: #cdd4da;\n  --coal-ash: #7d6e5f;\n  --neon-pink-purple: #c724b1;\n  --vivid-bright-green: #38db4e;\n  --dark-night-graphite: #14161a;\n  --day-light-white: #fafafa;\n  --mono: \"Fira Code\", \"Fira Mono\", ui-monospace, monospace;\n}\n\n/* Automatic (no data-theme): Calm light */\n:root {\n  --bg: var(--day-light-white);\n  --fg: var(--dark-night-graphite);\n  --head: var(--dark-night-graphite);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--coal-ash);\n  color-scheme: light;\n}\n\n/* Automatic + OS dark: Calm dark */\n@media (prefers-color-scheme: dark) {\n  :root:not([data-theme]) {\n    --bg: var(--dark-night-graphite);\n    --fg: var(--day-light-white);\n    --head: var(--day-light-white);\n    --link: var(--chio-light-blue);\n    --link-hover: var(--cvro-bright-blue);\n    --muted: var(--cacg-cold-gray);\n    --bg-soft: var(--tempered-iron-purple);\n    --code-bg: var(--tempered-iron-purple);\n    --code-fg: var(--ctip-bone-white);\n    --border: var(--coal-ash);\n    --rule: var(--coal-ash);\n    color-scheme: dark;\n  }\n}\n\n/* Smither light: tempered purple on bone white, headings over a hot-iron rule */\n:root[data-theme=\"smither-light\"] {\n  --bg: var(--ctip-bone-white);\n  --fg: var(--tempered-iron-purple);\n  --head: var(--tempered-iron-purple);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--anvil-coal-graphite);\n  --rule: var(--hot-iron-orange);\n  color-scheme: light;\n}\n\n/* Forgy dark: heading and its line must differ, so a hot-iron heading sits over a quiet temper-blue seam */\n:root[data-theme=\"forgy-dark\"] {\n  --bg: var(--tempered-iron-purple);\n  --fg: var(--ctip-bone-white);\n  --head: var(--hot-iron-orange);\n  --link: var(--cvro-bright-blue);\n  --link-hover: var(--chio-light-blue);\n  --muted: var(--cacg-cold-gray);\n  --bg-soft: var(--anvil-coal-graphite);\n  --code-bg: var(--anvil-coal-graphite);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--temper-blue);\n  color-scheme: dark;\n}\n\n:root[data-theme=\"calm-dark\"] {\n  --bg: var(--dark-night-graphite);\n  --fg: var(--day-light-white);\n  --head: var(--day-light-white);\n  --link: var(--chio-light-blue);\n  --link-hover: var(--cvro-bright-blue);\n  --muted: var(--cacg-cold-gray);\n  --bg-soft: var(--tempered-iron-purple);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--coal-ash);\n  --rule: var(--coal-ash);\n  color-scheme: dark;\n}\n\n:root[data-theme=\"calm-light\"] {\n  --bg: var(--day-light-white);\n  --fg: var(--dark-night-graphite);\n  --head: var(--dark-night-graphite);\n  --link: var(--temper-blue);\n  --link-hover: var(--tempered-iron-purple);\n  --muted: var(--coal-ash);\n  --bg-soft: var(--cacg-cold-gray);\n  --code-bg: var(--tempered-iron-purple);\n  --code-fg: var(--ctip-bone-white);\n  --border: var(--cacg-cold-gray);\n  --rule: var(--coal-ash);\n  color-scheme: light;\n}\n\n/* The theme dropdown. The design language pins it to the top right corner; here it sits beside the\n   title instead, because on a wide screen a fixed corner puts it far from everything else and out\n   of the eye's path \u2014 next to the version it is simply found. */\n#theme-select {\n  margin-left: 3ch;\n  font-family: var(--mono); font-size: .8rem; font-weight: bold;\n  padding: .3rem .7rem; border-radius: 4px;\n  border: 1px solid var(--border); background: var(--code-bg); color: var(--code-fg);\n  cursor: pointer;\n}\n\n/* prontopop's own surface, spoken in the semantic tokens above */\n\n/* NOT from the design language, so do not expect to find it upstream: the forge palette stops at\n   hot-iron orange, around working heat, and yellow is the next step up the same temperature scale\n   \u2014 welding heat. Added here for the signature chips. */\n:root { --welding-yellow: #f5c518; }\n\n* { box-sizing: border-box; }\n\n/* No max-width and no centering: the song table has a FIXED width in characters, so a narrow\n   window scrolls sideways instead of reflowing. The background still covers the whole canvas\n   because a body background propagates there. */\nbody {\n  font-family: var(--mono);\n  font-variant-ligatures: none;\n  font-feature-settings: \"liga\" 0, \"calt\" 0;\n  background: var(--bg);\n  color: var(--fg);\n  margin: 1rem;\n  padding: 0 0 3rem;\n  width: max-content;\n  min-width: calc(100% - 2rem);\n}\n\n/* The seam sits on the title ROW, not on the h1, so it still spans the full width now that the\n   theme dropdown shares the line. */\n.titlerow {\n  align-items: baseline;\n  margin: 0.2em 0 0.8em;\n  padding-bottom: 0.2em;\n  border-bottom: 4px solid var(--rule);\n}\n\nh1 {\n  color: var(--head);\n  font-size: 1.6rem;\n  margin: 0;\n}\n\nh2 { color: var(--head); font-size: 1.2rem; margin: 0.5rem 0; }\n\ninput, select, button {\n  font-family: inherit;\n  font-size: inherit;\n  font-variant-ligatures: none;\n  font-feature-settings: \"liga\" 0, \"calt\" 0, \"dlig\" 0;\n}\n\ninput:not([type=\"range\"]), select {\n  background: var(--bg);\n  color: var(--fg);\n  border: 1px solid var(--border);\n  border-radius: 0.3rem;\n  padding: 0.25rem 0.4rem;\n}\n\ninput:focus, select:focus, button:focus-visible {\n  outline: 2px solid var(--link);\n  outline-offset: 1px;\n}\n\ninput.pattern { letter-spacing: 0.2ch; }\n\n/* The signature at a glance: 4/4 in welding yellow, every other signature in light blue. Coloured\n   as CHIPS, the way the design language marks state, rather than as text: light blue as text fails\n   contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing\n   into all five themes. */\n.songrow input.bpm { text-align: center; }\n\n.songrow input.sign {\n  background: var(--chio-light-blue);\n  color: var(--tempered-iron-purple);\n  border-color: var(--chio-light-blue);\n  font-weight: bold;\n  text-align: center;\n}\n\n.songrow input.sign.common {\n  background: var(--welding-yellow);\n  border-color: var(--welding-yellow);\n}\n\n/* The concert name and the saved-concerts dropdown, pinned to the same width so the two rows line\n   up. Without this the select sizes itself to its longest option, so it drifted as concerts were\n   saved with longer names. */\n.concertfield { width: 30ch; }\n\ninput[type=\"range\"] { accent-color: var(--hot-iron-orange); }\n\nbutton {\n  padding: 0.3rem 0.8rem;\n  border-radius: 0.5rem;\n  border: 1px solid var(--border);\n  background: var(--bg-soft);\n  color: var(--fg);\n  cursor: pointer;\n}\n\nbutton:hover { border-color: var(--link); }\n\n/* The playing song's own button, in the same alert red-orange the transport wears while it offers\n   to stop: both say \"Stop\" and both do, so one word must not come in two colours. */\n.playing, .playing:hover {\n  background: var(--vivid-red-orange);\n  color: #ffffff;\n  border-color: var(--vivid-red-orange);\n}\n\n/* The one transport button: the signal green the design language gives a healthy state while it\n   offers to play, the alert red-orange while it offers to stop. It is the same button either way,\n   so the colour is what says which, and it has to be readable across a room. */\n.transport, .transport:hover {\n  background: var(--vivid-bright-green);\n  color: var(--tempered-iron-purple);\n  border-color: var(--vivid-bright-green);\n}\n\n/* white text keeps the red AA at button size */\n.transport.stopping, .transport.stopping:hover {\n  background: var(--vivid-red-orange);\n  color: #ffffff;\n  border-color: var(--vivid-red-orange);\n}\n\n.transport { font-weight: bold; padding: 0.4rem 1.1rem; }\n\n/* Next and Prev only walk the cue, so they stay in the ordinary button colours: nothing sounds\n   when they are pressed, and green would promise that it did */\n.step { padding: 0.4rem 0.8rem; }\n.step + .step { margin-right: 2ch; }\n\n/* how many bars a song runs for */\nselect.bars { margin-right: 2ch; }\n\n.fullscreen { margin-right: 2ch; }\n\n.row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }\n.row h2 { margin: 0.5rem 0; }\n\n/* The song table: fixed character widths, so a row NEVER reflows \u2014 one song, one line, and the\n   Play buttons line up in a column down the left. Total width is the sum plus the five gaps. */\n/* Column widths live in variables so a loaded concert can size Title and Pattern to its own\n   longest entries \u2014 see fitWidths in View.scala, which overrides the two elastic ones. The\n   defaults here are what an unmeasured table falls back to. Remember a pattern character occupies\n   1.2ch, since the field letter-spaces the beats apart; forgetting that once clipped a 4/4\n   pattern's closing ':||'. */\n:root {\n  --col-cue: 3ch;  /* one character: the \"@\" heading and the \">\" marker */\n  --col-play: 6ch;  /* \"Play\" and \"Stop\" are four characters; the buttons drop their side padding */\n  --col-title: 40ch;\n  --col-bpm: 5ch;   /* three or four digits, in fields that give up most of their side padding */\n  --col-sign: 5ch;  /* \"3/4\", under a heading shortened to \"Sig.\" to fit */\n  --col-pattern: 38ch;\n  --col-remove: 7ch;  /* \"Remove\" is six characters, and the button has no side padding left */\n  --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */\n  --col-gaps: calc(var(--col-gap) * 6);  /* the six gaps between seven columns */\n}\n\n.songrow {\n  display: grid;\n  gap: var(--col-gap);\n  align-items: center;\n  /* the fields are boxes with their own borders, so a hair between rows is enough to keep two of\n     them apart; a taller gap only pushed songs off the bottom of a phone */\n  margin: 0.1rem 0;\n  grid-template-columns:\n    var(--col-cue) var(--col-play) var(--col-title) var(--col-bpm)\n    var(--col-sign) var(--col-pattern) var(--col-remove);\n  width: calc(var(--col-cue) + var(--col-play) + var(--col-title) + var(--col-bpm) +\n              var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));\n}\n\n/* The row's fields keep their vertical padding but hand back most of the sides: it was the padding\n   that set how narrow each column could be drawn, and the table has to fit a phone held sideways.\n   fitWidths in View.scala allows for what is left. */\n.songrow input { width: 100%; min-width: 0; padding-left: 0.2rem; padding-right: 0.2rem; }\n\n/* the row buttons keep only their vertical padding: each fills its grid column anyway, so the side\n   padding bought nothing but width, and the table has to fit a phone held sideways */\n.songrow button { padding: 0.3rem 0; }\n.songrow.header { color: var(--muted); }\n/* the \"@\" sits over the marker below it */\n.songrow.header span:first-child { text-align: center; }\n\n/* the cue column: a \">\" at the current or last played song, and on every row a button that moves\n   the cue there. It wears the ordinary button look, so the column reads as pressable at a glance\n   rather than having to be discovered. */\n.songrow button.cue {\n  text-align: center;\n  color: var(--head);\n  font-weight: bold;\n}\n\n/* the cued row, outlined so the marked one is clear across a lit stage */\n.songrow button.cue.cued { border-color: var(--head); }\n\n\n.status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }\n\n/* the keyboard shortcuts, rendered from the same list the key handler reads */\n.shortcuts { margin-top: 2rem; }\n.shortcuts h2 { margin-bottom: 0.4rem; }\n.shortcuts table { border-collapse: collapse; }\n.shortcuts th, .shortcuts td { border: 1px solid var(--border); padding: 0.25rem 0.9rem; text-align: left; }\n.shortcuts th { background: var(--bg-soft); color: var(--muted); }\n.shortcuts td:first-child { font-weight: bold; color: var(--head); white-space: nowrap; }\n.shortcuts td:last-child { text-align: center; color: var(--muted); }\n\n/* what is playing, riding along at the end of the controls */\n.nowplaying { margin-left: 2ch; color: var(--muted); }\n\n/* the table holds something the Local Store does not; in the warm orange, not the alarm red */\n.unsaved { color: var(--hot-iron-orange); }\n\n/* The question before a load discards edits. Fixed to the viewport rather than the page, which is\n   as wide as the song table and scrolls sideways under it. */\n.backdrop {\n  position: fixed;\n  inset: 0;\n  background: rgba(0, 0, 0, 0.6);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 1rem;\n}\n\n.dialog {\n  background: var(--bg);\n  color: var(--fg);\n  border: 1px solid var(--border);\n  border-radius: 0.6rem;\n  padding: 1rem 1.4rem 1.2rem;\n  max-width: 52ch;\n  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);\n}\n\n.dialog h2 { margin-top: 0; }\n.dialog p { line-height: 1.5; }\n.dialog .concertname { color: var(--head); font-weight: bold; }\n.dialog .row { margin-bottom: 0; }\n.dialog button { padding: 0.4rem 1.1rem; }\n\n/* Cancel is the safe answer and takes the focus, so it is the one that looks pressed-by-default;\n   the destructive one wears the alert red-orange and has to be aimed at. */\n.cancel { font-weight: bold; margin-right: 2ch; }\n\n.discard, .discard:hover {\n  background: var(--vivid-red-orange);\n  color: #ffffff;\n  border-color: var(--vivid-red-orange);\n}\n";
 }
 $c_Lprontopop_Styles$.prototype = new $h_O();
 $c_Lprontopop_Styles$.prototype.constructor = $c_Lprontopop_Styles$;
@@ -8407,8 +8534,8 @@ function $p_Lprontopop_View$package$__listSaved$1__T__sci_Vector($thiz, keyPrefi
     return $x_1.drop$extension__T__I__T(_$2, this$12.length);
   }))))).sorted__s_math_Ordering__O($m_s_math_Ordering$String$()));
 }
-function $p_Lprontopop_View$package$__listOffered$1__T__sci_Vector($thiz, keyPrefix$7) {
-  var saved = $p_Lprontopop_View$package$__listSaved$1__T__sci_Vector($thiz, keyPrefix$7);
+function $p_Lprontopop_View$package$__listOffered$1__T__sci_Vector($thiz, keyPrefix$10) {
+  var saved = $p_Lprontopop_View$package$__listSaved$1__T__sci_Vector($thiz, keyPrefix$10);
   var this$11 = $n($as_sc_IterableOps($n(saved).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$3$2) => {
     var _$3 = $as_T(_$3$2);
     return $ct_T2__O__O__(new $c_T2(), _$3, false);
@@ -8423,10 +8550,10 @@ function $p_Lprontopop_View$package$__listOffered$1__T__sci_Vector($thiz, keyPre
   }))));
   return $as_sci_Vector(this$11.concat__sc_IterableOnce__O(suffix));
 }
-function $p_Lprontopop_View$package$__rowsOf$1__sr_IntRef__sci_Seq__sci_Vector($thiz, lastId$6, concert) {
+function $p_Lprontopop_View$package$__rowsOf$1__sr_IntRef__sci_Seq__sci_Vector($thiz, lastId$9, concert) {
   return $as_sci_Vector($n($n(concert).toVector__sci_Vector()).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((song$2) => {
     var song = $as_Lprontopop_Model$Song(song$2);
-    return $m_Lprontopop_SongRow$().from__I__Lprontopop_Model$Song__Lprontopop_SongRow($p_Lprontopop_View$package$__freshId$1__sr_IntRef__I($thiz, lastId$6), song);
+    return $m_Lprontopop_SongRow$().from__I__Lprontopop_Model$Song__Lprontopop_SongRow($p_Lprontopop_View$package$__freshId$1__sr_IntRef__I($thiz, lastId$9), song);
   }))));
 }
 function $p_Lprontopop_View$package$__widest$1__sci_Vector__F1__I($thiz, rows$1, text) {
@@ -8453,7 +8580,7 @@ function $p_Lprontopop_View$package$__fitWidths$1__sci_Vector__T2($thiz, rows) {
   var pattern = ((x$4 < 60) ? x$4 : 60);
   return new $c_T2$mcII$sp(title, pattern);
 }
-function $p_Lprontopop_View$package$__rowsOfSaved$1__sr_IntRef__T__sci_Vector($thiz, lastId$8, text) {
+function $p_Lprontopop_View$package$__rowsOfSaved$1__sr_IntRef__T__sci_Vector($thiz, lastId$11, text) {
   var this$1 = $n($m_s_Predef$().wrapRefArray__AO__scm_ArraySeq$ofRef($f_T__split__T__I__AT($n(text), "\n", (-1))));
   var this$6 = $n($m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$1));
   var pred = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$7$2) => {
@@ -8465,7 +8592,7 @@ function $p_Lprontopop_View$package$__rowsOfSaved$1__sr_IntRef__T__sci_Vector($t
   return $as_sci_Vector($n(this$6.filterImpl__F1__Z__sci_Vector(pred, false)).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((line$2) => {
     var line = $as_T(line$2);
     var f = $f_T__split__T__I__AT($n(line), "\t", (-1));
-    var id = $p_Lprontopop_View$package$__freshId$1__sr_IntRef__I($thiz, lastId$8);
+    var id = $p_Lprontopop_View$package$__freshId$1__sr_IntRef__I($thiz, lastId$11);
     var this$8 = $n($m_s_Predef$().wrapRefArray__AO__scm_ArraySeq$ofRef(f));
     var this$9 = new $c_s_PartialFunction$Lifted(this$8);
     var this$10 = $n(this$9.apply__O__s_Option(0));
@@ -8523,7 +8650,7 @@ function $p_Lprontopop_View$package$__stopPlaying$1__Lcom_raquo_airstream_state_
   var value = $m_s_None$();
   $f_Lcom_raquo_airstream_state_Var__set__O__V(this$1, value);
 }
-function $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$1, id, f) {
+function $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$1, dirtyVar$1, id, f) {
   var this$2 = $n(songsVar$1);
   var mod = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$8$2) => {
     var _$8 = $as_sci_Vector(_$8$2);
@@ -8533,8 +8660,10 @@ function $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Va
     }))));
   }));
   $f_Lcom_raquo_airstream_state_Var__update__F1__V(this$2, mod);
+  var this$3 = $n(dirtyVar$1);
+  $f_Lcom_raquo_airstream_state_Var__set__O__V(this$3, true);
 }
-function $p_Lprontopop_View$package$__removeRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__I__V($thiz, playingVar$2, songsVar$2, player$lzy1$4, id) {
+function $p_Lprontopop_View$package$__removeRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__I__V($thiz, playingVar$2, songsVar$2, dirtyVar$2, player$lzy1$4, id) {
   var this$1 = $n(playingVar$2);
   var this$2 = $n(this$1.Lcom_raquo_airstream_state_SourceVar__f_signal);
   if ($n($as_s_Option($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$2)).get__O())).contains__O__Z(id)) {
@@ -8551,8 +8680,10 @@ function $p_Lprontopop_View$package$__removeRow$1__Lcom_raquo_airstream_state_Va
     return this$4.filterImpl__F1__Z__sci_Vector(pred, true);
   }));
   $f_Lcom_raquo_airstream_state_Var__update__F1__V(this$5, mod);
+  var this$6 = $n(dirtyVar$2);
+  $f_Lcom_raquo_airstream_state_Var__set__O__V(this$6, true);
 }
-function $p_Lprontopop_View$package$__addSong$1__Lcom_raquo_airstream_state_Var__sr_IntRef__V($thiz, songsVar$3, lastId$4) {
+function $p_Lprontopop_View$package$__addSong$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_IntRef__V($thiz, songsVar$3, dirtyVar$3, lastId$4) {
   var this$4 = $n(songsVar$3);
   var mod = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$11$2) => {
     var _$11 = $as_sci_Vector(_$11$2);
@@ -8562,6 +8693,8 @@ function $p_Lprontopop_View$package$__addSong$1__Lcom_raquo_airstream_state_Var_
     return $as_sci_Vector(this$3.appended__O__O(elem));
   }));
   $f_Lcom_raquo_airstream_state_Var__update__F1__V(this$4, mod);
+  var this$5 = $n(dirtyVar$3);
+  $f_Lcom_raquo_airstream_state_Var__set__O__V(this$5, true);
 }
 function $p_Lprontopop_View$package$__toggleFullScreen$1__V($thiz) {
   if ((document.fullscreenElement === null)) {
@@ -8755,7 +8888,7 @@ function $p_Lprontopop_View$package$__togglePlayCued$1__Lcom_raquo_airstream_sta
     $p_Lprontopop_View$package$__playCued$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__V($thiz, songsVar$6, cueVar$5, statusVar$4, barsVar$4, playingVar$7, player$lzy1$8);
   }
 }
-function $p_Lprontopop_View$package$__save$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V($thiz, concertNameVar$1, statusVar$5, songsVar$7, keyPrefix$5, offeredVar$1, selectedVar$1) {
+function $p_Lprontopop_View$package$__save$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V($thiz, concertNameVar$1, statusVar$5, songsVar$7, keyPrefix$5, offeredVar$1, selectedVar$1, dirtyVar$4) {
   var this$1 = $n(concertNameVar$1);
   var this$2 = $n(this$1.Lcom_raquo_airstream_state_SourceVar__f_signal);
   var name = $f_T__trim__T($n($as_T($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$2)).get__O())));
@@ -8778,45 +8911,79 @@ function $p_Lprontopop_View$package$__save$1__Lcom_raquo_airstream_state_Var__Lc
     $f_Lcom_raquo_airstream_state_Var__set__O__V(this$10, value);
     var this$11 = $n(selectedVar$1);
     $f_Lcom_raquo_airstream_state_Var__set__O__V(this$11, name);
-    var this$12 = $n(statusVar$5);
+    var this$12 = $n(dirtyVar$4);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$12, false);
+    var this$13 = $n(statusVar$5);
     var value$1 = (("saved '" + name) + "'");
-    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$12, value$1);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$13, value$1);
   }
 }
-function $p_Lprontopop_View$package$__load$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__V($thiz, selectedVar$2, statusVar$6, songsVar$8, colWidthsVar$1, concertNameVar$2, keyPrefix$6, lastId$5, playingVar$8, player$lzy1$9) {
-  var this$1 = $n(selectedVar$2);
+function $p_Lprontopop_View$package$__loadConcert$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__V($thiz, statusVar$6, songsVar$8, colWidthsVar$1, concertNameVar$2, selectedVar$2, dirtyVar$5, keyPrefix$6, lastId$5, playingVar$8, player$lzy1$9, name) {
+  var x13 = $p_Lprontopop_View$package$__concertRows$1__T__sr_IntRef__T__s_Option($thiz, keyPrefix$6, lastId$5, name);
+  var x = $m_s_None$();
+  if ((x === x13)) {
+    var this$1 = $n(statusVar$6);
+    var value = (("no concert '" + name) + "'");
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$1, value);
+    return (void 0);
+  }
+  if ((x13 instanceof $c_s_Some)) {
+    var rows = $as_sci_Vector($n($as_s_Some(x13)).s_Some__f_value);
+    $p_Lprontopop_View$package$__stopPlaying$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__V($thiz, playingVar$8, player$lzy1$9);
+    var this$2 = $n(songsVar$8);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$2, rows);
+    var this$3 = $n(colWidthsVar$1);
+    var value$1 = $p_Lprontopop_View$package$__fitWidths$1__sci_Vector__T2($thiz, rows);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$3, value$1);
+    var this$4 = $n(concertNameVar$2);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$4, name);
+    var this$5 = $n(selectedVar$2);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$5, name);
+    var this$6 = $n(dirtyVar$5);
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$6, false);
+    var this$7 = $n(statusVar$6);
+    var value$2 = (((("loaded '" + name) + "' (") + $n(rows).length__I()) + " songs)");
+    $f_Lcom_raquo_airstream_state_Var__set__O__V(this$7, value$2);
+    return (void 0);
+  }
+  throw new $c_s_MatchError(x13);
+}
+function $p_Lprontopop_View$package$__chooseConcert$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__V($thiz, selectedVar$3, dirtyVar$6, pendingLoadVar$1, statusVar$7, songsVar$9, colWidthsVar$2, concertNameVar$3, keyPrefix$7, lastId$6, playingVar$9, player$lzy1$10, name) {
+  $m_sc_StringOps$();
+  var this$3 = $n(name);
+  if ((!(this$3 === ""))) {
+    var this$4 = $n(selectedVar$3);
+    var this$5 = $n(this$4.Lcom_raquo_airstream_state_SourceVar__f_signal);
+    var $x_1 = (name !== $n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$5)).get__O());
+  } else {
+    var $x_1 = false;
+  }
+  if ($x_1) {
+    var this$6 = $n(dirtyVar$6);
+    var this$7 = $n(this$6.Lcom_raquo_airstream_state_SourceVar__f_signal);
+    if ($uZ($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$7)).get__O())) {
+      var this$9 = $n(pendingLoadVar$1);
+      var value = new $c_s_Some(name);
+      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$9, value);
+    } else {
+      $p_Lprontopop_View$package$__loadConcert$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__V($thiz, statusVar$7, songsVar$9, colWidthsVar$2, concertNameVar$3, selectedVar$3, dirtyVar$6, keyPrefix$7, lastId$6, playingVar$9, player$lzy1$10, name);
+    }
+  }
+}
+function $p_Lprontopop_View$package$__answerPendingLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__Z__V($thiz, pendingLoadVar$2, statusVar$8, songsVar$10, colWidthsVar$3, concertNameVar$4, selectedVar$4, dirtyVar$7, keyPrefix$8, lastId$7, playingVar$10, player$lzy1$11, load) {
+  var this$1 = $n(pendingLoadVar$2);
   var this$2 = $n(this$1.Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var name = $as_T($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$2)).get__O());
-  matchResult6: {
-    var x13 = $p_Lprontopop_View$package$__concertRows$1__T__sr_IntRef__T__s_Option($thiz, keyPrefix$6, lastId$5, name);
-    var x = $m_s_None$();
-    if ((x === x13)) {
-      var this$4 = $n(statusVar$6);
-      var this$3 = $n(name);
-      if ((this$3 === "")) {
-        var value = "select a concert to load";
-      } else {
-        var value = (("no concert '" + name) + "'");
-      }
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$4, value);
-      break matchResult6;
+  var pending = $as_s_Option($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$2)).get__O());
+  var this$3 = $n(pendingLoadVar$2);
+  var value = $m_s_None$();
+  $f_Lcom_raquo_airstream_state_Var__set__O__V(this$3, value);
+  if (load) {
+    var this$4 = $n(pending);
+    if ((!this$4.isEmpty__Z())) {
+      var x0 = this$4.get__O();
+      var name = $as_T(x0);
+      $p_Lprontopop_View$package$__loadConcert$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__V($thiz, statusVar$8, songsVar$10, colWidthsVar$3, concertNameVar$4, selectedVar$4, dirtyVar$7, keyPrefix$8, lastId$7, playingVar$10, player$lzy1$11, name);
     }
-    if ((x13 instanceof $c_s_Some)) {
-      var rows = $as_sci_Vector($n($as_s_Some(x13)).s_Some__f_value);
-      $p_Lprontopop_View$package$__stopPlaying$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__V($thiz, playingVar$8, player$lzy1$9);
-      var this$5 = $n(songsVar$8);
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$5, rows);
-      var this$6 = $n(colWidthsVar$1);
-      var value$1 = $p_Lprontopop_View$package$__fitWidths$1__sci_Vector__T2($thiz, rows);
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$6, value$1);
-      var this$7 = $n(concertNameVar$2);
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$7, name);
-      var this$8 = $n(statusVar$6);
-      var value$2 = (((("loaded '" + name) + "' (") + $n(rows).length__I()) + " songs)");
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$8, value$2);
-      break matchResult6;
-    }
-    throw new $c_s_MatchError(x13);
   }
 }
 function $p_Lprontopop_View$package$__isFourFour$1__T__Z($thiz, sign) {
@@ -8829,7 +8996,7 @@ function $p_Lprontopop_View$package$__isFourFour$1__T__Z($thiz, sign) {
     return false;
   }
 }
-function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__Lprontopop_SongRow__Lcom_raquo_airstream_core_Signal__Lcom_raquo_laminar_nodes_ReactiveHtmlElement($thiz, cueSignal$1, cueVar$6, playingVar$9, songsVar$9, player$lzy1$10, statusVar$7, barsVar$5, id, initial, rowSignal) {
+function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__Lprontopop_SongRow__Lcom_raquo_airstream_core_Signal__Lcom_raquo_laminar_nodes_ReactiveHtmlElement($thiz, cueSignal$1, cueVar$6, playingVar$11, songsVar$11, player$lzy1$12, statusVar$9, barsVar$5, dirtyVar$8, id, initial, rowSignal) {
   var $x_15 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var x0$8 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("songrow");
   var $x_2 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
@@ -8865,7 +9032,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var x1$7 = $x_2.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array));
   var $x_4 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
-  var this$16 = $n($n(playingVar$9).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var this$16 = $n($n(playingVar$11).Lcom_raquo_airstream_state_SourceVar__f_signal);
   var project$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((p$2) => {
     var p = $as_s_Option(p$2);
     return ($n(p).contains__O__Z(id) ? "Stop" : "Play");
@@ -8874,7 +9041,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var x0$2 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$1, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable);
   var this$18 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls);
   var $x_3 = $n(this$18.$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("playing"));
-  var this$20 = $n($n(playingVar$9).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var this$20 = $n($n(playingVar$11).Lcom_raquo_airstream_state_SourceVar__f_signal);
   var project$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$19$2) => {
     var _$19 = $as_s_Option(_$19$2);
     return $n(_$19).contains__O__Z(id);
@@ -8884,7 +9051,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var eventProp$1 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
   var this$26 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$1, false, false));
   var onNext$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$20$3) => {
-    var this$23 = $n(songsVar$9);
+    var this$23 = $n(songsVar$11);
     var this$24 = $n(this$23.Lcom_raquo_airstream_state_SourceVar__f_signal);
     var this$25 = $n($n($as_sc_IterableOnceOps($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$24)).get__O())).find__F1__s_Option(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$21$2) => {
       var _$21 = $as_Lprontopop_SongRow(_$21$2);
@@ -8893,7 +9060,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
     if ((!this$25.isEmpty__Z())) {
       var x0$1 = this$25.get__O();
       var row = $as_Lprontopop_SongRow(x0$1);
-      $p_Lprontopop_View$package$__togglePlay$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lprontopop_SongRow__V($thiz, playingVar$9, player$lzy1$10, statusVar$7, barsVar$5, cueVar$6, row);
+      $p_Lprontopop_View$package$__togglePlay$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lprontopop_SongRow__V($thiz, playingVar$11, player$lzy1$12, statusVar$9, barsVar$5, cueVar$6, row);
     }
   }));
   var x2$1 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$26, onNext$1);
@@ -8914,7 +9081,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var this$39 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$2, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
   var onNext$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$3) => {
     var v = $as_T(v$3);
-    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$9, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$23$2) => {
+    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$11, dirtyVar$8, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$23$2) => {
       var _$23 = $as_Lprontopop_SongRow(_$23$2);
       $n(_$23);
       var this$34 = $n(_$23);
@@ -8947,7 +9114,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var this$53 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$3, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
   var onNext$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$3$1) => {
     var v$1 = $as_T(v$3$1);
-    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$9, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$25$2) => {
+    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$11, dirtyVar$8, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$25$2) => {
       var _$25 = $as_Lprontopop_SongRow(_$25$2);
       $n(_$25);
       var this$48 = $n(_$25);
@@ -8988,7 +9155,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var this$70 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$4, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
   var onNext$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$3$2) => {
     var v$2 = $as_T(v$3$2);
-    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$9, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$27$2) => {
+    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$11, dirtyVar$8, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$27$2) => {
       var _$27 = $as_Lprontopop_SongRow(_$27$2);
       $n(_$27);
       var this$65 = $n(_$27);
@@ -9021,7 +9188,7 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var this$85 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$5, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
   var onNext$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$3$3) => {
     var v$4 = $as_T(v$3$3);
-    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$9, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$29$2) => {
+    $p_Lprontopop_View$package$__updateRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__F1__V($thiz, songsVar$11, dirtyVar$8, id, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$29$2) => {
       var _$29 = $as_Lprontopop_SongRow(_$29$2);
       var this$79 = $n(v$4);
       var pattern$1$1 = $as_T(this$79.split("\u2026").join("..."));
@@ -9049,13 +9216,91 @@ function $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Sig
   var eventProp$6 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
   var this$93 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$6, false, false));
   var onNext$6 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$30$3) => {
-    $p_Lprontopop_View$package$__removeRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__I__V($thiz, playingVar$9, songsVar$9, player$lzy1$10, id);
+    $p_Lprontopop_View$package$__removeRow$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__I__V($thiz, playingVar$11, songsVar$11, dirtyVar$8, player$lzy1$12, id);
   }));
   var x1$6 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$93, onNext$6);
   var array$6 = [x0$7, x1$6];
   var x7 = $x_14.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$6));
   var array$7 = [x0$8, x1$7, x2$3, x3$1, x4$1, x5$1, x6, x7];
   return $x_15.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$7));
+}
+function $p_Lprontopop_View$package$__renderConfirmLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__Lcom_raquo_laminar_nodes_ReactiveHtmlElement($thiz, pendingLoadVar$4, statusVar$21, songsVar$33, colWidthsVar$7, concertNameVar$8, selectedVar$8, dirtyVar$22, keyPrefix$13, lastId$18, playingVar$28, player$lzy1$29, name) {
+  var $x_8 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var x0$7 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("backdrop");
+  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var eventProp = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$3 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp, false, false));
+  var onNext = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$31$3) => {
+    $p_Lprontopop_View$package$__answerPendingLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__Z__V($thiz, pendingLoadVar$4, statusVar$21, songsVar$33, colWidthsVar$7, concertNameVar$8, selectedVar$8, dirtyVar$22, keyPrefix$13, lastId$18, playingVar$28, player$lzy1$29, false);
+  }));
+  var x1$6 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$3, onNext);
+  var $x_7 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var x0$6 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("dialog");
+  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var eventProp$1 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$6 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$1, false, false)).stopPropagation__Lcom_raquo_laminar_keys_EventProcessor());
+  var onNext$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$32$3) => (void 0)));
+  var x1$5 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$6, onNext$1);
+  var $x_1 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h2__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$7 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x0 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$7, "Unsaved changes", r);
+  var array = [x0];
+  var x2$4 = $x_1.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array));
+  var $x_3 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).p__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$11 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r$1 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x0$2 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$11, "The songs have been edited since they were last saved. Loading ", r$1);
+  var $x_2 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var x0$1 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("concertname");
+  var this$12 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var value = (("\"" + name) + "\"");
+  var r$2 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x1 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$12, value, r$2);
+  var array$1 = [x0$1, x1];
+  var x1$1 = $x_2.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$1));
+  var this$16 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r$3 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x2 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$16, " replaces them, and the edits are gone.", r$3);
+  var array$2 = [x0$2, x1$1, x2];
+  var x3$1 = $x_3.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$2));
+  var $x_6 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var x0$5 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
+  var $x_4 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$20 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r$4 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x0$3 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$20, "Cancel", r$4);
+  var x1$2 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("cancel");
+  var x2$1 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_onMountFocus;
+  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var eventProp$2 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$23 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$2, false, false));
+  var onNext$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$33$3) => {
+    $p_Lprontopop_View$package$__answerPendingLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__Z__V($thiz, pendingLoadVar$4, statusVar$21, songsVar$33, colWidthsVar$7, concertNameVar$8, selectedVar$8, dirtyVar$22, keyPrefix$13, lastId$18, playingVar$28, player$lzy1$29, false);
+  }));
+  var x3 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$23, onNext$2);
+  var array$3 = [x0$3, x1$2, x2$1, x3];
+  var x1$4 = $x_4.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$3));
+  var $x_5 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$27 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r$5 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var x0$4 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$27, "Discard and load", r$5);
+  var x1$3 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("discard");
+  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var eventProp$3 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$30 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$3, false, false));
+  var onNext$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$34$3) => {
+    $p_Lprontopop_View$package$__answerPendingLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__Z__V($thiz, pendingLoadVar$4, statusVar$21, songsVar$33, colWidthsVar$7, concertNameVar$8, selectedVar$8, dirtyVar$22, keyPrefix$13, lastId$18, playingVar$28, player$lzy1$29, true);
+  }));
+  var x2$2 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$30, onNext$3);
+  var array$4 = [x0$4, x1$3, x2$2];
+  var x2$3 = $x_5.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$4));
+  var array$5 = [x0$5, x1$4, x2$3];
+  var x4 = $x_6.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$5));
+  var array$6 = [x0$6, x1$5, x2$4, x3$1, x4];
+  var x2$5 = $x_7.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$6));
+  var array$7 = [x0$7, x1$6, x2$5];
+  return $x_8.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$7));
 }
 /** @constructor */
 function $c_Lprontopop_View$package$() {
@@ -9077,66 +9322,68 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
   var colWidthsVar = $x_1.apply__O__Lcom_raquo_airstream_state_Var($p_Lprontopop_View$package$__fitWidths$1__sci_Vector__T2(this, $as_sci_Vector($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$3)).get__O())));
   var concertNameVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($m_Lprontopop_Concerts$().Lprontopop_Concerts$__f_startupTitle);
   var offeredVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($p_Lprontopop_View$package$__listOffered$1__T__sci_Vector(this, "prontopop.concert."));
-  var selectedVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var("");
+  var selectedVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($m_Lprontopop_Concerts$().Lprontopop_Concerts$__f_startupTitle);
+  var dirtyVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var(false);
+  var pendingLoadVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($m_s_None$());
   var playingVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($m_s_None$());
   var cueVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var($m_s_None$());
   var statusVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var("");
   var volumeVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var("100");
   var barsVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var("4");
   var fullScreenVar = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_Var).apply__O__Lcom_raquo_airstream_state_Var(false);
-  var this$9 = $m_sci_Vector$();
-  var this$6 = $m_sjsr_package$();
+  var this$10 = $m_sci_Vector$();
+  var this$7 = $m_sjsr_package$();
   var xs = new ($d_T.getArrayOf().constr)(["1", "2", "4", "8", "16", "32", "forever"]);
-  var array = this$6.refArrayToJSArray__AO__sjs_js_Array(xs);
+  var array = this$7.refArrayToJSArray__AO__sjs_js_Array(xs);
   var elems = new $c_sjsr_WrappedVarArgs(array);
-  var barChoices = this$9.from__sc_IterableOnce__sci_Vector(elems);
+  var barChoices = this$10.from__sc_IterableOnce__sci_Vector(elems);
   var signal = $n(cueVar).Lcom_raquo_airstream_state_SourceVar__f_signal;
-  var this$19 = $n($m_Lcom_raquo_airstream_combine_generated_CombinableSignal$().combineWith$extension__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_core_Source$SignalSource__Lapp_tulz_tuplez_Composition__Lcom_raquo_airstream_core_Signal(signal, $n(songsVar).Lcom_raquo_airstream_state_SourceVar__f_signal, new $c_Lapp_tulz_tuplez_Composition\uff3fPri0$$anon$1()));
+  var this$20 = $n($m_Lcom_raquo_airstream_combine_generated_CombinableSignal$().combineWith$extension__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_core_Source$SignalSource__Lapp_tulz_tuplez_Composition__Lcom_raquo_airstream_core_Signal(signal, $n(songsVar).Lcom_raquo_airstream_state_SourceVar__f_signal, new $c_Lapp_tulz_tuplez_Composition\uff3fPri0$$anon$1()));
   var project = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2) => {
     var x$1 = $as_T2(x$1$2);
     var cued = $as_s_Option($n(x$1)._1__O());
     var rows = $as_sci_Vector($n(x$1)._2__O());
-    var this$14 = $n(cued);
+    var this$15 = $n(cued);
     var p$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((id$3) => {
       var id$2 = $uI(id$3);
-      var this$13 = $n(rows);
+      var this$14 = $n(rows);
       var p = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$12$2) => {
         var _$12 = $as_Lprontopop_SongRow(_$12$2);
         return ($n(_$12).Lprontopop_SongRow__f_id === id$2);
       }));
-      return $f_sc_IterableOnceOps__exists__F1__Z(this$13, p);
+      return $f_sc_IterableOnceOps__exists__F1__Z(this$14, p);
     }));
-    var this$18 = ((this$14.isEmpty__Z() || $uZ(p$1.apply__O__O(this$14.get__O()))) ? this$14 : $m_s_None$());
+    var this$19 = ((this$15.isEmpty__Z() || $uZ(p$1.apply__O__O(this$15.get__O()))) ? this$15 : $m_s_None$());
     var alternative = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => {
-      var this$15 = $n(rows);
-      var this$16 = $n($f_sc_IndexedSeqOps__headOption__s_Option(this$15));
+      var this$16 = $n(rows);
+      var this$17 = $n($f_sc_IndexedSeqOps__headOption__s_Option(this$16));
       var f = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$13$2) => {
         var _$13 = $as_Lprontopop_SongRow(_$13$2);
         return $n(_$13).Lprontopop_SongRow__f_id;
       }));
-      if (this$16.isEmpty__Z()) {
+      if (this$17.isEmpty__Z()) {
         return $m_s_None$();
       } else {
-        var value = f.apply__O__O(this$16.get__O());
+        var value = f.apply__O__O(this$17.get__O());
         return new $c_s_Some(value);
       }
     }));
-    return (this$18.isEmpty__Z() ? $as_s_Option(alternative.apply__O()) : this$18);
+    return (this$19.isEmpty__Z() ? $as_s_Option(alternative.apply__O()) : this$19);
   }));
-  var cueSignal = new $c_Lcom_raquo_airstream_misc_MapSignal(this$19, project, $m_s_None$());
-  var this$33 = $m_sci_Vector$();
-  var this$30 = $m_sjsr_package$();
+  var cueSignal = new $c_Lcom_raquo_airstream_misc_MapSignal(this$20, project, $m_s_None$());
+  var this$34 = $m_sci_Vector$();
+  var this$31 = $m_sjsr_package$();
   $n($p_Lprontopop_View$package$__Shortcut$2__sr_LazyRef__Lprontopop_View$package$Shortcut$3$(this, Shortcut$lzy1));
-  var player$lzy1$17$1 = player$lzy1;
-  var act = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c(((player$lzy1$17) => (() => {
-    $p_Lprontopop_View$package$__togglePlayCued$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, playingVar, player$lzy1$17, songsVar, cueVar, statusVar, barsVar);
-  }))(player$lzy1$17$1));
+  var player$lzy1$20$1 = player$lzy1;
+  var act = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c(((player$lzy1$20) => (() => {
+    $p_Lprontopop_View$package$__togglePlayCued$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, playingVar, player$lzy1$20, songsVar, cueVar, statusVar, barsVar);
+  }))(player$lzy1$20$1));
   var $x_5 = new $c_Lprontopop_View$package$Shortcut$1(" ", "Space", "play the cued song, or stop what is playing", false, act);
   $n($p_Lprontopop_View$package$__Shortcut$2__sr_LazyRef__Lprontopop_View$package$Shortcut$3$(this, Shortcut$lzy1));
-  var player$lzy1$19$1 = player$lzy1;
-  var act$1 = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c(((player$lzy1$19) => (() => {
-    $p_Lprontopop_View$package$__stopPlaying$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__V(this, playingVar, player$lzy1$19);
-  }))(player$lzy1$19$1));
+  var player$lzy1$22$1 = player$lzy1;
+  var act$1 = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c(((player$lzy1$22) => (() => {
+    $p_Lprontopop_View$package$__stopPlaying$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__V(this, playingVar, player$lzy1$22);
+  }))(player$lzy1$22$1));
   var $x_4 = new $c_Lprontopop_View$package$Shortcut$1("Backspace", "Backspace", "stop the playing song, whatever else is going on", false, act$1);
   $n($p_Lprontopop_View$package$__Shortcut$2__sr_LazyRef__Lprontopop_View$package$Shortcut$3$(this, Shortcut$lzy1));
   var act$2 = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => {
@@ -9153,223 +9400,227 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     $p_Lprontopop_View$package$__moveCue$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__V(this, songsVar, cueVar, 1);
   }));
   var xs$1 = new ($d_Lprontopop_View$package$Shortcut$1.getArrayOf().constr)([$x_5, $x_4, $x_3, $x_2, new $c_Lprontopop_View$package$Shortcut$1("ArrowDown", "\u2193 Down", "move the cue to the song below", false, act$4)]);
-  var array$1 = this$30.refArrayToJSArray__AO__sjs_js_Array(xs$1);
+  var array$1 = this$31.refArrayToJSArray__AO__sjs_js_Array(xs$1);
   var elems$1 = new $c_sjsr_WrappedVarArgs(array$1);
-  var shortcuts = this$33.from__sc_IterableOnce__sci_Vector(elems$1);
+  var shortcuts = this$34.from__sc_IterableOnce__sci_Vector(elems$1);
   var $x_134 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$303 = $m_sjsr_package$();
+  var this$307 = $m_sjsr_package$();
   var $x_133 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("app");
-  var this$36 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var fn = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$31$3) => {
-    $as_Lcom_raquo_laminar_lifecycle_MountContext(_$31$3);
-    document.addEventListener("fullscreenchange", ((_$32$2) => {
+  var this$37 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var fn = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$35$3) => {
+    $as_Lcom_raquo_laminar_lifecycle_MountContext(_$35$3);
+    document.addEventListener("fullscreenchange", ((_$36$2) => {
       var on = (document.fullscreenElement !== null);
-      var this$35 = $n(fullScreenVar);
-      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$35, on);
+      var this$36 = $n(fullScreenVar);
+      $f_Lcom_raquo_airstream_state_Var__set__O__V(this$36, on);
       return (on ? ($m_Lprontopop_WakeLock$().keepAwake__V(), (void 0)) : ($m_Lprontopop_WakeLock$().allowSleep__V(), (void 0)));
     }));
   }));
-  var $x_132 = $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier(this$36, fn);
+  var $x_132 = $f_Lcom_raquo_laminar_api_MountHooks__onMountCallback__F1__Lcom_raquo_laminar_modifiers_Modifier(this$37, fn);
   var $x_131 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).styleAttr__Lcom_raquo_laminar_keys_HtmlAttr());
-  var this$38 = $n($n(colWidthsVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var this$39 = $n($n(colWidthsVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
   var project$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2$1) => {
     var x$1$1 = $as_T2(x$1$2$1);
     var title = $n(x$1$1)._1$mcI$sp__I();
     var pattern = $n(x$1$1)._2$mcI$sp__I();
     return (((("--col-title: " + title) + "ch; --col-pattern: ") + pattern) + "ch");
   }));
-  var $x_130 = $x_131.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater(new $c_Lcom_raquo_airstream_misc_MapSignal(this$38, project$1, $m_s_None$()));
+  var $x_130 = $x_131.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater(new $c_Lcom_raquo_airstream_misc_MapSignal(this$39, project$1, $m_s_None$()));
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var this$41 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var events = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$33$2) => {
-    var _$33 = $as_Lcom_raquo_laminar_defs_eventProps_DocumentEventProps(_$33$2);
+  var this$42 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var events = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$37$2) => {
+    var _$37 = $as_Lcom_raquo_laminar_defs_eventProps_DocumentEventProps(_$37$2);
     $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-    var eventProp = $n($as_Lcom_raquo_laminar_defs_eventProps_GlobalEventProps(_$33)).onKeyDown__Lcom_raquo_laminar_keys_EventProp();
+    var eventProp = $n($as_Lcom_raquo_laminar_defs_eventProps_GlobalEventProps(_$37)).onKeyDown__Lcom_raquo_laminar_keys_EventProp();
     return $m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp, false, false);
   }));
-  var source = $f_Lcom_raquo_laminar_api_Laminar__documentEvents__F1__Lcom_raquo_airstream_core_EventStream(this$41, events);
-  var $x_129 = $m_Lcom_raquo_laminar_api_Implicits$RichSource$().$minus$minus$greater$extension__Lcom_raquo_airstream_core_Source__F1__Lcom_raquo_laminar_modifiers_Binder(source, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((e$3) => {
-    var this$44 = $n(shortcuts);
-    var p$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((s$2) => {
-      var s = $as_Lprontopop_View$package$Shortcut$1(s$2);
-      return (($n(s).Lprontopop_View$package$Shortcut$1__f_key === $as_T(e$3.key)) && ($n(s).Lprontopop_View$package$Shortcut$1__f_evenWhileTyping || (!$p_Lprontopop_View$package$__typingSomewhere$1__Z(this))));
-    }));
-    var this$46 = $n($f_sc_IterableOnceOps__find__F1__s_Option(this$44, p$2));
-    var f$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((s$3) => {
-      var s$1 = $as_Lprontopop_View$package$Shortcut$1(s$3);
-      e$3.preventDefault();
-      var this$45 = $n($n(s$1).Lprontopop_View$package$Shortcut$1__f_act);
-      this$45.apply__O();
-    }));
-    if ((!this$46.isEmpty__Z())) {
-      f$1.apply__O__O(this$46.get__O());
+  var source = $f_Lcom_raquo_laminar_api_Laminar__documentEvents__F1__Lcom_raquo_airstream_core_EventStream(this$42, events);
+  var $x_129 = $m_Lcom_raquo_laminar_api_Implicits$RichSource$();
+  var player$lzy1$36$1 = player$lzy1;
+  var $x_128 = $x_129.$minus$minus$greater$extension__Lcom_raquo_airstream_core_Source__F1__Lcom_raquo_laminar_modifiers_Binder(source, new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$36) => ((e$3) => {
+    var this$45 = $n(pendingLoadVar);
+    var this$46 = $n(this$45.Lcom_raquo_airstream_state_SourceVar__f_signal);
+    var this$47 = $n($as_s_Option($n($f_Lcom_raquo_airstream_core_WritableSignal__tryNow__s_util_Try(this$46)).get__O()));
+    if ((!this$47.isEmpty__Z())) {
+      if (($as_T(e$3.key) === "Escape")) {
+        e$3.preventDefault();
+        $p_Lprontopop_View$package$__answerPendingLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__Z__V(this, pendingLoadVar, statusVar, songsVar, colWidthsVar, concertNameVar, selectedVar, dirtyVar, "prontopop.concert.", lastId, playingVar, player$lzy1$36, false);
+      }
+    } else {
+      var this$48 = $n(shortcuts);
+      var p$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((s$2) => {
+        var s = $as_Lprontopop_View$package$Shortcut$1(s$2);
+        return (($n(s).Lprontopop_View$package$Shortcut$1__f_key === $as_T(e$3.key)) && ($n(s).Lprontopop_View$package$Shortcut$1__f_evenWhileTyping || (!$p_Lprontopop_View$package$__typingSomewhere$1__Z(this))));
+      }));
+      var this$50 = $n($f_sc_IterableOnceOps__find__F1__s_Option(this$48, p$2));
+      var f$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((s$3) => {
+        var s$1 = $as_Lprontopop_View$package$Shortcut$1(s$3);
+        e$3.preventDefault();
+        var this$49 = $n($n(s$1).Lprontopop_View$package$Shortcut$1__f_act);
+        this$49.apply__O();
+      }));
+      if ((!this$50.isEmpty__Z())) {
+        f$1.apply__O__O(this$50.get__O());
+      }
     }
-  })));
-  var $x_128 = $m_Lprontopop_Styles$().createPageStyle__Lcom_raquo_laminar_nodes_ReactiveHtmlElement();
-  var $x_127 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$51 = $m_sjsr_package$();
-  var $x_126 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row titlerow");
-  var $x_125 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h1__Lcom_raquo_laminar_tags_HtmlTag();
-  var this$48 = $m_sjsr_package$();
-  var this$47 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$2 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$47, "ProntoPop! v0.1.0", r)]);
-  var array$2 = this$48.refArrayToJSArray__AO__sjs_js_Array(xs$2);
-  var xs$3 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_126, $n($x_125).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$2)), $m_Lprontopop_Theme$().createSelector__Lcom_raquo_laminar_nodes_ReactiveHtmlElement()]);
-  var array$3 = this$51.refArrayToJSArray__AO__sjs_js_Array(xs$3);
-  var $x_124 = $x_127.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$3));
-  var $x_123 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$75 = $m_sjsr_package$();
-  var $x_122 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
-  var $x_121 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  }))(player$lzy1$36$1)));
+  var $x_127 = $m_Lprontopop_Styles$().createPageStyle__Lcom_raquo_laminar_nodes_ReactiveHtmlElement();
+  var $x_126 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$55 = $m_sjsr_package$();
-  var this$54 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var $x_125 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row titlerow");
+  var $x_124 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h1__Lcom_raquo_laminar_tags_HtmlTag();
+  var this$52 = $m_sjsr_package$();
+  var this$51 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var r = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$2 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$51, "ProntoPop! v0.1.0", r)]);
+  var array$2 = this$52.refArrayToJSArray__AO__sjs_js_Array(xs$2);
+  var xs$3 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_125, $n($x_124).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$2)), $m_Lprontopop_Theme$().createSelector__Lcom_raquo_laminar_nodes_ReactiveHtmlElement()]);
+  var array$3 = this$55.refArrayToJSArray__AO__sjs_js_Array(xs$3);
+  var $x_123 = $x_126.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$3));
+  var $x_122 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$85 = $m_sjsr_package$();
+  var $x_121 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
+  var $x_120 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$59 = $m_sjsr_package$();
+  var this$58 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r$1 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$4 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$54, "\u00a0\u00a0Concert Name: ", r$1)]);
-  var array$4 = this$55.refArrayToJSArray__AO__sjs_js_Array(xs$4);
-  var $x_120 = $x_121.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$4));
-  var $x_119 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).input__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$61 = $m_sjsr_package$();
-  var $x_118 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("concertfield");
+  var xs$4 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$58, "\u00a0\u00a0Concert Name: ", r$1)]);
+  var array$4 = this$59.refArrayToJSArray__AO__sjs_js_Array(xs$4);
+  var $x_119 = $x_120.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$4));
+  var $x_118 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).input__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$65 = $m_sjsr_package$();
+  var $x_117 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("concertfield");
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var updater = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(concertNameVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var eventProp$1 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onInput__Lcom_raquo_laminar_keys_EventProp();
-  var this$59 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$1, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
+  var this$63 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$1, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
   var sink = $n(concertNameVar).Lcom_raquo_airstream_state_SourceVar__f_writer;
   var onNext = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1) => {
     $n(sink).onNext__O__V(_$1);
   }));
-  var listener = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$59, onNext);
-  var xs$5 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_118, $m_Lcom_raquo_laminar_inputs_InputController$().controlled__Lcom_raquo_laminar_modifiers_EventListener__Lcom_raquo_laminar_modifiers_KeyUpdater__Lcom_raquo_laminar_modifiers_Binder(listener, updater)]);
-  var array$5 = this$61.refArrayToJSArray__AO__sjs_js_Array(xs$5);
-  var $x_117 = $x_119.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$5));
-  var $x_116 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$68 = $m_sjsr_package$();
-  var this$64 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var listener = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$63, onNext);
+  var xs$5 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_117, $m_Lcom_raquo_laminar_inputs_InputController$().controlled__Lcom_raquo_laminar_modifiers_EventListener__Lcom_raquo_laminar_modifiers_KeyUpdater__Lcom_raquo_laminar_modifiers_Binder(listener, updater)]);
+  var array$5 = this$65.refArrayToJSArray__AO__sjs_js_Array(xs$5);
+  var $x_116 = $x_118.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$5));
+  var $x_115 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$72 = $m_sjsr_package$();
+  var this$68 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r$2 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var $x_115 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$64, "Save", r$2);
+  var $x_114 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$68, "Save", r$2);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var eventProp$2 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$67 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$2, false, false));
-  var onNext$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$34$3) => {
-    $p_Lprontopop_View$package$__save$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, concertNameVar, statusVar, songsVar, "prontopop.concert.", offeredVar, selectedVar);
+  var this$71 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$2, false, false));
+  var onNext$1 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$38$3) => {
+    $p_Lprontopop_View$package$__save$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, concertNameVar, statusVar, songsVar, "prontopop.concert.", offeredVar, selectedVar, dirtyVar);
   }));
-  var xs$6 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_115, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$67, onNext$1)]);
-  var array$6 = this$68.refArrayToJSArray__AO__sjs_js_Array(xs$6);
-  var $x_114 = $x_116.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$6));
-  var $x_113 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
-  var this$72 = $m_sjsr_package$();
-  var this$71 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var xs$6 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_114, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$71, onNext$1)]);
+  var array$6 = this$72.refArrayToJSArray__AO__sjs_js_Array(xs$6);
+  var $x_113 = $x_115.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$6));
+  var $x_112 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$76 = $m_sjsr_package$();
+  var this$75 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r$3 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$7 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$71, "  to Local Store", r$3)]);
-  var array$7 = this$72.refArrayToJSArray__AO__sjs_js_Array(xs$7);
-  var xs$8 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_122, $x_120, $x_117, $x_114, $n($x_113).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$7))]);
-  var array$8 = this$75.refArrayToJSArray__AO__sjs_js_Array(xs$8);
-  var $x_112 = $x_123.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$8));
-  var $x_111 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$7 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$75, "  to Local Store", r$3)]);
+  var array$7 = this$76.refArrayToJSArray__AO__sjs_js_Array(xs$7);
+  var $x_111 = $x_112.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$7));
+  var $x_110 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
+  var this$82 = $m_sjsr_package$();
+  var $x_109 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("unsaved");
+  $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
+  var this$80 = $n($n(dirtyVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var project$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((d$3) => {
+    var d$2 = $uZ(d$3);
+    return (d$2 ? "  unsaved changes" : "");
+  }));
+  var textSource = new $c_Lcom_raquo_airstream_misc_MapSignal(this$80, project$2, $m_s_None$());
+  var xs$8 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_109, $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
+  var array$8 = this$82.refArrayToJSArray__AO__sjs_js_Array(xs$8);
+  var xs$9 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_121, $x_119, $x_116, $x_113, $x_111, $n($x_110).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$8))]);
+  var array$9 = this$85.refArrayToJSArray__AO__sjs_js_Array(xs$9);
+  var $x_108 = $x_122.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$9));
+  var $x_107 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$112 = $m_sjsr_package$();
-  var $x_110 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
-  var $x_109 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$79 = $m_sjsr_package$();
-  var this$78 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var $x_106 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
+  var $x_105 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$89 = $m_sjsr_package$();
+  var this$88 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r$4 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$9 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$78, "Saved Concerts: ", r$4)]);
-  var array$9 = this$79.refArrayToJSArray__AO__sjs_js_Array(xs$9);
-  var $x_108 = $x_109.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$9));
-  var $x_107 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).select__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$98 = $m_sjsr_package$();
-  var $x_106 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("concertfield");
+  var xs$10 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$88, "Saved Concerts: ", r$4)]);
+  var array$10 = this$89.refArrayToJSArray__AO__sjs_js_Array(xs$10);
+  var $x_104 = $x_105.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$10));
+  var $x_103 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).select__Lcom_raquo_laminar_tags_HtmlTag());
+  var this$105 = $m_sjsr_package$();
+  var $x_102 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("concertfield");
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var this$94 = $n($n(offeredVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var project$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((offered$2) => {
+  var this$99 = $n($n(offeredVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var project$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((offered$2) => {
     var offered = $as_sci_Vector(offered$2);
-    var $x_101 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).option__Lcom_raquo_laminar_tags_HtmlTag());
-    var this$85 = $m_sjsr_package$();
-    var $x_100 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("");
-    var this$84 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-    var r$5 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$10 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_100, $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$84, "-- select --", r$5)]);
-    var array$10 = this$85.refArrayToJSArray__AO__sjs_js_Array(xs$10);
-    var elem$1 = $x_101.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$10));
-    var this$93 = $n($as_sc_SeqOps($n(offered).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2$2) => {
+    return $as_sci_Vector($n(offered).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2$2) => {
       var x$1$3 = $as_T2(x$1$2$2);
       var name = $as_T($n(x$1$3)._1__O());
       var builtIn = $uZ($n(x$1$3)._2__O());
-      var $x_104 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).option__Lcom_raquo_laminar_tags_HtmlTag());
-      var this$90 = $m_sjsr_package$();
-      var $x_103 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter(name);
+      var $x_100 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).option__Lcom_raquo_laminar_tags_HtmlTag());
+      var this$96 = $m_sjsr_package$();
+      var $x_99 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter(name);
       if (builtIn) {
-        var this$88 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+        var this$94 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
         var value$1 = (name + " (built-in)");
-        var r$6 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-        var $x_102 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$88, value$1, r$6);
+        var r$5 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+        var $x_98 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$94, value$1, r$5);
       } else {
-        var this$89 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-        var r$7 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-        var $x_102 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$89, name, r$7);
+        var this$95 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+        var r$6 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+        var $x_98 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$95, name, r$6);
       }
-      var xs$11 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_103, $x_102]);
-      var array$11 = this$90.refArrayToJSArray__AO__sjs_js_Array(xs$11);
-      return $x_104.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$11));
-    })))));
-    return $as_sci_Vector(this$93.prepended__O__O(elem$1));
+      var xs$11 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_99, $x_98]);
+      var array$11 = this$96.refArrayToJSArray__AO__sjs_js_Array(xs$11);
+      return $x_100.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$11));
+    }))));
   }));
-  var childrenSource = new $c_Lcom_raquo_airstream_misc_MapSignal(this$94, project$2, $m_s_None$());
-  var $x_105 = $m_Lcom_raquo_laminar_inserters_ChildrenInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter(childrenSource, $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$(), $m_Lcom_raquo_laminar_modifiers_RenderableNode$().Lcom_raquo_laminar_modifiers_RenderableNode$__f_nodeRenderable, (void 0));
-  var $x_99 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(selectedVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var childrenSource = new $c_Lcom_raquo_airstream_misc_MapSignal(this$99, project$3, $m_s_None$());
+  var $x_101 = $m_Lcom_raquo_laminar_inserters_ChildrenInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter(childrenSource, $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$(), $m_Lcom_raquo_laminar_modifiers_RenderableNode$().Lcom_raquo_laminar_modifiers_RenderableNode$__f_nodeRenderable, (void 0));
+  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
+  var updater$1 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(selectedVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var eventProp$3 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onChange__Lcom_raquo_laminar_keys_EventProp();
-  var this$97 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$3, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
-  var sink$1 = $n(selectedVar).Lcom_raquo_airstream_state_SourceVar__f_writer;
-  var onNext$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1$1) => {
-    $n(sink$1).onNext__O__V(_$1$1);
-  }));
-  var xs$12 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_106, $x_105, $x_99, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$97, onNext$2)]);
-  var array$12 = this$98.refArrayToJSArray__AO__sjs_js_Array(xs$12);
-  var $x_98 = $x_107.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$12));
-  var $x_97 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
-  var this$105 = $m_sjsr_package$();
-  var this$101 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$8 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var $x_96 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$101, "Load", r$8);
-  $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$4 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$104 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$4, false, false));
-  var player$lzy1$25$1 = player$lzy1;
-  var onNext$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$25) => ((_$35$3) => {
-    $p_Lprontopop_View$package$__load$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__V(this, selectedVar, statusVar, songsVar, colWidthsVar, concertNameVar, "prontopop.concert.", lastId, playingVar, player$lzy1$25);
-  }))(player$lzy1$25$1));
-  var xs$13 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_96, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$104, onNext$3)]);
-  var array$13 = this$105.refArrayToJSArray__AO__sjs_js_Array(xs$13);
-  var $x_95 = $x_97.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$13));
-  var $x_94 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
+  var this$103 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$3, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
+  var player$lzy1$38$1 = player$lzy1;
+  var onNext$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$38) => ((n$3) => {
+    var n = $as_T(n$3);
+    $p_Lprontopop_View$package$__chooseConcert$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__V(this, selectedVar, dirtyVar, pendingLoadVar, statusVar, songsVar, colWidthsVar, concertNameVar, "prontopop.concert.", lastId, playingVar, player$lzy1$38, n);
+  }))(player$lzy1$38$1));
+  var listener$1 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$103, onNext$2);
+  var xs$12 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_102, $x_101, $m_Lcom_raquo_laminar_inputs_InputController$().controlled__Lcom_raquo_laminar_modifiers_EventListener__Lcom_raquo_laminar_modifiers_KeyUpdater__Lcom_raquo_laminar_modifiers_Binder(listener$1, updater$1)]);
+  var array$12 = this$105.refArrayToJSArray__AO__sjs_js_Array(xs$12);
+  var $x_97 = $x_103.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$12));
+  var $x_96 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
   var this$109 = $m_sjsr_package$();
   var this$108 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$9 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$14 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$108, " from Local Store", r$9)]);
-  var array$14 = this$109.refArrayToJSArray__AO__sjs_js_Array(xs$14);
-  var xs$15 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_110, $x_108, $x_98, $x_95, $n($x_94).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$14))]);
-  var array$15 = this$112.refArrayToJSArray__AO__sjs_js_Array(xs$15);
-  var $x_93 = $x_111.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$15));
-  var $x_92 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$7 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$13 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$108, " from Local Store", r$7)]);
+  var array$13 = this$109.refArrayToJSArray__AO__sjs_js_Array(xs$13);
+  var xs$14 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_106, $x_104, $x_97, $n($x_96).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$13))]);
+  var array$14 = this$112.refArrayToJSArray__AO__sjs_js_Array(xs$14);
+  var $x_95 = $x_107.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$14));
+  var $x_94 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$199 = $m_sjsr_package$();
-  var $x_91 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
-  var $x_90 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var $x_93 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
+  var $x_92 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
   var this$126 = $m_sjsr_package$();
-  var $x_89 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("transport");
+  var $x_91 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("transport");
   var this$115 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls);
-  var $x_88 = $n(this$115.$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("stopping"));
+  var $x_90 = $n(this$115.$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("stopping"));
   var this$118 = $n($n(playingVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var project$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$36$2) => {
-    var _$36 = $as_s_Option(_$36$2);
-    var this$117 = $n(_$36);
+  var project$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$39$2) => {
+    var _$39 = $as_s_Option(_$39$2);
+    var this$117 = $n(_$39);
     return (!this$117.isEmpty__Z());
   }));
-  var $x_87 = $x_88.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater(new $c_Lcom_raquo_airstream_misc_MapSignal(this$118, project$3, $m_s_None$()));
+  var $x_89 = $x_90.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater(new $c_Lcom_raquo_airstream_misc_MapSignal(this$118, project$4, $m_s_None$()));
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
   var this$121 = $n($n(playingVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var project$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((p$2$1) => {
+  var project$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((p$2$1) => {
     var p$3 = $as_s_Option(p$2$1);
     var this$120 = $n(p$3);
     if ((!this$120.isEmpty__Z())) {
@@ -9378,116 +9629,116 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
       return "Play";
     }
   }));
-  var textSource = new $c_Lcom_raquo_airstream_misc_MapSignal(this$121, project$4, $m_s_None$());
-  var $x_86 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable);
+  var textSource$1 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$121, project$5, $m_s_None$());
+  var $x_88 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$1, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$5 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$125 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$5, false, false));
-  var player$lzy1$27$1 = player$lzy1;
-  var onNext$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$27) => ((_$37$3) => {
-    $p_Lprontopop_View$package$__togglePlayCued$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, playingVar, player$lzy1$27, songsVar, cueVar, statusVar, barsVar);
-  }))(player$lzy1$27$1));
-  var xs$16 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_89, $x_87, $x_86, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$125, onNext$4)]);
-  var array$16 = this$126.refArrayToJSArray__AO__sjs_js_Array(xs$16);
-  var $x_85 = $x_90.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$16));
-  var $x_84 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var eventProp$4 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$125 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$4, false, false));
+  var player$lzy1$40$1 = player$lzy1;
+  var onNext$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$40) => ((_$40$3) => {
+    $p_Lprontopop_View$package$__togglePlayCued$1__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__V(this, playingVar, player$lzy1$40, songsVar, cueVar, statusVar, barsVar);
+  }))(player$lzy1$40$1));
+  var xs$15 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_91, $x_89, $x_88, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$125, onNext$3)]);
+  var array$15 = this$126.refArrayToJSArray__AO__sjs_js_Array(xs$15);
+  var $x_87 = $x_92.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$15));
+  var $x_86 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
   var this$133 = $m_sjsr_package$();
   var this$129 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$10 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var $x_83 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$129, "Next", r$10);
-  var $x_82 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("step");
+  var r$8 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var $x_85 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$129, "Next", r$8);
+  var $x_84 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("step");
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$6 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$132 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$6, false, false));
-  var onNext$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$38$3) => {
+  var eventProp$5 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$132 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$5, false, false));
+  var onNext$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$41$3) => {
     $p_Lprontopop_View$package$__moveCue$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__V(this, songsVar, cueVar, 1);
   }));
-  var xs$17 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_83, $x_82, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$132, onNext$5)]);
-  var array$17 = this$133.refArrayToJSArray__AO__sjs_js_Array(xs$17);
-  var $x_81 = $x_84.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$17));
-  var $x_80 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$16 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_85, $x_84, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$132, onNext$4)]);
+  var array$16 = this$133.refArrayToJSArray__AO__sjs_js_Array(xs$16);
+  var $x_83 = $x_86.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$16));
+  var $x_82 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
   var this$140 = $m_sjsr_package$();
   var this$136 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$11 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var $x_79 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$136, "Prev", r$11);
-  var $x_78 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("step");
+  var r$9 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var $x_81 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$136, "Prev", r$9);
+  var $x_80 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("step");
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$7 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$139 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$7, false, false));
-  var onNext$6 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$39$3) => {
+  var eventProp$6 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$139 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$6, false, false));
+  var onNext$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$42$3) => {
     $p_Lprontopop_View$package$__moveCue$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__V(this, songsVar, cueVar, (-1));
   }));
-  var xs$18 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_79, $x_78, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$139, onNext$6)]);
-  var array$18 = this$140.refArrayToJSArray__AO__sjs_js_Array(xs$18);
-  var $x_77 = $x_80.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$18));
-  var $x_76 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$17 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_81, $x_80, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$139, onNext$5)]);
+  var array$17 = this$140.refArrayToJSArray__AO__sjs_js_Array(xs$17);
+  var $x_79 = $x_82.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$17));
+  var $x_78 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag());
   var this$149 = $m_sjsr_package$();
-  var $x_75 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("fullscreen");
+  var $x_77 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("fullscreen");
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
   var this$144 = $n($n(fullScreenVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var project$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((on$3) => {
+  var project$6 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((on$3) => {
     var on$2 = $uZ(on$3);
     return (on$2 ? "Exit full screen" : "Full screen");
   }));
-  var textSource$1 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$144, project$5, $m_s_None$());
-  var $x_74 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$1, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable);
+  var textSource$2 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$144, project$6, $m_s_None$());
+  var $x_76 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$2, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$8 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$148 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$8, false, false));
-  var onNext$7 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$40$3) => {
+  var eventProp$7 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$148 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$7, false, false));
+  var onNext$6 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$43$3) => {
     $p_Lprontopop_View$package$__toggleFullScreen$1__V(this);
   }));
-  var xs$19 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_75, $x_74, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$148, onNext$7)]);
-  var array$19 = this$149.refArrayToJSArray__AO__sjs_js_Array(xs$19);
-  var $x_73 = $x_76.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$19));
-  var $x_72 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).select__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$18 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_77, $x_76, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$148, onNext$6)]);
+  var array$18 = this$149.refArrayToJSArray__AO__sjs_js_Array(xs$18);
+  var $x_75 = $x_78.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$18));
+  var $x_74 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).select__Lcom_raquo_laminar_tags_HtmlTag());
   var this$160 = $m_sjsr_package$();
-  var $x_71 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("bars");
-  var $x_70 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).title__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("bars to play before stopping");
+  var $x_73 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("bars");
+  var $x_72 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).title__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("bars to play before stopping");
   var this$157 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var nodes = $n(barChoices).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((b$2) => {
     var b = $as_T(b$2);
-    var $x_68 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).option__Lcom_raquo_laminar_tags_HtmlTag());
+    var $x_70 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).option__Lcom_raquo_laminar_tags_HtmlTag());
     var this$154 = $m_sjsr_package$();
-    var $x_67 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter(b);
+    var $x_69 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter(b);
     var this$153 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-    var r$12 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$20 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_67, $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$153, b, r$12)]);
-    var array$20 = this$154.refArrayToJSArray__AO__sjs_js_Array(xs$20);
-    return $x_68.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$20));
+    var r$10 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+    var xs$19 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_69, $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$153, b, r$10)]);
+    var array$19 = this$154.refArrayToJSArray__AO__sjs_js_Array(xs$19);
+    return $x_70.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$19));
   })));
   var renderableSeq = $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$();
-  var $x_69 = $f_Lcom_raquo_laminar_api_Implicits__nodeSeqToModifier__O__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_Modifier(this$157, nodes, renderableSeq);
-  var $x_66 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(barsVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var $x_71 = $f_Lcom_raquo_laminar_api_Implicits__nodeSeqToModifier__O__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_Modifier(this$157, nodes, renderableSeq);
+  var $x_68 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(barsVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$9 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onChange__Lcom_raquo_laminar_keys_EventProp();
-  var this$159 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$9, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
-  var sink$2 = $n(barsVar).Lcom_raquo_airstream_state_SourceVar__f_writer;
-  var onNext$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1$2) => {
-    $n(sink$2).onNext__O__V(_$1$2);
+  var eventProp$8 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onChange__Lcom_raquo_laminar_keys_EventProp();
+  var this$159 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$8, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
+  var sink$1 = $n(barsVar).Lcom_raquo_airstream_state_SourceVar__f_writer;
+  var onNext$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1$1) => {
+    $n(sink$1).onNext__O__V(_$1$1);
   }));
-  var xs$21 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_71, $x_70, $x_69, $x_66, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$159, onNext$8)]);
-  var array$21 = this$160.refArrayToJSArray__AO__sjs_js_Array(xs$21);
-  var $x_65 = $x_72.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$21));
-  var $x_64 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$20 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_73, $x_72, $x_71, $x_68, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$159, onNext$7)]);
+  var array$20 = this$160.refArrayToJSArray__AO__sjs_js_Array(xs$20);
+  var $x_67 = $x_74.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$20));
+  var $x_66 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$164 = $m_sjsr_package$();
   var this$163 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$13 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$22 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$163, "Volume: ", r$13)]);
-  var array$22 = this$164.refArrayToJSArray__AO__sjs_js_Array(xs$22);
-  var $x_63 = $x_64.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$22));
-  var $x_62 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).input__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$11 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$21 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$163, "Volume: ", r$11)]);
+  var array$21 = this$164.refArrayToJSArray__AO__sjs_js_Array(xs$21);
+  var $x_65 = $x_66.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$21));
+  var $x_64 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).input__Lcom_raquo_laminar_tags_HtmlTag());
   var this$177 = $m_sjsr_package$();
-  var $x_61 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).typ__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("range");
-  var $x_60 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).minAttr__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("0");
-  var $x_59 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).maxAttr__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("100");
+  var $x_63 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).typ__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("range");
+  var $x_62 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).minAttr__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("0");
+  var $x_61 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).maxAttr__Lcom_raquo_laminar_keys_HtmlAttr()).$colon$eq__O__Lcom_raquo_laminar_modifiers_KeySetter("100");
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var updater$1 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(volumeVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var updater$2 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).value__Lcom_raquo_laminar_keys_HtmlProp()).$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_modifiers_KeyUpdater($n(volumeVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$10 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onInput__Lcom_raquo_laminar_keys_EventProp();
-  var this$175 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$10, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
-  var player$lzy1$30$1 = player$lzy1;
-  var onNext$9 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$30) => ((v$3) => {
+  var eventProp$9 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onInput__Lcom_raquo_laminar_keys_EventProp();
+  var this$175 = $n($n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$9, false, false)).mapToValue__Lcom_raquo_laminar_keys_EventProcessor());
+  var player$lzy1$43$1 = player$lzy1;
+  var onNext$8 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$43) => ((v$3) => {
     var v = $as_T(v$3);
     var this$169 = $n(volumeVar);
     $f_Lcom_raquo_airstream_state_Var__set__O__V(this$169, v);
@@ -9501,35 +9752,35 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     }
     var f$2 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v1$2) => {
       var d = $uD(v1$2);
-      $n($p_Lprontopop_View$package$__player$1__sr_LazyRef__Lprontopop_Sound$SoundPlayer(this, player$lzy1$30)).setVolume__D__V((d / 100.0));
+      $n($p_Lprontopop_View$package$__player$1__sr_LazyRef__Lprontopop_Sound$SoundPlayer(this, player$lzy1$43)).setVolume__D__V((d / 100.0));
     }));
     if ((!this$174.isEmpty__Z())) {
       f$2.apply__O__O(this$174.get__O());
     }
-  }))(player$lzy1$30$1));
-  var listener$1 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$175, onNext$9);
-  var xs$23 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_61, $x_60, $x_59, $m_Lcom_raquo_laminar_inputs_InputController$().controlled__Lcom_raquo_laminar_modifiers_EventListener__Lcom_raquo_laminar_modifiers_KeyUpdater__Lcom_raquo_laminar_modifiers_Binder(listener$1, updater$1)]);
-  var array$23 = this$177.refArrayToJSArray__AO__sjs_js_Array(xs$23);
-  var $x_58 = $x_62.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$23));
-  var $x_57 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  }))(player$lzy1$43$1));
+  var listener$2 = new $c_Lcom_raquo_laminar_modifiers_EventListener(this$175, onNext$8);
+  var xs$22 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_63, $x_62, $x_61, $m_Lcom_raquo_laminar_inputs_InputController$().controlled__Lcom_raquo_laminar_modifiers_EventListener__Lcom_raquo_laminar_modifiers_KeyUpdater__Lcom_raquo_laminar_modifiers_Binder(listener$2, updater$2)]);
+  var array$22 = this$177.refArrayToJSArray__AO__sjs_js_Array(xs$22);
+  var $x_60 = $x_64.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$22));
+  var $x_59 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$183 = $m_sjsr_package$();
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
   var this$181 = $n($n(volumeVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
-  var project$6 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$2) => {
+  var project$7 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((v$2) => {
     var v$1 = $as_T(v$2);
     return (v$1 + "%");
   }));
-  var textSource$2 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$181, project$6, $m_s_None$());
-  var xs$24 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$2, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
-  var array$24 = this$183.refArrayToJSArray__AO__sjs_js_Array(xs$24);
-  var $x_56 = $x_57.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$24));
-  var $x_55 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
+  var textSource$3 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$181, project$7, $m_s_None$());
+  var xs$23 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$3, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
+  var array$23 = this$183.refArrayToJSArray__AO__sjs_js_Array(xs$23);
+  var $x_58 = $x_59.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$23));
+  var $x_57 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
   var this$196 = $m_sjsr_package$();
-  var $x_54 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("nowplaying");
+  var $x_56 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("nowplaying");
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
   var signal$1 = $n(playingVar).Lcom_raquo_airstream_state_SourceVar__f_signal;
   var this$194 = $n($m_Lcom_raquo_airstream_combine_generated_CombinableSignal$().combineWith$extension__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_core_Source$SignalSource__Lapp_tulz_tuplez_Composition__Lcom_raquo_airstream_core_Signal(signal$1, $n(songsVar).Lcom_raquo_airstream_state_SourceVar__f_signal, new $c_Lapp_tulz_tuplez_Composition\uff3fPri0$$anon$1()));
-  var project$7 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2$3) => {
+  var project$8 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((x$1$2$3) => {
     var x$1$4 = $as_T2(x$1$2$3);
     var playing = $as_s_Option($n(x$1$4)._1__O());
     var rows$1 = $as_sci_Vector($n(x$1$4)._2__O());
@@ -9537,9 +9788,9 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     var f$3 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((id$3$1) => {
       var id$2$1 = $uI(id$3$1);
       var this$189 = $n(rows$1);
-      var p$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$41$2) => {
-        var _$41 = $as_Lprontopop_SongRow(_$41$2);
-        return ($n(_$41).Lprontopop_SongRow__f_id === id$2$1);
+      var p$4 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$44$2) => {
+        var _$44 = $as_Lprontopop_SongRow(_$44$2);
+        return ($n(_$44).Lprontopop_SongRow__f_id === id$2$1);
       }));
       return $f_sc_IterableOnceOps__find__F1__s_Option(this$189, p$4);
     }));
@@ -9557,202 +9808,221 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
     var default$1 = new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => ""));
     return $as_T((this$193.isEmpty__Z() ? default$1.apply__O() : this$193.get__O()));
   }));
-  var textSource$3 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$194, project$7, $m_s_None$());
-  var xs$25 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_54, $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$3, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
-  var array$25 = this$196.refArrayToJSArray__AO__sjs_js_Array(xs$25);
-  var xs$26 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_91, $x_85, $x_81, $x_77, $x_73, $x_65, $x_63, $x_58, $x_56, $n($x_55).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$25))]);
-  var array$26 = this$199.refArrayToJSArray__AO__sjs_js_Array(xs$26);
-  var $x_53 = $x_92.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$26));
-  var $x_52 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var textSource$4 = new $c_Lcom_raquo_airstream_misc_MapSignal(this$194, project$8, $m_s_None$());
+  var xs$24 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_56, $m_Lcom_raquo_laminar_inserters_ChildTextInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(textSource$4, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
+  var array$24 = this$196.refArrayToJSArray__AO__sjs_js_Array(xs$24);
+  var xs$25 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_93, $x_87, $x_83, $x_79, $x_75, $x_67, $x_65, $x_60, $x_58, $n($x_57).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$24))]);
+  var array$25 = this$199.refArrayToJSArray__AO__sjs_js_Array(xs$25);
+  var $x_55 = $x_94.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$25));
+  var $x_54 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$229 = $m_sjsr_package$();
-  var $x_51 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("songrow header");
-  var $x_50 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var $x_53 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("songrow header");
+  var $x_52 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$203 = $m_sjsr_package$();
   var this$202 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$14 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$27 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$202, "@", r$14)]);
-  var array$27 = this$203.refArrayToJSArray__AO__sjs_js_Array(xs$27);
-  var $x_49 = $x_50.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$27));
-  var $x_48 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$12 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$26 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$202, "@", r$12)]);
+  var array$26 = this$203.refArrayToJSArray__AO__sjs_js_Array(xs$26);
+  var $x_51 = $x_52.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$26));
+  var $x_50 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$207 = $m_sjsr_package$();
   var this$206 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$15 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$28 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$206, "Play", r$15)]);
-  var array$28 = this$207.refArrayToJSArray__AO__sjs_js_Array(xs$28);
-  var $x_47 = $x_48.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$28));
-  var $x_46 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$13 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$27 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$206, "Play", r$13)]);
+  var array$27 = this$207.refArrayToJSArray__AO__sjs_js_Array(xs$27);
+  var $x_49 = $x_50.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$27));
+  var $x_48 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$211 = $m_sjsr_package$();
   var this$210 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$16 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$29 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$210, "Title", r$16)]);
-  var array$29 = this$211.refArrayToJSArray__AO__sjs_js_Array(xs$29);
-  var $x_45 = $x_46.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$29));
-  var $x_44 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$14 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$28 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$210, "Title", r$14)]);
+  var array$28 = this$211.refArrayToJSArray__AO__sjs_js_Array(xs$28);
+  var $x_47 = $x_48.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$28));
+  var $x_46 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$215 = $m_sjsr_package$();
   var this$214 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$17 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$30 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$214, "BPM", r$17)]);
-  var array$30 = this$215.refArrayToJSArray__AO__sjs_js_Array(xs$30);
-  var $x_43 = $x_44.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$30));
-  var $x_42 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$15 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$29 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$214, "BPM", r$15)]);
+  var array$29 = this$215.refArrayToJSArray__AO__sjs_js_Array(xs$29);
+  var $x_45 = $x_46.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$29));
+  var $x_44 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$219 = $m_sjsr_package$();
   var this$218 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$18 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$31 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$218, "Sig.", r$18)]);
-  var array$31 = this$219.refArrayToJSArray__AO__sjs_js_Array(xs$31);
-  var $x_41 = $x_42.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$31));
-  var $x_40 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$16 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$30 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$218, "Sig.", r$16)]);
+  var array$30 = this$219.refArrayToJSArray__AO__sjs_js_Array(xs$30);
+  var $x_43 = $x_44.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$30));
+  var $x_42 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag());
   var this$223 = $m_sjsr_package$();
   var this$222 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$19 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$32 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$222, "Pattern", r$19)]);
-  var array$32 = this$223.refArrayToJSArray__AO__sjs_js_Array(xs$32);
-  var $x_39 = $x_40.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$32));
-  var $x_38 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
+  var r$17 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$31 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$222, "Pattern", r$17)]);
+  var array$31 = this$223.refArrayToJSArray__AO__sjs_js_Array(xs$31);
+  var $x_41 = $x_42.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$31));
+  var $x_40 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).span__Lcom_raquo_laminar_tags_HtmlTag();
   var this$226 = $m_sjsr_package$();
-  var xs$33 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([]);
-  var array$33 = this$226.refArrayToJSArray__AO__sjs_js_Array(xs$33);
-  var xs$34 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_51, $x_49, $x_47, $x_45, $x_43, $x_41, $x_39, $n($x_38).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$33))]);
-  var array$34 = this$229.refArrayToJSArray__AO__sjs_js_Array(xs$34);
-  var $x_37 = $x_52.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$34));
+  var xs$32 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([]);
+  var array$32 = this$226.refArrayToJSArray__AO__sjs_js_Array(xs$32);
+  var xs$33 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_53, $x_51, $x_49, $x_47, $x_45, $x_43, $x_41, $n($x_40).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$32))]);
+  var array$33 = this$229.refArrayToJSArray__AO__sjs_js_Array(xs$33);
+  var $x_39 = $x_54.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$33));
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var signal$2 = $n(songsVar).Lcom_raquo_airstream_state_SourceVar__f_signal;
-  var key = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$42$2) => {
-    var _$42 = $as_Lprontopop_SongRow(_$42$2);
-    return $n(_$42).Lprontopop_SongRow__f_id;
+  var key = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$45$2) => {
+    var _$45 = $as_Lprontopop_SongRow(_$45$2);
+    return $n(_$45).Lprontopop_SongRow__f_id;
   }));
   var distinctCompose = $m_Lcom_raquo_airstream_split_SplittableSignal$().split$default$2$extension__Lcom_raquo_airstream_core_Signal__F1(signal$2);
   var duplicateKeys = $m_Lcom_raquo_airstream_split_DuplicateKeysConfig$().Lcom_raquo_airstream_split_DuplicateKeysConfig$__f_default;
-  var player$lzy1$32$1 = player$lzy1;
-  var project$8 = new $c_sr_AbstractFunction3_$$Lambda$d1e06cbab540de4f9f09e7182f18ea80659b9825(((player$lzy1$32) => ((id$3$2, initial$3, rowSignal$3) => {
+  var player$lzy1$45$1 = player$lzy1;
+  var project$9 = new $c_sr_AbstractFunction3_$$Lambda$d1e06cbab540de4f9f09e7182f18ea80659b9825(((player$lzy1$45) => ((id$3$2, initial$3, rowSignal$3) => {
     var id$2$2 = $uI(id$3$2);
     var initial$2 = $as_Lprontopop_SongRow(initial$3);
     var rowSignal$2 = $as_Lcom_raquo_airstream_core_Signal(rowSignal$3);
-    return $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__Lprontopop_SongRow__Lcom_raquo_airstream_core_Signal__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(this, cueSignal, cueVar, playingVar, songsVar, player$lzy1$32, statusVar, barsVar, id$2$2, initial$2, rowSignal$2);
-  }))(player$lzy1$32$1));
+    return $p_Lprontopop_View$package$__renderRow$1__Lcom_raquo_airstream_core_Signal__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_LazyRef__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__I__Lprontopop_SongRow__Lcom_raquo_airstream_core_Signal__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(this, cueSignal, cueVar, playingVar, songsVar, player$lzy1$45, statusVar, barsVar, dirtyVar, id$2$2, initial$2, rowSignal$2);
+  }))(player$lzy1$45$1));
   var splittable = $m_Lcom_raquo_airstream_split_Splittable$VectorSplittable$();
-  var childrenSource$1 = new $c_Lcom_raquo_airstream_split_SplitSignal(signal$2, key, distinctCompose, project$8, splittable, duplicateKeys, false);
-  var $x_36 = $m_Lcom_raquo_laminar_inserters_ChildrenInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter(childrenSource$1, $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$(), $m_Lcom_raquo_laminar_modifiers_RenderableNode$().Lcom_raquo_laminar_modifiers_RenderableNode$__f_nodeRenderable, (void 0));
-  var $x_35 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var childrenSource$1 = new $c_Lcom_raquo_airstream_split_SplitSignal(signal$2, key, distinctCompose, project$9, splittable, duplicateKeys, false);
+  var $x_38 = $m_Lcom_raquo_laminar_inserters_ChildrenInserter$().apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_RenderableNode__O__Lcom_raquo_laminar_inserters_DynamicInserter(childrenSource$1, $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$(), $m_Lcom_raquo_laminar_modifiers_RenderableNode$().Lcom_raquo_laminar_modifiers_RenderableNode$__f_nodeRenderable, (void 0));
+  var $x_37 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$246 = $m_sjsr_package$();
-  var $x_34 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
-  var $x_33 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag();
+  var $x_36 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("row");
+  var $x_35 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).button__Lcom_raquo_laminar_tags_HtmlTag();
   var this$243 = $m_sjsr_package$();
   var this$239 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$20 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var $x_32 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$239, "Add song", r$20);
+  var r$18 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var $x_34 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$239, "Add song", r$18);
   $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var eventProp$11 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
-  var this$242 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$11, false, false));
-  var onNext$10 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$43$3) => {
-    $p_Lprontopop_View$package$__addSong$1__Lcom_raquo_airstream_state_Var__sr_IntRef__V(this, songsVar, lastId);
+  var eventProp$10 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).onClick__Lcom_raquo_laminar_keys_EventProp();
+  var this$242 = $n($m_Lcom_raquo_laminar_keys_EventProcessor$().empty__Lcom_raquo_laminar_keys_EventProp__Z__Z__Lcom_raquo_laminar_keys_EventProcessor(eventProp$10, false, false));
+  var onNext$9 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((_$46$3) => {
+    $p_Lprontopop_View$package$__addSong$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__sr_IntRef__V(this, songsVar, dirtyVar, lastId);
   }));
-  var xs$35 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_32, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$242, onNext$10)]);
-  var array$35 = this$243.refArrayToJSArray__AO__sjs_js_Array(xs$35);
-  var xs$36 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_34, $n($x_33).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$35))]);
-  var array$36 = this$246.refArrayToJSArray__AO__sjs_js_Array(xs$36);
-  var $x_31 = $x_35.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$36));
-  var $x_30 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
+  var xs$34 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_34, new $c_Lcom_raquo_laminar_modifiers_EventListener(this$242, onNext$9)]);
+  var array$34 = this$243.refArrayToJSArray__AO__sjs_js_Array(xs$34);
+  var xs$35 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_36, $n($x_35).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$34))]);
+  var array$35 = this$246.refArrayToJSArray__AO__sjs_js_Array(xs$35);
+  var $x_33 = $x_37.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$35));
+  var $x_32 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$251 = $m_sjsr_package$();
-  var $x_29 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("status");
+  var $x_31 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("status");
   $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
-  var textSource$4 = $n(statusVar).Lcom_raquo_airstream_state_SourceVar__f_signal;
-  var $x_28 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$();
-  var this$250 = $n(textSource$4);
-  var xs$37 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_29, $x_28.apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(this$250, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
-  var array$37 = this$251.refArrayToJSArray__AO__sjs_js_Array(xs$37);
-  var $x_27 = $x_30.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$37));
-  var $x_26 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag();
+  var textSource$5 = $n(statusVar).Lcom_raquo_airstream_state_SourceVar__f_signal;
+  var $x_30 = $m_Lcom_raquo_laminar_inserters_ChildTextInserter$();
+  var this$250 = $n(textSource$5);
+  var xs$36 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_31, $x_30.apply__Lcom_raquo_airstream_core_Observable__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_inserters_DynamicInserter(this$250, $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable)]);
+  var array$36 = this$251.refArrayToJSArray__AO__sjs_js_Array(xs$36);
+  var $x_29 = $x_32.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$36));
+  var $x_28 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).div__Lcom_raquo_laminar_tags_HtmlTag());
   var this$300 = $m_sjsr_package$();
-  var $x_25 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("shortcuts");
-  var $x_24 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h2__Lcom_raquo_laminar_tags_HtmlTag());
+  var $x_27 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_cls).$colon$eq__T__Lcom_raquo_laminar_modifiers_CompositeKeySetter("shortcuts");
+  var $x_26 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).h2__Lcom_raquo_laminar_tags_HtmlTag());
   var this$255 = $m_sjsr_package$();
   var this$254 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$21 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$38 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$254, "Keyboard shortcuts", r$21)]);
-  var array$38 = this$255.refArrayToJSArray__AO__sjs_js_Array(xs$38);
-  var $x_23 = $x_24.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$38));
-  var $x_22 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).table__Lcom_raquo_laminar_tags_HtmlTag();
+  var r$19 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$37 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$254, "Keyboard shortcuts", r$19)]);
+  var array$37 = this$255.refArrayToJSArray__AO__sjs_js_Array(xs$37);
+  var $x_25 = $x_26.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$37));
+  var $x_24 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).table__Lcom_raquo_laminar_tags_HtmlTag();
   var this$297 = $m_sjsr_package$();
-  var $x_21 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).thead__Lcom_raquo_laminar_tags_HtmlTag());
+  var $x_23 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).thead__Lcom_raquo_laminar_tags_HtmlTag());
   var this$273 = $m_sjsr_package$();
-  var $x_20 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tr__Lcom_raquo_laminar_tags_HtmlTag();
+  var $x_22 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tr__Lcom_raquo_laminar_tags_HtmlTag();
   var this$270 = $m_sjsr_package$();
-  var $x_19 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag());
+  var $x_21 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag());
   var this$259 = $m_sjsr_package$();
   var this$258 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$22 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$39 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$258, "Key", r$22)]);
-  var array$39 = this$259.refArrayToJSArray__AO__sjs_js_Array(xs$39);
-  var $x_18 = $x_19.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$39));
-  var $x_17 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag());
+  var r$20 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$38 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$258, "Key", r$20)]);
+  var array$38 = this$259.refArrayToJSArray__AO__sjs_js_Array(xs$38);
+  var $x_20 = $x_21.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$38));
+  var $x_19 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag());
   var this$263 = $m_sjsr_package$();
   var this$262 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$23 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$40 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$262, "Does", r$23)]);
-  var array$40 = this$263.refArrayToJSArray__AO__sjs_js_Array(xs$40);
-  var $x_16 = $x_17.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$40));
-  var $x_15 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag();
+  var r$21 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$39 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$262, "Does", r$21)]);
+  var array$39 = this$263.refArrayToJSArray__AO__sjs_js_Array(xs$39);
+  var $x_18 = $x_19.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$39));
+  var $x_17 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).th__Lcom_raquo_laminar_tags_HtmlTag();
   var this$267 = $m_sjsr_package$();
   var this$266 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-  var r$24 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$41 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$266, "While typing", r$24)]);
-  var array$41 = this$267.refArrayToJSArray__AO__sjs_js_Array(xs$41);
-  var xs$42 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_18, $x_16, $n($x_15).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$41))]);
-  var array$42 = this$270.refArrayToJSArray__AO__sjs_js_Array(xs$42);
-  var xs$43 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$n($x_20).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$42))]);
-  var array$43 = this$273.refArrayToJSArray__AO__sjs_js_Array(xs$43);
-  var $x_14 = $x_21.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$43));
-  var $x_13 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tbody__Lcom_raquo_laminar_tags_HtmlTag();
+  var r$22 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+  var xs$40 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$266, "While typing", r$22)]);
+  var array$40 = this$267.refArrayToJSArray__AO__sjs_js_Array(xs$40);
+  var xs$41 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_20, $x_18, $n($x_17).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$40))]);
+  var array$41 = this$270.refArrayToJSArray__AO__sjs_js_Array(xs$41);
+  var xs$42 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$n($x_22).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$41))]);
+  var array$42 = this$273.refArrayToJSArray__AO__sjs_js_Array(xs$42);
+  var $x_16 = $x_23.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$42));
+  var $x_15 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tbody__Lcom_raquo_laminar_tags_HtmlTag();
   var this$294 = $m_sjsr_package$();
   var this$293 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var nodes$1 = $n(shortcuts).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((s$2$1) => {
     var s$4 = $as_Lprontopop_View$package$Shortcut$1(s$2$1);
-    var $x_12 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tr__Lcom_raquo_laminar_tags_HtmlTag());
+    var $x_14 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).tr__Lcom_raquo_laminar_tags_HtmlTag());
     var this$290 = $m_sjsr_package$();
-    var $x_11 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
+    var $x_13 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
     var this$278 = $m_sjsr_package$();
     var this$277 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
     var value$4 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_shown;
-    var r$25 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$44 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$277, value$4, r$25)]);
-    var array$44 = this$278.refArrayToJSArray__AO__sjs_js_Array(xs$44);
-    var $x_10 = $x_11.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$44));
-    var $x_9 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
+    var r$23 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+    var xs$43 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$277, value$4, r$23)]);
+    var array$43 = this$278.refArrayToJSArray__AO__sjs_js_Array(xs$43);
+    var $x_12 = $x_13.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$43));
+    var $x_11 = $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag());
     var this$282 = $m_sjsr_package$();
     var this$281 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
     var value$5 = $n(s$4).Lprontopop_View$package$Shortcut$1__f_does;
-    var r$26 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-    var xs$45 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$281, value$5, r$26)]);
-    var array$45 = this$282.refArrayToJSArray__AO__sjs_js_Array(xs$45);
-    var $x_8 = $x_9.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$45));
-    var $x_7 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag();
+    var r$24 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+    var xs$44 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$281, value$5, r$24)]);
+    var array$44 = this$282.refArrayToJSArray__AO__sjs_js_Array(xs$44);
+    var $x_10 = $x_11.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$44));
+    var $x_9 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).td__Lcom_raquo_laminar_tags_HtmlTag();
     var this$287 = $m_sjsr_package$();
     if ($n(s$4).Lprontopop_View$package$Shortcut$1__f_evenWhileTyping) {
       var this$285 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-      var r$27 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-      var $x_6 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$285, "yes", r$27);
+      var r$25 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+      var $x_8 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$285, "yes", r$25);
     } else {
       var this$286 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
-      var r$28 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-      var $x_6 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$286, "no", r$28);
+      var r$26 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
+      var $x_8 = $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$286, "no", r$26);
     }
-    var xs$46 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_6]);
-    var array$46 = this$287.refArrayToJSArray__AO__sjs_js_Array(xs$46);
-    var xs$47 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_10, $x_8, $n($x_7).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$46))]);
-    var array$47 = this$290.refArrayToJSArray__AO__sjs_js_Array(xs$47);
-    return $x_12.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$47));
+    var xs$45 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_8]);
+    var array$45 = this$287.refArrayToJSArray__AO__sjs_js_Array(xs$45);
+    var xs$46 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_12, $x_10, $n($x_9).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$45))]);
+    var array$46 = this$290.refArrayToJSArray__AO__sjs_js_Array(xs$46);
+    return $x_14.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$46));
   })));
   var renderableSeq$1 = $m_Lcom_raquo_laminar_modifiers_RenderableSeq$collectionSeqRenderable$();
-  var xs$48 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__nodeSeqToModifier__O__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_Modifier(this$293, nodes$1, renderableSeq$1)]);
-  var array$48 = this$294.refArrayToJSArray__AO__sjs_js_Array(xs$48);
-  var xs$49 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_14, $n($x_13).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$48))]);
-  var array$49 = this$297.refArrayToJSArray__AO__sjs_js_Array(xs$49);
-  var xs$50 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_25, $x_23, $n($x_22).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$49))]);
-  var array$50 = this$300.refArrayToJSArray__AO__sjs_js_Array(xs$50);
-  var xs$51 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_133, $x_132, $x_130, $x_129, $x_128, $x_124, $x_112, $x_93, $x_53, $x_37, $x_36, $x_31, $x_27, $n($x_26).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$50))]);
-  var array$51 = this$303.refArrayToJSArray__AO__sjs_js_Array(xs$51);
-  return $x_134.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$51));
+  var xs$47 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$f_Lcom_raquo_laminar_api_Implicits__nodeSeqToModifier__O__Lcom_raquo_laminar_modifiers_RenderableSeq__Lcom_raquo_laminar_modifiers_Modifier(this$293, nodes$1, renderableSeq$1)]);
+  var array$47 = this$294.refArrayToJSArray__AO__sjs_js_Array(xs$47);
+  var xs$48 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_16, $n($x_15).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$47))]);
+  var array$48 = this$297.refArrayToJSArray__AO__sjs_js_Array(xs$48);
+  var xs$49 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_27, $x_25, $n($x_24).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$48))]);
+  var array$49 = this$300.refArrayToJSArray__AO__sjs_js_Array(xs$49);
+  var $x_7 = $x_28.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$49));
+  $n($n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L).Lcom_raquo_laminar_api_package$$anon$1__f_child);
+  var $x_6 = $m_Lcom_raquo_laminar_receivers_ChildOptionReceiver$();
+  var this$306 = $n($n(pendingLoadVar).Lcom_raquo_airstream_state_SourceVar__f_signal);
+  var player$lzy1$46$1 = player$lzy1;
+  var project$10 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((player$lzy1$46) => ((_$47$2) => {
+    var _$47 = $as_s_Option(_$47$2);
+    var this$304 = $n(_$47);
+    var f$5 = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((name$2) => {
+      var name$1 = $as_T(name$2);
+      return $p_Lprontopop_View$package$__renderConfirmLoad$1__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__Lcom_raquo_airstream_state_Var__T__sr_IntRef__Lcom_raquo_airstream_state_Var__sr_LazyRef__T__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(this, pendingLoadVar, statusVar, songsVar, colWidthsVar, concertNameVar, selectedVar, dirtyVar, "prontopop.concert.", lastId, playingVar, player$lzy1$46, name$1);
+    }));
+    if (this$304.isEmpty__Z()) {
+      return $m_s_None$();
+    } else {
+      var value$6 = f$5.apply__O__O(this$304.get__O());
+      return new $c_s_Some(value$6);
+    }
+  }))(player$lzy1$46$1));
+  var xs$50 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_133, $x_132, $x_130, $x_128, $x_127, $x_123, $x_108, $x_95, $x_55, $x_39, $x_38, $x_33, $x_29, $x_7, $x_6.$less$minus$minus__Lcom_raquo_airstream_core_Source__Lcom_raquo_laminar_inserters_DynamicInserter(new $c_Lcom_raquo_airstream_misc_MapSignal(this$306, project$10, $m_s_None$()))]);
+  var array$50 = this$307.refArrayToJSArray__AO__sjs_js_Array(xs$50);
+  return $x_134.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$50));
 });
 var $d_Lprontopop_View$package$ = new $TypeData().initClass($c_Lprontopop_View$package$, "prontopop.View$package$", ({
   Lprontopop_View$package$: 1
@@ -20097,6 +20367,15 @@ $c_Lcom_raquo_laminar_nodes_CommentNode.prototype.apply__Lcom_raquo_laminar_node
 $c_Lcom_raquo_laminar_nodes_CommentNode.prototype.ref__Lorg_scalajs_dom_Node = (function() {
   return this.Lcom_raquo_laminar_nodes_CommentNode__f_ref;
 });
+function $as_Lcom_raquo_laminar_nodes_CommentNode(obj) {
+  return (((obj instanceof $c_Lcom_raquo_laminar_nodes_CommentNode) || (obj === null)) ? obj : $throwClassCastException(obj, "com.raquo.laminar.nodes.CommentNode"));
+}
+function $isArrayOf_Lcom_raquo_laminar_nodes_CommentNode(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lcom_raquo_laminar_nodes_CommentNode)));
+}
+function $asArrayOf_Lcom_raquo_laminar_nodes_CommentNode(obj, depth) {
+  return (($isArrayOf_Lcom_raquo_laminar_nodes_CommentNode(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lcom.raquo.laminar.nodes.CommentNode;", depth));
+}
 var $d_Lcom_raquo_laminar_nodes_CommentNode = new $TypeData().initClass($c_Lcom_raquo_laminar_nodes_CommentNode, "com.raquo.laminar.nodes.CommentNode", ({
   Lcom_raquo_laminar_nodes_CommentNode: 1,
   Lcom_raquo_laminar_nodes_ReactiveNode: 1,
@@ -25015,9 +25294,6 @@ var $d_sc_ClassTagSeqFactory$AnySeqDelegate = new $TypeData().initClass($c_sc_Cl
   sc_IterableFactory: 1,
   sc_SeqFactory: 1
 }));
-function $f_sc_IndexedSeqOps__prepended__O__O($thiz, elem) {
-  return $n($thiz.iterableFactory__sc_IterableFactory()).from__sc_IterableOnce__O($ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, $thiz));
-}
 function $f_sc_IndexedSeqOps__map__F1__O($thiz, f) {
   return $n($thiz.iterableFactory__sc_IterableFactory()).from__sc_IterableOnce__O($ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), $thiz, f));
 }
@@ -30773,15 +31049,6 @@ function $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O($thiz, f) {
   }
   return $n(builder).result__O();
 }
-function $f_sc_StrictOptimizedSeqOps__prepended__O__O($thiz, elem) {
-  var b = $n($thiz.iterableFactory__sc_SeqFactory()).newBuilder__scm_Builder();
-  $f_scm_Builder__sizeHint__sc_IterableOnce__I__V($n(b), $thiz, 1);
-  var this$1 = $n(b);
-  this$1.addOne__O__scm_Growable(elem);
-  var this$2 = $n(b);
-  this$2.addAll__sc_IterableOnce__scm_Growable($thiz);
-  return $n(b).result__O();
-}
 function $f_sc_StrictOptimizedSeqOps__appended__O__O($thiz, elem) {
   var b = $n($thiz.iterableFactory__sc_SeqFactory()).newBuilder__scm_Builder();
   $f_scm_Builder__sizeHint__sc_IterableOnce__I__V($n(b), $thiz, 1);
@@ -34797,29 +35064,6 @@ var $d_sc_View$Map = new $TypeData().initClass($c_sc_View$Map, "scala.collection
   Ljava_io_Serializable: 1,
   sc_View: 1
 }));
-function $ct_sc_View$Prepended__O__sc_IterableOps__($thiz, elem, underlying) {
-  $thiz.sc_View$Prepended__f_elem = elem;
-  $thiz.sc_View$Prepended__f_underlying = underlying;
-  return $thiz;
-}
-/** @constructor */
-function $c_sc_View$Prepended() {
-  this.sc_View$Prepended__f_elem = null;
-  this.sc_View$Prepended__f_underlying = null;
-}
-$c_sc_View$Prepended.prototype = new $h_sc_AbstractView();
-$c_sc_View$Prepended.prototype.constructor = $c_sc_View$Prepended;
-/** @constructor */
-function $h_sc_View$Prepended() {
-}
-$h_sc_View$Prepended.prototype = $c_sc_View$Prepended.prototype;
-$c_sc_View$Prepended.prototype.iterator__sc_Iterator = (function() {
-  return new $c_sc_View$Concat(new $c_sc_View$Single(this.sc_View$Prepended__f_elem), this.sc_View$Prepended__f_underlying).iterator__sc_Iterator();
-});
-$c_sc_View$Prepended.prototype.knownSize__I = (function() {
-  var size = $n(this.sc_View$Prepended__f_underlying).knownSize__I();
-  return ((size >= 0) ? ((1 + size) | 0) : (-1));
-});
 /** @constructor */
 function $c_sc_View$Single(a) {
   this.sc_View$Single__f_a = null;
@@ -36992,9 +37236,6 @@ $c_sc_AbstractSeqView.prototype.map__F1__sc_SeqView = (function(f) {
 $c_sc_AbstractSeqView.prototype.appended__O__sc_SeqView = (function(elem) {
   return $ct_sc_SeqView$Appended__sc_SeqOps__O__(new $c_sc_SeqView$Appended(), this, elem);
 });
-$c_sc_AbstractSeqView.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this);
-});
 $c_sc_AbstractSeqView.prototype.stringPrefix__T = (function() {
   return "SeqView";
 });
@@ -37003,9 +37244,6 @@ $c_sc_AbstractSeqView.prototype.map__F1__O = (function(f) {
 });
 $c_sc_AbstractSeqView.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_SeqView(elem);
-});
-$c_sc_AbstractSeqView.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_SeqView(elem);
 });
 function $is_sc_IndexedSeq(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sc_IndexedSeq)));
@@ -37292,9 +37530,6 @@ $c_sc_SeqView$Appended.prototype.map__F1__sc_SeqView = (function(f) {
 $c_sc_SeqView$Appended.prototype.appended__O__sc_SeqView = (function(elem) {
   return $ct_sc_SeqView$Appended__sc_SeqOps__O__(new $c_sc_SeqView$Appended(), this, elem);
 });
-$c_sc_SeqView$Appended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this);
-});
 $c_sc_SeqView$Appended.prototype.stringPrefix__T = (function() {
   return "SeqView";
 });
@@ -37309,9 +37544,6 @@ $c_sc_SeqView$Appended.prototype.map__F1__O = (function(f) {
 });
 $c_sc_SeqView$Appended.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_SeqView(elem);
-});
-$c_sc_SeqView$Appended.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_SeqView(elem);
 });
 var $d_sc_SeqView$Appended = new $TypeData().initClass($c_sc_SeqView$Appended, "scala.collection.SeqView$Appended", ({
   sc_SeqView$Appended: 1,
@@ -37413,9 +37645,6 @@ $c_sc_SeqView$Map.prototype.map__F1__sc_SeqView = (function(f) {
 $c_sc_SeqView$Map.prototype.appended__O__sc_SeqView = (function(elem) {
   return $ct_sc_SeqView$Appended__sc_SeqOps__O__(new $c_sc_SeqView$Appended(), this, elem);
 });
-$c_sc_SeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this);
-});
 $c_sc_SeqView$Map.prototype.stringPrefix__T = (function() {
   return "SeqView";
 });
@@ -37431,89 +37660,9 @@ $c_sc_SeqView$Map.prototype.map__F1__O = (function(f) {
 $c_sc_SeqView$Map.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_SeqView(elem);
 });
-$c_sc_SeqView$Map.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_SeqView(elem);
-});
 var $d_sc_SeqView$Map = new $TypeData().initClass($c_sc_SeqView$Map, "scala.collection.SeqView$Map", ({
   sc_SeqView$Map: 1,
   sc_View$Map: 1,
-  sc_AbstractView: 1,
-  sc_AbstractIterable: 1,
-  sc_IterableOnce: 1,
-  sc_IterableOnceOps: 1,
-  sc_IterableOps: 1,
-  sc_IterableFactoryDefaults: 1,
-  sc_Iterable: 1,
-  Ljava_io_Serializable: 1,
-  sc_View: 1,
-  sc_SeqOps: 1,
-  sc_SeqView: 1
-}));
-function $ct_sc_SeqView$Prepended__O__sc_SeqOps__($thiz, elem, underlying) {
-  $thiz.sc_SeqView$Prepended__f_elem = elem;
-  $thiz.sc_SeqView$Prepended__f_underlying = underlying;
-  $ct_sc_View$Prepended__O__sc_IterableOps__($thiz, elem, underlying);
-  return $thiz;
-}
-/** @constructor */
-function $c_sc_SeqView$Prepended() {
-  this.sc_View$Prepended__f_elem = null;
-  this.sc_View$Prepended__f_underlying = null;
-  this.sc_SeqView$Prepended__f_elem = null;
-  this.sc_SeqView$Prepended__f_underlying = null;
-}
-$c_sc_SeqView$Prepended.prototype = new $h_sc_View$Prepended();
-$c_sc_SeqView$Prepended.prototype.constructor = $c_sc_SeqView$Prepended;
-/** @constructor */
-function $h_sc_SeqView$Prepended() {
-}
-$h_sc_SeqView$Prepended.prototype = $c_sc_SeqView$Prepended.prototype;
-$c_sc_SeqView$Prepended.prototype.concat__sc_IterableOnce__O = (function(suffix) {
-  return $as_sc_View($f_sc_IterableOps__concat__sc_IterableOnce__O(this, suffix));
-});
-$c_sc_SeqView$Prepended.prototype.distinctBy__F1__O = (function(f) {
-  return $f_sc_SeqOps__distinctBy__F1__O(this, f);
-});
-$c_sc_SeqView$Prepended.prototype.indexWhere__F1__I__I = (function(p, from) {
-  var this$1 = $n(this.iterator__sc_Iterator());
-  return $f_sc_Iterator__indexWhere__F1__I__I(this$1, p, from);
-});
-$c_sc_SeqView$Prepended.prototype.lengthCompare__I__I = (function(len) {
-  return $f_sc_IterableOps__sizeCompare__I__I(this, len);
-});
-$c_sc_SeqView$Prepended.prototype.isEmpty__Z = (function() {
-  return $f_sc_SeqOps__isEmpty__Z(this);
-});
-$c_sc_SeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
-  return $ct_sc_SeqView$Map__sc_SeqOps__F1__(new $c_sc_SeqView$Map(), this, f);
-});
-$c_sc_SeqView$Prepended.prototype.appended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_SeqView$Appended__sc_SeqOps__O__(new $c_sc_SeqView$Appended(), this, elem);
-});
-$c_sc_SeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_SeqView$Prepended__O__sc_SeqOps__(new $c_sc_SeqView$Prepended(), elem, this);
-});
-$c_sc_SeqView$Prepended.prototype.stringPrefix__T = (function() {
-  return "SeqView";
-});
-$c_sc_SeqView$Prepended.prototype.apply__I__O = (function(idx) {
-  return ((idx === 0) ? this.sc_SeqView$Prepended__f_elem : $n(this.sc_SeqView$Prepended__f_underlying).apply__I__O(((idx - 1) | 0)));
-});
-$c_sc_SeqView$Prepended.prototype.length__I = (function() {
-  return ((1 + $n(this.sc_SeqView$Prepended__f_underlying).length__I()) | 0);
-});
-$c_sc_SeqView$Prepended.prototype.map__F1__O = (function(f) {
-  return this.map__F1__sc_SeqView(f);
-});
-$c_sc_SeqView$Prepended.prototype.appended__O__O = (function(elem) {
-  return this.appended__O__sc_SeqView(elem);
-});
-$c_sc_SeqView$Prepended.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_SeqView(elem);
-});
-var $d_sc_SeqView$Prepended = new $TypeData().initClass($c_sc_SeqView$Prepended, "scala.collection.SeqView$Prepended", ({
-  sc_SeqView$Prepended: 1,
-  sc_View$Prepended: 1,
   sc_AbstractView: 1,
   sc_AbstractIterable: 1,
   sc_IterableOnce: 1,
@@ -37566,6 +37715,8 @@ function $c_Lcom_raquo_laminar_api_package$$anon$1() {
   this.Lcom_raquo_laminar_api_package$$anon$1__f_selectbitmap$1 = false;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_option$lzy1 = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_optionbitmap$1 = false;
+  this.Lcom_raquo_laminar_api_package$$anon$1__f_p$lzy1 = null;
+  this.Lcom_raquo_laminar_api_package$$anon$1__f_pbitmap$1 = false;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_div$lzy1 = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_divbitmap$1 = false;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_table$lzy1 = null;
@@ -37612,6 +37763,7 @@ function $c_Lcom_raquo_laminar_api_package$$anon$1() {
   this.Lcom_raquo_laminar_api_package$$anon$1__f_cls = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_styleAttr$lzy1 = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_styleAttrbitmap$1 = false;
+  this.Lcom_raquo_laminar_api_package$$anon$1__f_onMountFocus = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_Var = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_Modifier = null;
   this.Lcom_raquo_laminar_api_package$$anon$1__f_StringValueMapper$lzy1 = null;
@@ -37683,6 +37835,13 @@ $c_Lcom_raquo_laminar_api_package$$anon$1.prototype.option__Lcom_raquo_laminar_t
     this.Lcom_raquo_laminar_api_package$$anon$1__f_optionbitmap$1 = true;
   }
   return this.Lcom_raquo_laminar_api_package$$anon$1__f_option$lzy1;
+});
+$c_Lcom_raquo_laminar_api_package$$anon$1.prototype.p__Lcom_raquo_laminar_tags_HtmlTag = (function() {
+  if ((!this.Lcom_raquo_laminar_api_package$$anon$1__f_pbitmap$1)) {
+    this.Lcom_raquo_laminar_api_package$$anon$1__f_p$lzy1 = new $c_Lcom_raquo_laminar_tags_HtmlTag("p", false);
+    this.Lcom_raquo_laminar_api_package$$anon$1__f_pbitmap$1 = true;
+  }
+  return this.Lcom_raquo_laminar_api_package$$anon$1__f_p$lzy1;
 });
 $c_Lcom_raquo_laminar_api_package$$anon$1.prototype.div__Lcom_raquo_laminar_tags_HtmlTag = (function() {
   if ((!this.Lcom_raquo_laminar_api_package$$anon$1__f_divbitmap$1)) {
@@ -38015,9 +38174,6 @@ $c_sc_AbstractIndexedSeqView.prototype.iterator__sc_Iterator = (function() {
 $c_sc_AbstractIndexedSeqView.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return $ct_sc_IndexedSeqView$Appended__sc_IndexedSeqOps__O__(new $c_sc_IndexedSeqView$Appended(), this, elem);
 });
-$c_sc_AbstractIndexedSeqView.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
 $c_sc_AbstractIndexedSeqView.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return $ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), this, f);
 });
@@ -38029,12 +38185,6 @@ $c_sc_AbstractIndexedSeqView.prototype.appended__O__sc_SeqView = (function(elem)
 });
 $c_sc_AbstractIndexedSeqView.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_AbstractIndexedSeqView.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_AbstractIndexedSeqView.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
 });
 $c_sc_AbstractIndexedSeqView.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_IndexedSeqView(f);
@@ -38102,9 +38252,6 @@ $c_sc_IndexedSeqView$Appended.prototype.iterator__sc_Iterator = (function() {
 $c_sc_IndexedSeqView$Appended.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return $ct_sc_IndexedSeqView$Appended__sc_IndexedSeqOps__O__(new $c_sc_IndexedSeqView$Appended(), this, elem);
 });
-$c_sc_IndexedSeqView$Appended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
 $c_sc_IndexedSeqView$Appended.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return $ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), this, f);
 });
@@ -38116,12 +38263,6 @@ $c_sc_IndexedSeqView$Appended.prototype.appended__O__sc_SeqView = (function(elem
 });
 $c_sc_IndexedSeqView$Appended.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Appended.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Appended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
 });
 $c_sc_IndexedSeqView$Appended.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_IndexedSeqView(f);
@@ -38183,12 +38324,6 @@ $c_sc_IndexedSeqView$Id.prototype.appended__O__sc_SeqView = (function(elem) {
 $c_sc_IndexedSeqView$Id.prototype.appended__O__O = (function(elem) {
   return $ct_sc_IndexedSeqView$Appended__sc_IndexedSeqOps__O__(new $c_sc_IndexedSeqView$Appended(), this, elem);
 });
-$c_sc_IndexedSeqView$Id.prototype.prepended__O__O = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
-$c_sc_IndexedSeqView$Id.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
 $c_sc_IndexedSeqView$Id.prototype.map__F1__O = (function(f) {
   return $ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), this, f);
 });
@@ -38249,9 +38384,6 @@ $c_sc_IndexedSeqView$Map.prototype.iterator__sc_Iterator = (function() {
 $c_sc_IndexedSeqView$Map.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return $ct_sc_IndexedSeqView$Appended__sc_IndexedSeqOps__O__(new $c_sc_IndexedSeqView$Appended(), this, elem);
 });
-$c_sc_IndexedSeqView$Map.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
 $c_sc_IndexedSeqView$Map.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return $ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), this, f);
 });
@@ -38264,12 +38396,6 @@ $c_sc_IndexedSeqView$Map.prototype.appended__O__sc_SeqView = (function(elem) {
 $c_sc_IndexedSeqView$Map.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_IndexedSeqView(elem);
 });
-$c_sc_IndexedSeqView$Map.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
 $c_sc_IndexedSeqView$Map.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_IndexedSeqView(f);
 });
@@ -38280,87 +38406,6 @@ var $d_sc_IndexedSeqView$Map = new $TypeData().initClass($c_sc_IndexedSeqView$Ma
   sc_IndexedSeqView$Map: 1,
   sc_SeqView$Map: 1,
   sc_View$Map: 1,
-  sc_AbstractView: 1,
-  sc_AbstractIterable: 1,
-  sc_IterableOnce: 1,
-  sc_IterableOnceOps: 1,
-  sc_IterableOps: 1,
-  sc_IterableFactoryDefaults: 1,
-  sc_Iterable: 1,
-  Ljava_io_Serializable: 1,
-  sc_View: 1,
-  sc_SeqOps: 1,
-  sc_SeqView: 1,
-  sc_IndexedSeqOps: 1,
-  sc_IndexedSeqView: 1
-}));
-function $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__($thiz, elem, underlying) {
-  $ct_sc_SeqView$Prepended__O__sc_SeqOps__($thiz, elem, underlying);
-  return $thiz;
-}
-/** @constructor */
-function $c_sc_IndexedSeqView$Prepended() {
-  this.sc_View$Prepended__f_elem = null;
-  this.sc_View$Prepended__f_underlying = null;
-  this.sc_SeqView$Prepended__f_elem = null;
-  this.sc_SeqView$Prepended__f_underlying = null;
-}
-$c_sc_IndexedSeqView$Prepended.prototype = new $h_sc_SeqView$Prepended();
-$c_sc_IndexedSeqView$Prepended.prototype.constructor = $c_sc_IndexedSeqView$Prepended;
-/** @constructor */
-function $h_sc_IndexedSeqView$Prepended() {
-}
-$h_sc_IndexedSeqView$Prepended.prototype = $c_sc_IndexedSeqView$Prepended.prototype;
-$c_sc_IndexedSeqView$Prepended.prototype.head__O = (function() {
-  return $f_sc_IndexedSeqOps__head__O(this);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.headOption__s_Option = (function() {
-  return $f_sc_IndexedSeqOps__headOption__s_Option(this);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.lengthCompare__I__I = (function(len) {
-  var x = this.length__I();
-  return ((x === len) ? 0 : ((x < len) ? (-1) : 1));
-});
-$c_sc_IndexedSeqView$Prepended.prototype.knownSize__I = (function() {
-  return this.length__I();
-});
-$c_sc_IndexedSeqView$Prepended.prototype.iterator__sc_Iterator = (function() {
-  return $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Appended__sc_IndexedSeqOps__O__(new $c_sc_IndexedSeqView$Appended(), this, elem);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(new $c_sc_IndexedSeqView$Prepended(), elem, this);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.map__F1__sc_IndexedSeqView = (function(f) {
-  return $ct_sc_IndexedSeqView$Map__sc_IndexedSeqOps__F1__(new $c_sc_IndexedSeqView$Map(), this, f);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.stringPrefix__T = (function() {
-  return "IndexedSeqView";
-});
-$c_sc_IndexedSeqView$Prepended.prototype.appended__O__sc_SeqView = (function(elem) {
-  return this.appended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.appended__O__O = (function(elem) {
-  return this.appended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.map__F1__O = (function(f) {
-  return this.map__F1__sc_IndexedSeqView(f);
-});
-$c_sc_IndexedSeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
-  return this.map__F1__sc_IndexedSeqView(f);
-});
-var $d_sc_IndexedSeqView$Prepended = new $TypeData().initClass($c_sc_IndexedSeqView$Prepended, "scala.collection.IndexedSeqView$Prepended", ({
-  sc_IndexedSeqView$Prepended: 1,
-  sc_SeqView$Prepended: 1,
-  sc_View$Prepended: 1,
   sc_AbstractView: 1,
   sc_AbstractIterable: 1,
   sc_IterableOnce: 1,
@@ -38413,9 +38458,6 @@ $c_scm_ArrayBufferView.prototype.iterator__sc_Iterator = (function() {
 $c_scm_ArrayBufferView.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_ArrayBufferView__f_mutationCount);
 });
-$c_scm_ArrayBufferView.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_ArrayBufferView__f_mutationCount);
-});
 $c_scm_ArrayBufferView.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_ArrayBufferView__f_mutationCount);
 });
@@ -38424,12 +38466,6 @@ $c_scm_ArrayBufferView.prototype.appended__O__sc_SeqView = (function(elem) {
 });
 $c_scm_ArrayBufferView.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sc_IndexedSeqView(elem);
-});
-$c_scm_ArrayBufferView.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
-});
-$c_scm_ArrayBufferView.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return this.prepended__O__sc_IndexedSeqView(elem);
 });
 $c_scm_ArrayBufferView.prototype.map__F1__O = (function(f) {
   return this.map__F1__sc_IndexedSeqView(f);
@@ -39451,9 +39487,6 @@ $c_scm_CheckedIndexedSeqView$Appended.prototype.iterator__sc_Iterator = (functio
 $c_scm_CheckedIndexedSeqView$Appended.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
 });
-$c_scm_CheckedIndexedSeqView$Appended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
-});
 $c_scm_CheckedIndexedSeqView$Appended.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
 });
@@ -39465,12 +39498,6 @@ $c_scm_CheckedIndexedSeqView$Appended.prototype.appended__O__sc_SeqView = (funct
 });
 $c_scm_CheckedIndexedSeqView$Appended.prototype.appended__O__O = (function(elem) {
   return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Appended.prototype.prepended__O__O = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Appended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
 });
 $c_scm_CheckedIndexedSeqView$Appended.prototype.map__F1__O = (function(f) {
   return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Appended__f_mutationCount);
@@ -39520,9 +39547,6 @@ $c_scm_CheckedIndexedSeqView$Map.prototype.iterator__sc_Iterator = (function() {
 $c_scm_CheckedIndexedSeqView$Map.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
   return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
 });
-$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
-});
 $c_scm_CheckedIndexedSeqView$Map.prototype.map__F1__sc_IndexedSeqView = (function(f) {
   return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
 });
@@ -39535,12 +39559,6 @@ $c_scm_CheckedIndexedSeqView$Map.prototype.appended__O__sc_SeqView = (function(e
 $c_scm_CheckedIndexedSeqView$Map.prototype.appended__O__O = (function(elem) {
   return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
 });
-$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__O = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Map.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
-});
 $c_scm_CheckedIndexedSeqView$Map.prototype.map__F1__O = (function(f) {
   return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Map__f_mutationCount);
 });
@@ -39552,75 +39570,6 @@ var $d_scm_CheckedIndexedSeqView$Map = new $TypeData().initClass($c_scm_CheckedI
   sc_IndexedSeqView$Map: 1,
   sc_SeqView$Map: 1,
   sc_View$Map: 1,
-  sc_AbstractView: 1,
-  sc_AbstractIterable: 1,
-  sc_IterableOnce: 1,
-  sc_IterableOnceOps: 1,
-  sc_IterableOps: 1,
-  sc_IterableFactoryDefaults: 1,
-  sc_Iterable: 1,
-  Ljava_io_Serializable: 1,
-  sc_View: 1,
-  sc_SeqOps: 1,
-  sc_SeqView: 1,
-  sc_IndexedSeqOps: 1,
-  sc_IndexedSeqView: 1,
-  scm_CheckedIndexedSeqView: 1
-}));
-/** @constructor */
-function $c_scm_CheckedIndexedSeqView$Prepended(elem, underlying, mutationCount) {
-  this.sc_View$Prepended__f_elem = null;
-  this.sc_View$Prepended__f_underlying = null;
-  this.sc_SeqView$Prepended__f_elem = null;
-  this.sc_SeqView$Prepended__f_underlying = null;
-  this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount = null;
-  this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount = mutationCount;
-  $ct_sc_IndexedSeqView$Prepended__O__sc_IndexedSeqOps__(this, elem, underlying);
-}
-$c_scm_CheckedIndexedSeqView$Prepended.prototype = new $h_sc_IndexedSeqView$Prepended();
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.constructor = $c_scm_CheckedIndexedSeqView$Prepended;
-/** @constructor */
-function $h_scm_CheckedIndexedSeqView$Prepended() {
-}
-$h_scm_CheckedIndexedSeqView$Prepended.prototype = $c_scm_CheckedIndexedSeqView$Prepended.prototype;
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.iterator__sc_Iterator = (function() {
-  return $f_scm_CheckedIndexedSeqView__iterator__sc_Iterator(this);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.appended__O__sc_IndexedSeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__sc_IndexedSeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__sc_IndexedSeqView = (function(f) {
-  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.mutationCount__F0 = (function() {
-  return this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount;
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.appended__O__sc_SeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.appended__O__O = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Appended(this, elem, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__O = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.prepended__O__sc_SeqView = (function(elem) {
-  return new $c_scm_CheckedIndexedSeqView$Prepended(elem, this, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__O = (function(f) {
-  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-$c_scm_CheckedIndexedSeqView$Prepended.prototype.map__F1__sc_SeqView = (function(f) {
-  return new $c_scm_CheckedIndexedSeqView$Map(this, f, this.scm_CheckedIndexedSeqView$Prepended__f_mutationCount);
-});
-var $d_scm_CheckedIndexedSeqView$Prepended = new $TypeData().initClass($c_scm_CheckedIndexedSeqView$Prepended, "scala.collection.mutable.CheckedIndexedSeqView$Prepended", ({
-  scm_CheckedIndexedSeqView$Prepended: 1,
-  sc_IndexedSeqView$Prepended: 1,
-  sc_SeqView$Prepended: 1,
-  sc_View$Prepended: 1,
   sc_AbstractView: 1,
   sc_AbstractIterable: 1,
   sc_IterableOnce: 1,
@@ -41320,10 +41269,6 @@ $c_sci_LazyList.prototype.appended__O__O = (function(elem) {
 $c_sci_LazyList.prototype.filterNot__F1__O = (function(pred) {
   return this.filterNot__F1__sci_LazyList(pred);
 });
-$c_sci_LazyList.prototype.prepended__O__O = (function(elem) {
-  $m_sci_LazyList$();
-  return $ct_sci_LazyList__O__sci_LazyList__(new $c_sci_LazyList(), elem, this);
-});
 $c_sci_LazyList.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_LazyList(f);
 });
@@ -41391,9 +41336,6 @@ $h_sci_WrappedString.prototype = $c_sci_WrappedString.prototype;
 $c_sci_WrappedString.prototype.iterator__sc_Iterator = (function() {
   var this$1 = new $c_sc_StringView(this.sci_WrappedString__f_self);
   return $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$1);
-});
-$c_sci_WrappedString.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_IndexedSeqOps__prepended__O__O(this, elem);
 });
 $c_sci_WrappedString.prototype.map__F1__O = (function(f) {
   return $f_sc_IndexedSeqOps__map__F1__O(this, f);
@@ -41547,9 +41489,6 @@ $c_sjsr_WrappedVarArgs.prototype.distinctBy__F1__O = (function(f) {
 });
 $c_sjsr_WrappedVarArgs.prototype.sorted__s_math_Ordering__O = (function(ord) {
   return $f_sc_SeqOps__sorted__s_math_Ordering__O(this, ord);
-});
-$c_sjsr_WrappedVarArgs.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
 });
 $c_sjsr_WrappedVarArgs.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);
@@ -42231,9 +42170,6 @@ $h_sci_Range.prototype = $c_sci_Range.prototype;
 $c_sci_Range.prototype.distinctBy__F1__O = (function(f) {
   return $f_sci_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
 });
-$c_sci_Range.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
-});
 $c_sci_Range.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);
 });
@@ -42818,15 +42754,6 @@ $c_sci_ArraySeq.prototype.map__F1__sci_ArraySeq = (function(f) {
   }
   return $m_sci_ArraySeq$().unsafeWrapArray__O__sci_ArraySeq(a);
 });
-$c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  var $x_1 = $m_sci_ArraySeq$();
-  var xs = this.unsafeArray__O();
-  var len = ((1 + $m_jl_reflect_Array$().getLength__O__I(xs)) | 0);
-  var dest = new $ac_O(len);
-  dest.set(0, elem);
-  $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $m_jl_reflect_Array$().getLength__O__I(xs));
-  return $x_1.unsafeWrapArray__O__sci_ArraySeq(dest);
-});
 $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq = (function(elem) {
   var $x_1 = $m_sci_ArraySeq$();
   var xs = this.unsafeArray__O();
@@ -42912,9 +42839,6 @@ $c_sci_ArraySeq.prototype.iterableFactory__sc_IterableFactory = (function() {
 });
 $c_sci_ArraySeq.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_ArraySeq(f);
-});
-$c_sci_ArraySeq.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 $c_sci_ArraySeq.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
@@ -43302,9 +43226,6 @@ $c_scm_ArraySeq.prototype.filterNot__F1__O = (function(pred) {
 $c_scm_ArraySeq.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
 });
-$c_scm_ArraySeq.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
-});
 $c_scm_ArraySeq.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);
 });
@@ -43460,20 +43381,6 @@ $c_sci_ArraySeq$ofBoolean.prototype.appended__O__sci_ArraySeq = (function(elem) 
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofBoolean.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if (((typeof elem) === "boolean")) {
-    var b = $uZ(elem);
-    var xs = this.sci_ArraySeq$ofBoolean__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$BooleanManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_Z(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofBoolean(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofBoolean.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofBoolean__f_unsafeArray;
 });
@@ -43491,9 +43398,6 @@ $c_sci_ArraySeq$ofBoolean.prototype.sorted__s_math_Ordering__O = (function(ord) 
 });
 $c_sci_ArraySeq$ofBoolean.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofBoolean.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofBoolean(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofBoolean) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofBoolean"));
@@ -43603,20 +43507,6 @@ $c_sci_ArraySeq$ofByte.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofByte.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ($isByte(elem)) {
-    var b = $uB(elem);
-    var xs = this.sci_ArraySeq$ofByte__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$ByteManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_B(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofByte(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofByte.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofByte__f_unsafeArray;
 });
@@ -43634,9 +43524,6 @@ $c_sci_ArraySeq$ofByte.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sci_ArraySeq$ofByte.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofByte.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofByte(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofByte) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofByte"));
@@ -43746,20 +43633,6 @@ $c_sci_ArraySeq$ofChar.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofChar.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ((elem instanceof $Char)) {
-    var b = $uC(elem);
-    var xs = this.sci_ArraySeq$ofChar__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$CharManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_C(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofChar(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofChar.prototype.addString__scm_StringBuilder__T__T__T__scm_StringBuilder = (function(sb, start, sep, end) {
   return new $c_scm_ArraySeq$ofChar(this.sci_ArraySeq$ofChar__f_unsafeArray).addString__scm_StringBuilder__T__T__T__scm_StringBuilder(sb, start, sep, end);
 });
@@ -43780,9 +43653,6 @@ $c_sci_ArraySeq$ofChar.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sci_ArraySeq$ofChar.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofChar.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofChar(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofChar) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofChar"));
@@ -43890,20 +43760,6 @@ $c_sci_ArraySeq$ofDouble.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofDouble.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if (((typeof elem) === "number")) {
-    var b = $uD(elem);
-    var xs = this.sci_ArraySeq$ofDouble__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$DoubleManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_D(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofDouble(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofDouble.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofDouble__f_unsafeArray;
 });
@@ -43918,9 +43774,6 @@ $c_sci_ArraySeq$ofDouble.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_ArraySeq$ofDouble.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofDouble.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofDouble(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofDouble) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofDouble"));
@@ -44028,20 +43881,6 @@ $c_sci_ArraySeq$ofFloat.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofFloat.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ($isFloat(elem)) {
-    var b = $uF(elem);
-    var xs = this.sci_ArraySeq$ofFloat__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$FloatManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_F(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofFloat(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofFloat.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofFloat__f_unsafeArray;
 });
@@ -44056,9 +43895,6 @@ $c_sci_ArraySeq$ofFloat.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_ArraySeq$ofFloat.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofFloat.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofFloat(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofFloat) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofFloat"));
@@ -44168,20 +44004,6 @@ $c_sci_ArraySeq$ofInt.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofInt.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ($isInt(elem)) {
-    var b = $uI(elem);
-    var xs = this.sci_ArraySeq$ofInt__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$IntManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_I(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofInt(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofInt.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofInt__f_unsafeArray;
 });
@@ -44199,9 +44021,6 @@ $c_sci_ArraySeq$ofInt.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sci_ArraySeq$ofInt.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofInt.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofInt(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofInt) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofInt"));
@@ -44315,22 +44134,6 @@ $c_sci_ArraySeq$ofLong.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofLong.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ((elem instanceof $Long)) {
-    var $x_1 = $uJ(elem);
-    var b_$_lo = $x_1.l;
-    var b_$_hi = $x_1.h;
-    var xs = this.sci_ArraySeq$ofLong__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$LongManifest$();
-    var len = ((1 + (($n(xs).u.length >>> 1) | 0)) | 0);
-    var dest = new $ac_J(len);
-    dest.set(0, b_$_lo, b_$_hi);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, (($n(xs).u.length >>> 1) | 0));
-    return new $c_sci_ArraySeq$ofLong(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofLong.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofLong__f_unsafeArray;
 });
@@ -44348,9 +44151,6 @@ $c_sci_ArraySeq$ofLong.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sci_ArraySeq$ofLong.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofLong.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofLong(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofLong) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofLong"));
@@ -44559,20 +44359,6 @@ $c_sci_ArraySeq$ofShort.prototype.appended__O__sci_ArraySeq = (function(elem) {
     return $c_sci_ArraySeq.prototype.appended__O__sci_ArraySeq.call(this, elem);
   }
 });
-$c_sci_ArraySeq$ofShort.prototype.prepended__O__sci_ArraySeq = (function(elem) {
-  if ($isShort(elem)) {
-    var b = $uS(elem);
-    var xs = this.sci_ArraySeq$ofShort__f_unsafeArray;
-    $m_s_reflect_ManifestFactory$ShortManifest$();
-    var len = ((1 + $n(xs).u.length) | 0);
-    var dest = new $ac_S(len);
-    dest.set(0, b);
-    $m_s_Array$().copy__O__I__O__I__I__V(xs, 0, dest, 1, $n(xs).u.length);
-    return new $c_sci_ArraySeq$ofShort(dest);
-  } else {
-    return $c_sci_ArraySeq.prototype.prepended__O__sci_ArraySeq.call(this, elem);
-  }
-});
 $c_sci_ArraySeq$ofShort.prototype.unsafeArray__O = (function() {
   return this.sci_ArraySeq$ofShort__f_unsafeArray;
 });
@@ -44590,9 +44376,6 @@ $c_sci_ArraySeq$ofShort.prototype.sorted__s_math_Ordering__O = (function(ord) {
 });
 $c_sci_ArraySeq$ofShort.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_ArraySeq(elem);
-});
-$c_sci_ArraySeq$ofShort.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_ArraySeq(elem);
 });
 function $as_sci_ArraySeq$ofShort(obj) {
   return (((obj instanceof $c_sci_ArraySeq$ofShort) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.ArraySeq$ofShort"));
@@ -45063,9 +44846,6 @@ $c_sci_List.prototype.equals__O__Z = (function(o) {
 });
 $c_sci_List.prototype.iterableFactory__sc_IterableFactory = (function() {
   return $m_sci_List$();
-});
-$c_sci_List.prototype.prepended__O__O = (function(elem) {
-  return new $c_sci_$colon$colon(elem, this);
 });
 $c_sci_List.prototype.appendedAll__sc_IterableOnce__O = (function(suffix) {
   return this.appendedAll__sc_IterableOnce__sci_List(suffix);
@@ -46576,9 +46356,6 @@ $c_sci_Vector1.prototype.apply__O__O = (function(v1) {
 $c_sci_Vector1.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
 });
-$c_sci_Vector1.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
-});
 $c_sci_Vector1.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
 });
@@ -46835,9 +46612,6 @@ $c_sci_Vector0$.prototype.apply__O__O = (function(v1) {
 $c_sci_Vector0$.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
 });
-$c_sci_Vector0$.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
-});
 $c_sci_Vector0$.prototype.map__F1__O = (function(f) {
   return this;
 });
@@ -47090,9 +46864,6 @@ $c_sci_Vector2.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_Vector2.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
-});
-$c_sci_Vector2.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
 });
 $c_sci_Vector2.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
@@ -47468,9 +47239,6 @@ $c_sci_Vector3.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_Vector3.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
-});
-$c_sci_Vector3.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
 });
 $c_sci_Vector3.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
@@ -47998,9 +47766,6 @@ $c_sci_Vector4.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_Vector4.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
-});
-$c_sci_Vector4.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
 });
 $c_sci_Vector4.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
@@ -48712,9 +48477,6 @@ $c_sci_Vector5.prototype.apply__O__O = (function(v1) {
 });
 $c_sci_Vector5.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
-});
-$c_sci_Vector5.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
 });
 $c_sci_Vector5.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
@@ -49612,9 +49374,6 @@ $c_sci_Vector6.prototype.apply__O__O = (function(v1) {
 $c_sci_Vector6.prototype.appended__O__O = (function(elem) {
   return this.appended__O__sci_Vector(elem);
 });
-$c_sci_Vector6.prototype.prepended__O__O = (function(elem) {
-  return this.prepended__O__sci_Vector(elem);
-});
 $c_sci_Vector6.prototype.map__F1__O = (function(f) {
   return this.map__F1__sci_Vector(f);
 });
@@ -49684,9 +49443,6 @@ $c_scm_StringBuilder.prototype.sizeHint__I__V = (function(size) {
 $c_scm_StringBuilder.prototype.iterator__sc_Iterator = (function() {
   var this$1 = new $c_sc_IndexedSeqView$Id(this);
   return $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$1);
-});
-$c_scm_StringBuilder.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_IndexedSeqOps__prepended__O__O(this, elem);
 });
 $c_scm_StringBuilder.prototype.map__F1__O = (function(f) {
   return $f_sc_IndexedSeqOps__map__F1__O(this, f);
@@ -49874,9 +49630,6 @@ $c_scm_ListBuffer.prototype.filterNot__F1__O = (function(pred) {
 });
 $c_scm_ListBuffer.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
-});
-$c_scm_ListBuffer.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
 });
 $c_scm_ListBuffer.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);
@@ -50086,9 +49839,6 @@ $c_scm_ArrayBuffer.prototype.filterNot__F1__O = (function(pred) {
 $c_scm_ArrayBuffer.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
 });
-$c_scm_ArrayBuffer.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
-});
 $c_scm_ArrayBuffer.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);
 });
@@ -50253,9 +50003,6 @@ $c_sjs_js_WrappedArray.prototype.stringPrefix__T = (function() {
 $c_sjs_js_WrappedArray.prototype.iterator__sc_Iterator = (function() {
   var this$1 = new $c_sc_IndexedSeqView$Id(this);
   return $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$1);
-});
-$c_sjs_js_WrappedArray.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_IndexedSeqOps__prepended__O__O(this, elem);
 });
 $c_sjs_js_WrappedArray.prototype.map__F1__O = (function(f) {
   return $f_sc_IndexedSeqOps__map__F1__O(this, f);
@@ -50438,9 +50185,6 @@ $c_scm_ArrayDeque.prototype.filterNot__F1__O = (function(pred) {
 });
 $c_scm_ArrayDeque.prototype.distinctBy__F1__O = (function(f) {
   return $f_sc_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
-});
-$c_scm_ArrayDeque.prototype.prepended__O__O = (function(elem) {
-  return $f_sc_StrictOptimizedSeqOps__prepended__O__O(this, elem);
 });
 $c_scm_ArrayDeque.prototype.appended__O__O = (function(elem) {
   return $f_sc_StrictOptimizedSeqOps__appended__O__O(this, elem);

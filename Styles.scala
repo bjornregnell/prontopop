@@ -360,6 +360,47 @@ select.bars { margin-right: 2ch; }
 .shortcuts td:first-child { font-weight: bold; color: var(--head); white-space: nowrap; }
 .shortcuts td:last-child { text-align: center; color: var(--muted); }
 
-/* what is playing, beside the Songs heading */
+/* what is playing, riding along at the end of the controls */
 .nowplaying { margin-left: 2ch; color: var(--muted); }
+
+/* the table holds something the Local Store does not; in the warm orange, not the alarm red */
+.unsaved { color: var(--hot-iron-orange); }
+
+/* The question before a load discards edits. Fixed to the viewport rather than the page, which is
+   as wide as the song table and scrolls sideways under it. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.dialog {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 1rem 1.4rem 1.2rem;
+  max-width: 52ch;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+}
+
+.dialog h2 { margin-top: 0; }
+.dialog p { line-height: 1.5; }
+.dialog .concertname { color: var(--head); font-weight: bold; }
+.dialog .row { margin-bottom: 0; }
+.dialog button { padding: 0.4rem 1.1rem; }
+
+/* Cancel is the safe answer and takes the focus, so it is the one that looks pressed-by-default;
+   the destructive one wears the alert red-orange and has to be aimed at. */
+.cancel { font-weight: bold; margin-right: 2ch; }
+
+.discard, .discard:hover {
+  background: var(--vivid-red-orange);
+  color: #ffffff;
+  border-color: var(--vivid-red-orange);
+}
 """

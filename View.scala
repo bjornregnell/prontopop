@@ -67,7 +67,14 @@ def createProntoPopLandingPage(): HtmlElement =
   val colWidthsVar   = Var(fitWidths(songsVar.now()))
   val concertNameVar = Var(Concerts.startupTitle)
   val offeredVar     = Var(listOffered())
-  val selectedVar    = Var("")
+  /** Which concert the table holds, so the dropdown reads as "this is what is loaded". */
+  val selectedVar    = Var(Concerts.startupTitle)
+  /** Whether the table has been touched since it was last loaded or saved. Kept for the whole
+    * table rather than per song: what a load overwrites is all of it. */
+  val dirtyVar       = Var(false)
+  /** A concert waiting on the "discard your edits?" answer. Some(name) is what puts the dialog on
+    * screen, and answering either way clears it. */
+  val pendingLoadVar = Var(Option.empty[Title])
   val playingVar     = Var(Option.empty[Int])
   /** The song that played last, so the cue stays put when it stops. None until something plays. */
   val cueVar         = Var(Option.empty[Int])
@@ -87,12 +94,16 @@ def createProntoPopLandingPage(): HtmlElement =
 
   def updateRow(id: Int)(f: SongRow => SongRow): Unit =
     songsVar.update(_.map(r => if r.id == id then f(r) else r))
+    dirtyVar.set(true)
 
   def removeRow(id: Int): Unit =
     if playingVar.now().contains(id) then stopPlaying()
     songsVar.update(_.filterNot(_.id == id))
+    dirtyVar.set(true)
 
-  def addSong(): Unit = songsVar.update(_ :+ SongRow(freshId()))
+  def addSong(): Unit =
+    songsVar.update(_ :+ SongRow(freshId()))
+    dirtyVar.set(true)
 
   def toggleFullScreen(): Unit =
     if dom.document.fullscreenElement == null then dom.document.documentElement.requestFullscreen()
@@ -186,19 +197,37 @@ def createProntoPopLandingPage(): HtmlElement =
       dom.window.localStorage.setItem(keyPrefix + name, text)
       offeredVar.set(listOffered())
       selectedVar.set(name)
+      dirtyVar.set(false)
       statusVar.set(s"saved '$name'")
 
-  def load(): Unit =
-    val name = selectedVar.now()
+  /** Replace the table with a concert, no questions asked. Everything that asks them calls this. */
+  def loadConcert(name: Title): Unit =
     concertRows(name) match
-      case None =>
-        statusVar.set(if name.isEmpty then "select a concert to load" else s"no concert '$name'")
+      case None => statusVar.set(s"no concert '$name'")
       case Some(rows) =>
         stopPlaying()
         songsVar.set(rows)
         colWidthsVar.set(fitWidths(rows))
         concertNameVar.set(name)
+        selectedVar.set(name)
+        dirtyVar.set(false)
         statusVar.set(s"loaded '$name' (${rows.length} songs)")
+
+  /** What choosing from the dropdown does. Loads at once when nothing would be lost, and otherwise
+    * puts the question on screen rather than quietly throwing the edits away.
+    *
+    * The select is `controlled`, so while the question is open the dropdown snaps back to the
+    * concert that is actually loaded — it must not sit there showing one concert while the table
+    * holds another. */
+  def chooseConcert(name: Title): Unit =
+    if name.nonEmpty && name != selectedVar.now() then
+      if dirtyVar.now() then pendingLoadVar.set(Some(name)) else loadConcert(name)
+
+  /** Answer the question: Some(name) loads it, None leaves the table alone. */
+  def answerPendingLoad(load: Boolean): Unit =
+    val pending = pendingLoadVar.now()
+    pendingLoadVar.set(None)
+    if load then pending.foreach(loadConcert)
 
   /** Parsed rather than compared as text, so " 4 / 4 " counts and a half-typed signature does not.
     * Anything unparseable is simply not 4/4, and wears the other colour. */
@@ -231,6 +260,30 @@ def createProntoPopLandingPage(): HtmlElement =
       button("Remove", onClick --> (_ => removeRow(id))),
     )
 
+  /** The question asked before a load throws edits away. Cancel takes the focus, so the reflex
+    * answers — a stray Return or space bar on the keys — keep the table as it is. Clicking the
+    * darkened page behind it cancels too, which is what a tap outside a dialog usually means. */
+  def renderConfirmLoad(name: Title): HtmlElement =
+    div(cls := "backdrop",
+      onClick --> (_ => answerPendingLoad(load = false)),
+      div(cls := "dialog",
+        // the click that opens a concert must not also count as a click on the page behind
+        onClick.stopPropagation --> (_ => ()),
+        h2("Unsaved changes"),
+        p(
+          "The songs have been edited since they were last saved. Loading ",
+          span(cls := "concertname", s"\"$name\""),
+          " replaces them, and the edits are gone.",
+        ),
+        div(cls := "row",
+          button("Cancel", cls := "cancel", onMountFocus,
+            onClick --> (_ => answerPendingLoad(load = false))),
+          button("Discard and load", cls := "discard",
+            onClick --> (_ => answerPendingLoad(load = true))),
+        ),
+      ),
+    )
+
   div(cls := "app",
     onMountCallback: _ =>
       // Driven by the state change rather than the button, so entering fullscreen by any route
@@ -248,11 +301,19 @@ def createProntoPopLandingPage(): HtmlElement =
     // Listening on the document rather than an element means the keys work without clicking into
     // the page first; preventDefault stops the page scrolling under them.
     documentEvents(_.onKeyDown) --> { (e: dom.KeyboardEvent) =>
-      shortcuts
-        .find(s => s.key == e.key && (s.evenWhileTyping || !typingSomewhere))
-        .foreach: s =>
+      // While the question is on screen it owns the keyboard: Escape answers no, and nothing else
+      // gets through — a space bar that started a song from behind a modal would be a nasty
+      // surprise. Yes is left to the focused button, which Enter and Space already activate.
+      if pendingLoadVar.now().isDefined then
+        if e.key == "Escape" then
           e.preventDefault()
-          s.act()
+          answerPendingLoad(load = false)
+      else
+        shortcuts
+          .find(s => s.key == e.key && (s.evenWhileTyping || !typingSomewhere))
+          .foreach: s =>
+            e.preventDefault()
+            s.act()
     },
     Styles.createPageStyle,
     div(cls := "row titlerow",
@@ -269,19 +330,23 @@ def createProntoPopLandingPage(): HtmlElement =
       // non-breaking, since HTML collapses ordinary leading spaces: pads "to" out to the width of
       // "from" below, so both "Local Store" land in the same column
       span("  to Local Store"),
+      // So the warning when loading is never a surprise: the table says all along that it holds
+      // something the Local Store does not.
+      span(cls := "unsaved",
+        child.text <-- dirtyVar.signal.map(d => if d then "  unsaved changes" else "")),
     ),
     div(cls := "row",
       span("Saved Concerts: "),
+      // Choosing loads: a Load button beside it only asked the same question twice. Controlled, so
+      // a choice that is refused snaps back to the concert the table actually holds.
       select(
         cls := "concertfield",
         children <-- offeredVar.signal.map: offered =>
-          option(value := "", "-- select --") +: offered.map: (name, builtIn) =>
+          offered.map: (name, builtIn) =>
             option(value := name, if builtIn then s"$name (built-in)" else name)
         ,
-        value <-- selectedVar.signal,
-        onChange.mapToValue --> selectedVar.writer,
+        controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),
-      button("Load", onClick --> (_ => load())),
       span(" from Local Store"),
     ),
     div(cls := "row",
@@ -349,4 +414,6 @@ def createProntoPopLandingPage(): HtmlElement =
         ),
       ),
     ),
+    // Last in the page, so it paints over everything; only present while there is a question.
+    child.maybe <-- pendingLoadVar.signal.map(_.map(renderConfirmLoad)),
   )

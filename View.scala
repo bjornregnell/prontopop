@@ -40,9 +40,11 @@ def createProntoPopLandingPage(): HtmlElement =
     * an empty table still has usable fields and one long title cannot run away with the layout. */
   def fitWidths(rows: Vector[SongRow]): (Int, Int) =
     def widest(text: SongRow => String): Int = rows.map(r => text(r).length).maxOption.getOrElse(0)
-    val title = (widest(_.title) + 3).max(16).min(60)
+    // 2ch of slack covers the field's own border and its remaining side padding, with room for the
+    // caret past the last character. It was 3ch while the fields still had wide side padding.
+    val title = (widest(_.title) + 2).max(14).min(60)
     // a pattern character takes 1.2ch, because the field letter-spaces the beats apart
-    val pattern = ((widest(_.pattern) * 1.2).ceil.toInt + 3).max(14).min(60)
+    val pattern = ((widest(_.pattern) * 1.2).ceil.toInt + 2).max(12).min(60)
     (title, pattern)
 
   def rowsOfSaved(text: String): Vector[SongRow] =

@@ -219,9 +219,6 @@ input.pattern { letter-spacing: 0.2ch; }
    as CHIPS, the way the design language marks state, rather than as text: light blue as text fails
    contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing
    into all five themes. */
-/* the two short fields keep their vertical padding but hand back most of the sides, which is what
-   made their columns wide; both hold three characters and centre them */
-.songrow input.bpm, .songrow input.sign { padding-left: 0.2rem; padding-right: 0.2rem; }
 .songrow input.bpm { text-align: center; }
 
 .songrow input.sign {
@@ -319,7 +316,10 @@ select.bars { margin-right: 2ch; }
               var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));
 }
 
-.songrow input { width: 100%; min-width: 0; }
+/* The row's fields keep their vertical padding but hand back most of the sides: it was the padding
+   that set how narrow each column could be drawn, and the table has to fit a phone held sideways.
+   fitWidths in View.scala allows for what is left. */
+.songrow input { width: 100%; min-width: 0; padding-left: 0.2rem; padding-right: 0.2rem; }
 
 /* the row buttons keep only their vertical padding: each fills its grid column anyway, so the side
    padding bought nothing but width, and the table has to fit a phone held sideways */

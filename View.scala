@@ -143,7 +143,7 @@ def createProntoPopLandingPage(): HtmlElement =
         case "TEXTAREA" | "SELECT" => true
         case _                     => false
 
-  /** Step the cue, wrapping like Play next does. */
+  /** Step the cue, wrapping at either end rather than going dead. */
   def moveCue(delta: Int): Unit =
     val rows = songsVar.now()
     if rows.nonEmpty then
@@ -151,21 +151,13 @@ def createProntoPopLandingPage(): HtmlElement =
       val to = ((at + delta) % rows.length + rows.length) % rows.length
       cueVar.set(Some(rows(to).id))
 
-  /** Play the song after the cue — or the first one, when nothing has played yet, so the opening
-    * press does not skip the top song. Wraps at the end rather than going dead. */
-  def playNext(): Unit =
-    val rows = songsVar.now()
-    if rows.nonEmpty then
-      val at = cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0)
-      startPlaying(rows(at.map(i => (i + 1) % rows.length).getOrElse(0)))
-
   /** Play the cued song — the one the ">" marks, or the top one before anything has played. */
   def playCued(): Unit =
     val rows = songsVar.now()
     cueVar.now().flatMap(id => rows.find(_.id == id)).orElse(rows.headOption).foreach(startPlaying)
 
-  /** Stop if something is running, otherwise start the cued song again. Return moves on; this
-    * stays put, so the pair reads as "again" and "next". */
+  /** Stop if something is running, otherwise start the cued song. What the big button does, and
+    * what the space bar does. */
   def togglePlayCued(): Unit =
     if playingVar.now().isDefined then stopPlaying() else playCued()
 
@@ -173,9 +165,8 @@ def createProntoPopLandingPage(): HtmlElement =
   val shortcuts: Vector[Shortcut] = Vector(
     Shortcut(" ", "Space", "play the cued song, or stop what is playing", evenWhileTyping = false,
       () => togglePlayCued()),
-    Shortcut("Enter", "Return", "play the song after the cue", evenWhileTyping = false,
-      () => playNext()),
-    Shortcut("Backspace", "Backspace", "silence — stop the playing song", evenWhileTyping = false,
+    Shortcut("Backspace", "Backspace", "stop the playing song, whatever else is going on",
+      evenWhileTyping = false,
       () => stopPlaying()),
     Shortcut("Escape", "Esc", "leave full screen", evenWhileTyping = true,
       () => exitFullScreenIfAny()),
@@ -296,8 +287,19 @@ def createProntoPopLandingPage(): HtmlElement =
     div(cls := "row",
       // Ordered for a narrow screen: the three pressed mid-song first, so when the row wraps it is
       // the bar count and the volume that drop to the next line, not the transport.
-      button("Play next", cls := "playnext", onClick --> (_ => playNext())),
-      button("Silence", cls := "silence", onClick --> (_ => stopPlaying())),
+      //
+      // One button for both starting and stopping, and it acts on the cue like everything else
+      // does: green Play while silent, red Stop while a song runs. Next and Prev only walk the
+      // cue — the same thing the arrow keys do — so there is one rule to hold on stage, "the cue
+      // is what plays", instead of a button whose meaning depended on whether anything had played
+      // yet.
+      button(cls := "transport",
+        cls("stopping") <-- playingVar.signal.map(_.isDefined),
+        child.text <-- playingVar.signal.map(p => if p.isDefined then "Stop" else "Play"),
+        onClick --> (_ => togglePlayCued()),
+      ),
+      button("Next", cls := "step", onClick --> (_ => moveCue(1))),
+      button("Prev", cls := "step", onClick --> (_ => moveCue(-1))),
       button(cls := "fullscreen",
         child.text <-- fullScreenVar.signal.map(on => if on then "Exit full screen" else "Full screen"),
         onClick --> (_ => toggleFullScreen()),

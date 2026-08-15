@@ -252,36 +252,41 @@ button {
 
 button:hover { border-color: var(--link); }
 
-/* the playing song, in the signal green the design language gives a healthy state */
+/* The playing song's own button, in the same alert red-orange the transport wears while it offers
+   to stop: both say "Stop" and both do, so one word must not come in two colours. */
 .playing, .playing:hover {
-  background: var(--vivid-bright-green);
-  color: var(--tempered-iron-purple);
-  border-color: var(--vivid-bright-green);
-}
-
-/* the panic button, in the alert red-orange; white text keeps it AA at button size */
-.silence, .silence:hover {
   background: var(--vivid-red-orange);
   color: #ffffff;
   border-color: var(--vivid-red-orange);
 }
 
-.silence { font-weight: bold; padding: 0.4rem 1.1rem; margin-right: 2ch; }
-
-/* how many bars Play next and the row buttons run for */
-select.bars { margin-right: 2ch; }
-
-.fullscreen { margin-right: 2ch; }
-
-/* starts the song after the cue, in the same signal green a playing song wears */
-.playnext, .playnext:hover {
+/* The one transport button: the signal green the design language gives a healthy state while it
+   offers to play, the alert red-orange while it offers to stop. It is the same button either way,
+   so the colour is what says which, and it has to be readable across a room. */
+.transport, .transport:hover {
   background: var(--vivid-bright-green);
   color: var(--tempered-iron-purple);
   border-color: var(--vivid-bright-green);
-  font-weight: bold;
-  padding: 0.4rem 1.1rem;
-  margin-right: 2ch;
 }
+
+/* white text keeps the red AA at button size */
+.transport.stopping, .transport.stopping:hover {
+  background: var(--vivid-red-orange);
+  color: #ffffff;
+  border-color: var(--vivid-red-orange);
+}
+
+.transport { font-weight: bold; padding: 0.4rem 1.1rem; }
+
+/* Next and Prev only walk the cue, so they stay in the ordinary button colours: nothing sounds
+   when they are pressed, and green would promise that it did */
+.step { padding: 0.4rem 0.8rem; }
+.step + .step { margin-right: 2ch; }
+
+/* how many bars a song runs for */
+select.bars { margin-right: 2ch; }
+
+.fullscreen { margin-right: 2ch; }
 
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }
 .row h2 { margin: 0.5rem 0; }

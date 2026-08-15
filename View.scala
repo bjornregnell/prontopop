@@ -364,8 +364,10 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
       button("Next", cls := "step", onClick --> (_ => moveCue(1))),
       button("Prev", cls := "step", onClick --> (_ => moveCue(-1))),
+      // one word each way, since the row has to fit a phone; the title says the rest
       button(cls := "fullscreen",
-        child.text <-- fullScreenVar.signal.map(on => if on then "Exit full screen" else "Full screen"),
+        title <-- fullScreenVar.signal.map(on => if on then "leave full screen" else "go full screen"),
+        child.text <-- fullScreenVar.signal.map(on => if on then "Exit" else "Full"),
         onClick --> (_ => toggleFullScreen()),
       ),
       select(

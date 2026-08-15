@@ -317,11 +317,9 @@ def createProntoPopLandingPage(): HtmlElement =
         }),
       ),
       span(child.text <-- volumeVar.signal.map(v => s"$v%")),
-    ),
-    // Derived from what is playing rather than set as a message, so it clears itself on Stop and
-    // follows a title edited mid-play.
-    div(cls := "row",
-      h2("Songs:"),
+      // Rides along with the controls rather than heading a row of its own, which cost a line of
+      // screen the songs wanted. Derived from what is playing rather than set as a message, so it
+      // clears itself on Stop and follows a title edited mid-play.
       span(cls := "nowplaying", child.text <--
         playingVar.signal.combineWith(songsVar.signal).map: (playing, rows) =>
           playing.flatMap(id => rows.find(_.id == id))

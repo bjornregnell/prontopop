@@ -112,12 +112,14 @@ def createProntoPopLandingPage(): HtmlElement =
   val cueVar         = Var(Option.empty[Int])
   val statusVar      = Var("")
   val volumeVar      = Var("100")
-  /** How many bars a song plays before stopping itself; "forever" means until Silence. */
+  /** How many bars a song plays before stopping itself; the infinity sign means until stopped. */
   val barsVar        = Var("4")
   /** Driven by the browser's own fullscreenchange, so the label stays right however it was left —
     * by the button, or by the Escape key, which the browser handles itself. */
   val fullScreenVar  = Var(false)
-  val barChoices     = Vector("1", "2", "4", "8", "16", "32", "forever")
+  /** How many bars to play. Anything that is not a number means forever, so the infinity sign both
+    * reads as forever and behaves as it: nothing parses it to an Int. */
+  val barChoices     = Vector("1", "2", "4", "8", "16", "32", "∞")
   lazy val player    = Sound.initWebSound()
 
   def stopPlaying(): Unit =
@@ -442,8 +444,13 @@ def createProntoPopLandingPage(): HtmlElement =
         child.text <-- playingVar.signal.map(p => if p.isDefined then "Stop" else "Play"),
         onClick --> (_ => togglePlayCued()),
       ),
-      button("Next", cls := "step", onClick --> (_ => moveCue(1))),
-      button("Prev", cls := "step", onClick --> (_ => moveCue(-1))),
+      // The arrow points where the cue goes, matching the arrow keys and the table below it: down
+      // is the next song, up is the one before. Titled, since an arrow alone does not say what it
+      // moves.
+      button("↓", cls := "step", title := "move the cue to the song below",
+        onClick --> (_ => moveCue(1))),
+      button("↑", cls := "step", title := "move the cue to the song above",
+        onClick --> (_ => moveCue(-1))),
       // one word each way, since the row has to fit a phone; the title says the rest
       button(cls := "fullscreen",
         title <-- fullScreenVar.signal.map(on => if on then "leave full screen" else "go full screen"),

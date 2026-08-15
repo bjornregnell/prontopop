@@ -287,15 +287,13 @@ button:hover { border-color: var(--link); }
 
 .transport { font-weight: bold; padding: 0.4rem 1.1rem; }
 
-/* Next and Prev only walk the cue, so they stay in the ordinary button colours: nothing sounds
-   when they are pressed, and green would promise that it did */
-.step { padding: 0.4rem 0.8rem; }
-.step + .step { margin-right: 2ch; }
+/* The two cue steps only walk the cue, so they stay in the ordinary button colours: nothing sounds
+   when they are pressed, and green would promise that it did. An arrow needs less width than a
+   word, which is the point of it being one. */
+.step { padding: 0.4rem 0.9ch; }
 
-/* how many bars a song runs for */
-select.bars { margin-right: 2ch; }
-
-.fullscreen { margin-right: 2ch; }
+/* how many bars a song runs for: two digits and the select's own arrow, nothing more */
+select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2ch; }
 
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }
 .row h2 { margin: 0.5rem 0; }

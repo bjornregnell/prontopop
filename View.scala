@@ -571,7 +571,15 @@ def createProntoPopLandingPage(): HtmlElement =
     },
     Styles.createPageStyle,
     div(cls := "row titlerow",
-      h1(s"ProntoPop! $Version"),
+      // The name is the link, not the version: the version says which build this is, and clicking
+      // it would promise a page about that build, which the repository is not.
+      h1(
+        a(href := "https://github.com/bjornregnell/prontopop",
+          target := "_blank", rel := "noopener",
+          title := "the source, on GitHub",
+          "ProntoPop!"),
+        s" $Version",
+      ),
       Theme.createSelector(),
     ),
     // Naming a concert and picking one share a line: both answer "which concert", both are set

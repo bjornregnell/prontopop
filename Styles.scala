@@ -194,6 +194,18 @@ h1 {
   margin: 0;
 }
 
+/* The name links to the source. It keeps the heading's colour rather than turning link-blue, since
+   a heading that changed colour would read as a different kind of thing; the underline is what
+   says it can be pressed, and the colour only moves on hover. */
+h1 a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+h1 a:hover { color: var(--link); }
+
 h2 { color: var(--head); font-size: 1.2rem; margin: 0.5rem 0; }
 
 input, select, button {

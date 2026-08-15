@@ -156,6 +156,21 @@ def createProntoPopLandingPage(): HtmlElement =
     songsVar.update(_ :+ SongRow(freshId()))
     dirtyVar.set(true)
 
+  /** Swap a row with the one above or below it. Silent at the ends rather than wrapping: the
+    * buttons that would go nowhere are disabled, and a keyboard or a double click that gets past
+    * them should do nothing rather than something surprising. */
+  def moveRow(id: Int, delta: Int): Unit =
+    val rows = songsVar.now()
+    val i = rows.indexWhere(_.id == id)
+    val j = i + delta
+    if i >= 0 && j >= 0 && j < rows.length then
+      songsVar.set(rows.updated(i, rows(j)).updated(j, rows(i)))
+      dirtyVar.set(true)
+
+  /** Where a row sits now, so the ends of the table can grey out the move that leads nowhere. */
+  def indexSignal(id: Int): Signal[(Int, Int)] =
+    songsVar.signal.map(rows => (rows.indexWhere(_.id == id), rows.length))
+
   def addPause(): Unit =
     songsVar.update(_ :+ pauseRow())
     dirtyVar.set(true)
@@ -335,6 +350,20 @@ def createProntoPopLandingPage(): HtmlElement =
       span(),
       div(cls := "pauseline", title := "a pause in the concert"),
       button("Remove", onClick --> (_ => removeRow(id))),
+      // a pause arrives at the bottom of the table, so it needs these more than a song does
+      moveButtons(id),
+    )
+
+  /** Move up and Move down, greyed out at the ends where there is nothing to swap with. */
+  def moveButtons(id: Int): Seq[HtmlElement] =
+    val at = indexSignal(id)
+    Seq(
+      button("Move up", cls := "moveup", title := "swap with the row above",
+        disabled <-- at.map((i, _) => i <= 0),
+        onClick --> (_ => moveRow(id, -1))),
+      button("Move down", cls := "movedown", title := "swap with the row below",
+        disabled <-- at.map((i, n) => i < 0 || i >= n - 1),
+        onClick --> (_ => moveRow(id, 1))),
     )
 
   /** Which of the two a row is can be decided once, from the initial value: the sign of an id
@@ -368,6 +397,7 @@ def createProntoPopLandingPage(): HtmlElement =
       input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),
       input(cls := "pattern", controlled(value <-- rowSignal.map(_.pattern), onInput.mapToValue --> (v => updateRow(id)(_.copy(pattern = v.replace("…", "...")))))),
       button("Remove", onClick --> (_ => removeRow(id))),
+      moveButtons(id),
     )
 
   /** Any question the app must not act without an answer to. Cancel takes the focus, so the reflex
@@ -528,7 +558,8 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
     ),
     div(cls := "songrow header",
-      span("@"), span("Play"), span("BPM"), span("Sig."), span("Title"), span("Pattern"), span(),
+      span("@"), span("Play"), span("BPM"), span("Sig."), span("Title"), span("Pattern"),
+      span(), span(), span(),
     ),
     children <-- songsVar.signal.split(_.id)(renderRow),
     div(cls := "status", child.text <-- statusVar.signal),

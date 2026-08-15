@@ -319,8 +319,9 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
   --col-sign: 4.2ch;  /* also the width of the "Sig." above it */
   --col-pattern: 38ch;
   --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
+  --col-move: 9.4ch;  /* "Move down" is nine; both moves take it, so the pair lines up */
   --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */
-  --col-gaps: calc(var(--col-gap) * 6);  /* the six gaps between seven columns */
+  --col-gaps: calc(var(--col-gap) * 8);  /* the eight gaps between nine columns */
 }
 
 .songrow {
@@ -332,9 +333,11 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
   margin: 0.1rem 0;
   grid-template-columns:
     var(--col-cue) var(--col-play) var(--col-bpm) var(--col-sign)
-    var(--col-title) var(--col-pattern) var(--col-remove);
+    var(--col-title) var(--col-pattern) var(--col-remove)
+    var(--col-move) var(--col-move);
   width: calc(var(--col-cue) + var(--col-play) + var(--col-title) + var(--col-bpm) +
-              var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));
+              var(--col-sign) + var(--col-pattern) + var(--col-remove) +
+              var(--col-move) + var(--col-move) + var(--col-gaps));
 }
 
 /* The row's fields keep their vertical padding but hand back most of the sides: it was the padding

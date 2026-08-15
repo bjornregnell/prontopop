@@ -222,6 +222,9 @@ input.pattern { letter-spacing: 0.2ch; }
    as CHIPS, the way the design language marks state, rather than as text: light blue as text fails
    contrast on the light grounds (2.80 on white, 2.20 on bone), while a chip carries its own pairing
    into all five themes. */
+/* the two numeric fields give up what side padding the row's fields still had: they are centred,
+   three characters wide, and every character of the column is spoken for */
+.songrow input.bpm, .songrow input.sign { padding-left: 0; padding-right: 0; }
 .songrow input.bpm { text-align: center; }
 
 .songrow input.sign {
@@ -307,10 +310,13 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
    pattern's closing ':||'. */
 :root {
   --col-cue: 3ch;  /* one character: the "@" heading and the ">" marker */
-  --col-play: 6ch;  /* "Play" and "Stop" are four characters; the buttons drop their side padding */
+  /* The three fixed narrow columns are cut close to their contents: four characters for
+     "Play"/"Stop", three for a tempo or a signature, plus the field's own border and a hair for
+     the caret. There is no side padding left to give. */
+  --col-play: 4.6ch;
   --col-title: 40ch;
-  --col-bpm: 5ch;   /* three or four digits, in fields that give up most of their side padding */
-  --col-sign: 5ch;  /* "3/4", under a heading shortened to "Sig." to fit */
+  --col-bpm: 4.2ch;
+  --col-sign: 4.2ch;  /* also the width of the "Sig." above it */
   --col-pattern: 38ch;
   --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
   --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */

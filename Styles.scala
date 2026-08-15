@@ -278,7 +278,7 @@ select.bars { margin-right: 2ch; }
   border-color: var(--vivid-bright-green);
   font-weight: bold;
   padding: 0.4rem 1.1rem;
-  margin-right: 1ch;
+  margin-right: 2ch;
 }
 
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }

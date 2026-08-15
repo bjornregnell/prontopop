@@ -237,10 +237,11 @@ input.pattern { letter-spacing: 0.2ch; }
   border-color: var(--welding-yellow);
 }
 
-/* The concert name and the saved-concerts dropdown, pinned to the same width so the two rows line
-   up. Without this the select sizes itself to its longest option, so it drifted as concerts were
-   saved with longer names. */
-.concertfield { width: 30ch; }
+/* The concert name and the concert dropdown, pinned to one width. Without this the select sizes
+   itself to its longest option, so it drifted as concerts were saved under longer names, and the
+   two now share a line where drifting would push the dropdown off a phone. Wide enough for
+   "Soaree01 (built-in)" and the select's own arrow. */
+.concertfield { width: 23ch; }
 
 input[type="range"] { accent-color: var(--hot-iron-orange); }
 
@@ -366,8 +367,17 @@ select.bars { margin-right: 2ch; }
 /* what is playing, riding along at the end of the controls */
 .nowplaying { margin-left: 2ch; color: var(--muted); }
 
-/* the table holds something the Local Store does not; in the warm orange, not the alarm red */
-.unsaved { color: var(--hot-iron-orange); }
+/* Save says whether there is anything to save: red while the table holds something the Local Store
+   does not, the ordinary button otherwise. White text keeps the red AA at button size. */
+.save.dirty, .save.dirty:hover {
+  background: var(--vivid-red-orange);
+  color: #ffffff;
+  border-color: var(--vivid-red-orange);
+  font-weight: bold;
+}
+
+/* room between saving a concert and choosing one, since they now share a line */
+.loadlabel { margin-left: 2ch; }
 
 /* The question before a load discards edits. Fixed to the viewport rather than the page, which is
    as wide as the song table and scrolls sideways under it. */

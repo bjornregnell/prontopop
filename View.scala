@@ -320,23 +320,21 @@ def createProntoPopLandingPage(): HtmlElement =
       h1(s"ProntoPop! $Version"),
       Theme.createSelector(),
     ),
+    // Naming a concert and picking one share a line: both answer "which concert", both are set
+    // before the gig and left alone, and a line of screen is a song. "Local Store" is gone from
+    // both labels — it said where things go, which nobody has a second choice about.
     div(cls := "row",
-      // non-breaking, because HTML collapses ordinary leading spaces: pads "Concert Name:" out to
-      // the width of "Saved Concerts:" so the two colons and their fields line up
-      span("  Concert Name: "),
+      span("Concert: "),
       input(cls := "concertfield",
         controlled(value <-- concertNameVar.signal, onInput.mapToValue --> concertNameVar.writer)),
-      button("Save", onClick --> (_ => save())),
-      // non-breaking, since HTML collapses ordinary leading spaces: pads "to" out to the width of
-      // "from" below, so both "Local Store" land in the same column
-      span("  to Local Store"),
-      // So the warning when loading is never a surprise: the table says all along that it holds
-      // something the Local Store does not.
-      span(cls := "unsaved",
-        child.text <-- dirtyVar.signal.map(d => if d then "  unsaved changes" else "")),
-    ),
-    div(cls := "row",
-      span("Saved Concerts: "),
+      // Red while the table holds something the Local Store does not, so the warning when loading
+      // is never the first news of it — and the button doing the telling is also the cure. This
+      // replaced a line of text saying the same thing, which cost the width of the words.
+      button("Save", cls := "save",
+        cls("dirty") <-- dirtyVar.signal,
+        title <-- dirtyVar.signal.map(d => if d then "unsaved changes" else "save this concert"),
+        onClick --> (_ => save())),
+      span(cls := "loadlabel", "Load: "),
       // Choosing loads: a Load button beside it only asked the same question twice. Controlled, so
       // a choice that is refused snaps back to the concert the table actually holds.
       select(
@@ -347,7 +345,6 @@ def createProntoPopLandingPage(): HtmlElement =
         ,
         controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),
-      span(" from Local Store"),
     ),
     div(cls := "row",
       // Ordered for a narrow screen: the three pressed mid-song first, so when the row wraps it is

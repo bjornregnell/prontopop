@@ -66,8 +66,9 @@ linted clean.
 
 - **Loading never silently discards edits.** Choosing from the dropdown loads at once — there is no
   `Load` button, since it only asked the same question twice — but any edit since the last load or
-  save raises a flag, shown as `unsaved changes` beside `Save` so the warning is never the first
-  news of it. Loading while that flag is up puts the question on screen instead: `Cancel` (focused,
+  save raises a flag, and the flag turns the `Save` button red, so the warning is never the first
+  news of it and the thing doing the telling is also the cure. Loading while that flag is up puts
+  the question on screen instead: `Cancel` (focused,
   so the reflex answers keep the table) or `Discard and load`. The dropdown is `controlled`, which
   matters more than it looks: without it a refused choice would leave the dropdown naming one
   concert while the table held another. The flag is for the whole table, not per song, because what

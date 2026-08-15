@@ -320,11 +320,13 @@ def createProntoPopLandingPage(): HtmlElement =
         cls("playing") <-- playingVar.signal.map(_.contains(id)),
         onClick --> (_ => songsVar.now().find(_.id == id).foreach(togglePlay)),
       ),
-      input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),
+      // Tempo and signature come before the title: they are the two a performer checks against the
+      // count-in, and next to the pattern they read as the one thing they describe.
       input(cls := "bpm", controlled(value <-- rowSignal.map(_.bpm), onInput.mapToValue --> (v => updateRow(id)(_.copy(bpm = v))))),
       input(cls := "sign",
         cls("common") <-- rowSignal.map(r => isFourFour(r.sign)),
         controlled(value <-- rowSignal.map(_.sign), onInput.mapToValue --> (v => updateRow(id)(_.copy(sign = v))))),
+      input(cls := "title", controlled(value <-- rowSignal.map(_.title), onInput.mapToValue --> (v => updateRow(id)(_.copy(title = v))))),
       input(cls := "pattern", controlled(value <-- rowSignal.map(_.pattern), onInput.mapToValue --> (v => updateRow(id)(_.copy(pattern = v.replace("…", "...")))))),
       button("Remove", onClick --> (_ => removeRow(id))),
     )
@@ -483,7 +485,7 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
     ),
     div(cls := "songrow header",
-      span("@"), span("Play"), span("Title"), span("BPM"), span("Sig."), span("Pattern"), span(),
+      span("@"), span("Play"), span("BPM"), span("Sig."), span("Title"), span("Pattern"), span(),
     ),
     children <-- songsVar.signal.split(_.id)(renderRow),
     div(cls := "status", child.text <-- statusVar.signal),

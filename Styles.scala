@@ -325,8 +325,8 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
      them apart; a taller gap only pushed songs off the bottom of a phone */
   margin: 0.1rem 0;
   grid-template-columns:
-    var(--col-cue) var(--col-play) var(--col-title) var(--col-bpm)
-    var(--col-sign) var(--col-pattern) var(--col-remove);
+    var(--col-cue) var(--col-play) var(--col-bpm) var(--col-sign)
+    var(--col-title) var(--col-pattern) var(--col-remove);
   width: calc(var(--col-cue) + var(--col-play) + var(--col-title) + var(--col-bpm) +
               var(--col-sign) + var(--col-pattern) + var(--col-remove) + var(--col-gaps));
 }

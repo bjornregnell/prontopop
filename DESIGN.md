@@ -66,13 +66,21 @@ linted clean.
   It renders as a dashed rule across the columns between the cue and `Remove` — a break in the list
   rather than a row with empty fields — and keeps its `Remove` so a break can be taken out. The cue
   steps **over** pauses (`moveCue` walks `filterNot(_.isPause)`), so a step never lands on one and
-  never has to be pressed twice to get past it. In the Local Store a pause is one line holding a
-  marker character, which no song can produce: concerts saved before pauses existed have no such
-  line and load exactly as they did.
+  never has to be pressed twice to get past it.
 
-  ⚠ A `Pause` written inside the `BEGIN/END GENERATED Soaree01` markers in `Concerts.scala` is
-  **lost on `./build.sc --sync`**, which rewrites that whole block from the songbook, and
-  `parsesoaree.sc` emits only songs. (BR, 2026-08-15.)
+  **Written down, a pause is `---` everywhere.** In the Local Store it is a line of exactly that,
+  which no song can produce — a song always writes its four tab-separated fields — so concerts
+  saved before pauses existed contain no such line and load exactly as they did. In the songbook it
+  is a `Titel` macro whose value is three or more dashes and nothing else:
+
+  ```latex
+  \newcommand{\PausEttTitel}{---}
+  ```
+
+  which `parsesoaree.sc` turns into a `Pause,` line, in songbook order, needing no `Bpm` and no
+  `Sig`. The songbook is the only place the concert's ORDER exists, so a break in that order has to
+  be expressible there — a `Pause` typed into the generated block by hand is overwritten by the
+  next `./build.sc --sync`. (BR, 2026-08-15.)
 
 - **The cue is what plays.** One rule for the whole transport: `Play` starts the cued song and turns
   into a red `Stop` while it runs, `Next` and `Prev` only walk the cue, and the arrow keys and the

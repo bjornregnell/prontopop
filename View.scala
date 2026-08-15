@@ -9,10 +9,11 @@ def createProntoPopLandingPage(): HtmlElement =
 
   val keyPrefix = "prontopop.concert."
 
-  /** How a pause is written to the Local Store: a line that no song can produce, since a song
-    * always writes its four tab-separated fields. Concerts saved before pauses existed contain no
-    * such line and load exactly as they did. */
-  val pauseLine: String = 2.toChar.toString
+  /** How a pause is written to the Local Store: the same three dashes the songbook uses to ask for
+    * one, so the break looks like a break wherever it is stored. No song can produce this line —
+    * a song always writes its four tab-separated fields — and concerts saved before pauses existed
+    * contain no such line and load exactly as they did. */
+  val pauseLine: String = "---"
 
   var lastId = 0
   def freshId(): Int =

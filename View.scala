@@ -354,14 +354,18 @@ def createProntoPopLandingPage(): HtmlElement =
       moveButtons(id),
     )
 
-  /** Move up and Move down, greyed out at the ends where there is nothing to swap with. */
+  /** Move up and Move down, greyed out at the ends where there is nothing to swap with.
+    *
+    * Solid triangles, not the thin arrows the transport wears: those move the CUE, these move the
+    * ROW, and one glyph doing both jobs on the same screen would be a trap. The words are still
+    * there, in the hover title. */
   def moveButtons(id: Int): Seq[HtmlElement] =
     val at = indexSignal(id)
     Seq(
-      button("Move up", cls := "moveup", title := "swap with the row above",
+      button("▲", cls := "moveup", title := "move up: swap with the row above",
         disabled <-- at.map((i, _) => i <= 0),
         onClick --> (_ => moveRow(id, -1))),
-      button("Move down", cls := "movedown", title := "swap with the row below",
+      button("▼", cls := "movedown", title := "move down: swap with the row below",
         disabled <-- at.map((i, n) => i < 0 || i >= n - 1),
         onClick --> (_ => moveRow(id, 1))),
     )

@@ -319,7 +319,7 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
   --col-sign: 4.2ch;  /* also the width of the "Sig." above it */
   --col-pattern: 38ch;
   --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
-  --col-move: 9.4ch;  /* "Move down" is nine; both moves take it, so the pair lines up */
+  --col-move: 3ch;  /* one triangle, like the cue column's one character */
   --col-gap: 0.25ch;  /* between two columns; the fields' own borders do most of the separating */
   --col-gaps: calc(var(--col-gap) * 8);  /* the eight gaps between nine columns */
 }

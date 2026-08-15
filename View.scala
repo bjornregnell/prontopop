@@ -505,14 +505,6 @@ def createProntoPopLandingPage(): HtmlElement =
         ,
         controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),
-      // Adding a song is concert-building too, and it had a whole row under the table to itself.
-      // "Add song", not "Add": on a row about concerts, "Add" would read as adding a concert.
-      // It sits at the end and the row scrolls sideways on a phone, which is the right thing to
-      // pay for it — adding a song is not something anyone does mid-gig.
-      button("Add song", cls := "addsong", title := "add an empty song under the cue",
-        onClick --> (_ => addSong())),
-      button("Add pause", cls := "addpause", title := "add a pause under the cue",
-        onClick --> (_ => addPause())),
       // Only ever the saved copy, and only after asking. Disabled on a built-in: those ship with
       // the app, and a dropdown entry nobody can restore is not something a button should offer.
       button("Remove concert", cls := "removeconcert",
@@ -556,6 +548,13 @@ def createProntoPopLandingPage(): HtmlElement =
         value <-- barsVar.signal,
         onChange.mapToValue --> barsVar.writer,
       ),
+      // Down here with the cue's own controls, because that is what they act on: both put their
+      // row under the ">". "Add song", not "Add", since the row also carries a concert dropdown's
+      // worth of meaning nearby and "Add" alone would not say which.
+      button("Add song", cls := "addsong", title := "add an empty song under the cue",
+        onClick --> (_ => addSong())),
+      button("Add pause", cls := "addpause", title := "add a pause under the cue",
+        onClick --> (_ => addPause())),
       span("Vol: "),
       input(typ := "range", minAttr := "0", maxAttr := "100",
         controlled(value <-- volumeVar.signal, onInput.mapToValue --> { (v: String) =>

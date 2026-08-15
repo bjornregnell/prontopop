@@ -406,9 +406,8 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
 
 /* room between saving a concert, choosing one, and adding to one, since they share a line */
 .loadlabel { margin-left: 2ch; }
-.addsong { margin-left: 2ch; }
-.addpause { margin-left: 1ch; }
-.removeconcert { margin-left: 1ch; }
+.addpause { margin-left: 1ch; margin-right: 2ch; }
+.removeconcert { margin-left: 2ch; }
 
 /* A disabled button says "not for this concert", not "broken": dimmed, and it stops looking
    pressable. Removing a built-in is the one thing this row cannot do. */

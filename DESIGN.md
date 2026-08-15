@@ -74,9 +74,22 @@ linted clean.
   concert while the table held another. The flag is for the whole table, not per song, because what
   a load overwrites is all of it.
 
-  This settles half of the old TODO-A gap below — what happens when someone edits a loaded built-in.
-  Editing is now visibly unsaved work; saving under the same title still shadows the built-in, which
-  remains a deliberate choice. (BR, 2026-08-15.)
+  This settles the old TODO-A gap below — what happens when someone edits a loaded built-in.
+  (BR, 2026-08-15.)
+
+- **A built-in concert is never hidden by a saved one.** Both stay in the dropdown, both stay
+  loadable, and each keeps its own songs; a built-in shows `(built-in)` after its title so a shared
+  title still says which is which. Saving is not a way to delete what ships in the app, and the
+  original is exactly what somebody who has made a mess of a concert wants back. This reverses the
+  earlier "local storage wins" rule, which made the built-in disappear the moment you saved under
+  its name and offered no way to get it back short of clearing browser storage.
+
+  It costs the dropdown an identity: two entries can now read the same, so an option's value is a
+  KEY — the title, prefixed by a marker character for a built-in — not the title itself.
+  `selectedVar`, `pendingLoadVar` and `concertRows` all speak in keys; `titleOf` and `labelOf`
+  turn one back into something a person reads. The Concert Name field always gets the plain title,
+  so saving a loaded built-in saves under its own name, beside it rather than over it. Overwriting
+  a saved concert is left to the unsaved-changes guard above. (BR, 2026-08-15.)
 
 ## The bug that shaped `Concerts.scala` (fixed)
 
@@ -133,6 +146,10 @@ removes both the string literal and the exception.
 
 Saved concerts come first, built-ins are appended, and a saved concert with the same title hides the
 built-in. Precedence falls out naturally if `load` looks in local storage first:
+
+> **Superseded, 2026-08-15.** Hiding was the wrong half of this. Both are offered now, and an
+> option's value is a key rather than a bare title — see the standing decision above. The sketch
+> below is kept for the shape of `listConcerts`, not for its precedence rule.
 
 ```scala
 def listConcerts(): Vector[String] =
@@ -221,6 +238,11 @@ under that title" fixes both the order and the precedence. What it does not say 
 built-in should be visibly marked as one, and (ii) what should happen when someone edits a loaded
 built-in — today nothing persists until Save, and saving under the same title shadows the built-in
 forever, which is coherent but should be a deliberate choice rather than an accident.
+
+> **Both gaps are closed, 2026-08-15.** A built-in is marked `(built-in)` in its label, and saving
+> under its title no longer shadows it: both are offered, and each keeps its own songs. The
+> "shadows it forever" worry was the right one — it turned out to have no answer short of clearing
+> browser storage.
 
 **B (open on a built-in): yes, with one gap and one hazard.** The gap is whether the Concert Name
 field should pre-fill to match. The hazard is that `Concerts.all("Example01")`, written literally,

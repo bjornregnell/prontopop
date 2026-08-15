@@ -23,11 +23,27 @@ def createProntoPopLandingPage(): HtmlElement =
       .map(_.drop(keyPrefix.length))
       .sorted
 
-  /** What the dropdown offers: saved concerts first, then the built-in ones whose title nobody has
-    * saved over. Paired with a flag so a built-in can say so in its label. */
+  /** What the dropdown offers: every saved concert, then every built-in one. A built-in stays on
+    * the list even when a saved concert has taken its title — saving is not a way to delete what
+    * ships in the app, and the original is the thing somebody who has made a mess of a concert
+    * most wants back. Paired with a flag so a built-in can say so in its label. */
   def listOffered(): Vector[(Title, Boolean)] =
-    val saved = listSaved()
-    saved.map(_ -> false) ++ Concerts.titles.filterNot(saved.contains).map(_ -> true)
+    listSaved().map(_ -> false) ++ Concerts.titles.map(_ -> true)
+
+  /** A dropdown entry, marking a built-in so a title shared with a saved concert still picks out
+    * one of the two. The marker is a control character, which no one types into a concert name,
+    * and it never leaves this file: it names an option, and nothing else. Built from its code
+    * point rather than written as a literal, which would be an invisible character in the source. */
+  val builtInMark: String = 1.toChar.toString
+
+  def keyOf(name: Title, builtIn: Boolean): String = if builtIn then builtInMark + name else name
+
+  /** The title inside a dropdown key, without the marker. */
+  def titleOf(key: String): Title = key.stripPrefix(builtInMark)
+
+  /** How a key reads to a person: the same text its option shows. */
+  def labelOf(key: String): String =
+    if key.startsWith(builtInMark) then s"${titleOf(key)} (built-in)" else key
 
   def rowsOf(concert: Concert): Vector[SongRow] =
     concert.toVector.map(song => SongRow.from(freshId(), song))
@@ -58,23 +74,26 @@ def createProntoPopLandingPage(): HtmlElement =
         f.lift(3).getOrElse("").replace("…", "..."),
       )
 
-  /** Local storage wins over a built-in of the same title. */
-  def concertRows(name: Title): Option[Vector[SongRow]] =
-    Option(dom.window.localStorage.getItem(keyPrefix + name)).map(rowsOfSaved)
-      .orElse(Concerts.all.get(name).map(rowsOf))
+  /** The songs behind a dropdown key. The key says which of the two a shared title means, so
+    * neither hides the other: local storage is asked for a saved key, the app itself for a
+    * built-in one. */
+  def concertRows(key: String): Option[Vector[SongRow]] =
+    if key.startsWith(builtInMark) then Concerts.all.get(titleOf(key)).map(rowsOf)
+    else Option(dom.window.localStorage.getItem(keyPrefix + key)).map(rowsOfSaved)
 
   val songsVar       = Var(rowsOf(Concerts.startup))
   val colWidthsVar   = Var(fitWidths(songsVar.now()))
   val concertNameVar = Var(Concerts.startupTitle)
   val offeredVar     = Var(listOffered())
-  /** Which concert the table holds, so the dropdown reads as "this is what is loaded". */
-  val selectedVar    = Var(Concerts.startupTitle)
+  /** Which dropdown entry the table holds, so it reads as "this is what is loaded". A key, not a
+    * title: the app opens on the built-in, and a saved concert may share its name. */
+  val selectedVar    = Var(keyOf(Concerts.startupTitle, builtIn = true))
   /** Whether the table has been touched since it was last loaded or saved. Kept for the whole
     * table rather than per song: what a load overwrites is all of it. */
   val dirtyVar       = Var(false)
-  /** A concert waiting on the "discard your edits?" answer. Some(name) is what puts the dialog on
-    * screen, and answering either way clears it. */
-  val pendingLoadVar = Var(Option.empty[Title])
+  /** A dropdown key waiting on the "discard your edits?" answer. Some(key) is what puts the dialog
+    * on screen, and answering either way clears it. */
+  val pendingLoadVar = Var(Option.empty[String])
   val playingVar     = Var(Option.empty[Int])
   /** The song that played last, so the cue stays put when it stops. None until something plays. */
   val cueVar         = Var(Option.empty[Int])
@@ -200,18 +219,20 @@ def createProntoPopLandingPage(): HtmlElement =
       dirtyVar.set(false)
       statusVar.set(s"saved '$name'")
 
-  /** Replace the table with a concert, no questions asked. Everything that asks them calls this. */
-  def loadConcert(name: Title): Unit =
-    concertRows(name) match
-      case None => statusVar.set(s"no concert '$name'")
+  /** Replace the table with a concert, no questions asked. Everything that asks them calls this.
+    * The Concert Name field takes the plain title, so saving a loaded built-in saves under its
+    * name — and the built-in stays in the dropdown beside it. */
+  def loadConcert(key: String): Unit =
+    concertRows(key) match
+      case None => statusVar.set(s"no concert '${labelOf(key)}'")
       case Some(rows) =>
         stopPlaying()
         songsVar.set(rows)
         colWidthsVar.set(fitWidths(rows))
-        concertNameVar.set(name)
-        selectedVar.set(name)
+        concertNameVar.set(titleOf(key))
+        selectedVar.set(key)
         dirtyVar.set(false)
-        statusVar.set(s"loaded '$name' (${rows.length} songs)")
+        statusVar.set(s"loaded '${labelOf(key)}' (${rows.length} songs)")
 
   /** What choosing from the dropdown does. Loads at once when nothing would be lost, and otherwise
     * puts the question on screen rather than quietly throwing the edits away.
@@ -219,9 +240,9 @@ def createProntoPopLandingPage(): HtmlElement =
     * The select is `controlled`, so while the question is open the dropdown snaps back to the
     * concert that is actually loaded — it must not sit there showing one concert while the table
     * holds another. */
-  def chooseConcert(name: Title): Unit =
-    if name.nonEmpty && name != selectedVar.now() then
-      if dirtyVar.now() then pendingLoadVar.set(Some(name)) else loadConcert(name)
+  def chooseConcert(key: String): Unit =
+    if key.nonEmpty && key != selectedVar.now() then
+      if dirtyVar.now() then pendingLoadVar.set(Some(key)) else loadConcert(key)
 
   /** Answer the question: Some(name) loads it, None leaves the table alone. */
   def answerPendingLoad(load: Boolean): Unit =
@@ -263,7 +284,7 @@ def createProntoPopLandingPage(): HtmlElement =
   /** The question asked before a load throws edits away. Cancel takes the focus, so the reflex
     * answers — a stray Return or space bar on the keys — keep the table as it is. Clicking the
     * darkened page behind it cancels too, which is what a tap outside a dialog usually means. */
-  def renderConfirmLoad(name: Title): HtmlElement =
+  def renderConfirmLoad(key: String): HtmlElement =
     div(cls := "backdrop",
       onClick --> (_ => answerPendingLoad(load = false)),
       div(cls := "dialog",
@@ -272,7 +293,7 @@ def createProntoPopLandingPage(): HtmlElement =
         h2("Unsaved changes"),
         p(
           "The songs have been edited since they were last saved. Loading ",
-          span(cls := "concertname", s"\"$name\""),
+          span(cls := "concertname", s"\"${labelOf(key)}\""),
           " replaces them, and the edits are gone.",
         ),
         div(cls := "row",
@@ -341,7 +362,8 @@ def createProntoPopLandingPage(): HtmlElement =
         cls := "concertfield",
         children <-- offeredVar.signal.map: offered =>
           offered.map: (name, builtIn) =>
-            option(value := name, if builtIn then s"$name (built-in)" else name)
+            val key = keyOf(name, builtIn)
+            option(value := key, labelOf(key))
         ,
         controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),

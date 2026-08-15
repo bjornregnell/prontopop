@@ -409,6 +409,9 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; }
    jobs. Nothing else on the row is pushed apart: one row-gap between neighbours, as below. */
 .loadlabel { margin-left: 2ch; }
 
+/* the file chooser is never seen: the Upload button presses it */
+input.chooser { display: none; }
+
 /* A disabled button says "not for this concert", not "broken": dimmed, and it stops looking
    pressable. Removing a built-in is the one thing this row cannot do. */
 button:disabled, button:disabled:hover {

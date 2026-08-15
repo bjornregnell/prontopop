@@ -2,6 +2,7 @@ package prontopop
 
 import com.raquo.laminar.api.L.*
 import org.scalajs.dom
+import scala.scalajs.js
 
 def createProntoPopLandingPage(): HtmlElement =
   import Model.*
@@ -9,11 +10,21 @@ def createProntoPopLandingPage(): HtmlElement =
 
   val keyPrefix = "prontopop.concert."
 
+  /** The hidden file input, once the page has it: the Upload button presses it. */
+  var fileChooser: dom.html.Input = null
+
   /** How a pause is written to the Local Store: the same three dashes the songbook uses to ask for
     * one, so the break looks like a break wherever it is stored. No song can produce this line —
     * a song always writes its four tab-separated fields — and concerts saved before pauses existed
     * contain no such line and load exactly as they did. */
   val pauseLine: String = "---"
+
+  /** Reading is looser than writing: dashes and nothing else, however many and whatever whitespace
+    * is around them, since a file that has been through an editor or another machine's line endings
+    * should still say what it meant. The same rule the songbook's parser uses. */
+  def isPauseLine(s: String): Boolean =
+    val t = s.trim
+    t.length >= 3 && t.forall(_ == '-')
 
   var lastId = 0
   def freshId(): Int =
@@ -79,8 +90,10 @@ def createProntoPopLandingPage(): HtmlElement =
     (title, pattern)
 
   def rowsOfSaved(text: String): Vector[SongRow] =
-    text.split("\n", -1).toVector.filter(_.nonEmpty).map: line =>
-      if line == pauseLine then pauseRow()
+    // \r\n and lone \r as well as \n: a concert may arrive as a file from another machine
+    text.replace("\r\n", "\n").replace("\r", "\n")
+      .split("\n", -1).toVector.filter(_.trim.nonEmpty).map: line =>
+      if isPauseLine(line) then pauseRow()
       else
         val f = line.split("\t", -1)
         SongRow(
@@ -275,13 +288,19 @@ def createProntoPopLandingPage(): HtmlElement =
       () => moveCue(1)),
   )
 
+  /** A concert as text: one song per line, its four fields separated by tabs, and a pause as three
+    * dashes. One format for the Local Store and for a file on disk — a concert downloaded and
+    * uploaded again is the same concert, and either can be edited in a spreadsheet. */
+  def concertText(rows: Vector[SongRow]): String =
+    rows
+      .map(r => if r.isPause then pauseLine else Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
+      .mkString("\n")
+
   def save(): Unit =
     val name = concertNameVar.now().trim
     if name.isEmpty then statusVar.set("give the concert a name before saving")
     else
-      val text = songsVar.now()
-        .map(r => if r.isPause then pauseLine else Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
-        .mkString("\n")
+      val text = concertText(songsVar.now())
       dom.window.localStorage.setItem(keyPrefix + name, text)
       offeredVar.set(listOffered())
       selectedVar.set(name)
@@ -345,6 +364,79 @@ def createProntoPopLandingPage(): HtmlElement =
         confirm = "Remove",
         act = () => removeConcert(key),
       )))
+
+  /** Only what a file name can safely carry, so a concert called "Soaré / 2026" still lands on
+    * disk. Empty names fall back rather than producing a file called ".tsv". */
+  def fileNameOf(name: String): String =
+    val safe = name.trim.map(c => if c.isLetterOrDigit || "-_. ".contains(c) then c else '-').trim
+    (if safe.isEmpty then "concert" else safe) + ".tsv"
+
+  /** Hand the concert to the browser as a file. An object URL on an anchor with `download`, which
+    * every browser here has, rather than showSaveFilePicker, which Firefox does not; whether a
+    * "where to?" dialog appears is then the browser's own download setting. */
+  def downloadConcert(): Unit =
+    val text = concertText(songsVar.now())
+    val bag = js.Dynamic.literal("type" -> "text/tab-separated-values;charset=utf-8")
+    // the element type is spelled out because js.Array is invariant, so js.Array[String] is not it
+    val parts = js.Array[dom.BufferSource | dom.Blob | String](text)
+    val blob = dom.Blob(parts, bag.asInstanceOf[dom.BlobPropertyBag])
+    val url = dom.URL.createObjectURL(blob)
+    val a = dom.document.createElement("a").asInstanceOf[dom.html.Anchor]
+    a.href = url
+    a.setAttribute("download", fileNameOf(concertNameVar.now()))
+    // it has to be in the document for the click to count in every browser
+    dom.document.body.appendChild(a)
+    a.click()
+    dom.document.body.removeChild(a)
+    dom.URL.revokeObjectURL(url)
+    statusVar.set(s"downloaded '${fileNameOf(concertNameVar.now())}'")
+
+  /** Put an uploaded concert in the table. Not a load: it came from a file, not from the Local
+    * Store, so the table now holds something the store does not have and Save says so in orange.
+    * The file's name fills the Concert field, so saving it is one press. */
+  def takeUploaded(name: String, rows: Vector[SongRow]): Unit =
+    stopPlaying()
+    songsVar.set(rows)
+    colWidthsVar.set(fitWidths(rows))
+    concertNameVar.set(name)
+    cueVar.set(None)
+    dirtyVar.set(true)
+    statusVar.set(s"uploaded '$name' (${rows.count(!_.isPause)} songs) — not saved yet")
+
+  /** What a chosen file becomes, once it has been read. Refuses a file that holds no songs rather
+    * than emptying the table over it, and asks first if there are edits to lose. */
+  def uploaded(fileName: String, text: String): Unit =
+    val name = fileName.reverse.dropWhile(_ != '.').drop(1).reverse.trim match
+      case "" => fileName.trim
+      case stem => stem
+    val rows = rowsOfSaved(text)
+    if rows.forall(_.isPause) then
+      statusVar.set(s"'$fileName' holds no songs — nothing uploaded")
+    else if !dirtyVar.now() then takeUploaded(name, rows)
+    else
+      pendingAskVar.set(Some(Ask(
+        heading = "Unsaved changes",
+        before = "The songs have been edited since they were last saved. Uploading ",
+        subject = fileName,
+        after = " replaces them, and the edits are gone.",
+        confirm = "Discard and upload",
+        act = () => takeUploaded(name, rows),
+      )))
+
+  /** Read the file the chooser handed over. Its value is cleared afterwards so that choosing the
+    * same file twice in a row still counts as a change. */
+  def readChosen(input: dom.html.Input): Unit =
+    val files = input.files
+    if files != null && files.length > 0 then
+      val file = files(0)
+      val reader = dom.FileReader()
+      reader.onload = _ =>
+        uploaded(file.name, reader.result.asInstanceOf[String])
+        input.value = ""
+      reader.onerror = _ =>
+        statusVar.set(s"could not read '${file.name}'")
+        input.value = ""
+      reader.readAsText(file, "UTF-8")
 
   /** Answer the question: yes runs what it asked about, no leaves everything alone. */
   def answerAsk(yes: Boolean): Unit =
@@ -513,6 +605,19 @@ def createProntoPopLandingPage(): HtmlElement =
           if k.startsWith(builtInMark) then "a built-in concert cannot be removed"
           else s"remove '$k' from the Local Store",
         onClick --> (_ => askRemoveConcert())),
+      button("Download concert", cls := "download",
+        title <-- concertNameVar.signal.map(n => s"save this concert as ${fileNameOf(n)}"),
+        onClick --> (_ => downloadConcert())),
+      // The chooser is a file input, which cannot be styled into the row, so it is hidden and the
+      // button presses it. Its own change event is what carries the file, so it has to be a real
+      // element in the page rather than one made on the spot.
+      button("Upload concert", cls := "upload", title := "read a concert from a .tsv file",
+        onClick --> (_ => Option(fileChooser).foreach(_.click()))),
+      input(typ := "file", cls := "chooser",
+        accept := ".tsv,.txt,text/plain,text/tab-separated-values",
+        onMountCallback(ctx => fileChooser = ctx.thisNode.ref),
+        onChange --> (ev => readChosen(ev.target.asInstanceOf[dom.html.Input])),
+      ),
     ),
     div(cls := "row",
       // Ordered for a narrow screen: the three pressed mid-song first, so when the row wraps it is

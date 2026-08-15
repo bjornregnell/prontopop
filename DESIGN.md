@@ -92,6 +92,18 @@ linted clean.
   to the cue; if the answer is "it plays something else", it is probably the wrong control.
   (BR, 2026-08-15.)
 
+- **One text format, wherever a concert is written down.** A song is its four fields separated by
+  tabs, a pause is `---`, one entry per line. The Local Store holds exactly that, `Download
+  concert` hands exactly that to the browser as a `.tsv`, and `Upload concert` reads it back — so a
+  concert can go to another machine, or into a spreadsheet, and come home unchanged. `concertText`
+  writes it and `rowsOfSaved` reads it, and reading is the looser of the two: any line ending, and
+  a pause is any line of three or more dashes.
+
+  An uploaded concert is deliberately **not** a load. It did not come from the Local Store, so the
+  dropdown goes on naming the concert that did, `Save` turns orange, and the file's name fills the
+  Concert field so that saving it is one press. A file holding no songs is refused with a message
+  rather than emptying the table. (BR, 2026-08-15.)
+
 - **Loading never silently discards edits.** Choosing from the dropdown loads at once — there is no
   `Load` button, since it only asked the same question twice — but any edit since the last load or
   save raises a flag, and the flag turns the `Save` button red, so the warning is never the first

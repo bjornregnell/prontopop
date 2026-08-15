@@ -115,8 +115,16 @@ Honestly, so nobody assumes otherwise:
 
 - **Interaction is exercised only where a probe was written.** The probes cover the cue column, the
   Play/Stop transport with its two cue steps, choosing a concert while there are unsaved edits,
-  removing a saved concert, and pauses — that the cue steps over one and that one survives a save
-  and a load. Theme switching and the volume slider are still only ever loaded, never pressed.
+  removing a saved concert, pauses — that the cue steps over one and that one survives a save and a
+  load — and downloading and uploading a concert as a file. Theme switching and the volume slider
+  are still only ever loaded, never pressed.
+- A download can be checked without letting a file leave: the probe replaces `URL.createObjectURL`
+  to keep the Blob and `HTMLAnchorElement.prototype.click` to read the file name off the anchor,
+  then reads the Blob back as text. An upload is driven by building a `File` in a `DataTransfer`,
+  assigning it to the hidden chooser's `files`, and dispatching `change`.
+- **Reading a file is really asynchronous**, and `--virtual-time-budget` races past a fixed wait, so
+  a probe that uploads must idle for a few steps rather than one. A dialog appearing "one step late"
+  is this, not a bug in the app.
 - **A probe proves the wiring, not the feel.** It can show that pressing Play sets the button to
   Stop and names the song; it cannot show that the button is reachable with a thumb, or that the
   colour reads across a stage. Those still want the screenshot and a human.

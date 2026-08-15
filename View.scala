@@ -345,6 +345,8 @@ def createProntoPopLandingPage(): HtmlElement =
         ,
         controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),
+      // Adding a song is concert-building too, and it had a whole row under the table to itself.
+      button("Add song", cls := "addsong", onClick --> (_ => addSong())),
     ),
     div(cls := "row",
       // Ordered for a narrow screen: the three pressed mid-song first, so when the row wraps it is
@@ -395,7 +397,6 @@ def createProntoPopLandingPage(): HtmlElement =
       span("@"), span("Play"), span("Title"), span("BPM"), span("Sig."), span("Pattern"), span(),
     ),
     children <-- songsVar.signal.split(_.id)(renderRow),
-    div(cls := "row", button("Add song", onClick --> (_ => addSong()))),
     div(cls := "status", child.text <-- statusVar.signal),
     div(cls := "shortcuts",
       h2("Keyboard shortcuts"),

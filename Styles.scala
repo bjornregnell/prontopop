@@ -353,7 +353,10 @@ select.bars { margin-right: 2ch; }
 .songrow button.cue.cued { border-color: var(--head); }
 
 
-.status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
+/* No reserved height: it stood empty most of the time, holding a line and a half of screen against
+   a message that may never come. The page shifts by one line when a message does arrive, which is
+   the trade — and a message means something worth being shifted by. */
+.status { margin-top: 0.5rem; color: var(--muted); }
 
 /* The keyboard shortcuts, rendered from the same list the key handler reads. A reference to glance
    at, not a section to be announced: its heading is the size of the text under it, and the rows are
@@ -380,8 +383,9 @@ select.bars { margin-right: 2ch; }
   font-weight: bold;
 }
 
-/* room between saving a concert and choosing one, since they now share a line */
+/* room between saving a concert, choosing one, and adding to one, since they share a line */
 .loadlabel { margin-left: 2ch; }
+.addsong { margin-left: 2ch; }
 
 /* The question before a load discards edits. Fixed to the viewport rather than the page, which is
    as wide as the song table and scrolls sideways under it. */

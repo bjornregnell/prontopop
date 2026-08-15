@@ -377,7 +377,7 @@ def createProntoPopLandingPage(): HtmlElement =
         value <-- barsVar.signal,
         onChange.mapToValue --> barsVar.writer,
       ),
-      span("Volume: "),
+      span("Vol: "),
       input(typ := "range", minAttr := "0", maxAttr := "100",
         controlled(value <-- volumeVar.signal, onInput.mapToValue --> { (v: String) =>
           volumeVar.set(v)

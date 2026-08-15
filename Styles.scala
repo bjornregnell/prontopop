@@ -355,11 +355,13 @@ select.bars { margin-right: 2ch; }
 
 .status { margin-top: 1rem; min-height: 1.5em; color: var(--muted); }
 
-/* the keyboard shortcuts, rendered from the same list the key handler reads */
-.shortcuts { margin-top: 2rem; }
-.shortcuts h2 { margin-bottom: 0.4rem; }
+/* The keyboard shortcuts, rendered from the same list the key handler reads. A reference to glance
+   at, not a section to be announced: its heading is the size of the text under it, and the rows are
+   as close as they can be and stay legible. */
+.shortcuts { margin-top: 1rem; }
+.shortcuts h2 { font-size: 1rem; margin: 0 0 0.2rem; }
 .shortcuts table { border-collapse: collapse; }
-.shortcuts th, .shortcuts td { border: 1px solid var(--border); padding: 0.25rem 0.9rem; text-align: left; }
+.shortcuts th, .shortcuts td { border: 1px solid var(--border); padding: 0.1rem 0.9rem; text-align: left; }
 .shortcuts th { background: var(--bg-soft); color: var(--muted); }
 .shortcuts td:first-child { font-weight: bold; color: var(--head); white-space: nowrap; }
 .shortcuts td:last-child { text-align: center; color: var(--muted); }

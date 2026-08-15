@@ -295,8 +295,9 @@ button:hover { border-color: var(--link); }
    word, which is the point of it being one. */
 .step { padding: 0.4rem 0.9ch; }
 
-/* how many bars a song runs for: two digits and the select's own arrow, nothing more */
-select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2ch; }
+/* how many bars a song runs for: two digits and the select's own arrow, nothing more. No margin:
+   everything on this row sits one row-gap from its neighbour, so nothing needs pushing apart. */
+select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; }
 
 .row { display: flex; flex-wrap: wrap; gap: 0.5ch; align-items: center; margin: 0.5rem 0; }
 .row h2 { margin: 0.5rem 0; }
@@ -406,7 +407,6 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; margin-right: 2
 
 /* room between saving a concert, choosing one, and adding to one, since they share a line */
 .loadlabel { margin-left: 2ch; }
-.addpause { margin-left: 1ch; margin-right: 2ch; }
 .removeconcert { margin-left: 2ch; }
 
 /* A disabled button says "not for this concert", not "broken": dimmed, and it stops looking

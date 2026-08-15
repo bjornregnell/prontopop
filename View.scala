@@ -91,9 +91,22 @@ def createProntoPopLandingPage(): HtmlElement =
   /** Whether the table has been touched since it was last loaded or saved. Kept for the whole
     * table rather than per song: what a load overwrites is all of it. */
   val dirtyVar       = Var(false)
-  /** A dropdown key waiting on the "discard your edits?" answer. Some(key) is what puts the dialog
-    * on screen, and answering either way clears it. */
-  val pendingLoadVar = Var(Option.empty[String])
+  /** A question the app will not act without an answer to. The subject is set apart from the two
+    * halves of the sentence so it can be highlighted: it is the concert being acted on, and it is
+    * the word the reader checks before answering.
+    *
+    * @param heading  what kind of question it is
+    * @param before   the sentence up to the subject
+    * @param subject  the concert, as a person reads it
+    * @param after    the rest of the sentence, saying what will be lost
+    * @param confirm  the label on the answer that does it
+    * @param act      what to do if that answer is given
+    */
+  case class Ask(heading: String, before: String, subject: String, after: String, confirm: String,
+    act: () => Unit)
+
+  /** The question on screen, if any. Answering either way clears it. */
+  val pendingAskVar = Var(Option.empty[Ask])
   val playingVar     = Var(Option.empty[Int])
   /** The song that played last, so the cue stays put when it stops. None until something plays. */
   val cueVar         = Var(Option.empty[Int])
@@ -242,13 +255,46 @@ def createProntoPopLandingPage(): HtmlElement =
     * holds another. */
   def chooseConcert(key: String): Unit =
     if key.nonEmpty && key != selectedVar.now() then
-      if dirtyVar.now() then pendingLoadVar.set(Some(key)) else loadConcert(key)
+      if !dirtyVar.now() then loadConcert(key)
+      else pendingAskVar.set(Some(Ask(
+        heading = "Unsaved changes",
+        before = "The songs have been edited since they were last saved. Loading ",
+        subject = labelOf(key),
+        after = " replaces them, and the edits are gone.",
+        confirm = "Discard and load",
+        act = () => loadConcert(key),
+      )))
 
-  /** Answer the question: Some(name) loads it, None leaves the table alone. */
-  def answerPendingLoad(load: Boolean): Unit =
-    val pending = pendingLoadVar.now()
-    pendingLoadVar.set(None)
-    if load then pending.foreach(loadConcert)
+  /** Take a saved concert out of the Local Store. The songs stay on screen: removing the stored
+    * copy is not the same as losing the work, and Save turns orange to say the table now holds
+    * something the store does not. A built-in cannot get here — the button is disabled for one,
+    * and this asks the store, which never had it. */
+  def removeConcert(name: Title): Unit =
+    dom.window.localStorage.removeItem(keyPrefix + name)
+    offeredVar.set(listOffered())
+    // the dropdown must name something that exists; the built-ins are always there to fall back on
+    selectedVar.set(offeredVar.now().headOption.map((n, b) => keyOf(n, b)).getOrElse(""))
+    dirtyVar.set(true)
+    statusVar.set(s"removed '$name' from the Local Store")
+
+  /** Ask before removing, since nothing brings a saved concert back. */
+  def askRemoveConcert(): Unit =
+    val key = selectedVar.now()
+    if key.nonEmpty && !key.startsWith(builtInMark) then
+      pendingAskVar.set(Some(Ask(
+        heading = "Remove concert",
+        before = "Removing ",
+        subject = key,
+        after = " from the Local Store cannot be undone. The songs stay in the table, unsaved.",
+        confirm = "Remove",
+        act = () => removeConcert(key),
+      )))
+
+  /** Answer the question: yes runs what it asked about, no leaves everything alone. */
+  def answerAsk(yes: Boolean): Unit =
+    val pending = pendingAskVar.now()
+    pendingAskVar.set(None)
+    if yes then pending.foreach(_.act())
 
   /** Parsed rather than compared as text, so " 4 / 4 " counts and a half-typed signature does not.
     * Anything unparseable is simply not 4/4, and wears the other colour. */
@@ -281,26 +327,26 @@ def createProntoPopLandingPage(): HtmlElement =
       button("Remove", onClick --> (_ => removeRow(id))),
     )
 
-  /** The question asked before a load throws edits away. Cancel takes the focus, so the reflex
-    * answers — a stray Return or space bar on the keys — keep the table as it is. Clicking the
+  /** Any question the app must not act without an answer to. Cancel takes the focus, so the reflex
+    * answers — a stray Return or space bar on the keys — leave everything as it is. Clicking the
     * darkened page behind it cancels too, which is what a tap outside a dialog usually means. */
-  def renderConfirmLoad(key: String): HtmlElement =
+  def renderAsk(ask: Ask): HtmlElement =
     div(cls := "backdrop",
-      onClick --> (_ => answerPendingLoad(load = false)),
+      onClick --> (_ => answerAsk(yes = false)),
       div(cls := "dialog",
-        // the click that opens a concert must not also count as a click on the page behind
+        // the click that answers must not also count as a click on the page behind
         onClick.stopPropagation --> (_ => ()),
-        h2("Unsaved changes"),
+        h2(ask.heading),
         p(
-          "The songs have been edited since they were last saved. Loading ",
-          span(cls := "concertname", s"\"${labelOf(key)}\""),
-          " replaces them, and the edits are gone.",
+          ask.before,
+          span(cls := "concertname", s"\"${ask.subject}\""),
+          ask.after,
         ),
         div(cls := "row",
           button("Cancel", cls := "cancel", onMountFocus,
-            onClick --> (_ => answerPendingLoad(load = false))),
-          button("Discard and load", cls := "discard",
-            onClick --> (_ => answerPendingLoad(load = true))),
+            onClick --> (_ => answerAsk(yes = false))),
+          button(ask.confirm, cls := "discard",
+            onClick --> (_ => answerAsk(yes = true))),
         ),
       ),
     )
@@ -325,10 +371,10 @@ def createProntoPopLandingPage(): HtmlElement =
       // While the question is on screen it owns the keyboard: Escape answers no, and nothing else
       // gets through — a space bar that started a song from behind a modal would be a nasty
       // surprise. Yes is left to the focused button, which Enter and Space already activate.
-      if pendingLoadVar.now().isDefined then
+      if pendingAskVar.now().isDefined then
         if e.key == "Escape" then
           e.preventDefault()
-          answerPendingLoad(load = false)
+          answerAsk(yes = false)
       else
         shortcuts
           .find(s => s.key == e.key && (s.evenWhileTyping || !typingSomewhere))
@@ -373,6 +419,14 @@ def createProntoPopLandingPage(): HtmlElement =
       // pay for it — adding a song is not something anyone does mid-gig.
       button("Add song", cls := "addsong", title := "add an empty song to the bottom of the table",
         onClick --> (_ => addSong())),
+      // Only ever the saved copy, and only after asking. Disabled on a built-in: those ship with
+      // the app, and a dropdown entry nobody can restore is not something a button should offer.
+      button("Remove concert", cls := "removeconcert",
+        disabled <-- selectedVar.signal.map(k => k.isEmpty || k.startsWith(builtInMark)),
+        title <-- selectedVar.signal.map: k =>
+          if k.startsWith(builtInMark) then "a built-in concert cannot be removed"
+          else s"remove '$k' from the Local Store",
+        onClick --> (_ => askRemoveConcert())),
     ),
     div(cls := "row",
       // Ordered for a narrow screen: the three pressed mid-song first, so when the row wraps it is
@@ -441,5 +495,5 @@ def createProntoPopLandingPage(): HtmlElement =
       ),
     ),
     // Last in the page, so it paints over everything; only present while there is a question.
-    child.maybe <-- pendingLoadVar.signal.map(_.map(renderConfirmLoad)),
+    child.maybe <-- pendingAskVar.signal.map(_.map(renderAsk)),
   )

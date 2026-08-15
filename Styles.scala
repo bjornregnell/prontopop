@@ -391,6 +391,15 @@ select.bars { margin-right: 2ch; }
 /* room between saving a concert, choosing one, and adding to one, since they share a line */
 .loadlabel { margin-left: 2ch; }
 .addsong { margin-left: 2ch; }
+.removeconcert { margin-left: 1ch; }
+
+/* A disabled button says "not for this concert", not "broken": dimmed, and it stops looking
+   pressable. Removing a built-in is the one thing this row cannot do. */
+button:disabled, button:disabled:hover {
+  opacity: 0.45;
+  cursor: default;
+  border-color: var(--border);
+}
 
 /* The question before a load discards edits. Fixed to the viewport rather than the page, which is
    as wide as the song table and scrolls sideways under it. */

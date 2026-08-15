@@ -91,6 +91,13 @@ linted clean.
   so saving a loaded built-in saves under its own name, beside it rather than over it. Overwriting
   a saved concert is left to the unsaved-changes guard above. (BR, 2026-08-15.)
 
+  `Remove concert` takes a saved concert out of the store, and is **disabled while a built-in is
+  selected** — a dropdown entry nobody can restore is not something a button should offer. It asks
+  first, through the same dialog the load guard uses (`Ask`, so a second question needed no second
+  dialog), because nothing brings a saved concert back. The songs stay in the table afterwards:
+  removing the stored copy is not the same as losing the work, and `Save` turns orange to say the
+  table now holds something the store does not.
+
 ## The bug that shaped `Concerts.scala` (fixed)
 
 VERIFIED at the time, not suspected — running a main that touched `Concerts.all` on the JVM gave:

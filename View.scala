@@ -346,7 +346,10 @@ def createProntoPopLandingPage(): HtmlElement =
         controlled(value <-- selectedVar.signal, onChange.mapToValue --> (n => chooseConcert(n))),
       ),
       // Adding a song is concert-building too, and it had a whole row under the table to itself.
-      button("Add", cls := "addsong", title := "add an empty song to the bottom of the table",
+      // "Add song", not "Add": on a row about concerts, "Add" would read as adding a concert.
+      // It sits at the end and the row scrolls sideways on a phone, which is the right thing to
+      // pay for it — adding a song is not something anyone does mid-gig.
+      button("Add song", cls := "addsong", title := "add an empty song to the bottom of the table",
         onClick --> (_ => addSong())),
     ),
     div(cls := "row",

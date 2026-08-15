@@ -152,9 +152,26 @@ def createProntoPopLandingPage(): HtmlElement =
     songsVar.update(_.filterNot(_.id == id))
     dirtyVar.set(true)
 
-  def addSong(): Unit =
-    songsVar.update(_ :+ SongRow(freshId()))
+  /** Where the ">" sits, by the same rule the marker uses: the cued row while it is still in the
+    * list, otherwise the first song. -1 when there is no song to point at. */
+  def cuedIndex(rows: Vector[SongRow]): Int =
+    cueVar.now().map(id => rows.indexWhere(_.id == id)).filter(_ >= 0)
+      .getOrElse(rows.indexWhere(!_.isPause))
+
+  /** Put a new row directly under the cue, so a concert grows where the eye already is rather than
+    * at the bottom of a long list.
+    *
+    * A new SONG takes the cue with it. Without that, adding three songs would leave them in the
+    * reverse of the order they were made, each one landing under the same unmoved marker. A pause
+    * cannot take the cue — there is nothing there to play — so it leaves the marker where it is. */
+  def insertRow(row: SongRow): Unit =
+    val rows = songsVar.now()
+    val at = cuedIndex(rows)
+    songsVar.set(rows.patch(if at >= 0 then at + 1 else rows.length, Vector(row), 0))
+    if !row.isPause then cueVar.set(Some(row.id))
     dirtyVar.set(true)
+
+  def addSong(): Unit = insertRow(SongRow(freshId()))
 
   /** Swap a row with the one above or below it. Silent at the ends rather than wrapping: the
     * buttons that would go nowhere are disabled, and a keyboard or a double click that gets past
@@ -171,9 +188,7 @@ def createProntoPopLandingPage(): HtmlElement =
   def indexSignal(id: Int): Signal[(Int, Int)] =
     songsVar.signal.map(rows => (rows.indexWhere(_.id == id), rows.length))
 
-  def addPause(): Unit =
-    songsVar.update(_ :+ pauseRow())
-    dirtyVar.set(true)
+  def addPause(): Unit = insertRow(pauseRow())
 
   def toggleFullScreen(): Unit =
     if dom.document.fullscreenElement == null then dom.document.documentElement.requestFullscreen()
@@ -494,11 +509,9 @@ def createProntoPopLandingPage(): HtmlElement =
       // "Add song", not "Add": on a row about concerts, "Add" would read as adding a concert.
       // It sits at the end and the row scrolls sideways on a phone, which is the right thing to
       // pay for it — adding a song is not something anyone does mid-gig.
-      button("Add song", cls := "addsong", title := "add an empty song to the bottom of the table",
+      button("Add song", cls := "addsong", title := "add an empty song under the cue",
         onClick --> (_ => addSong())),
-      // Lands at the bottom like its neighbour. A break belongs between two songs, and there is no
-      // way to move a row yet, so a pause is placed by building the concert down to it.
-      button("Add pause", cls := "addpause", title := "add a pause to the bottom of the table",
+      button("Add pause", cls := "addpause", title := "add a pause under the cue",
         onClick --> (_ => addPause())),
       // Only ever the saved copy, and only after asking. Disabled on a built-in: those ship with
       // the app, and a dropdown entry nobody can restore is not something a button should offer.

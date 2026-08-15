@@ -71,14 +71,16 @@ linted clean.
   **Written down, a pause is `---` everywhere.** In the Local Store it is a line of exactly that,
   which no song can produce — a song always writes its four tab-separated fields — so concerts
   saved before pauses existed contain no such line and load exactly as they did. In the songbook it
-  is a `Titel` macro whose value is three or more dashes and nothing else:
+  is a macro whose **value** is three or more dashes and nothing else:
 
   ```latex
-  \newcommand{\PausEttTitel}{---}
+  \newcommand{\PausEtt}{---}
   ```
 
-  which `parsesoaree.sc` turns into a `Pause,` line, in songbook order, needing no `Bpm` and no
-  `Sig`. The songbook is the only place the concert's ORDER exists, so a break in that order has to
+  which `parsesoaree.sc` turns into a `Pause,` line where that macro sits. The value carries the
+  meaning and the name is free — a pause has no title, and requiring a `Titel` suffix to be noticed
+  would be the script's parsing showing through the songbook's spelling. The name only has to be
+  unique, which `\newcommand` insists on anyway. The songbook is the only place the concert's ORDER exists, so a break in that order has to
   be expressible there — a `Pause` typed into the generated block by hand is overwritten by the
   next `./build.sc --sync`. (BR, 2026-08-15.)
 

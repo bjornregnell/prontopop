@@ -15,15 +15,19 @@
 // same convention as `tt sub` and `deploy.sc --dry-run`. Nothing is written when the download
 // fails, so a network problem can never leave a half-updated file.
 //
-// A PAUSE in the concert is written in the songbook as a Titel macro whose value is three or more
+// A PAUSE in the concert is written in the songbook as a macro whose VALUE is three or more
 // dashes, and nothing else:
 //
-//     \newcommand{\PausEttTitel}{---}
+//     \newcommand{\PausEtt}{---}
 //
-// It needs no Bpm and no Sig, and it becomes a `Pause,` line in the generated block. The songbook
-// is the only place the concert's ORDER exists, so a break in that order has to be expressible
-// there; a pause written into Concerts.scala by hand lives inside the generated markers and is
-// overwritten by the next sync.
+// The value carries the meaning, not the name: a pause has no title, and making it wear a `Titel`
+// suffix to be noticed would be this script's parsing showing through the songbook's spelling.
+// Call it what you like — the name only has to be unique, which \newcommand insists on anyway.
+// It becomes a `Pause,` line where its macro sits in the file.
+//
+// The songbook is the only place the concert's ORDER exists, so a break in that order has to be
+// expressible there; a pause written into Concerts.scala by hand lives inside the generated
+// markers and is overwritten by the next sync.
 //
 // The block it owns is delimited by BEGIN/END GENERATED markers rather than found by parsing Scala.
 // Balancing parentheses from `Seq(` would be the obvious alternative and is a trap: song titles
@@ -151,13 +155,13 @@ if signatures.isEmpty then die("found no \\frac signature macros such as \\Rakt 
 
 val byName = cmds.map(c => c.name -> c.value).toMap
 
-/** Song keys in file order. `FullTitel` also ends in `Titel`, so it must be excluded or every song
+/** Which macros name a song. `FullTitel` also ends in `Titel`, so it must be excluded or every song
   * would appear twice, once under a bogus key like `RymdresanFull`. */
+def isTitle(name: String): Boolean = name.endsWith("Titel") && !name.endsWith("FullTitel")
+
+/** Song keys in file order. */
 val keys: Vector[String] =
-  cmds.map(_.name)
-    .filter(n => n.endsWith("Titel") && !n.endsWith("FullTitel"))
-    .map(_.dropRight("Titel".length))
-    .distinct
+  cmds.map(_.name).filter(isTitle).map(_.dropRight("Titel".length)).distinct
 
 val firstNumber = raw"\d+".r
 
@@ -171,51 +175,67 @@ enum Entry:
   case Break
   case Tune(song: Song)
 
-/** A title of nothing but dashes asks for a pause. Three at least, so a title that happens to be a
-  * dash or an en-dash is not mistaken for one. */
-def isPauseTitle(s: String): Boolean =
+/** A macro whose VALUE is nothing but dashes asks for a pause, whatever it is called. The value
+  * carries the meaning rather than the name, because a pause has no title to put in one and should
+  * not have to pretend otherwise; the name only has to be unique, which \newcommand insists on
+  * anyway. Three dashes at least, so a value that is one dash or an en-dash is not mistaken. */
+def isPauseValue(s: String): Boolean =
   val t = s.trim
   t.length >= 3 && t.forall(_ == '-')
 
-val entries: Vector[Entry] = keys.flatMap: key =>
+def songEntry(key: String): Option[Entry] =
   def field(suffix: String): Option[String] = byName.get(key + suffix).filter(_.nonEmpty)
 
-  def tune: Option[Entry] =
-    for
-      title <- field("Titel").orElse { note(s"$key: no Titel — skipped"); None }
-      rawBpm <- field("Bpm").orElse { note(s"$key: no Bpm — skipped"); None }
-      bpm <- firstNumber.findFirstIn(rawBpm).map(_.toInt)
-               .orElse { note(s"$key: Bpm '$rawBpm' holds no number — skipped"); None }
-      rawSig <- field("Sig").orElse { note(s"$key: no Sig — skipped"); None }
-      sig <- signatures.get(rawSig.trim.stripPrefix("\\"))
-               .orElse { note(s"$key: unknown signature macro '$rawSig' — skipped"); None }
-    yield
-      // A second number is the stick tempo for a later section; the concert wants the tempo you
-      // COUNT IN, so the first number is the right one and nothing is being lost here.
-      val all = firstNumber.findAllIn(rawBpm).toVector
-      if all.size > 1 then
-        note(s"$key: taking $bpm for verse and chorus; ${all.tail.mkString(", ")} is the later stick tempo")
-      if title.contains("\\") then note(s"$key: Titel '$title' still contains LaTeX")
-      Entry.Tune(Song(key, title, bpm, sig._1, sig._2))
+  for
+    title <- field("Titel").orElse { note(s"$key: no Titel — skipped"); None }
+    rawBpm <- field("Bpm").orElse { note(s"$key: no Bpm — skipped"); None }
+    bpm <- firstNumber.findFirstIn(rawBpm).map(_.toInt)
+             .orElse { note(s"$key: Bpm '$rawBpm' holds no number — skipped"); None }
+    rawSig <- field("Sig").orElse { note(s"$key: no Sig — skipped"); None }
+    sig <- signatures.get(rawSig.trim.stripPrefix("\\"))
+             .orElse { note(s"$key: unknown signature macro '$rawSig' — skipped"); None }
+  yield
+    // A second number is the stick tempo for a later section; the concert wants the tempo you
+    // COUNT IN, so the first number is the right one and nothing is being lost here.
+    val all = firstNumber.findAllIn(rawBpm).toVector
+    if all.size > 1 then
+      note(s"$key: taking $bpm for verse and chorus; ${all.tail.mkString(", ")} is the later stick tempo")
+    if title.contains("\\") then note(s"$key: Titel '$title' still contains LaTeX")
+    Entry.Tune(Song(key, title, bpm, sig._1, sig._2))
 
-  if field("Titel").exists(isPauseTitle) then
-    note(s"$key: a pause")
-    Some(Entry.Break)
-  else tune
+/** The concert in songbook order, walking every macro rather than only the titles: a pause is not
+  * a song and has no Titel macro to be found under, so its place in the running order is the place
+  * its own macro sits. A song is emitted at its Titel, which is where the reader sees it start. */
+val entries: Vector[Entry] =
+  var seen = Set.empty[String]
+  cmds.flatMap: c =>
+    if isTitle(c.name) then
+      val key = c.name.dropRight("Titel".length)
+      if seen(key) then None
+      else
+        seen += key
+        songEntry(key)
+    else if isPauseValue(c.value) then
+      note(s"\\${c.name}: a pause")
+      Some(Entry.Break)
+    else None
 
 val songs  = entries.collect { case Entry.Tune(s) => s }
 val breaks = entries.count(_ == Entry.Break)
 if songs.isEmpty then die("no complete songs found")
 
 def tally: String =
-  s"${songs.size} of ${keys.size - breaks} songs" + (if breaks > 0 then s", $breaks pause(s)" else "")
+  s"${songs.size} of ${keys.size} songs" + (if breaks > 0 then s", $breaks pause(s)" else "")
 
 // ---- the generated block ---------------------------------------------------------------
 
 def quoted(s: String): String = "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
 
 val block: Vector[String] =
-  (s"  val $target = ${quoted(target)} -> Seq(" +:
+  // Ascribed, not inferred: a concert of songs alone would infer Seq[Song], and adding the first
+  // pause would silently widen it. Saying (String, Concert) keeps the declared type steady, and
+  // keeps a sync from undoing an ascription written by hand.
+  (s"  val $target: (String, Concert) = ${quoted(target)} -> Seq(" +:
     entries.map:
       case Entry.Break => "    Pause,"
       case Entry.Tune(s) =>

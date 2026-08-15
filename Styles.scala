@@ -298,7 +298,7 @@ select.bars { margin-right: 2ch; }
   --col-bpm: 6ch;
   --col-sign: 7ch;
   --col-pattern: 38ch;
-  --col-remove: 11ch;
+  --col-remove: 7ch;  /* "Remove" is six characters, and the button has no side padding left */
   --col-gaps: 3ch;  /* the six 0.5ch gaps between seven columns */
 }
 

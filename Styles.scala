@@ -309,7 +309,9 @@ select.bars { margin-right: 2ch; }
   display: grid;
   gap: var(--col-gap);
   align-items: center;
-  margin: 0.25rem 0;
+  /* the fields are boxes with their own borders, so a hair between rows is enough to keep two of
+     them apart; a taller gap only pushed songs off the bottom of a phone */
+  margin: 0.1rem 0;
   grid-template-columns:
     var(--col-cue) var(--col-play) var(--col-title) var(--col-bpm)
     var(--col-sign) var(--col-pattern) var(--col-remove);

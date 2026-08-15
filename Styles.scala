@@ -405,9 +405,9 @@ select.bars { width: 6ch; padding-left: 0.3ch; padding-right: 0; }
   font-weight: bold;
 }
 
-/* room between saving a concert, choosing one, and adding to one, since they share a line */
+/* Room between naming a concert and choosing one, since they share a line and are two different
+   jobs. Nothing else on the row is pushed apart: one row-gap between neighbours, as below. */
 .loadlabel { margin-left: 2ch; }
-.removeconcert { margin-left: 2ch; }
 
 /* A disabled button says "not for this concert", not "broken": dimmed, and it stops looking
    pressable. Removing a built-in is the one thing this row cannot do. */

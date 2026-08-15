@@ -10,7 +10,7 @@ def createProntoPopLandingPage(): HtmlElement =
 
   val keyPrefix = "prontopop.concert."
 
-  /** The hidden file input, once the page has it: the Upload button presses it. */
+  /** The hidden file input, once the page has it: the Import button presses it. */
   var fileChooser: dom.html.Input = null
 
   /** How a pause is written to the Local Store: the same three dashes the songbook uses to ask for
@@ -289,8 +289,8 @@ def createProntoPopLandingPage(): HtmlElement =
   )
 
   /** A concert as text: one song per line, its four fields separated by tabs, and a pause as three
-    * dashes. One format for the Local Store and for a file on disk — a concert downloaded and
-    * uploaded again is the same concert, and either can be edited in a spreadsheet. */
+    * dashes. One format for the Local Store and for a file on disk — a concert exported and
+    * imported again is the same concert, and either can be edited in a spreadsheet. */
   def concertText(rows: Vector[SongRow]): String =
     rows
       .map(r => if r.isPause then pauseLine else Seq(r.title, r.bpm, r.sign, r.pattern).mkString("\t"))
@@ -371,10 +371,13 @@ def createProntoPopLandingPage(): HtmlElement =
     val safe = name.trim.map(c => if c.isLetterOrDigit || "-_. ".contains(c) then c else '-').trim
     (if safe.isEmpty then "concert" else safe) + ".tsv"
 
-  /** Hand the concert to the browser as a file. An object URL on an anchor with `download`, which
-    * every browser here has, rather than showSaveFilePicker, which Firefox does not; whether a
-    * "where to?" dialog appears is then the browser's own download setting. */
-  def downloadConcert(): Unit =
+  /** Write the concert out as a file. Nothing travels — the app has no server and the file lands on
+    * the same machine the Local Store is on — which is why this is an export and not a download.
+    *
+    * The mechanism is an object URL on an anchor carrying the `download` attribute, which every
+    * browser here has, rather than showSaveFilePicker, which Firefox does not; whether a "where
+    * to?" dialog appears is then the browser's own setting for saving files. */
+  def exportConcert(): Unit =
     val text = concertText(songsVar.now())
     val bag = js.Dynamic.literal("type" -> "text/tab-separated-values;charset=utf-8")
     // the element type is spelled out because js.Array is invariant, so js.Array[String] is not it
@@ -389,38 +392,38 @@ def createProntoPopLandingPage(): HtmlElement =
     a.click()
     dom.document.body.removeChild(a)
     dom.URL.revokeObjectURL(url)
-    statusVar.set(s"downloaded '${fileNameOf(concertNameVar.now())}'")
+    statusVar.set(s"exported '${fileNameOf(concertNameVar.now())}'")
 
-  /** Put an uploaded concert in the table. Not a load: it came from a file, not from the Local
+  /** Put an imported concert in the table. Not a load: it came from a file, not from the Local
     * Store, so the table now holds something the store does not have and Save says so in orange.
     * The file's name fills the Concert field, so saving it is one press. */
-  def takeUploaded(name: String, rows: Vector[SongRow]): Unit =
+  def takeImported(name: String, rows: Vector[SongRow]): Unit =
     stopPlaying()
     songsVar.set(rows)
     colWidthsVar.set(fitWidths(rows))
     concertNameVar.set(name)
     cueVar.set(None)
     dirtyVar.set(true)
-    statusVar.set(s"uploaded '$name' (${rows.count(!_.isPause)} songs) — not saved yet")
+    statusVar.set(s"imported '$name' (${rows.count(!_.isPause)} songs) — not saved yet")
 
   /** What a chosen file becomes, once it has been read. Refuses a file that holds no songs rather
     * than emptying the table over it, and asks first if there are edits to lose. */
-  def uploaded(fileName: String, text: String): Unit =
+  def imported(fileName: String, text: String): Unit =
     val name = fileName.reverse.dropWhile(_ != '.').drop(1).reverse.trim match
       case "" => fileName.trim
       case stem => stem
     val rows = rowsOfSaved(text)
     if rows.forall(_.isPause) then
-      statusVar.set(s"'$fileName' holds no songs — nothing uploaded")
-    else if !dirtyVar.now() then takeUploaded(name, rows)
+      statusVar.set(s"'$fileName' holds no songs — nothing imported")
+    else if !dirtyVar.now() then takeImported(name, rows)
     else
       pendingAskVar.set(Some(Ask(
         heading = "Unsaved changes",
-        before = "The songs have been edited since they were last saved. Uploading ",
+        before = "The songs have been edited since they were last saved. Importing ",
         subject = fileName,
         after = " replaces them, and the edits are gone.",
-        confirm = "Discard and upload",
-        act = () => takeUploaded(name, rows),
+        confirm = "Discard and import",
+        act = () => takeImported(name, rows),
       )))
 
   /** Read the file the chooser handed over. Its value is cleared afterwards so that choosing the
@@ -431,7 +434,7 @@ def createProntoPopLandingPage(): HtmlElement =
       val file = files(0)
       val reader = dom.FileReader()
       reader.onload = _ =>
-        uploaded(file.name, reader.result.asInstanceOf[String])
+        imported(file.name, reader.result.asInstanceOf[String])
         input.value = ""
       reader.onerror = _ =>
         statusVar.set(s"could not read '${file.name}'")
@@ -605,13 +608,15 @@ def createProntoPopLandingPage(): HtmlElement =
           if k.startsWith(builtInMark) then "a built-in concert cannot be removed"
           else s"remove '$k' from the Local Store",
         onClick --> (_ => askRemoveConcert())),
-      button("Download concert", cls := "download",
-        title <-- concertNameVar.signal.map(n => s"save this concert as ${fileNameOf(n)}"),
-        onClick --> (_ => downloadConcert())),
+      // Export and Import rather than Download and Upload: nothing travels. The app has no server,
+      // and the file lands on the same machine the Local Store is already on.
+      button("Export concert", cls := "export",
+        title <-- concertNameVar.signal.map(n => s"write this concert to a file, ${fileNameOf(n)}"),
+        onClick --> (_ => exportConcert())),
       // The chooser is a file input, which cannot be styled into the row, so it is hidden and the
       // button presses it. Its own change event is what carries the file, so it has to be a real
       // element in the page rather than one made on the spot.
-      button("Upload concert", cls := "upload", title := "read a concert from a .tsv file",
+      button("Import concert", cls := "import", title := "read a concert from a .tsv file",
         onClick --> (_ => Option(fileChooser).foreach(_.click()))),
       input(typ := "file", cls := "chooser",
         accept := ".tsv,.txt,text/plain,text/tab-separated-values",

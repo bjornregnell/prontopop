@@ -7868,7 +7868,7 @@ function $m_Lprontopop_Concerts$() {
 /** @constructor */
 function $c_Lprontopop_Main$package$() {
   this.Lprontopop_Main$package$__f_Version = null;
-  this.Lprontopop_Main$package$__f_Version = "v0.1.0";
+  this.Lprontopop_Main$package$__f_Version = "v0.2.0";
 }
 $c_Lprontopop_Main$package$.prototype = new $h_O();
 $c_Lprontopop_Main$package$.prototype.constructor = $c_Lprontopop_Main$package$;
@@ -10076,7 +10076,7 @@ $c_Lprontopop_View$package$.prototype.createProntoPopLandingPage__Lcom_raquo_lam
   var $x_157 = $x_162.apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$2));
   var this$57 = $n($m_Lcom_raquo_laminar_api_package$().Lcom_raquo_laminar_api_package$__f_L);
   var r$1 = $m_Lcom_raquo_laminar_modifiers_RenderableText$().Lcom_raquo_laminar_modifiers_RenderableText$__f_stringRenderable;
-  var xs$3 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_157, $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$57, " v0.1.0", r$1)]);
+  var xs$3 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_157, $f_Lcom_raquo_laminar_api_Implicits__textToTextNode__O__Lcom_raquo_laminar_modifiers_RenderableText__Lcom_raquo_laminar_nodes_TextNode(this$57, " v0.2.0", r$1)]);
   var array$3 = this$58.refArrayToJSArray__AO__sjs_js_Array(xs$3);
   var xs$4 = new ($d_Lcom_raquo_laminar_modifiers_Modifier.getArrayOf().constr)([$x_164, $n($x_163).apply__sci_Seq__Lcom_raquo_laminar_nodes_ReactiveHtmlElement(new $c_sjsr_WrappedVarArgs(array$3)), $m_Lprontopop_Theme$().createSelector__Lcom_raquo_laminar_nodes_ReactiveHtmlElement()]);
   var array$4 = this$61.refArrayToJSArray__AO__sjs_js_Array(xs$4);
